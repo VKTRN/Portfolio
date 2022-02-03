@@ -25,7 +25,7 @@ function App() {
           <div className="introduction">
             <h1>Hi!</h1>
             <p>
-              My name is Viktor.
+              My name is Viktor. And this is the first automated deployment!
             </p>
             <p>
               I am a front-end developer based in Hannover, Germany.

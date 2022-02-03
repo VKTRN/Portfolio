@@ -26,4 +26,4 @@ jobs:
     - name: Adding Known Hosts
       run: ssh-keyscan -H ${{ secrets.SSH_HOST_IP }} >> ~/.ssh/known_hosts
     - name: Deploy with rsync
-      run: rsync -avz ./build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_IP }}:/root/build
+      run: rsync -avz ./build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_IP }}:/var/www/build
