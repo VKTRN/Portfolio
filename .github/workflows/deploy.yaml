@@ -10,7 +10,10 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${{secrets.VULTR_API_KEY}}
+      - uses: techknowlogick/action-vultr@v2
+        with: 
+          token: ${{ secrets.VULTR_API_KEY }}
+      -run: vultr-cli account 
 
 # jobs:
 #   deploy:
