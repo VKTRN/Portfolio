@@ -26,4 +26,5 @@ jobs:
           SOURCE: "dist/"
           REMOTE_HOST: codeintuition.org
           REMOTE_USER: root
+          TARGET: /
           EXCLUDE: "/dist/, /node_modules/"
