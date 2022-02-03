@@ -23,8 +23,8 @@ jobs:
       env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: 80.240.23.67 
+          SOURCE: "buil/"
+          REMOTE_HOST: 80.240.23.67
           REMOTE_USER: root
           TARGET: /
           EXCLUDE: "/dist/, /node_modules/"
