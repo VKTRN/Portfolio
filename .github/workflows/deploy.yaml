@@ -22,7 +22,7 @@ jobs:
       uses: easingthemes/ssh-deploy@main
       env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
+          ARGS: "-rltgoDv --delete"
           SOURCE: "build/"
           REMOTE_HOST: 80.240.23.67
           REMOTE_USER: root
