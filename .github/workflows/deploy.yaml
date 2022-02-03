@@ -18,13 +18,12 @@ jobs:
       run: npm install
     - name: Run build task
       run: npm run build
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@main
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "build/"
-          REMOTE_HOST: 80.240.23.67
-          REMOTE_USER: root
-          TARGET: /
-          EXCLUDE: "/dist/, /node_modules/"
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }} 
+        known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+    - name: Adding Known Hosts
+      run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+    - name: Deploy with rsync
+      run: rsync -avz ./build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_IP }}:/root/build
