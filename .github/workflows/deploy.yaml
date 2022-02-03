@@ -1,0 +1,27 @@
+name: Vultr Continuous Deployment
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - run: ls
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     - uses: actions/checkout@master
+#     - uses: actions/setup-node@master
+#       width:
+#       node-version: 12
+#     - run: npm ci
+#     - run: npm run build
+#     - uses: 
+
+
+#     ${{secrets.VULTR_API_KEY}}
