@@ -3,17 +3,28 @@ $svg-size: 7rem;
 .header{
   display: flex;
   justify-content: center;
-  height:10rem;
   background-color: #8E96B2;
   padding: 1rem 0;
-
-  .links{
-    width:80%;
+  
+  .header-content{
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    font-size: 1.5rem;
+    flex-direction: column;
+    width:80%;
+
+    .logo{
+      color: #342F3D;
+      font-size: 5rem;
+      font-weight: 700;
+    }
+  
+    .links{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-size: 1.5rem;
+    }
   }
+
 
 }
 

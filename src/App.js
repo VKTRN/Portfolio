@@ -6,11 +6,14 @@ function App() {
   return (
     <div className="App">
       <div className="header">
-        <div className="links">
-          <a href="">Link</a>
-          <a href="">Link</a>
-          <a href="">Link</a>
-          <a href="">Link</a>
+        <div className="header-content">
+          <div className="logo">vktrn.com</div>
+          <div className="links">
+            <a href="">Link</a>
+            <a href="">Link</a>
+            <a href="">Link</a>
+            <a href="">Link</a>
+          </div>
         </div>
       </div>
 
