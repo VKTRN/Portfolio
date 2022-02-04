@@ -5,18 +5,13 @@ function App() {
 
   return (
     <div className="App">
-      
       <div className="header">
-
         <div className="links">
           <a href="">Link</a>
           <a href="">Link</a>
           <a href="">Link</a>
-          <a href="">Test</a>
-          <a href="">Link</a>
           <a href="">Link</a>
         </div>
-
       </div>
 
       <div className="content">
@@ -25,7 +20,7 @@ function App() {
           <div className="introduction">
             <h1>Hi!</h1>
             <p>
-              My name is Viktor. And this is the first automated deployment!
+              My name is Viktor.
             </p>
             <p>
               I am a front-end developer based in Hannover, Germany.
@@ -38,7 +33,7 @@ function App() {
 
           <h3 className="mt-5">front end</h3>
           <div className="front-end stack">
-            <a className="logo" href="https://www.google.com">
+            <a className="logo">
               <img className="col-1 row-1" src="./svg/HTML5.svg" alt="" />
               <p>HTML5</p>
             </a>
@@ -98,7 +93,7 @@ function App() {
           </div>
           <div className="socials stack mb-5">
               <div className="logo">
-                <img className="col-1 row-1" src="./svg/youtube.svg" alt="" />
+                <img className="col-1 row-1 youtube" src="./svg/youtube.svg" alt="" />
               </div>
               <div className="logo">
                 <img className="col-2 row-1" src="./svg/twitter.svg" alt="" />
@@ -108,12 +103,12 @@ function App() {
               </div>
           </div>
         </div>
-      
       </div>
 
-
       <div className="footer">
-        footer
+        <a href="">Terms&Conditions</a>
+        <a href="">Privacy Policy</a>
+        <a href="">Contact</a>
       </div>
     </div>
   );
