@@ -13,8 +13,12 @@ $svg-size: 7rem;
 
     .logo{
       color: #342F3D;
-      font-size: 5rem;
-      font-weight: 700;
+      font-size: 3rem;
+      font-weight: 600;
+
+      @include media-breakpoint-up(sm){
+        font-size: 4rem;
+      }
     }
   
     .links{
