@@ -1,7 +1,20 @@
-import {useRef} from "react"
+import {useState, useRef, useEffect, useContext} from "react"
 import './scss/custom.scss';
 
+const dummytext = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, incidunt sed, architecto similique dicta magnam esse, quo hic enim distinctio facilis libero quaerat commodi illo deleniti sunt dolorem tempora possimus. Placeat numquam repellat quod expedita, blanditiis voluptates? Veritatis consequuntur, asperiores voluptatibus doloremque dolor velit sed vero! Accusamus, similique reprehenderit? Repellendus!"
+
 function App() {
+
+  const ref = useRef()
+  const ref2 = useRef()
+
+  function toggleAccordion(ref) {
+    ref.current.classList.toggle("open")
+  }
+
+  function handleHover(ref) {
+    ref.current.classList.toggle("ready")
+  }
 
   return (
     <div className="App">
@@ -36,57 +49,78 @@ function App() {
 
           <h3 className="mt-5">front end</h3>
           <div className="front-end stack">
-            <a className="logo">
-              <img className="col-1 row-1" src="./svg/HTML5.svg" alt="" />
-              <p>HTML5</p>
-            </a>
-            <a className="logo" >
-              <img className="col-2 row-1" src="./svg/CSS3.svg" alt="" />
-              <p>CSS3</p>
-            </a>
-            <a className="logo">
-              <img className="col-3 row-1" src="./svg/JS.svg" alt="" />
-              <p>Javascript</p>
-            </a>
-            <a className="logo">
-              <img className="col-1 row-2" src="./svg/sass.svg" alt="" />
-              <p>Sass</p>
-            </a>
-            <a className="logo">
-              <img className="col-2 row-2" src="./svg/React.svg" alt="" />
-              <p>React.js</p>
-            </a>
-            <a className="logo">
-              <img className="col-3 row-2" src="./svg/Bootstrap.svg" alt="" />
-              <p>Bootstrap</p>
-            </a>
+            <div className="front-end-row top">
+              <a className="logo" onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+                <img className="col-1 row-1" src="./svg/HTML5.svg" alt="" />
+                <p>HTML5</p>
+              </a>
+              <a className="logo"   onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+                <img className="col-2 row-1" src="./svg/CSS3.svg" alt="" />
+                <p>CSS3</p>
+              </a>
+              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+                <img className="col-3 row-1" src="./svg/JS.svg" alt="" />
+                <p>Javascript</p>
+              </a>
+            </div>
+            <div ref={ref} className="accordion">
+              <div className="text">
+                {dummytext}
+              </div>
+            </div>
+            <div className="front-end-row bottom">
+              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+                <img className="col-1 row-2" src="./svg/sass.svg" alt="" />
+                <p>Sass</p>
+              </a>
+              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+                <img className="col-2 row-2" src="./svg/React.svg" alt="" />
+                <p>React.js</p>
+              </a>
+              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+                <img className="col-3 row-2" src="./svg/Bootstrap.svg" alt="" />
+                <p>Bootstrap</p>
+              </a>
+            </div>
+
           </div>
 
           <h3 className="mt-5">back end</h3>
           <div className="back-end stack">
-            <a className="logo">
-              <img className="col-1 row-1" src="./svg/mongo.svg" alt="" />
-              <p>MongoDB</p>
-            </a>
-            <a className="logo">
-              <img className="col-2 row-1" src="./svg/node.svg" alt="" />
-              <p>Node.js</p>
-            </a>
-            <a className="logo">
-              <img className="col-3 row-1" src="./svg/python.svg" alt="" />
-              <p>Python</p>
-            </a>
+            <div className="back-end-row">
+              <a className="logo" onClick={() => toggleAccordion(ref2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
+                <img className="col-1 row-1" src="./svg/mongo.svg" alt="" />
+                <p>MongoDB</p>
+              </a>
+              <a className="logo" onClick={() => toggleAccordion(ref2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
+                <img className="col-2 row-1" src="./svg/node.svg" alt="" />
+                <p>Node.js</p>
+              </a>
+              <a className="logo" onClick={() => toggleAccordion(ref2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
+                <img className="col-3 row-1" src="./svg/python.svg" alt="" />
+                <p>Python</p>
+              </a>
+
+            </div>
+            <div ref={ref2} className="accordion">
+              <div className="text">
+                {dummytext}
+              </div>
+            </div>
           </div>
 
           <h3 className="mt-5">dev ops</h3>
           <div className="dev-ops stack">
-            <div className="logo">
-              <img className="col-1 row-1" src="./svg/git.svg" alt="" />
-              <p>Git</p>
-            </div>
-            <div className="logo">
-              <img className="col-2 row-1" src="./svg/Docker.svg" alt="" />
-              <p>Docker</p>
+            <div className="dev-ops-row">
+              <div className="logo">
+                <img className="col-1 row-1" src="./svg/git.svg" alt="" />
+                <p>Git</p>
+              </div>
+              <div className="logo">
+                <img className="col-2 row-1" src="./svg/Docker.svg" alt="" />
+                <p>Docker</p>
+              </div>
+
             </div>
 
           </div>

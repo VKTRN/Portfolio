@@ -67,15 +67,52 @@ $svg-size: 7rem;
     }
 
     .stack{
-      display: grid;
-      column-gap: 6rem;
-      row-gap: 3rem;
-      justify-content:center;
+      // display: grid;
+      // column-gap: 6rem;
+      // row-gap: 3rem;
+      // justify-content:center;
       margin-top:2rem;
-
+      padding:0;
       background-color: #4c4c5a;
-      padding:3rem;
       border-radius: 2rem;
+
+      .accordion{
+        grid-column-start: 1;
+        grid-column-end: 4;
+        font-size: 0rem;
+        overflow:hidden;
+        background-color: #bec6e5;
+
+        width:100%;
+        padding:0rem;
+        transition: padding 400ms 200ms, font-size 400ms 200ms ;
+        
+        .text{
+          text-align: justify;
+          text-align-last: justify;
+          width:25rem;
+          opacity:0;
+          color:#383847;
+          transition: opacity 200ms ;
+
+        }
+
+      }
+
+      .ready{
+      }
+
+      .open{
+        font-size: 1rem;
+        padding: 2rem;
+        transition: padding 400ms, font-size 400ms;
+
+        .text{
+          opacity:1;
+          transition: opacity 200ms 400ms;
+        }
+      }
+
 
       .logo{
         display: flex;
@@ -95,6 +132,8 @@ $svg-size: 7rem;
 
         transition: all 400ms ease;
 
+        
+
         p{
           margin: .5rem 0 0 0;
           font-size: 1rem;
@@ -106,52 +145,81 @@ $svg-size: 7rem;
         }
       }
 
-
-      @include media-breakpoint-up(md){
-        padding:4rem;
-      }
-      
-      @include media-breakpoint-up(lg){
-        padding:5rem
-      }
     }
 
     .front-end{
 
-      grid-template-columns: 1fr;
-
-      @include media-breakpoint-up(md){
-        grid-template-columns: 1fr 1fr;
-      }
       
-      @include media-breakpoint-up(lg){
-        grid-template-columns: 1fr 1fr 1fr;
+      .front-end-row{
+        grid-template-columns: 1fr;
+        display: grid;
+        column-gap: 6rem;
+        row-gap: 3rem;
+        margin:1rem 5rem 1rem 5rem;
+        justify-content:center;
+        @include media-breakpoint-up(md){
+          grid-template-columns: 1fr 1fr;
+        }
+        
+        @include media-breakpoint-up(lg){
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        &.top{
+          margin-top:5rem;
+        }
+        &.bottom{
+          margin-bottom:5rem;
+        }
       }
+
     }
 
     .back-end{
-      grid-template-columns: 1fr;
+      .accordion{
+        margin-bottom:4rem;
 
-      @include media-breakpoint-up(md){
-        grid-template-columns: 1fr 1fr;
       }
-      
-      @include media-breakpoint-up(lg){
-        grid-template-columns: 1fr 1fr 1fr;
+      .back-end-row{
+        grid-template-columns: 1fr;
+        display: grid;
+        column-gap: 6rem;
+        row-gap: 3rem;
+        margin:5rem 5rem 1rem 5rem;
+        justify-content:center;
+  
+        @include media-breakpoint-up(md){
+          grid-template-columns: 1fr 1fr;
+        }
+        
+        @include media-breakpoint-up(lg){
+          grid-template-columns: 1fr 1fr 1fr;
+        }
       }
     }
 
     .dev-ops{
-      grid-template-columns: 1fr;
 
-      @include media-breakpoint-up(md){
-        grid-template-columns: 1fr 1fr;
+      .dev-ops-row{
+        grid-template-columns: 1fr;
+        display: grid;
+        column-gap: 6rem;
+        row-gap: 3rem;
+        margin:5rem 5rem 5rem 5rem;
+        justify-content:center;
+  
+        @include media-breakpoint-up(md){
+          grid-template-columns: 1fr 1fr;
+        }
+
       }
       
 
     }
 
     .socials{
+      display: grid;
+
       grid-template-columns: 1fr 1fr 1fr;
       background-color: transparent !important;
       column-gap: 5vw;
