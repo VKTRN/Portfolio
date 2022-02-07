@@ -1,19 +1,42 @@
 import {useState, useRef, useEffect, useContext} from "react"
 import './scss/custom.scss';
 
-const dummytext = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, incidunt sed, architecto similique dicta magnam esse, quo hic enim distinctio facilis libero quaerat commodi illo deleniti sunt dolorem tempora possimus. Placeat numquam repellat quod expedita, blanditiis voluptates? Veritatis consequuntur, asperiores voluptatibus doloremque dolor velit sed vero! Accusamus, similique reprehenderit? Repellendus!"
+const text_html = "html html html html html html html html html html html html html html html html html html html html html html html html html html "
+const text_css = "css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css csscss css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css csscss css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css csscss css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css csscss css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css "
+const dummytext = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, vitae."
 
 function App() {
 
   const ref = useRef()
+  const buttonRef = useRef()
   const ref2 = useRef()
 
-  function toggleAccordion(ref) {
+  function toggleAccordion(ref, text) {
     ref.current.classList.toggle("open")
+    if (ref.current.children[0].childNodes.length > 0){
+      const txt = ref.current.children[0].childNodes[0]
+      ref.current.children[0].removeChild(txt)
+    }
+    console.log(ref.current.children[0].childNodes);
+    ref.current.children[0].appendChild(document.createTextNode(text))
+    
+    ref.current.classList.contains("open") // if element is open, the handleOutsideClick listener should be activated. Else it should be removed.
+		? document.addEventListener('click', handleOutsideClick, true)
+		: document.removeEventListener('click', handleOutsideClick, true)
   }
 
   function handleHover(ref) {
     ref.current.classList.toggle("ready")
+  }
+
+  function handleOutsideClick(event) {
+    // if user clicks outside, the menu gets closed and the outside-click eventlistener is removed.
+    const clickedElement = event.target
+  
+    if (!ref.current.contains(clickedElement) && !buttonRef.current.contains(clickedElement)) { // defines the elements that are not outside.
+      ref.current.classList.remove("open")
+      document.removeEventListener('click', handleOutsideClick, true)
+    }
   }
 
   return (
@@ -50,34 +73,34 @@ function App() {
           <h3 className="mt-5">front end</h3>
           <div className="front-end stack">
             <div className="front-end-row top">
-              <a className="logo" onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+              <a className="logo" ref={buttonRef} onClick={() => toggleAccordion(ref, text_html)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
                 <img className="col-1 row-1" src="./svg/HTML5.svg" alt="" />
                 <p>HTML5</p>
               </a>
-              <a className="logo"   onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+              <a className="logo"   onClick={() => toggleAccordion(ref, text_css)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
                 <img className="col-2 row-1" src="./svg/CSS3.svg" alt="" />
                 <p>CSS3</p>
               </a>
-              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+              <a className="logo"  onClick={() => toggleAccordion(ref, text_html)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
                 <img className="col-3 row-1" src="./svg/JS.svg" alt="" />
                 <p>Javascript</p>
               </a>
             </div>
             <div ref={ref} className="accordion">
               <div className="text">
-                {dummytext}
+                
               </div>
             </div>
             <div className="front-end-row bottom">
-              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+              <a className="logo"  onClick={() => toggleAccordion(ref, text_html)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
                 <img className="col-1 row-2" src="./svg/sass.svg" alt="" />
                 <p>Sass</p>
               </a>
-              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+              <a className="logo"  onClick={() => toggleAccordion(ref, text_html)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
                 <img className="col-2 row-2" src="./svg/React.svg" alt="" />
                 <p>React.js</p>
               </a>
-              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
+              <a className="logo"  onClick={() => toggleAccordion(ref, text_html)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
                 <img className="col-3 row-2" src="./svg/Bootstrap.svg" alt="" />
                 <p>Bootstrap</p>
               </a>
@@ -88,15 +111,15 @@ function App() {
           <h3 className="mt-5">back end</h3>
           <div className="back-end stack">
             <div className="back-end-row">
-              <a className="logo" onClick={() => toggleAccordion(ref2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
+              <a className="logo" onClick={() => toggleAccordion(ref, text_html2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
                 <img className="col-1 row-1" src="./svg/mongo.svg" alt="" />
                 <p>MongoDB</p>
               </a>
-              <a className="logo" onClick={() => toggleAccordion(ref2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
+              <a className="logo" onClick={() => toggleAccordion(ref, text_html2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
                 <img className="col-2 row-1" src="./svg/node.svg" alt="" />
                 <p>Node.js</p>
               </a>
-              <a className="logo" onClick={() => toggleAccordion(ref2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
+              <a className="logo" onClick={() => toggleAccordion(ref, text_html2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
                 <img className="col-3 row-1" src="./svg/python.svg" alt="" />
                 <p>Python</p>
               </a>
