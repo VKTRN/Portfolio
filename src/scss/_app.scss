@@ -88,18 +88,19 @@ $svg-size: 7rem;
           margin: 2rem;
         }
         
-        .ready{
-  
-        }
+
   
         
+      }
+
+      #accordion-2{
+        margin-bottom: 4rem;
       }
       
       .open{
         height:15rem;
 
-        .text{
-        }
+
       }
 
 
@@ -138,7 +139,6 @@ $svg-size: 7rem;
     }
 
     .front-end{
-
       
       .front-end-row{
         grid-template-columns: 1fr;
@@ -159,9 +159,7 @@ $svg-size: 7rem;
         &.top{
           margin-top:5rem;
         }
-        &.bottom{
-          margin-bottom:5rem;
-        }
+
       }
 
     }
