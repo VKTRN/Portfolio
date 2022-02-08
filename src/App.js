@@ -1,20 +1,20 @@
 import {useState, useRef, useEffect, useContext} from "react"
 import './scss/custom.scss';
+import Logo from "./components/Logo"
 
-const dummytext = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, incidunt sed, architecto similique dicta magnam esse, quo hic enim distinctio facilis libero quaerat commodi illo deleniti sunt dolorem tempora possimus. Placeat numquam repellat quod expedita, blanditiis voluptates? Veritatis consequuntur, asperiores voluptatibus doloremque dolor velit sed vero! Accusamus, similique reprehenderit? Repellendus!"
+const text_html = "html html html html html html html html html html html html html html html html html html html html html html html html html html "
+const text_css = "css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css" 
+const text_js = "JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript " 
+
+
+
 
 function App() {
 
-  const ref = useRef()
-  const ref2 = useRef()
+  const ref_accordion_1 = useRef()
+  const ref_accordion_2 = useRef()
 
-  function toggleAccordion(ref) {
-    ref.current.classList.toggle("open")
-  }
-
-  function handleHover(ref) {
-    ref.current.classList.toggle("ready")
-  }
+  const [currentText, set_currentText] = useState(null)
 
   return (
     <div className="App">
@@ -49,63 +49,40 @@ function App() {
 
           <h3 className="mt-5">front end</h3>
           <div className="front-end stack">
-            <div className="front-end-row top">
-              <a className="logo" onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
-                <img className="col-1 row-1" src="./svg/HTML5.svg" alt="" />
-                <p>HTML5</p>
-              </a>
-              <a className="logo"   onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
-                <img className="col-2 row-1" src="./svg/CSS3.svg" alt="" />
-                <p>CSS3</p>
-              </a>
-              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
-                <img className="col-3 row-1" src="./svg/JS.svg" alt="" />
-                <p>Javascript</p>
-              </a>
+            <div id="row-1" className="front-end-row top">
+              <Logo className="col-1 row-1" id="HTML5"      ref_accordion={ref_accordion_1} text={text_html}></Logo>
+              <Logo className="col-2 row-1" id="CSS3"       ref_accordion={ref_accordion_1} text={text_css}></Logo>
+              <Logo className="col-3 row-1" id="JavaScript" ref_accordion={ref_accordion_1} text={text_js}></Logo>
             </div>
-            <div ref={ref} className="accordion">
-              <div className="text">
-                {dummytext}
-              </div>
+            <div id="accordion-1" ref={ref_accordion_1} className="accordion">
+              <div className="text"></div>
             </div>
-            <div className="front-end-row bottom">
-              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
-                <img className="col-1 row-2" src="./svg/sass.svg" alt="" />
-                <p>Sass</p>
-              </a>
-              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
-                <img className="col-2 row-2" src="./svg/React.svg" alt="" />
-                <p>React.js</p>
-              </a>
-              <a className="logo"  onClick={() => toggleAccordion(ref)} onMouseEnter={() => handleHover(ref)} onMouseLeave={() => handleHover(ref)}>
-                <img className="col-3 row-2" src="./svg/Bootstrap.svg" alt="" />
-                <p>Bootstrap</p>
-              </a>
+            <div id="row-2" className="front-end-row bottom">
+              <Logo className="col-1 row-2" id="Sass"      ref_accordion={ref_accordion_2} text={text_html}></Logo>
+              <Logo className="col-2 row-2" id="React.js"  ref_accordion={ref_accordion_2} text={text_css}></Logo>
+              <Logo className="col-3 row-2" id="Bootstrap" ref_accordion={ref_accordion_2} text={text_js}></Logo>
             </div>
-
+            <div id="accordion-2" ref={ref_accordion_2} className="accordion">
+              <div className="text"></div>
+            </div>
           </div>
 
           <h3 className="mt-5">back end</h3>
           <div className="back-end stack">
             <div className="back-end-row">
-              <a className="logo" onClick={() => toggleAccordion(ref2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
+              <a className="logo" >
                 <img className="col-1 row-1" src="./svg/mongo.svg" alt="" />
                 <p>MongoDB</p>
               </a>
-              <a className="logo" onClick={() => toggleAccordion(ref2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
+              <a className="logo" >
                 <img className="col-2 row-1" src="./svg/node.svg" alt="" />
                 <p>Node.js</p>
               </a>
-              <a className="logo" onClick={() => toggleAccordion(ref2)} onMouseEnter={() => handleHover(ref2)} onMouseLeave={() => handleHover(ref2)}>
+              <a className="logo" >
                 <img className="col-3 row-1" src="./svg/python.svg" alt="" />
                 <p>Python</p>
               </a>
 
-            </div>
-            <div ref={ref2} className="accordion">
-              <div className="text">
-                {dummytext}
-              </div>
             </div>
           </div>
 
