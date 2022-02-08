@@ -1,6 +1,6 @@
 import {useState, useRef, useEffect, useContext} from "react"
 
-function Logo({id, ref_accordion, text}){
+function Logo({id, ref_accordion, text, set_accordion_text}){
 
     function handleHover(ref) {
         ref.current.classList.toggle("ready")
@@ -16,22 +16,12 @@ function Logo({id, ref_accordion, text}){
             accordion.classList.add("open")
         }
 
-        function remove_text(){
-            const txt = accordion.children[0].childNodes[0]
-            accordion.children[0].removeChild(txt)
-        }
-
         function remove_content_id(){
             accordion.removeAttribute('content-id')
         }
 
-        function change_text(){
-            remove_text()
-            accordion.children[0].appendChild(document.createTextNode(text))
-        }
-
         function set_text(){
-            accordion.children[0].appendChild(document.createTextNode(text))
+            set_accordion_text(text)
         }
 
         function set_content_id(){
@@ -44,7 +34,6 @@ function Logo({id, ref_accordion, text}){
         
             if (clickedElement_row !== row){
                 close_accordion()
-                remove_text()
                 remove_content_id()
                 document.removeEventListener('click', handleOutsideClick, true)
             }
@@ -67,12 +56,11 @@ function Logo({id, ref_accordion, text}){
         if (accordion_is_open) {
             if (accordion_content_id === clicked_element_id) {
                 close_accordion()
-                remove_text()
                 remove_content_id()
                 remove_outside_click_listener()
             }
             else{
-                change_text()
+                set_text()
                 set_content_id()
                 add_outside_click_listener()
             }

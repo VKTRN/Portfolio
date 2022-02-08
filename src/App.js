@@ -2,19 +2,22 @@ import {useState, useRef, useEffect, useContext} from "react"
 import './scss/custom.scss';
 import Logo from "./components/Logo"
 
-const text_html = "html html html html html html html html html html html html html html html html html html html html html html html html html html "
-const text_css = "css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css" 
-const text_js = "JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript " 
-
-
-
+const text_html      = "html html html html html html html html html html html html html html html html html html html html html html html html html html "
+const text_css       = "css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css" 
+const text_js        = "JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript " 
+const text_bootstrap = "bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap "
 
 function App() {
 
   const ref_accordion_1 = useRef()
   const ref_accordion_2 = useRef()
+  const ref_accordion_3 = useRef()
+  const ref_accordion_4 = useRef()
 
-  const [currentText, set_currentText] = useState(null)
+  const [accordion_text1, set_accordion_text1] = useState("")
+  const [accordion_text2, set_accordion_text2] = useState("")
+  const [accordion_text3, set_accordion_text3] = useState("")
+  const [accordion_text4, set_accordion_text4] = useState("")
 
   return (
     <div className="App">
@@ -49,55 +52,60 @@ function App() {
 
           <h3 className="mt-5">front end</h3>
           <div className="front-end stack">
+
             <div id="row-1" className="front-end-row top">
-              <Logo className="col-1 row-1" id="HTML5"      ref_accordion={ref_accordion_1} text={text_html}></Logo>
-              <Logo className="col-2 row-1" id="CSS3"       ref_accordion={ref_accordion_1} text={text_css}></Logo>
-              <Logo className="col-3 row-1" id="JavaScript" ref_accordion={ref_accordion_1} text={text_js}></Logo>
+              <Logo className="col-1 row-1" id="HTML5"      ref_accordion={ref_accordion_1} text={text_html} set_accordion_text = {set_accordion_text1} ></Logo>
+              <Logo className="col-2 row-1" id="CSS3"       ref_accordion={ref_accordion_1} text={text_css}  set_accordion_text = {set_accordion_text1} ></Logo>
+              <Logo className="col-3 row-1" id="JavaScript" ref_accordion={ref_accordion_1} text={text_js}   set_accordion_text = {set_accordion_text1} ></Logo>
             </div>
-            <div id="accordion-1" ref={ref_accordion_1} className="accordion">
-              <div className="text"></div>
+
+            <div id="accordion-1" ref={ref_accordion_1} className="accordion ">
+              <div className="text">
+                {accordion_text1}
+              </div>
             </div>
+
             <div id="row-2" className="front-end-row bottom">
-              <Logo className="col-1 row-2" id="Sass"      ref_accordion={ref_accordion_2} text={text_html}></Logo>
-              <Logo className="col-2 row-2" id="React.js"  ref_accordion={ref_accordion_2} text={text_css}></Logo>
-              <Logo className="col-3 row-2" id="Bootstrap" ref_accordion={ref_accordion_2} text={text_js}></Logo>
+              <Logo className="col-1 row-2" id="Sass"      ref_accordion={ref_accordion_2} text={text_html}        set_accordion_text = {set_accordion_text2} ></Logo>
+              <Logo className="col-2 row-2" id="React.js"  ref_accordion={ref_accordion_2} text={text_css}         set_accordion_text = {set_accordion_text2} ></Logo>
+              <Logo className="col-3 row-2" id="Bootstrap" ref_accordion={ref_accordion_2} text={text_bootstrap}   set_accordion_text = {set_accordion_text2} ></Logo>
             </div>
-            <div id="accordion-2" ref={ref_accordion_2} className="accordion">
-              <div className="text"></div>
+
+            <div id="accordion-2" ref={ref_accordion_2} className="accordion accordion-bottom">
+              <div className="text">
+                {accordion_text2}
+              </div>
             </div>
+
           </div>
 
           <h3 className="mt-5">back end</h3>
           <div className="back-end stack">
-            <div className="back-end-row">
-              <a className="logo" >
-                <img className="col-1 row-1" src="./svg/mongo.svg" alt="" />
-                <p>MongoDB</p>
-              </a>
-              <a className="logo" >
-                <img className="col-2 row-1" src="./svg/node.svg" alt="" />
-                <p>Node.js</p>
-              </a>
-              <a className="logo" >
-                <img className="col-3 row-1" src="./svg/python.svg" alt="" />
-                <p>Python</p>
-              </a>
-
+            <div id="row-3" className="back-end-row">
+              <Logo className="col-1 row-1" id="MongoDB" ref_accordion={ref_accordion_3} text={text_html}        set_accordion_text = {set_accordion_text3} ></Logo>
+              <Logo className="col-2 row-1" id="Node.js" ref_accordion={ref_accordion_3} text={text_css}         set_accordion_text = {set_accordion_text3} ></Logo>
+              <Logo className="col-3 row-1" id="Python"  ref_accordion={ref_accordion_3} text={text_bootstrap}   set_accordion_text = {set_accordion_text3} ></Logo>
             </div>
+
+            <div id="accordion-3" ref={ref_accordion_3} className="accordion accordion-bottom">
+              <div className="text">
+                {accordion_text3}
+              </div>
+            </div>
+
           </div>
 
           <h3 className="mt-5">dev ops</h3>
           <div className="dev-ops stack">
-            <div className="dev-ops-row">
-              <div className="logo">
-                <img className="col-1 row-1" src="./svg/git.svg" alt="" />
-                <p>Git</p>
-              </div>
-              <div className="logo">
-                <img className="col-2 row-1" src="./svg/Docker.svg" alt="" />
-                <p>Docker</p>
-              </div>
+            <div  id="row-4"  className="dev-ops-row">
+              <Logo className="col-1 row-1" id="git"     ref_accordion={ref_accordion_4} text={text_html}        set_accordion_text = {set_accordion_text4} ></Logo>
+              <Logo className="col-2 row-1" id="Docker"  ref_accordion={ref_accordion_4} text={text_css}         set_accordion_text = {set_accordion_text4} ></Logo>
+            </div>
 
+            <div id="accordion-4" ref={ref_accordion_4} className="accordion accordion-bottom">
+                <div className="text">
+                  {accordion_text4}
+                </div>
             </div>
 
           </div>
