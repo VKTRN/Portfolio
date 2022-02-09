@@ -1,40 +1,26 @@
 import {useState, useRef, useEffect, useContext} from "react"
 
-function Logo({id, ref_accordion, text, set_accordion_text}){
+function Logo({id,open, set_open, i}){
 
-    function handleHover(ref) {
-        ref.current.classList.toggle("ready")
-    }
-
-    function toggleAccordion(event, ref_accordion, text) {
+    function toggleAccordion(event) {
 
         function close_accordion(){
-            accordion.classList.remove("open")
+            set_open(["","","","","",""])
         }
 
         function open_accordion(){
-            accordion.classList.add("open")
-        }
-
-        function remove_content_id(){
-            accordion.removeAttribute('content-id')
-        }
-
-        function set_text(){
-            set_accordion_text(text)
-        }
-
-        function set_content_id(){
-            accordion.setAttribute('content-id', clicked_element_id)
+            const value = ["","","","","",""]
+            value[i] = "open"
+            set_open(value)
         }
 
         function handleOutsideClick(event) {
             // if user clicks outside, the menu gets closed and the outside-click eventlistener is removed.
-            const clickedElement_row = event.target.parentElement.id
+            const outside      = event.target.id !== id
+            const is_accordion = event.target.classList.contains("accordion")
         
-            if (clickedElement_row !== row){
+            if (outside && !is_accordion){
                 close_accordion()
-                remove_content_id()
                 document.removeEventListener('click', handleOutsideClick, true)
             }
         }
@@ -47,34 +33,21 @@ function Logo({id, ref_accordion, text, set_accordion_text}){
             document.removeEventListener('click', handleOutsideClick, true)
         }
 
-        const accordion            = ref_accordion.current
-        const clicked_element_id   = event.target.id
-        const accordion_is_open    = accordion.classList.contains("open")
-        const accordion_content_id = accordion.getAttribute('content-id')
-        const row                  = event.target.parentElement.id
+        const is_open = open[i] === 'open'
 
-        if (accordion_is_open) {
-            if (accordion_content_id === clicked_element_id) {
-                close_accordion()
-                remove_content_id()
-                remove_outside_click_listener()
-            }
-            else{
-                set_text()
-                set_content_id()
-                add_outside_click_listener()
-            }
+        if (is_open){
+            close_accordion()
+            remove_outside_click_listener()
         }
         else{
             open_accordion()
-            set_text()
-            set_content_id()
             add_outside_click_listener()
         }
+
     }
 
     return(
-    <a className="logo" id={id} onClick={(event) => toggleAccordion(event,ref_accordion, text)} onMouseEnter={() => handleHover(ref_accordion)} onMouseLeave={() => handleHover(ref_accordion)}>
+    <a id={id} className="logo" onClick={toggleAccordion} >
         <img src={`./svg/${id}.svg`} alt="" />
         <p>{id}</p>
     </a>

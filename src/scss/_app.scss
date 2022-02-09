@@ -73,17 +73,18 @@ $svg-size: 7rem;
       border-radius: .75rem;
       z-index: 4;
 
+
       .accordion{
-        grid-column-start: 1;
-        grid-column-end: 4;
-        height: 0rem;
+        height: 0px;
         overflow:hidden;
         background-color: #bec6e5;
-        width:100%;
+        // width:100%;
         transition: all 400ms;
-        
+        // flex: 0 0 100%;
+        width:100%;
+        z-index:12;
         .text{
-          width:25rem;
+          width:80%;
           color:#383847;
           margin: 2rem;
         }
@@ -108,7 +109,10 @@ $svg-size: 7rem;
         border-radius: .5rem;
         transition: all 400ms ease;
         user-select: none;
-        
+        // flex: 0 0 160px;
+        width:10rem;
+        margin-top:2rem;
+        margin-bottom:2rem;
         
         &:hover{
           background-color: #68687a;
@@ -130,66 +134,27 @@ $svg-size: 7rem;
 
     }
 
+      
     .front-end{
+      grid-template-columns: 1fr;
+      display: flex;
+      margin:5rem 0rem 5rem 0rem;
+      justify-content:center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0 0;
+      z-index: 111;
+
+      width:16rem;
       
-      .front-end-row{
-        grid-template-columns: 1fr;
-        display: grid;
-        column-gap: 6rem;
-        row-gap: 3rem;
-        margin:1rem 5rem 1rem 5rem;
-        justify-content:center;
-
-        @include media-breakpoint-up(md){
-          grid-template-columns: 1fr 1fr;
-        }
-        
-        @include media-breakpoint-up(lg){
-          grid-template-columns: 1fr 1fr 1fr;
-        }
-
-        &.top{
-          margin-top:5rem;
-        }
-
-      }
-
-    }
-
-    .back-end{
-
-      .back-end-row{
-        grid-template-columns: 1fr;
-        display: grid;
-        column-gap: 6rem;
-        margin:5rem 5rem 1rem 5rem;
-        justify-content:center;
-  
-        @include media-breakpoint-up(md){
-          grid-template-columns: 1fr 1fr;
-        }
-        
-        @include media-breakpoint-up(lg){
-          grid-template-columns: 1fr 1fr 1fr;
-        }
-      }
-    }
-
-    .dev-ops{
-
-      .dev-ops-row{
-        grid-template-columns: 1fr;
-        display: grid;
-        column-gap: 6rem;
-        margin:5rem 5rem 1rem 5rem;
-        justify-content:center;
-  
-        @include media-breakpoint-up(md){
-          grid-template-columns: 1fr 1fr;
-        }
-
+      @include media-breakpoint-up(md){
+        width:34rem;
+        gap: 0 3rem;
       }
       
+      @include media-breakpoint-up(lg){
+        width:46rem;
+      }
 
     }
 
@@ -227,7 +192,6 @@ $svg-size: 7rem;
       }
 
     }
-
   }
 }
 
@@ -241,5 +205,115 @@ $svg-size: 7rem;
 
   @include media-breakpoint-up(sm){
     flex-direction: row;
+  }
+}
+
+
+
+
+
+#HTML5{
+  order:0;
+}
+#CSS3{
+  order:2;
+  @include media-breakpoint-up(md){
+    order:1;
+  }
+    @include media-breakpoint-up(lg){
+    order:1;
+  }
+}
+#JavaScript{
+  order:4;
+  @include media-breakpoint-up(md){
+    order:4;
+  }
+    @include media-breakpoint-up(lg){
+    order:2;
+  }
+}
+
+#HTML5-accordion{
+  order:1;
+  @include media-breakpoint-up(md){
+    order:2;
+  }
+    @include media-breakpoint-up(lg){
+    order:3;
+  }
+}
+#CSS3-accordion{
+  order:3;
+  @include media-breakpoint-up(md){
+    order:3;
+  }
+    @include media-breakpoint-up(lg){
+    order:4;
+  }
+}
+#JavaScript-accordion{
+  order:5;
+  @include media-breakpoint-up(md){
+    order:6;
+  }
+    @include media-breakpoint-up(lg){
+    order:5;
+  }
+}
+
+#Sass{
+  order:6;
+  @include media-breakpoint-up(md){
+    order:5;
+  }
+    @include media-breakpoint-up(lg){
+    order:6;
+  }
+}
+#React{
+  order:8;
+  @include media-breakpoint-up(md){
+    order: 8;
+  }
+    @include media-breakpoint-up(lg){
+    order: 7;
+  }
+}
+#Bootstrap{
+  order:10;
+  @include media-breakpoint-up(md){
+    order:9;
+  }
+    @include media-breakpoint-up(lg){
+    order:8;
+  }
+}
+
+#Sass-accordion{
+  order:7;
+  @include media-breakpoint-up(md){
+    order:7;
+  }
+    @include media-breakpoint-up(lg){
+    order:9;
+  }
+}
+#React-accordion{
+  order:9;
+  @include media-breakpoint-up(md){
+    order:10;
+  }
+    @include media-breakpoint-up(lg){
+    order:10;
+  }
+}
+#Bootstrap-accordion{
+  order:11;
+  @include media-breakpoint-up(md){
+    order:11;
+  }
+    @include media-breakpoint-up(lg){
+    order:11;
   }
 }
