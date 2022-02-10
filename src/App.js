@@ -1,15 +1,18 @@
 import {useState, useRef, useEffect, useContext} from "react"
 import './scss/custom.scss';
 import Logo from "./components/Logo"
+import Accordion from "./components/Accordion"
 
 const text_html      = "html html html html html html html html html html html html html html html html html html html html html html html html html html "
 const text_css       = "css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css" 
 const text_js        = "JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript " 
 const text_bootstrap = "bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap "
 
+
+
 function App() {
 
-  const [open, set_open] = useState(["","","","","",""])
+  const [open, set_open] = useState(Array(6))
 
   return (
     <div className="App">
@@ -45,56 +48,19 @@ function App() {
           <h3 className="mt-5">front end</h3>
           <div className="front-end stack">
 
-            <div className="front-end">
-
-              <Logo id="HTML5"      open={open} set_open={set_open} i={0}></Logo>
-              <Logo id="CSS3"       open={open} set_open={set_open} i={1}></Logo>
-              <Logo id="JavaScript" open={open} set_open={set_open} i={2}></Logo>
-              
-
-              <Logo id="Sass"      open={open} set_open={set_open} i={3}></Logo>
-              <Logo id="React" className="react"  open={open} set_open={set_open} i={4}></Logo>
-              <Logo id="Bootstrap" open={open} set_open={set_open} i={5}></Logo> 
-
-              <div id="HTML5-accordion" className={`accordion ${open[0]}`} >
-                <div className="text">
-                  {text_html}
-                </div>
-              </div>
-              <div id="CSS3-accordion" className={`accordion ${open[1]}`}>
-                <div className="text">
-                  {text_css}
-                </div>
-              </div>
-              <div id="JavaScript-accordion" className={`accordion ${open[2]}`}>
-                <div className="text">
-                  {text_js}
-                </div>
-              </div>
-
-              <div id="Sass-accordion" className={`accordion ${open[3]}`} >
-                <div className="text">
-                  {text_html}
-                </div>
-              </div>
-              <div id="React-accordion" className={`accordion ${open[4]}`}>
-                <div className="text">
-                  {text_css}
-                </div>
-              </div>
-              <div id="Bootstrap-accordion" className={`accordion ${open[5]}`}>
-                <div className="text">
-                  {text_js}
-                </div>
-              </div>
-
-
-
-
-
-            </div>
-
-
+            
+            <Logo id="HTML5"      open={open} set_open={set_open} i={0}></Logo>
+            <Accordion id = "HTML5-accordion"      open = {open[0]} text = {text_html}></Accordion>
+            <Logo id="CSS3"       open={open} set_open={set_open} i={1}></Logo>
+            <Accordion id = "CSS3-accordion"       open = {open[1]} text = {text_css} ></Accordion>
+            <Logo id="JavaScript" open={open} set_open={set_open} i={2}></Logo>
+            <Accordion id = "JavaScript-accordion" open = {open[2]} text = {text_js}  ></Accordion>
+            <Logo id="Sass"       open={open} set_open={set_open} i={3}></Logo>
+            <Accordion id = "Sass-accordion"       open = {open[3]} text = {text_html}></Accordion>
+            <Logo id="React"      open={open} set_open={set_open} i={4}></Logo>
+            <Accordion id = "React-accordion"      open = {open[4]} text = {text_css} ></Accordion>
+            <Logo id="Bootstrap"  open={open} set_open={set_open} i={5}></Logo> 
+            <Accordion id = "Bootstrap-accordion"  open = {open[5]} text = {text_js}  ></Accordion>
 
 
           </div>
