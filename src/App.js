@@ -1,15 +1,19 @@
 import {useState, useRef, useEffect, useContext} from "react"
 import './scss/custom.scss';
 import Logo from "./components/Logo"
+import Accordion from "./components/Accordion"
+import StackItem from "./components/StackItem"
 
 const text_html      = "html html html html html html html html html html html html html html html html html html html html html html html html html html "
 const text_css       = "css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css" 
 const text_js        = "JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript " 
 const text_bootstrap = "bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap "
 
+
+
 function App() {
 
-  const [open, set_open] = useState(["","","","","",""])
+  const [open, set_open] = useState(Array(11))
 
   return (
     <div className="App">
@@ -44,81 +48,35 @@ function App() {
 
           <h3 className="mt-5">front end</h3>
           <div className="front-end stack">
-
-            <div className="front-end">
-
-              <Logo id="HTML5"      open={open} set_open={set_open} i={0}></Logo>
-              <Logo id="CSS3"       open={open} set_open={set_open} i={1}></Logo>
-              <Logo id="JavaScript" open={open} set_open={set_open} i={2}></Logo>
-              
-
-              <Logo id="Sass"      open={open} set_open={set_open} i={3}></Logo>
-              <Logo id="React" className="react"  open={open} set_open={set_open} i={4}></Logo>
-              <Logo id="Bootstrap" open={open} set_open={set_open} i={5}></Logo> 
-
-              <div id="HTML5-accordion" className={`accordion ${open[0]}`} >
-                <div className="text">
-                  {text_html}
-                </div>
-              </div>
-              <div id="CSS3-accordion" className={`accordion ${open[1]}`}>
-                <div className="text">
-                  {text_css}
-                </div>
-              </div>
-              <div id="JavaScript-accordion" className={`accordion ${open[2]}`}>
-                <div className="text">
-                  {text_js}
-                </div>
-              </div>
-
-              <div id="Sass-accordion" className={`accordion ${open[3]}`} >
-                <div className="text">
-                  {text_html}
-                </div>
-              </div>
-              <div id="React-accordion" className={`accordion ${open[4]}`}>
-                <div className="text">
-                  {text_css}
-                </div>
-              </div>
-              <div id="Bootstrap-accordion" className={`accordion ${open[5]}`}>
-                <div className="text">
-                  {text_js}
-                </div>
-              </div>
-
-
-
-
-
-            </div>
-
-
-
-
+            <StackItem id="HTML5"      text={text_html} open={open} set_open={set_open} i={0}></StackItem>
+            <StackItem id="CSS3"       text={text_css}  open={open} set_open={set_open} i={1}></StackItem>
+            <StackItem id="JavaScript" text={text_js}   open={open} set_open={set_open} i={2}></StackItem>
+            <StackItem id="Sass"       text={text_html} open={open} set_open={set_open} i={3}></StackItem>
+            <StackItem id="React"      text={text_css}  open={open} set_open={set_open} i={4}></StackItem>
+            <StackItem id="Bootstrap"  text={text_js}   open={open} set_open={set_open} i={5}></StackItem>
           </div>
 
-          {/* <h3 className="mt-5">back end</h3> */}
+          <h3 className="mt-5">back end</h3>
+          <div className="front-end stack">
+            <StackItem id="MongoDB" text={text_html} open={open} set_open={set_open} i={6}></StackItem>
+            <StackItem id="Node"    text={text_css}  open={open} set_open={set_open} i={7}></StackItem>
+            <StackItem id="Python"  text={text_js}   open={open} set_open={set_open} i={8}></StackItem>
+          </div>
 
-
-          {/* <h3 className="mt-5">dev ops</h3>
-
+          <h3 className="mt-5">dev ops</h3>
+          <div className="front-end stack">
+            <StackItem id="Git" text={text_html} open={open} set_open={set_open} i={9}></StackItem>
+            <StackItem id="Docker"    text={text_css}  open={open} set_open={set_open} i={10}></StackItem>
+          </div>
 
           <div className="tech-stack">
             <h2>Connect with me</h2>
-          </div> */}
-          {/* <div className="socials stack mb-5">
-              <div className="logo">
-                <img className="col-1 row-1 youtube" src="./svg/youtube.svg" alt="" />
-              </div>
-              <div className="logo">
-                <img className="col-2 row-1" src="./svg/twitter.svg" alt="" />
-              </div>
-              <div className="logo">
-                <img className="col-2 row-1 white-svg" src="./svg/github.svg" alt="" />
-              </div>
-          </div> */}
+          </div>  
+          <div className="front-end stack socials">
+            <StackItem id="youtube" text={text_html} open={open} set_open={set_open} i={11}></StackItem>
+            <StackItem id="twitter"    text={text_css}  open={open} set_open={set_open} i={12}></StackItem>
+            <StackItem id="github"  text={text_js}   open={open} set_open={set_open} i={13}></StackItem>
+          </div>
         </div>
       </div>
 
