@@ -13,7 +13,7 @@ const text_bootstrap = "bootstrap bootstrap bootstrap bootstrap bootstrap bootst
 
 function App() {
 
-  const [open, set_open] = useState(Array(6))
+  const [open, set_open] = useState(Array(11))
 
   return (
     <div className="App">
@@ -56,26 +56,27 @@ function App() {
             <StackItem id="Bootstrap"  text={text_js}   open={open} set_open={set_open} i={5}></StackItem>
           </div>
 
-          {/* <h3 className="mt-5">back end</h3> */}
+          <h3 className="mt-5">back end</h3>
+          <div className="front-end stack">
+            <StackItem id="MongoDB" text={text_html} open={open} set_open={set_open} i={6}></StackItem>
+            <StackItem id="Node"    text={text_css}  open={open} set_open={set_open} i={7}></StackItem>
+            <StackItem id="Python"  text={text_js}   open={open} set_open={set_open} i={8}></StackItem>
+          </div>
 
-
-          {/* <h3 className="mt-5">dev ops</h3>
-
+          <h3 className="mt-5">dev ops</h3>
+          <div className="front-end stack">
+            <StackItem id="Git" text={text_html} open={open} set_open={set_open} i={9}></StackItem>
+            <StackItem id="Docker"    text={text_css}  open={open} set_open={set_open} i={10}></StackItem>
+          </div>
 
           <div className="tech-stack">
             <h2>Connect with me</h2>
-          </div> */}
-          {/* <div className="socials stack mb-5">
-              <div className="logo">
-                <img className="col-1 row-1 youtube" src="./svg/youtube.svg" alt="" />
-              </div>
-              <div className="logo">
-                <img className="col-2 row-1" src="./svg/twitter.svg" alt="" />
-              </div>
-              <div className="logo">
-                <img className="col-2 row-1 white-svg" src="./svg/github.svg" alt="" />
-              </div>
-          </div> */}
+          </div>  
+          <div className="front-end stack socials">
+            <StackItem id="youtube" text={text_html} open={open} set_open={set_open} i={11}></StackItem>
+            <StackItem id="twitter"    text={text_css}  open={open} set_open={set_open} i={12}></StackItem>
+            <StackItem id="github"  text={text_js}   open={open} set_open={set_open} i={13}></StackItem>
+          </div>
         </div>
       </div>
 

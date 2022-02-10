@@ -1,3 +1,4 @@
+@use 'sass:math';
 $svg-size: 7rem;
 
 .header{
@@ -69,6 +70,7 @@ $svg-size: 7rem;
     .stack{
       margin-top:2rem;
       padding:0;
+      padding-bottom: 2rem;
       background-color: #4c4c5a;
       border-radius: .75rem;
       z-index: 4;
@@ -159,11 +161,9 @@ $svg-size: 7rem;
     }
 
     .socials{
-      display: grid;
 
-      grid-template-columns: 1fr 1fr 1fr;
       background-color: transparent !important;
-      column-gap: 5vw;
+      // column-gap: 5vw;
       margin-top:2rem;
       padding:0;
 
@@ -173,24 +173,11 @@ $svg-size: 7rem;
         img{
           width: $svg-size/4 !important;
           height: $svg-size/4 !important;
-
-          @include media-breakpoint-up(md){
-            width: $svg-size/3 !important;
-            height: $svg-size/3 !important;
-          }
-          
-          @include media-breakpoint-up(lg){
-            width: $svg-size/2 !important;
-            height: $svg-size/2 !important;
+          .youtube{
+            width:initial !important;
           }
         }
-
-        .youtube{
-          width:initial !important;
-        }
-
       }
-
     }
   }
 }
@@ -209,111 +196,27 @@ $svg-size: 7rem;
 }
 
 
+// handle order of the techstack items
+$elements: 24;
 
-
-
-#HTML5{
-  order:0;
-}
-#CSS3{
-  order:2;
-  @include media-breakpoint-up(md){
-    order:1;
-  }
+@for $i from 0 to $elements {
+  .stack{
+    @include media-breakpoint-up(md){
+      .item:nth-child(#{2*$i + 1}) {
+        order: $i+2*floor($i/2);
+      }
+      .item:nth-child(#{2*$i + 2}) {
+        order: $i+2*floor($i/2)+2;
+      }
+    }
+    
     @include media-breakpoint-up(lg){
-    order:1;
-  }
-}
-#JavaScript{
-  order:4;
-  @include media-breakpoint-up(md){
-    order:4;
-  }
-    @include media-breakpoint-up(lg){
-    order:2;
-  }
-}
-
-#HTML5-accordion{
-  order:1;
-  @include media-breakpoint-up(md){
-    order:2;
-  }
-    @include media-breakpoint-up(lg){
-    order:3;
-  }
-}
-#CSS3-accordion{
-  order:3;
-  @include media-breakpoint-up(md){
-    order:3;
-  }
-    @include media-breakpoint-up(lg){
-    order:4;
-  }
-}
-#JavaScript-accordion{
-  order:5;
-  @include media-breakpoint-up(md){
-    order:6;
-  }
-    @include media-breakpoint-up(lg){
-    order:5;
-  }
-}
-
-#Sass{
-  order:6;
-  @include media-breakpoint-up(md){
-    order:5;
-  }
-    @include media-breakpoint-up(lg){
-    order:6;
-  }
-}
-#React{
-  order:8;
-  @include media-breakpoint-up(md){
-    order: 8;
-  }
-    @include media-breakpoint-up(lg){
-    order: 7;
-  }
-}
-#Bootstrap{
-  order:10;
-  @include media-breakpoint-up(md){
-    order:9;
-  }
-    @include media-breakpoint-up(lg){
-    order:8;
-  }
-}
-
-#Sass-accordion{
-  order:7;
-  @include media-breakpoint-up(md){
-    order:7;
-  }
-    @include media-breakpoint-up(lg){
-    order:9;
-  }
-}
-#React-accordion{
-  order:9;
-  @include media-breakpoint-up(md){
-    order:10;
-  }
-    @include media-breakpoint-up(lg){
-    order:10;
-  }
-}
-#Bootstrap-accordion{
-  order:11;
-  @include media-breakpoint-up(md){
-    order:11;
-  }
-    @include media-breakpoint-up(lg){
-    order:11;
+      .item:nth-child(#{2*$i + 1}) {
+        order: $i+3*floor($i/3);
+      }
+      .item:nth-child(#{2*$i + 2}) {
+        order: $i+3*floor($i/3)+3;
+      }
+    }
   }
 }

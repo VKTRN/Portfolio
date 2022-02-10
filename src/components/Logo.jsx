@@ -5,11 +5,11 @@ function Logo({id,open, set_open, i}){
   function toggleAccordion(event) {
 
       function close_accordion(){
-          set_open(Array(6))
+          set_open(Array(open.length))
       }
 
       function open_accordion(){
-          const value = Array(6)
+          const value = Array(open.length)
           value[i] = "open"
           set_open(value)
       }
@@ -47,7 +47,7 @@ function Logo({id,open, set_open, i}){
   }
 
   return(
-    <a id={id} className="logo" onClick={toggleAccordion} >
+    <a id={id} className="logo item" onClick={toggleAccordion} >
       <img src={`./svg/${id}.svg`} alt="" />
       <p>{id}</p>
     </a>
