@@ -2,6 +2,7 @@ import {useState, useRef, useEffect, useContext} from "react"
 import './scss/custom.scss';
 import Logo from "./components/Logo"
 import Accordion from "./components/Accordion"
+import StackItem from "./components/StackItem"
 
 const text_html      = "html html html html html html html html html html html html html html html html html html html html html html html html html html "
 const text_css       = "css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css" 
@@ -47,22 +48,12 @@ function App() {
 
           <h3 className="mt-5">front end</h3>
           <div className="front-end stack">
-
-            
-            <Logo id="HTML5"      open={open} set_open={set_open} i={0}></Logo>
-            <Accordion id = "HTML5-accordion"      open = {open[0]} text = {text_html}></Accordion>
-            <Logo id="CSS3"       open={open} set_open={set_open} i={1}></Logo>
-            <Accordion id = "CSS3-accordion"       open = {open[1]} text = {text_css} ></Accordion>
-            <Logo id="JavaScript" open={open} set_open={set_open} i={2}></Logo>
-            <Accordion id = "JavaScript-accordion" open = {open[2]} text = {text_js}  ></Accordion>
-            <Logo id="Sass"       open={open} set_open={set_open} i={3}></Logo>
-            <Accordion id = "Sass-accordion"       open = {open[3]} text = {text_html}></Accordion>
-            <Logo id="React"      open={open} set_open={set_open} i={4}></Logo>
-            <Accordion id = "React-accordion"      open = {open[4]} text = {text_css} ></Accordion>
-            <Logo id="Bootstrap"  open={open} set_open={set_open} i={5}></Logo> 
-            <Accordion id = "Bootstrap-accordion"  open = {open[5]} text = {text_js}  ></Accordion>
-
-
+            <StackItem id="HTML5"      text={text_html} open={open} set_open={set_open} i={0}></StackItem>
+            <StackItem id="CSS3"       text={text_css}  open={open} set_open={set_open} i={1}></StackItem>
+            <StackItem id="JavaScript" text={text_js}   open={open} set_open={set_open} i={2}></StackItem>
+            <StackItem id="Sass"       text={text_html} open={open} set_open={set_open} i={3}></StackItem>
+            <StackItem id="React"      text={text_css}  open={open} set_open={set_open} i={4}></StackItem>
+            <StackItem id="Bootstrap"  text={text_js}   open={open} set_open={set_open} i={5}></StackItem>
           </div>
 
           {/* <h3 className="mt-5">back end</h3> */}
