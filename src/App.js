@@ -9,15 +9,7 @@ const text_bootstrap = "bootstrap bootstrap bootstrap bootstrap bootstrap bootst
 
 function App() {
 
-  const ref_accordion_1 = useRef()
-  const ref_accordion_2 = useRef()
-  const ref_accordion_3 = useRef()
-  const ref_accordion_4 = useRef()
-
-  const [accordion_text1, set_accordion_text1] = useState("")
-  const [accordion_text2, set_accordion_text2] = useState("")
-  const [accordion_text3, set_accordion_text3] = useState("")
-  const [accordion_text4, set_accordion_text4] = useState("")
+  const [open, set_open] = useState(["","","","","",""])
 
   return (
     <div className="App">
@@ -53,67 +45,70 @@ function App() {
           <h3 className="mt-5">front end</h3>
           <div className="front-end stack">
 
-            <div id="row-1" className="front-end-row top">
-              <Logo className="col-1 row-1" id="HTML5"      ref_accordion={ref_accordion_1} text={text_html} set_accordion_text = {set_accordion_text1} ></Logo>
-              <Logo className="col-2 row-1" id="CSS3"       ref_accordion={ref_accordion_1} text={text_css}  set_accordion_text = {set_accordion_text1} ></Logo>
-              <Logo className="col-3 row-1" id="JavaScript" ref_accordion={ref_accordion_1} text={text_js}   set_accordion_text = {set_accordion_text1} ></Logo>
-            </div>
+            <div className="front-end">
 
-            <div id="accordion-1" ref={ref_accordion_1} className="accordion ">
-              <div className="text">
-                {accordion_text1}
-              </div>
-            </div>
+              <Logo id="HTML5"      open={open} set_open={set_open} i={0}></Logo>
+              <Logo id="CSS3"       open={open} set_open={set_open} i={1}></Logo>
+              <Logo id="JavaScript" open={open} set_open={set_open} i={2}></Logo>
+              
 
-            <div id="row-2" className="front-end-row bottom">
-              <Logo className="col-1 row-2" id="Sass"      ref_accordion={ref_accordion_2} text={text_html}        set_accordion_text = {set_accordion_text2} ></Logo>
-              <Logo className="col-2 row-2" id="React.js"  ref_accordion={ref_accordion_2} text={text_css}         set_accordion_text = {set_accordion_text2} ></Logo>
-              <Logo className="col-3 row-2" id="Bootstrap" ref_accordion={ref_accordion_2} text={text_bootstrap}   set_accordion_text = {set_accordion_text2} ></Logo>
-            </div>
+              <Logo id="Sass"      open={open} set_open={set_open} i={3}></Logo>
+              <Logo id="React" className="react"  open={open} set_open={set_open} i={4}></Logo>
+              <Logo id="Bootstrap" open={open} set_open={set_open} i={5}></Logo> 
 
-            <div id="accordion-2" ref={ref_accordion_2} className="accordion accordion-bottom">
-              <div className="text">
-                {accordion_text2}
-              </div>
-            </div>
-
-          </div>
-
-          <h3 className="mt-5">back end</h3>
-          <div className="back-end stack">
-            <div id="row-3" className="back-end-row">
-              <Logo className="col-1 row-1" id="MongoDB" ref_accordion={ref_accordion_3} text={text_html}        set_accordion_text = {set_accordion_text3} ></Logo>
-              <Logo className="col-2 row-1" id="Node.js" ref_accordion={ref_accordion_3} text={text_css}         set_accordion_text = {set_accordion_text3} ></Logo>
-              <Logo className="col-3 row-1" id="Python"  ref_accordion={ref_accordion_3} text={text_bootstrap}   set_accordion_text = {set_accordion_text3} ></Logo>
-            </div>
-
-            <div id="accordion-3" ref={ref_accordion_3} className="accordion accordion-bottom">
-              <div className="text">
-                {accordion_text3}
-              </div>
-            </div>
-
-          </div>
-
-          <h3 className="mt-5">dev ops</h3>
-          <div className="dev-ops stack">
-            <div  id="row-4"  className="dev-ops-row">
-              <Logo className="col-1 row-1" id="git"     ref_accordion={ref_accordion_4} text={text_html}        set_accordion_text = {set_accordion_text4} ></Logo>
-              <Logo className="col-2 row-1" id="Docker"  ref_accordion={ref_accordion_4} text={text_css}         set_accordion_text = {set_accordion_text4} ></Logo>
-            </div>
-
-            <div id="accordion-4" ref={ref_accordion_4} className="accordion accordion-bottom">
+              <div id="HTML5-accordion" className={`accordion ${open[0]}`} >
                 <div className="text">
-                  {accordion_text4}
+                  {text_html}
                 </div>
+              </div>
+              <div id="CSS3-accordion" className={`accordion ${open[1]}`}>
+                <div className="text">
+                  {text_css}
+                </div>
+              </div>
+              <div id="JavaScript-accordion" className={`accordion ${open[2]}`}>
+                <div className="text">
+                  {text_js}
+                </div>
+              </div>
+
+              <div id="Sass-accordion" className={`accordion ${open[3]}`} >
+                <div className="text">
+                  {text_html}
+                </div>
+              </div>
+              <div id="React-accordion" className={`accordion ${open[4]}`}>
+                <div className="text">
+                  {text_css}
+                </div>
+              </div>
+              <div id="Bootstrap-accordion" className={`accordion ${open[5]}`}>
+                <div className="text">
+                  {text_js}
+                </div>
+              </div>
+
+
+
+
+
             </div>
 
+
+
+
           </div>
+
+          {/* <h3 className="mt-5">back end</h3> */}
+
+
+          {/* <h3 className="mt-5">dev ops</h3>
+
 
           <div className="tech-stack">
             <h2>Connect with me</h2>
-          </div>
-          <div className="socials stack mb-5">
+          </div> */}
+          {/* <div className="socials stack mb-5">
               <div className="logo">
                 <img className="col-1 row-1 youtube" src="./svg/youtube.svg" alt="" />
               </div>
@@ -123,7 +118,7 @@ function App() {
               <div className="logo">
                 <img className="col-2 row-1 white-svg" src="./svg/github.svg" alt="" />
               </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
