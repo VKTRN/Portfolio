@@ -64,8 +64,9 @@ function App() {
 
           <h3 className="mt-5">dev ops</h3>
           <div className="front-end stack">
-            <StackItem id="Git" text={text_html} open={open} set_open={set_open} i={9}></StackItem>
-            <StackItem id="Docker"    text={text_css}  open={open} set_open={set_open} i={10}></StackItem>
+            <StackItem id="Bash"    text={text_css}  open={open} set_open={set_open} i={9}></StackItem>
+            <StackItem id="Git" text={text_html} open={open} set_open={set_open} i={10}></StackItem>
+            <StackItem id="Docker"    text={text_css}  open={open} set_open={set_open} i={11}></StackItem>
           </div>
 
           <div className="tech-stack">
