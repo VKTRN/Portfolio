@@ -3,6 +3,7 @@ import './scss/custom.scss';
 import Logo from "./components/Logo"
 import Accordion from "./components/Accordion"
 import StackItem from "./components/StackItem"
+import SocialButton from "./components/SocialButton"
 
 const text_html      = "html html html html html html html html html html html html html html html html html html html html html html html html html html "
 const text_css       = "css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css" 
@@ -19,12 +20,12 @@ function App() {
       <div className="header">
         <div className="header-content">
           <div className="logo">vktrn.com</div>
-          <div className="links">
+          {/* <div className="links">
             <a href="">Link</a>
             <a href="">Link</a>
             <a href="">Link</a>
             <a href="">Link</a>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -73,9 +74,9 @@ function App() {
             <h2>Connect with me</h2>
           </div>  
           <div className="front-end stack socials">
-            <StackItem id="youtube" text={text_html} open={open} set_open={set_open} i={11}></StackItem>
-            <StackItem id="twitter"    text={text_css}  open={open} set_open={set_open} i={12}></StackItem>
-            <StackItem id="github"  text={text_js}   open={open} set_open={set_open} i={13}></StackItem>
+            <SocialButton id="youtube" link="https://www.youtube.com"></SocialButton>
+            <SocialButton id="twitter" link="https://www.twitter.com"></SocialButton>
+            <SocialButton id="github"  link="https://www.github.com"></SocialButton>
           </div>
         </div>
       </div>
