@@ -79,17 +79,20 @@ $logo-margin:1rem;
       padding-top: $stack-padding - $logo-margin;
       background-color: #4c4c5a;
       border-radius: .75rem;
+      position: relative;
       z-index: 4;
-
-
+      
+      
       .accordion{
+        position: relative;
         height: 0px;
         overflow:hidden;
         background-color: #bec6e5;
         // width:100%;
-        transition: all 400ms;
+        transition: all 600ms;
         // flex: 0 0 100%;
         width:100%;
+        box-shadow:         inset 0px 1px 0px 0px rgba(50, 50, 50, 0.7);
         z-index:12;
         .text{
           // width:80%;
