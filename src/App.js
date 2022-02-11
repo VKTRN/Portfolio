@@ -10,7 +10,6 @@ const text_js        = "JavaScript JavaScript JavaScript JavaScript JavaScript J
 const text_bootstrap = "bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap "
 
 
-
 function App() {
 
   const [open, set_open] = useState(Array(11))

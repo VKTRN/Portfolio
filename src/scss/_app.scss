@@ -1,5 +1,10 @@
 @use 'sass:math';
 $svg-size: 7rem;
+$stack-padding: 2rem;
+$logo-width:10rem;
+$logo-padding:1rem;
+$logo-gap:3rem;
+$logo-margin:1rem;
 
 .header{
   display: flex;
@@ -70,7 +75,8 @@ $svg-size: 7rem;
     .stack{
       margin-top:2rem;
       padding:0;
-      padding-bottom: 2rem;
+      padding-bottom: $stack-padding - $logo-margin;
+      padding-top: $stack-padding - $logo-margin;
       background-color: #4c4c5a;
       border-radius: .75rem;
       z-index: 4;
@@ -86,9 +92,9 @@ $svg-size: 7rem;
         width:100%;
         z-index:12;
         .text{
-          width:80%;
+          // width:80%;
+          padding:2rem;
           color:#383847;
-          margin: 2rem;
         }
       }
 
@@ -106,15 +112,15 @@ $svg-size: 7rem;
         align-items: center;
         cursor: pointer;
         color: white !important;
-        padding:1rem;
-        padding-top:1rem;
+        padding: $logo-padding;
         border-radius: .5rem;
         transition: all 400ms ease;
         user-select: none;
+        margin:$logo-margin 0;
         // flex: 0 0 160px;
-        width:10rem;
-        margin-top:2rem;
-        margin-bottom:2rem;
+        width: $logo-width;
+        // margin-top:2rem;
+        // margin-bottom:2rem;
         
         &:hover{
           background-color: #68687a;
@@ -147,15 +153,15 @@ $svg-size: 7rem;
       gap: 0 0;
       z-index: 111;
 
-      width:16rem;
+      width:$logo-width + 2*$stack-padding;
       
       @include media-breakpoint-up(md){
-        width:34rem;
-        gap: 0 3rem;
+        width:2*$logo-width + 1*$logo-gap + 2*$stack-padding;
+        gap: 0 $logo-gap;
       }
       
       @include media-breakpoint-up(lg){
-        width:46rem;
+        width:3*$logo-width + 2*$logo-gap + 2*$stack-padding;
       }
 
     }
@@ -219,4 +225,8 @@ $elements: 24;
       }
     }
   }
+}
+
+.stack{
+
 }
