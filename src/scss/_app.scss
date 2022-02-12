@@ -1,6 +1,6 @@
 @use 'sass:math';
 $svg-size: 7rem;
-$stack-padding: 2rem;
+$stack-padding: 4rem;
 $logo-width:10rem;
 $logo-padding:1rem;
 $logo-gap:3rem;
@@ -114,9 +114,9 @@ $logo-margin:1rem;
         flex-direction: column;
         align-items: center;
         cursor: pointer;
-        color: white !important;
+        color: rgba(232, 250, 255, 0.788) !important;
         padding: $logo-padding;
-        border-radius: .5rem;
+        border-radius: 1rem;
         transition: all 400ms ease;
         user-select: none;
         margin:$logo-margin 0;
@@ -124,16 +124,18 @@ $logo-margin:1rem;
         width: $logo-width;
         // margin-top:2rem;
         // margin-bottom:2rem;
+        text-shadow: 2px 1px 2px rgba(0,0,0,.4);
         
         &:hover{
-          background-color: #68687a;
-          box-shadow: 0px 9px 14px 0px rgb(50, 50, 50, .7);
+          // background-color: #68687a;
+          box-shadow: 10px 10px 35px 0px rgba(50, 50, 50, 0.897), -10px -10px 40px 0px  #656570;
           transform: translateY(-.5rem);
+
         }
 
         p{
           margin: .5rem 0 0 0;
-          font-size: 1rem;
+          font-size: 1.25rem;
         }
         
         img{
@@ -175,7 +177,16 @@ $logo-margin:1rem;
       // column-gap: 5vw;
       margin-top:2rem;
       padding:0;
-      gap:5rem;
+      gap:2rem;
+      
+      @include media-breakpoint-up(md){
+        gap:3rem;
+      }
+      
+      @include media-breakpoint-up(lg){
+        gap:5rem;
+      }
+      
 
 
       .social{
