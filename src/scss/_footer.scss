@@ -1,0 +1,12 @@
+.footer{
+  background-color: #8E96B2;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap:1rem;
+  padding:1rem;
+
+  @include media-breakpoint-up(sm){
+    flex-direction: row;
+  }
+}
