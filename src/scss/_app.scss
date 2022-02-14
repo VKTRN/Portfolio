@@ -1,5 +1,10 @@
 @use 'sass:math';
 $svg-size: 7rem;
+$stack-padding: 4rem;
+$logo-width:10rem;
+$logo-padding:1rem;
+$logo-gap:3rem;
+$logo-margin:1rem;
 
 .header{
   display: flex;
@@ -70,25 +75,29 @@ $svg-size: 7rem;
     .stack{
       margin-top:2rem;
       padding:0;
-      padding-bottom: 2rem;
+      padding-bottom: $stack-padding - $logo-margin;
+      padding-top: $stack-padding - $logo-margin;
       background-color: #4c4c5a;
       border-radius: .75rem;
+      position: relative;
       z-index: 4;
-
-
+      
+      
       .accordion{
+        position: relative;
         height: 0px;
         overflow:hidden;
         background-color: #bec6e5;
         // width:100%;
-        transition: all 400ms;
+        transition: all 600ms;
         // flex: 0 0 100%;
         width:100%;
+        box-shadow:         inset 0px 1px 0px 0px rgba(50, 50, 50, 0.7);
         z-index:12;
         .text{
-          width:80%;
+          // width:80%;
+          padding:2rem;
           color:#383847;
-          margin: 2rem;
         }
       }
 
@@ -105,26 +114,28 @@ $svg-size: 7rem;
         flex-direction: column;
         align-items: center;
         cursor: pointer;
-        color: white !important;
-        padding:1rem;
-        padding-top:1rem;
-        border-radius: .5rem;
+        color: rgba(232, 250, 255, 0.788) !important;
+        padding: $logo-padding;
+        border-radius: 1rem;
         transition: all 400ms ease;
         user-select: none;
+        margin:$logo-margin 0;
         // flex: 0 0 160px;
-        width:10rem;
-        margin-top:2rem;
-        margin-bottom:2rem;
+        width: $logo-width;
+        // margin-top:2rem;
+        // margin-bottom:2rem;
+        text-shadow: 2px 1px 2px rgba(0,0,0,.4);
         
         &:hover{
-          background-color: #68687a;
-          box-shadow: 0px 9px 14px 0px rgb(50, 50, 50, .7);
+          // background-color: #68687a;
+          box-shadow: 10px 10px 35px 0px rgba(50, 50, 50, 0.897), -10px -10px 40px 0px  #656570;
           transform: translateY(-.5rem);
+
         }
 
         p{
           margin: .5rem 0 0 0;
-          font-size: 1rem;
+          font-size: 1.25rem;
         }
         
         img{
@@ -147,15 +158,15 @@ $svg-size: 7rem;
       gap: 0 0;
       z-index: 111;
 
-      width:16rem;
+      width:$logo-width + 2*$stack-padding;
       
       @include media-breakpoint-up(md){
-        width:34rem;
-        gap: 0 3rem;
+        width:2*$logo-width + 1*$logo-gap + 2*$stack-padding;
+        gap: 0 $logo-gap;
       }
       
       @include media-breakpoint-up(lg){
-        width:46rem;
+        width:3*$logo-width + 2*$logo-gap + 2*$stack-padding;
       }
 
     }
@@ -166,17 +177,42 @@ $svg-size: 7rem;
       // column-gap: 5vw;
       margin-top:2rem;
       padding:0;
+      gap:2rem;
+      
+      @include media-breakpoint-up(md){
+        gap:3rem;
+      }
+      
+      @include media-breakpoint-up(lg){
+        gap:5rem;
+      }
+      
 
 
-      .logo{
-        
-        img{
-          width: $svg-size/4 !important;
-          height: $svg-size/4 !important;
-          .youtube{
-            width:initial !important;
-          }
+      .social{
+        display: flex;
+        justify-content:center;
+        align-items: center;
+
+
+
+        &:hover{
+          transform: scale(1.3);
         }
+
+        transition: all 400ms;
+  
+        img{
+          width: $logo-width/4 !important;
+          // height: $svg-size/4 !important;
+          // .youtube{
+          //   width:initial !important;
+          // }
+        }
+      }
+
+      #github{
+        filter: brightness(0) saturate(100%) invert(100%);
       }
     }
   }
@@ -219,4 +255,8 @@ $elements: 24;
       }
     }
   }
+}
+
+.stack{
+
 }
