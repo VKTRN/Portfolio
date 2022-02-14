@@ -1,0 +1,14 @@
+
+.Blog{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  .blog{
+    background-color: #342F3D;
+    display: flex;
+    flex:1;
+    justify-content: center;
+  }
+}
