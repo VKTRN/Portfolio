@@ -174,7 +174,7 @@ $logo-margin:1rem;
         transition: all 400ms;
   
         img{
-          width: $logo-width/4 !important;
+          width: calc($logo-width/4) !important;
           // height: $svg-size/4 !important;
           // .youtube{
           //   width:initial !important;
@@ -196,19 +196,19 @@ $elements: 24;
   .stack{
     @include media-breakpoint-up(md){
       .item:nth-child(#{2*$i + 1}) {
-        order: $i+2*floor($i/2);
+        order: $i+2*floor(calc($i/2));
       }
       .item:nth-child(#{2*$i + 2}) {
-        order: $i+2*floor($i/2)+2;
+        order: $i+2*floor(calc($i/2))+2;
       }
     }
     
     @include media-breakpoint-up(lg){
       .item:nth-child(#{2*$i + 1}) {
-        order: $i+3*floor($i/3);
+        order: $i+3*floor(calc($i/3));
       }
       .item:nth-child(#{2*$i + 2}) {
-        order: $i+3*floor($i/3)+3;
+        order: $i+3*floor(calc($i/3))+3;
       }
     }
   }
