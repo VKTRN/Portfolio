@@ -1,4 +1,5 @@
 import {useState, useRef, useEffect, useContext} from "react"
+import React from 'react'
 
 function Logo({id,open, set_open, i}){
 

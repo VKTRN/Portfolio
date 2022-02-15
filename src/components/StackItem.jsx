@@ -1,4 +1,5 @@
 import {useState, useRef, useEffect, useContext} from "react"
+import React from 'react'
 import Logo from "./Logo"
 import Accordion from "./Accordion"
 

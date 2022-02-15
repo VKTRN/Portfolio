@@ -1,4 +1,6 @@
 import {useState, useRef, useEffect, useContext} from "react"
+import React from 'react';
+
 // import '../scss/custom.scss';
 import StackItem from "../components/StackItem"
 import SocialButton from "../components/SocialButton"
