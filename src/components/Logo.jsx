@@ -1,4 +1,3 @@
-import {useState, useRef, useEffect, useContext} from "react"
 import React from 'react'
 
 function Logo({id,open, set_open, i}){
@@ -48,7 +47,7 @@ function Logo({id,open, set_open, i}){
   }
 
   return(
-    <a id={id} className="logo item" onClick={toggleAccordion} >
+    <a href='/' id={id} className="logo item" onClick={toggleAccordion} >
       <img src={`./svg/${id}.svg`} alt="" />
       <p>{id}</p>
     </a>

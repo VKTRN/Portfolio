@@ -1,4 +1,3 @@
-import {useState, useRef, useEffect, useContext} from "react"
 import React from 'react'
 
 function Accordion({id, open, text}){

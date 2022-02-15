@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect, useContext} from "react"
+import {useState} from "react"
 import React from 'react';
 
 // import '../scss/custom.scss';
@@ -8,14 +8,7 @@ import Editor from '../components/Editor'
 
 const initial_html = "<div class='container'></div>"
 // const initial_css = ".container{\n\tbackground-color: blue;\n}"
-const initial_css = ".container{\
-                    \n\tbackground-color: white;\
-                    \n\theight: 100px;\
-                    \n\twidth: 100px;\
-                    \n\tposition: relative;\
-                    \n\ttop: 100px;\
-                    \n\tleft: 100px;\
-                    \n}"
+const initial_css = ".container{\n\tbackground-color: white;\n\twidth: 100px;\n\tposition: relative;\n\ttop: 100px;\n\tleft: 100px;\n}"
 
 function Blog() {
 

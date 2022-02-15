@@ -12,18 +12,6 @@ export default function Editor({ language, displayName, value, onChange}) {
 
   function handleChange(editor, event) {
 
-    function findLineContainingProperty(property){
-      let containingLine 
-      let index
-      lines.forEach((line, i) => {
-        if(line.includes(property)){
-          containingLine = line
-          index = i
-        }
-      })
-      return [containingLine,index]
-    }
-
     function lineContainsSomeProperty(index){
       return lines[index].includes(":")
     }
@@ -79,7 +67,7 @@ export default function Editor({ language, displayName, value, onChange}) {
     const validLine       = lineContainsSomeProperty(changeIndex)
     const afterColon      = charStart > colon
     const beforeSemicolon = charEnd <= semicolon
-    const hitEnter        = change.length == 2
+    const hitEnter        = change.length === 2
     
     if ( validLine && afterColon && beforeSemicolon && !hitEnter) {
       onChange(newValue)

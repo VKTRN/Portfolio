@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect, useContext} from "react"
+import {useState} from "react"
 import React from 'react';
 
 // import '../scss/custom.scss';
@@ -10,7 +10,6 @@ import Footer from "../components/Footer"
 const text_html      = "html html html html html html html html html html html html html html html html html html html html html html html html html html "
 const text_css       = "css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css" 
 const text_js        = "JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript " 
-const text_bootstrap = "bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap bootstrap "
 
 function Home() {
 
