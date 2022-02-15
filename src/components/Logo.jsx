@@ -47,10 +47,10 @@ function Logo({id,open, set_open, i}){
   }
 
   return(
-    <a href='/' id={id} className="logo item" onClick={toggleAccordion} >
+    <div  id={id} className="logo item" onClick={toggleAccordion} >
       <img src={`./svg/${id}.svg`} alt="" />
       <p>{id}</p>
-    </a>
+    </div>
   )
 
 }

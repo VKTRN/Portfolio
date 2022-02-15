@@ -6,16 +6,17 @@
   
   .header-content{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     width:80%;
 
     .logo{
       color: #342F3D;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 600;
 
       @include media-breakpoint-up(sm){
-        font-size: 3rem;
+        font-size: 2rem;
       }
     }
   
@@ -23,7 +24,7 @@
       display: flex;
       justify-content: center;
       gap:4rem;
-      align-items: flex-end;
+      align-items: center;
       font-size: 1.25rem;
     }
   }

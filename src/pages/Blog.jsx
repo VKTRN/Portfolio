@@ -1,14 +1,31 @@
 import {useState} from "react"
 import React from 'react';
 
-// import '../scss/custom.scss';
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import Editor from '../components/Editor'
 
-const initial_html = "<div class='container'></div>"
-// const initial_css = ".container{\n\tbackground-color: blue;\n}"
-const initial_css = ".container{\n\tbackground-color: white;\n\twidth: 100px;\n\tposition: relative;\n\ttop: 100px;\n\tleft: 100px;\n}"
+function addDeclaration(css_string, property, value){
+  return css_string+"\n\t"+property+": "+value+";"
+}
+
+function openSelector(selector){
+  return selector+"{"
+}
+
+function closeSelector(css_string){
+  return css_string + "\n}"
+}
+
+const initial_html = "<body>\n\t<div class='container'></div>\n</body>"
+
+let initial_css 
+
+initial_css = openSelector(".container")
+initial_css = addDeclaration(initial_css, "position", "absolute")
+initial_css = addDeclaration(initial_css, "top", "100px")
+initial_css = addDeclaration(initial_css, "left", "100px")
+initial_css = closeSelector(initial_css)
 
 function Blog() {
 
@@ -31,7 +48,13 @@ function Blog() {
       <Header></Header>
 
       <div className="blog">
-        <div className="pane top-pane">
+
+        <div className="text">
+          <h2>Position: Absolute</h2>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita fugiat reprehenderit, delectus et explicabo provident hic facere tempore cumque velit mollitia fugit quos molestiae harum quis, alias error magnam asperiores quisquam architecto culpa rerum maiores at! Delectus nemo, laudantium quibusdam iure dicta eius ullam obcaecati reprehenderit veniam, quod quidem dignissimos.
+        </div>
+
+        <div className="code">
           <Editor
             language="xml"
             displayName="HTML"
@@ -46,14 +69,12 @@ function Blog() {
           />
         </div>
 
-        <div className="pane" >
-          <div className="element container" style={{ backgroundColor:getProperty("background-color", "container"), 
-                                              height:getProperty("height", "container"),
-                                              width:getProperty("width", "container"),
-                                              position:getProperty("position", "container"),
-                                              top:getProperty("top", "container"),
-                                              left:getProperty("left", "container"),
-                                            }}>B
+        <div className="code-display" >
+          <div className="container" style={{ 
+                                              position:        getProperty("position", "container"),
+                                              top:             getProperty("top", "container"),
+                                              left:            getProperty("left", "container"),
+                                            }}>
           </div>
         </div>
       </div>

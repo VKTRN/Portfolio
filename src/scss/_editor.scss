@@ -1,23 +1,26 @@
-body {
-  margin: 0;
-  background-color: hsl(225, 6%, 25%);
-}
-
-.app{
-  display:flex;
-}
-
-.top-pane {
-  display: flex;
-  flex-direction: column;
-  
-}
-
-.pane {
+.code {
   position: relative;
   height: 50vh;
-  width: 50vw;
   display: flex;
+  flex-direction: column;
+  width: 22rem;
+  display: flex;
+}
+
+.code-display{
+
+  width:30rem;
+  height:auto;
+  width:35vw;
+  max-width: 40rem;
+  max-height: 40rem;
+  background-color: rgb(49, 53, 59);
+  border: solid rgb(189, 189, 189) 1px;
+  border-radius: .5rem;
+  margin:.5rem;
+  overflow: hidden;
+  position:relative;
+
 }
 
 .editor-container {
@@ -25,8 +28,11 @@ body {
   flex-basis: 0;
   display: flex;
   flex-direction: column;
-  padding: .5rem;
-  background-color: hsl(225, 6%, 25%);
+  margin:.5rem;
+  border: solid rgb(189, 189, 189) 1px;
+  border-radius: .5rem;
+
+
 }
 
 .editor-container.collapsed {
@@ -54,6 +60,7 @@ body {
   padding: .5rem .5rem .5rem 1rem;
   border-top-right-radius: .5rem;
   border-top-left-radius: .5rem;
+
 }
 
 .CodeMirror {
@@ -65,13 +72,15 @@ body {
   border-bottom-right-radius: .5rem;
   border-bottom-left-radius: .5rem;
   overflow: hidden;
+
 }
 
-.element{
+.container{
   position:absolute;
   left:0px;
 	height:100px;
 	width:100px;
   background-color:cyan;
   transition: all 300ms;
+  border-radius: .5rem;
 }
