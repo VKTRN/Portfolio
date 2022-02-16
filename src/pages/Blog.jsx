@@ -15,15 +15,15 @@ function add_px(value,px){
   return pixelToNum(value) + px + "px";
 }
 
-function copy_object(target){
-  let object = {};
+// function copy_object(target){
+//   let object = {};
 
-  Object.entries(target).forEach(entry => {
-      object[entry[0]] = entry[1] 
-  })
+//   Object.entries(target).forEach(entry => {
+//       object[entry[0]] = entry[1] 
+//   })
 
-  return object
-}
+//   return object
+// }
 
 function addDeclaration(css_string, property, value){
   return css_string+"\n\t"+property+": "+value+";"
@@ -59,18 +59,21 @@ function Blog() {
   const style_line_y     = {left:add_px(left,25),  alignment:"vertical"};
 
 
-  function getPropertyValue(property, selector){
-    const selectorStringStart = css.indexOf(selector)
-    const selectorStringEnd = css.slice(selectorStringStart).indexOf("}")+selectorStringStart
-    const cssString = css.slice(selectorStringStart, selectorStringEnd)
-    const start = cssString.indexOf(property)+property.length+1
-    const end   = cssString.slice(start).indexOf(";") + start
-    const value = cssString.slice(start,end).replace(/\s/g, "")
 
-    return value
-  }
 
   useEffect(() => {
+
+    function getPropertyValue(property, selector){
+      const selectorStringStart = css.indexOf(selector)
+      const selectorStringEnd = css.slice(selectorStringStart).indexOf("}")+selectorStringStart
+      const cssString = css.slice(selectorStringStart, selectorStringEnd)
+      const start = cssString.indexOf(property)+property.length+1
+      const end   = cssString.slice(start).indexOf(";") + start
+      const value = cssString.slice(start,end).replace(/\s/g, "")
+  
+      return value
+    }
+
     set_left(getPropertyValue("left", "container"))
     set_top(getPropertyValue("top", "container"))
     console.log(ref_display.current.getBoundingClientRect());
