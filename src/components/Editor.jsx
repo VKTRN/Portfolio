@@ -62,7 +62,6 @@ export default function Editor({ language, displayName, value, onChange}) {
     const semicolon  = findSemicolon(changeLine)
     const newLine    = insertChange(changeLine)
     const newValue   = insertLine(changeIndex)
-    console.log(newValue);
 
     const validLine       = lineContainsSomeProperty(changeIndex)
     const afterColon      = charStart > colon

@@ -13,11 +13,16 @@
     justify-content: center;
     font-family: monospace !important;
 
-    .text{
+    .text-container{
       font-family: 'Roboto', sans-serif;
+      margin-right: 5rem;
+      width:25rem;
       color:white;
-      margin-right: auto;
-      width:30vw;
+      
+      .text{
+        text-align: justify;
+        text-align-last: justify;
+      }
     }
 
   }

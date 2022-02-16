@@ -76,10 +76,9 @@
 }
 
 .container{
+	height:50px;
+	width:50px;
   position:absolute;
-  left:0px;
-	height:100px;
-	width:100px;
   background-color:cyan;
   transition: all 300ms;
   border-radius: .5rem;
