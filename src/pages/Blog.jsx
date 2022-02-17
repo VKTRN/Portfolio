@@ -29,34 +29,46 @@ function addDeclaration(css_string, property, value){
   return css_string+"\n  "+property+": "+value+";"
 }
 
-function openSelector(selector){
-  return selector+"{"
+function openSelector(css_string, selector){
+  return css_string + selector+"{"
+}
+
+function addNewLine(css_string){
+  return css_string + "\n"
 }
 
 function closeSelector(css_string){
   return css_string + "\n}"
 }
 
-const initial_html = "<body>\n\t<div class='container'></div>\n</body>"
+const initial_html = "<body>\n\t<div class='container'>\n\t\t<div class='square'></div>\n\t</div>\n</body>"
 
-let initial_css 
+let initial_css = "" 
 
-initial_css = openSelector(".container")
+initial_css = openSelector(initial_css,".square")
 initial_css = addDeclaration(initial_css, "left", "100px")
 initial_css = addDeclaration(initial_css, "top", "100px")
 initial_css = closeSelector(initial_css)
 
+initial_css = addNewLine(initial_css)
+initial_css = addNewLine(initial_css)
+
+initial_css = openSelector(initial_css,".container")
+initial_css = addDeclaration(initial_css, "position", "relative")
+initial_css = closeSelector(initial_css)
+
 function Blog() {
 
-  const [html, setHtml]  = useState(initial_html)
-  const [css, setCss]    = useState(initial_css)
-  const [left, set_left] = useState("100px")
-  const [top, set_top]   = useState("100px")
-  const ref_square       = useRef()
-  const ref_display      = useRef()
+  const [html, setHtml]          = useState(initial_html)
+  const [css, setCss]            = useState(initial_css)
+  const [left, set_left]         = useState("100px")
+  const [top, set_top]           = useState("100px")
+  const [position, set_position] = useState("relative")
+  const ref_square               = useRef()
+  const ref_display              = useRef()
 
-  const style_line_x     = {top: add_px(top, 25), alignment:"horizontal"};
-  const style_line_y     = {left:add_px(left,25), alignment:"vertical"};
+  const style_line_x     = {top: add_px(top, 35), alignment:"horizontal"};
+  const style_line_y     = {left:add_px(left,35), alignment:"vertical"};
 
   useEffect(() => {
     function getPropertyValue(property, selector){
@@ -70,8 +82,9 @@ function Blog() {
       return value
     }
 
-    set_left(getPropertyValue("left", "container"))
-    set_top(getPropertyValue("top", "container"))
+    set_left(getPropertyValue("left", "square"))
+    set_top(getPropertyValue("top", "square"))
+    set_position(getPropertyValue("position", "container"))
   },[css])
 
   return (
@@ -103,10 +116,15 @@ function Blog() {
         </div>
 
         <div ref={ref_display} className="code-display" >
-          <div ref={ref_square} className="container" style={{ left: left, top: top}}>
+          <span className="name">body</span>
+          <div className="container" style={{ position: position}}>
+            <div ref={ref_square} className="square" style={{ left: left, top: top}}>
+              <span className="name">.square</span>
+            </div>
           </div>
-          <HorizontalMeasure style = {style_line_x} length = {left} position={"absolute"}/>
-          <VerticalMeasure style = {style_line_y} length = {top} position={"absolute"}/>
+          <span className="name2">.container</span>
+          <HorizontalMeasure style = {style_line_x} length = {left} position={position}/>
+          <VerticalMeasure   style = {style_line_y} length = {top}  position={position}/>
         </div>
       </div>
 

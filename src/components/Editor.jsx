@@ -42,8 +42,7 @@ export default function Editor({ language, displayName, value, onChange}) {
         }
       }
 
-      newLines[0] = deleteWhiteSpace(newLines[0]) // fix bug of unknown source
-      newLines[1] = deleteWhiteSpace(newLines[1]) // fix bug of unknown source
+      newLines = newLines.map((line) => {return deleteWhiteSpace(line)})
 
       newValue = newLines.join("")
       return newValue
@@ -54,7 +53,7 @@ export default function Editor({ language, displayName, value, onChange}) {
     }
 
     function deleteWhiteSpace(string){
-      if(/\s/.test(string[string.length-1])){
+      if(/\s/.test(string[string.length-1]) && string.length > 1){
         return string.slice(0, -1)
       }
       return string

@@ -59,12 +59,14 @@ function HorizontalMeasure(props) {
         // sets the offset of the lines with respect to the property position of the div screen 
         // whenever position is changed
         
-        if (props.position === "fixed"){
-            setOffsetX(0);
-            setOffsetY(0);
+        if (props.position === "relative"){
+          const x = document.querySelector(".container").getBoundingClientRect().x;
+          const y = document.querySelector(".container").getBoundingClientRect().y;
+          setOffsetX(x);
+          setOffsetY(y);
         }
 
-        if (props.position === "absolute"){
+        if (props.position === "static"){
             const x = document.querySelector(".code-display").getBoundingClientRect().x;
             const y = document.querySelector(".code-display").getBoundingClientRect().y;
             setOffsetX(x);
