@@ -30,10 +30,10 @@ export default function Editor({ language, displayName, value, onChange}) {
     }
     
     function insertLine(index){
-      let newValue = ""
-
-      let newLines = lines
+      let newValue    = ""
+      let newLines    = lines
       newLines[index] = newLine
+
 
       for (let j = 1; j < newLines.length; j++) {
         newLines[j] = "\n" + newLines[j]
@@ -42,12 +42,27 @@ export default function Editor({ language, displayName, value, onChange}) {
         }
       }
 
+      newLines[0] = deleteWhiteSpace(newLines[0]) // fix bug of unknown source
+      newLines[1] = deleteWhiteSpace(newLines[1]) // fix bug of unknown source
+
       newValue = newLines.join("")
       return newValue
     }
 
     function getLines(){
       return editor.display.view.map(a => a.line.text)
+    }
+
+    function showWhiteSpaces(string){
+      // a function to detect and debug unwanted whitespaces
+      console.log(string.replace(/\s/g, "."))
+    }
+
+    function deleteWhiteSpace(string){
+      if(/\s/.test(string[string.length-1])){
+        return string.slice(0, -1)
+      }
+      return string
     }
   
     const lines       = getLines()
@@ -56,13 +71,12 @@ export default function Editor({ language, displayName, value, onChange}) {
     const changeLine  = lines[changeIndex]
     const charStart   = event.from.ch
     const charEnd     = event.to.ch
-
-
+    
     const colon      = findColon(changeLine)
     const semicolon  = findSemicolon(changeLine)
     const newLine    = insertChange(changeLine)
     const newValue   = insertLine(changeIndex)
-
+    
     const validLine       = lineContainsSomeProperty(changeIndex)
     const afterColon      = charStart > colon
     const beforeSemicolon = charEnd <= semicolon

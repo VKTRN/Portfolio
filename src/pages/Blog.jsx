@@ -26,7 +26,7 @@ function add_px(value,px){
 // }
 
 function addDeclaration(css_string, property, value){
-  return css_string+"\n\t"+property+": "+value+";"
+  return css_string+"\n  "+property+": "+value+";"
 }
 
 function openSelector(selector){
@@ -55,14 +55,10 @@ function Blog() {
   const ref_square       = useRef()
   const ref_display      = useRef()
 
-  const style_line_x     = {top:add_px(top,25),  alignment:"horizontal"};
-  const style_line_y     = {left:add_px(left,25),  alignment:"vertical"};
-
-
-
+  const style_line_x     = {top: add_px(top, 25), alignment:"horizontal"};
+  const style_line_y     = {left:add_px(left,25), alignment:"vertical"};
 
   useEffect(() => {
-
     function getPropertyValue(property, selector){
       const selectorStringStart = css.indexOf(selector)
       const selectorStringEnd = css.slice(selectorStringStart).indexOf("}")+selectorStringStart
@@ -76,7 +72,6 @@ function Blog() {
 
     set_left(getPropertyValue("left", "container"))
     set_top(getPropertyValue("top", "container"))
-    console.log(ref_display.current.getBoundingClientRect());
   },[css])
 
   return (
