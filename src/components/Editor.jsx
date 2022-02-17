@@ -53,11 +53,6 @@ export default function Editor({ language, displayName, value, onChange}) {
       return editor.display.view.map(a => a.line.text)
     }
 
-    function showWhiteSpaces(string){
-      // a function to detect and debug unwanted whitespaces
-      console.log(string.replace(/\s/g, "."))
-    }
-
     function deleteWhiteSpace(string){
       if(/\s/.test(string[string.length-1])){
         return string.slice(0, -1)
