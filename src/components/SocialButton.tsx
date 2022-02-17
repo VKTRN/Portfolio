@@ -1,6 +1,11 @@
 import React from 'react';
 
-function SocialButton({id, link}){
+type Props = {
+  id: string,
+  link: string
+}
+
+function SocialButton({id, link}:Props){
 
   return(
     <a id={id} href={link} className="social">

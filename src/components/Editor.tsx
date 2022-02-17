@@ -6,30 +6,37 @@ import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/css/css'
 import { Controlled as ControlledEditor } from 'react-codemirror2'
 
-export default function Editor({ language, displayName, value, onChange}) {
+type Props = {
+  string: string,
+  displayName: string,
+  value: string,
+  onChange:any
+}
+
+export default function Editor({ string, displayName, value, onChange}:Props) {
 
   const [open, setOpen] = useState(true)
 
-  function handleChange(editor, event) {
+  function handleChange(editor:any, event:any) {
 
-    function lineContainsSomeProperty(index){
+    function lineContainsSomeProperty(index: number){
       return lines[index].includes(":")
     }
     
-    function findColon(line){
+    function findColon(line: string){
       return line.indexOf(":")
     }
     
-    function findSemicolon(line){
+    function findSemicolon(line: string){
       return line.indexOf(";")
     }
 
-    function insertChange(line){
+    function insertChange(line: string){
       const newLine = line.slice(0, charStart) + change + line.slice(charEnd)
       return newLine
     }
     
-    function insertLine(index){
+    function insertLine(index: number){
       let newValue    = ""
       let newLines    = lines
       newLines[index] = newLine
@@ -42,17 +49,17 @@ export default function Editor({ language, displayName, value, onChange}) {
         }
       }
 
-      newLines = newLines.map((line) => {return deleteWhiteSpace(line)})
+      newLines = newLines.map((line: string) => {return deleteWhiteSpace(line)})
 
       newValue = newLines.join("")
       return newValue
     }
 
     function getLines(){
-      return editor.display.view.map(a => a.line.text)
+      return editor.display.view.map((a:any) => a.line.text)
     }
 
-    function deleteWhiteSpace(string){
+    function deleteWhiteSpace(string: string){
       if(/\s/.test(string[string.length-1]) && string.length > 1){
         return string.slice(0, -1)
       }
@@ -99,7 +106,6 @@ export default function Editor({ language, displayName, value, onChange}) {
         options={{
           lineWrapping: true,
           lint: true,
-          mode: language,
           tabSize:2,
           theme: 'material',
           lineNumbers: true
