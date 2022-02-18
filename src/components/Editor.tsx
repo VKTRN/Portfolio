@@ -15,7 +15,6 @@ type Props = {
 
 export default function Editor({ language, displayName, value, onChange}:Props) {
 
-  const [open, setOpen] = useState(true)
 
   function handleChange(editor:any, event:any) {
 
@@ -89,7 +88,7 @@ export default function Editor({ language, displayName, value, onChange}:Props) 
   }
   
   return (
-    <div className={`editor-container ${open ? '' : 'collapsed'}`}>
+    <div className="editor-container">
       <div className="editor-title">
         {displayName}
       </div>
