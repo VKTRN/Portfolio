@@ -7,13 +7,13 @@ import 'codemirror/mode/css/css'
 import { Controlled as ControlledEditor } from 'react-codemirror2'
 
 type Props = {
-  string: string,
+  language: string,
   displayName: string,
   value: string,
   onChange:any
 }
 
-export default function Editor({ string, displayName, value, onChange}:Props) {
+export default function Editor({ language, displayName, value, onChange}:Props) {
 
   const [open, setOpen] = useState(true)
 
@@ -92,12 +92,6 @@ export default function Editor({ string, displayName, value, onChange}:Props) {
     <div className={`editor-container ${open ? '' : 'collapsed'}`}>
       <div className="editor-title">
         {displayName}
-        <button
-          type="button"
-          className="expand-collapse-btn"
-          onClick={() => setOpen(prevOpen => !prevOpen)}
-        >
-        </button>
       </div>
       <ControlledEditor
         onBeforeChange={handleChange}
@@ -105,10 +99,9 @@ export default function Editor({ string, displayName, value, onChange}:Props) {
         className="code-mirror-wrapper"
         options={{
           lineWrapping: true,
-          lint: true,
+          mode: language,
           tabSize:2,
           theme: 'material',
-          lineNumbers: true
         }}
       />
     </div>

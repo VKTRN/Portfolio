@@ -59,6 +59,22 @@ initial_css = closeSelector(initial_css)
 
 function Blog() {
 
+  function setPropertyValue(value, property, selector){
+    const selectorStringStart = css.indexOf(selector)
+    const selectorStringEnd = css.slice(selectorStringStart).indexOf("}")+selectorStringStart
+    const cssString = css.slice(selectorStringStart, selectorStringEnd)
+    const start = cssString.indexOf(property)+property.length+1
+    const end   = cssString.slice(start).indexOf(";") + start
+    const newString = css.slice(0, selectorStringStart+start) + " " + value + css.slice(selectorStringStart + end)
+    
+    setCss(newString)
+    // return newString
+  }
+
+  function change_position(){
+    position === "relative" ? setPropertyValue("static", "position", "container") : setPropertyValue("relative", "position", "container")
+  }
+
   const [html, setHtml]          = useState(initial_html)
   const [css, setCss]            = useState(initial_css)
   const [left, set_left]         = useState("100px")
@@ -81,6 +97,8 @@ function Blog() {
   
       return value
     }
+
+
 
     set_left(getPropertyValue("left", "square"))
     set_top(getPropertyValue("top", "square"))
@@ -113,6 +131,7 @@ function Blog() {
             value={css}
             onChange={setCss}
           />
+          <button onClick={change_position}>Hi</button>
         </div>
 
         <div ref={ref_display} className="code-display" >

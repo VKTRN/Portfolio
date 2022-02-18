@@ -68,7 +68,7 @@ function Home() {
           <div className="front-end stack socials">
             <SocialButton id="youtube" link="https://www.youtube.com"></SocialButton>
             <SocialButton id="twitter" link="https://www.twitter.com"></SocialButton>
-            <SocialButton id="github"  link="https://www.github.com"></SocialButton>
+            <SocialButton id="github"  link="https://github.com/VKTRN"></SocialButton>
           </div>
         </div>
       </div>
