@@ -19,10 +19,32 @@ function copy_object(target){
   return object
 }
 
+function getWindowDimensions() {
+  const {innerWidth: width, innerHeight: height} = window;
+  return {width, height};
+}
+
+function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowDimensions;
+}
+
 function VerticalMeasure(props) {
     
     const [offsetX, setOffsetX] = useState(0)
     const [offsetY, setOffsetY] = useState(0)
+    const windowDimensions      = useWindowDimensions()
+
     
     function line_inner(style_parent, style_child) {
 
@@ -73,7 +95,7 @@ function VerticalMeasure(props) {
             setOffsetX(x);
             setOffsetY(y);
         }
-    }, [props.position])
+    }, [props.position, windowDimensions])
 
     let style = copy_object(props.style) // copy style-object to add some styles
     style.left = add_px(style.left, offsetX)

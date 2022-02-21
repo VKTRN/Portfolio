@@ -1,10 +1,15 @@
+$scale: 1.5;
+$font-size: 1rem;
+
 
 .measure {
   position: fixed;
   display: flex;
   text-align: center;
   align-items: center;
-  font-size: small;
+  font-size: $font-size;
+  z-index: 8;
+
 }
 
 .measure-shaft {
@@ -16,19 +21,19 @@
 .measure-line {
   flex: 1;
   background-color: red;
-  font-size: small;
-  height: 1px;
-  width: 1px;
+  font-size: $font-size;
+  height: 2px;
+  width: 2px;
 }
 
 .x {
   flex-direction: row;
-  height: 1px;
+  height: 2px;
 }
 
 .y {
   flex-direction: column;
-  width: 1px;
+  width: 2px;
 }
 
 .measure-value {
@@ -37,8 +42,8 @@
   padding: 0.5rem;
   align-items: center;
   justify-content: center;
-  font-size: small;
-  height: 1px;
+  font-size: $font-size;
+  height: 2px;
 }
 
 .ease {
@@ -48,34 +53,34 @@
 .arrow-left {
   width: 0;
   height: 0;
-  border-top: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  border-right: 8px solid red;
+  border-top: calc(3px * $scale) solid transparent;
+  border-bottom: calc(3px * $scale) solid transparent;
+  border-right: calc(8px * $scale) solid red;
 }
 
 .arrow-right {
   width: 0;
   height: 0;
-  border-top: 3px solid transparent;
-  border-bottom: 3px solid transparent;
+  border-top: calc(3px * $scale) solid transparent;
+  border-bottom: calc(3px * $scale) solid transparent;
 
-  border-left: 8px solid red;
+  border-left: calc(8px * $scale) solid red;
 }
 
 .arrow-up {
   width: 0;
   height: 0;
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
+  border-left: calc(3px * $scale) solid transparent;
+  border-right: calc(3px * $scale) solid transparent;
 
-  border-bottom: 8px solid red;
+  border-bottom: calc(8px * $scale) solid red;
 }
 
 .arrow-down {
   width: 0;
   height: 0;
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
+  border-left: calc(3px * $scale) solid transparent;
+  border-right: calc(3px * $scale) solid transparent;
 
-  border-top: 8px solid red;
+  border-top: calc(8px * $scale) solid red;
 }
