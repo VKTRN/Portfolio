@@ -131,7 +131,7 @@ function Blog() {
             value={css}
             onChange={setCss}
           />
-          <button onClick={change_position}>Hi</button>
+          <button onClick={change_position}>toggle</button>
         </div>
 
         <div ref={ref_display} className="code-display" >

@@ -8,6 +8,7 @@
 
   .blog{
     display: flex;
+    gap:2rem;
     flex:1;
     padding:2rem;
     justify-content: center;
@@ -15,7 +16,6 @@
 
     .text-container{
       font-family: 'Roboto', sans-serif;
-      margin-right: 5rem;
       width:25rem;
       color:white;
       

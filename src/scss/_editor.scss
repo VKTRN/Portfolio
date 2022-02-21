@@ -1,14 +1,21 @@
 .code {
   position: relative;
-  height: 50vh;
+  // height: 50vh;
   display: flex;
   flex-direction: column;
   width: 22rem;
-  gap:3rem;
+  gap:2rem;
   display: flex;
+  background-color: #26212e;
+  padding:1rem;
+  border-radius: .5rem;
+  border: solid rgb(189, 189, 189) 1px;
+
+
 
   button{
-    background-color: rgba(255,255,255,.7);
+    background-color: rgba(161, 163, 189, 0.6);
+    border-radius: .5rem;
     width:20%
   }
 }
@@ -94,7 +101,6 @@
 }
 
 .code-display{
-
   width:30rem;
   height:auto;
   width:35vw;
@@ -103,7 +109,6 @@
   background-color: rgb(49, 53, 59);
   border: solid rgb(189, 189, 189) 1px;
   border-radius: .5rem;
-  margin:.5rem;
   overflow: hidden;
   position:relative;
   // clip: rect(0, auto, auto, 0);
