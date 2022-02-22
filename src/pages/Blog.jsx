@@ -1,4 +1,6 @@
 import {useState, useRef, useEffect} from "react"
+import { MdOutlineKeyboardArrowUp, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+
 import React from 'react';
 
 import Header            from "../components/Header"
@@ -46,6 +48,7 @@ const initial_html = "<body>\n\t<div class='container'>\n\t\t<div class='square'
 let initial_css = "" 
 
 initial_css = openSelector(initial_css,".square")
+initial_css = addDeclaration(initial_css, "position", "absolute")
 initial_css = addDeclaration(initial_css, "left", "100px")
 initial_css = addDeclaration(initial_css, "top", "100px")
 initial_css = closeSelector(initial_css)
@@ -68,11 +71,29 @@ function Blog() {
     const newString = css.slice(0, selectorStringStart+start) + " " + value + css.slice(selectorStringStart + end)
     
     setCss(newString)
-    // return newString
   }
 
   function change_position(){
     position === "relative" ? setPropertyValue("static", "position", "container") : setPropertyValue("relative", "position", "container")
+  }
+
+  function move(direction){
+    switch (direction) {
+      case "left":
+        setPropertyValue(add_px(left, -50), "left", "square")
+        break;
+      case "right":
+        setPropertyValue(add_px(left, 50), "left", "square")
+        break;
+      case "up":
+        setPropertyValue(add_px(top, -50), "top", "square")
+        break;
+      case "down":
+        setPropertyValue(add_px(top, 50), "top", "square")
+        break;
+      default:
+        break;
+    }
   }
 
   const [html, setHtml]          = useState(initial_html)
@@ -131,7 +152,21 @@ function Blog() {
             value={css}
             onChange={setCss}
           />
-          <button onClick={change_position}>toggle</button>
+          <div className="buttons">
+            <button onClick={change_position}>toggle</button>
+            <button onClick={() => move("up")}>
+              <MdOutlineKeyboardArrowUp />
+            </button>
+            <button onClick={() => move("down")}>
+              <MdOutlineKeyboardArrowDown />
+            </button>
+            <button onClick={() => move("left")}>
+              <MdOutlineKeyboardArrowLeft />
+            </button>
+            <button onClick={() => move("right")}>
+              <MdOutlineKeyboardArrowRight />
+            </button>
+          </div>
         </div>
 
         <div ref={ref_display} className="code-display" >
