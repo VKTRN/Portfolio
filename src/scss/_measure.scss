@@ -1,0 +1,87 @@
+$scale: 1.5;
+$font-size: 1rem;
+$color:rgb(255, 44, 44);
+
+
+.measure {
+  position: fixed;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  font-size: $font-size;
+  z-index: 8;
+
+}
+
+.measure-shaft {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.measure-line {
+  flex: 1;
+  background-color: $color;
+  font-size: $font-size;
+  height: 2px;
+  width: 2px;
+}
+
+.x {
+  flex-direction: row;
+  height: 2px;
+}
+
+.y {
+  flex-direction: column;
+  width: 2px;
+}
+
+.measure-value {
+  display: flex;
+  color: $color;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size;
+  height: 2px;
+}
+
+.ease {
+  transition: all 300ms;
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+  border-top: calc(3px * $scale) solid transparent;
+  border-bottom: calc(3px * $scale) solid transparent;
+  border-right: calc(8px * $scale) solid $color;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: calc(3px * $scale) solid transparent;
+  border-bottom: calc(3px * $scale) solid transparent;
+
+  border-left: calc(8px * $scale) solid $color;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: calc(3px * $scale) solid transparent;
+  border-right: calc(3px * $scale) solid transparent;
+
+  border-bottom: calc(8px * $scale) solid $color;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: calc(3px * $scale) solid transparent;
+  border-right: calc(3px * $scale) solid transparent;
+
+  border-top: calc(8px * $scale) solid $color;
+}

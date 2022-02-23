@@ -1,0 +1,29 @@
+
+.Blog{
+  background-color: #342F3D;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+
+  .blog{
+    display: flex;
+    gap:2rem;
+    flex:1;
+    padding:2rem;
+    justify-content: center;
+    font-family: monospace !important;
+
+    .text-container{
+      font-family: 'Roboto', sans-serif;
+      width:29rem;
+      color:white;
+      
+      .text{
+        text-align: justify;
+        text-align-last: justify;
+      }
+    }
+
+  }
+}

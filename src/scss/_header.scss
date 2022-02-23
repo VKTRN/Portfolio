@@ -1,0 +1,31 @@
+.header{
+  display: flex;
+  justify-content: center;
+  background-color: #8E96B2;
+  padding: .5rem 0;
+  
+  .header-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:80%;
+
+    .logo{
+      color: #342F3D;
+      font-size: 1.5rem;
+      font-weight: 600;
+
+      @include media-breakpoint-up(sm){
+        font-size: 2rem;
+      }
+    }
+  
+    .links{
+      display: flex;
+      justify-content: center;
+      gap:4rem;
+      align-items: center;
+      font-size: 1.25rem;
+    }
+  }
+}
