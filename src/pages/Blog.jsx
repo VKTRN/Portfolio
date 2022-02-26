@@ -10,6 +10,7 @@ import HorizontalMeasure from '../components/HorizontalMeasure'
 import VerticalMeasure   from '../components/VerticalMeasure'
 
 function pixelToNum(value){
+  console.log(typeof value);
   return parseInt(value.replace(/px/,""))
 }
 
@@ -17,15 +18,9 @@ function add_px(value,px){
   return pixelToNum(value) + px + "px";
 }
 
-// function copy_object(target){
-//   let object = {};
-
-//   Object.entries(target).forEach(entry => {
-//       object[entry[0]] = entry[1] 
-//   })
-
-//   return object
-// }
+function toPixel(value){
+  return value + "px";
+}
 
 function addDeclaration(css_string, property, value){
   return css_string+"\n  "+property+": "+value+";"
@@ -80,16 +75,16 @@ function Blog() {
   function move(direction){
     switch (direction) {
       case "left":
-        setPropertyValue(add_px(left, -50), "left", "square")
+        setPropertyValue(toPixel(left -50), "left", "square")
         break;
       case "right":
-        setPropertyValue(add_px(left, 50), "left", "square")
+        setPropertyValue(toPixel(left+ 50), "left", "square")
         break;
       case "up":
-        setPropertyValue(add_px(top, -50), "top", "square")
+        setPropertyValue(toPixel(top -50), "top", "square")
         break;
       case "down":
-        setPropertyValue(add_px(top, 50), "top", "square")
+        setPropertyValue(toPixel(top+ 50), "top", "square")
         break;
       default:
         break;
@@ -98,14 +93,14 @@ function Blog() {
 
   const [html, setHtml]          = useState(initial_html)
   const [css, setCss]            = useState(initial_css)
-  const [left, set_left]         = useState("100px")
-  const [top, set_top]           = useState("100px")
+  const [left, set_left]         = useState(100)
+  const [top, set_top]           = useState(100)
   const [position, set_position] = useState("relative")
   const ref_square               = useRef()
   const ref_display              = useRef()
 
-  const style_line_x     = {top: add_px(top, 35), alignment:"horizontal"};
-  const style_line_y     = {left:add_px(left,35), alignment:"vertical"};
+  // const top_of_x_line     = add_px(top, 35);
+  // const style_line_y     = {left:add_px(left,35)};
 
   useEffect(() => {
     function getPropertyValue(property, selector){
@@ -119,10 +114,8 @@ function Blog() {
       return value
     }
 
-
-
-    set_left(getPropertyValue("left", "square"))
-    set_top(getPropertyValue("top", "square"))
+    set_left(pixelToNum(getPropertyValue("left", "square")))
+    set_top(pixelToNum(getPropertyValue("top", "square")))
     set_position(getPropertyValue("position", "container"))
   },[css])
 
@@ -177,8 +170,8 @@ function Blog() {
             </div>
           </div>
           <span className="name2">.container</span>
-          <HorizontalMeasure style = {style_line_x} length = {left} position={position}/>
-          <VerticalMeasure   style = {style_line_y} length = {top}  position={position}/>
+          <HorizontalMeasure top={top} length = {left} position={position}/>
+          <VerticalMeasure left={left} length = {top} position={position}/>
         </div>
       </div>
 

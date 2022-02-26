@@ -1,7 +1,6 @@
 import React, {useState ,useEffect} from 'react'
 
 function pixelToNum(value){
-  
   return parseInt(value.replace(/px/,""))
 }
 
@@ -9,14 +8,8 @@ function add_px(value,px){
   return pixelToNum(value) + px + "px";
 }
 
-function copy_object(target){
-  let object = {};
-
-  Object.entries(target).forEach(entry => {
-      object[entry[0]] = entry[1] 
-  })
-
-  return object
+function toPixel(value){
+  return value + "px";
 }
 
 function getWindowDimensions() {
@@ -39,82 +32,65 @@ function useWindowDimensions() {
   return windowDimensions;
 }
 
-function VerticalMeasure(props) {
-    
-    const [offsetX, setOffsetX] = useState(0)
-    const [offsetY, setOffsetY] = useState(0)
-    const windowDimensions      = useWindowDimensions()
+function VerticalMeasure({left, length, position}) {
 
-    
-    function line_inner(style_parent, style_child) {
+  const [offsetX, setOffsetX] = useState(0)
+  const [offsetY, setOffsetY] = useState(0)
+  const windowDimensions      = useWindowDimensions()
+  const [small, set_small]    = useState(false)
 
-        // horizontal measure when measure is big enough to fit value
-        
-        return(
-            <div className="measure y ease" style={style_parent}>
-                <span className="arrow-up ease"></span>
-                <div className="measure-shaft y ease" style={style_child}>
-                    <span className="measure-line ease"></span>
-                    <span className="measure-value ease">{props.length}</span>
-                    <span className="measure-line ease"></span>
-                </div>
-                <span className="arrow-down"></span>
-            </div>
-        )
-    }
+  useEffect(() => {
 
-    function line_outer(style_parent, style_child) {
+      // sets the offset of the lines with respect to the property position of the div screen 
+      // whenever position is changed
+      
+      if (position === "relative"){
+        const x = document.querySelector(".container").getBoundingClientRect().x;
+        const y = document.querySelector(".container").getBoundingClientRect().y;
+        setOffsetX(x);
+        setOffsetY(y);
+      }
 
-        // horizontal measure when measure is to small to fit value
-
-        return(
-            <div className="measure y ease" style={style_parent}>
-                <div className="arrow-down ease"></div>
-                <div className="measure-line ease" style={style_child}></div>
-                <div className="arrow-up ease"></div>
-                <span className="measure-value ease">{props.length}</span>
-            </div>
-        )
-    }
-    
-    useEffect(() => {
-
-        // sets the offset of the lines with respect to the property position of the div screen 
-        // whenever position is changed
-        
-        if (props.position === "relative"){
-          const x = document.querySelector(".container").getBoundingClientRect().x;
-          const y = document.querySelector(".container").getBoundingClientRect().y;
+      if (position === "static"){
+          const x = document.querySelector(".code-display").getBoundingClientRect().x;
+          const y = document.querySelector(".code-display").getBoundingClientRect().y;
           setOffsetX(x);
           setOffsetY(y);
-        }
+      }
+  }, [position, windowDimensions])
 
-        if (props.position === "static"){
-            const x = document.querySelector(".code-display").getBoundingClientRect().x;
-            const y = document.querySelector(".code-display").getBoundingClientRect().y;
-            setOffsetX(x);
-            setOffsetY(y);
-        }
-    }, [props.position, windowDimensions])
 
-    let style = copy_object(props.style) // copy style-object to add some styles
-    style.left = add_px(style.left, offsetX)
+  let len    = Math.abs(length)
+  let line_y = offsetY
+  let rotation1 = "scaleX(1)"
+  let rotation2 = "scaleX(1)"
 
-    if(pixelToNum(props.length)>=70){ // if measure is bigger than 70px, value fits in measure
-        style.height = props.length;
-        style.top  = offsetY;
-        return line_inner(style);
-    }
-    else{ // else value is rendered outside measure
+  const length_is_negative = length < 0
+  const length_is_long = Math.abs(length) > 70
 
-        const value = pixelToNum(props.length);
-        style.top  = offsetY - 8
+  if(length_is_long){
+    len -= 8
+    line_y += 4
+  }
+  else{
+    rotation1 = "translateY(-6px) scaleY(-1)"
+    rotation2 = "translateY(6px) scaleY(-1)"
+  }
+  
+  if(length_is_negative){
+    line_y += length
+  }
 
-        value < 0 ? style.top += value : style.top += 0;
-        
-        return line_outer(style, {height:Math.abs(value), flex:"initial"});
-    }
 
+  return(
+    <>
+      <div className="measure-y"  style={{height:len, top:line_y, left:left+offsetX+35 }}>
+        <div className="arrow-up"  style={{transform: rotation1}}></div>
+        <div className="value">{length}</div>
+        <div className="arrow-down" style={{transform: rotation2}}></div>
+      </div>
+    </>
+  )
 }
 
 export default VerticalMeasure
