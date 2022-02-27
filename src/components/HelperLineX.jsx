@@ -6,7 +6,6 @@ const HelperLineX = ({top,  position}) => {
   const [offsetX, setOffsetX] = useState(0)
   const [offsetY, setOffsetY] = useState(0)
   const [height, setHeight]   = useState(0)
-  const [width, setWidth]     = useState(0)
   const windowDimensions      = useWindowDimensions()
 
   useEffect(() => {
@@ -20,7 +19,6 @@ const HelperLineX = ({top,  position}) => {
       setOffsetX(dimensions.x);
       setOffsetY(dimensions.y);
       setHeight(dimensions.height);
-      setWidth(dimensions.width);
 
   }, [position, windowDimensions])
 

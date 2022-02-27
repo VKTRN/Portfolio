@@ -1,17 +1,5 @@
 import React, {useState ,useEffect} from 'react'
 
-function pixelToNum(value){
-  return parseInt(value.replace(/px/,""))
-}
-
-function add_px(value,px){
-  return pixelToNum(value) + px + "px";
-}
-
-function toPixel(value){
-  return value + "px";
-}
-
 function getWindowDimensions() {
   const {innerWidth: width, innerHeight: height} = window;
   return {width, height};
@@ -37,7 +25,6 @@ function VerticalMeasure({left, length, position}) {
   const [offsetX, setOffsetX] = useState(0)
   const [offsetY, setOffsetY] = useState(0)
   const windowDimensions      = useWindowDimensions()
-  const [small, set_small]    = useState(false)
 
   useEffect(() => {
 

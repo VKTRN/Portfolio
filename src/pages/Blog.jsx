@@ -15,10 +15,6 @@ function pixelToNum(value){
   return parseInt(value.replace(/px/,""))
 }
 
-function add_px(value,px){
-  return pixelToNum(value) + px + "px";
-}
-
 function toPixel(value){
   return value + "px";
 }
