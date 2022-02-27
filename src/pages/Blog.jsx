@@ -8,9 +8,10 @@ import Footer            from "../components/Footer"
 import Editor            from '../components/Editor'
 import HorizontalMeasure from '../components/HorizontalMeasure'
 import VerticalMeasure   from '../components/VerticalMeasure'
+import HelperLineX       from '../components/HelperLineX'
+import HelperLineY       from '../components/HelperLineY'
 
 function pixelToNum(value){
-  console.log(typeof value);
   return parseInt(value.replace(/px/,""))
 }
 
@@ -172,6 +173,8 @@ function Blog() {
           <span className="name2">.container</span>
           <HorizontalMeasure top={top} length = {left} position={position}/>
           <VerticalMeasure left={left} length = {top} position={position}/>
+          <HelperLineX top={top} position={position}/>
+          <HelperLineY left={left} position={position}/>
         </div>
       </div>
 

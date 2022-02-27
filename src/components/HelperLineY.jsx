@@ -1,7 +1,7 @@
 import React, {useState ,useEffect} from 'react'
 import {useWindowDimensions} from '../hooks'
 
-const HelperLineX = ({top,  position}) => {
+const HelperLineY = ({left,  position}) => {
 
   const [offsetX, setOffsetX] = useState(0)
   const [offsetY, setOffsetY] = useState(0)
@@ -25,44 +25,43 @@ const HelperLineX = ({top,  position}) => {
   }, [position, windowDimensions])
 
   // variables
-  const left_helper   = offsetX
+  const top_helper   = offsetY
   
   // booleans
-  const is_above      = top+35 < 0
-  const is_underneath = top+35 > height
-  const is_outside    = is_above || is_underneath
-  const is_positioned = position !== "static"
+  const is_left      = left+35 < 0
+  const is_right = left+35 > width
+  const is_outside    = is_left || is_right
 
   // to be determined
   let opacity
   let length_helper
-  let top_helper
-  let bottom_helper
+  let left_helper
+  let right_helper
   let style
   
-  if(is_outside && is_positioned){
+  if(is_outside){
     opacity = 1
-    if(is_underneath){
-      top_helper    = offsetY+height
-      bottom_helper = "default"
-      length_helper = top - height +45
-      style         = {top:top_helper, left: left_helper, height: length_helper, opacity:opacity}
+    if(is_right){
+      left_helper    = offsetX+width
+      right_helper = "default"
+      length_helper = left - width +45
+      style         = {left:left_helper, top: top_helper, width: length_helper, opacity:opacity}
     }
     else{
-      length_helper = Math.abs(top +25)
-      top_helper    = "initial"
-      bottom_helper = windowDimensions.height- offsetY
-      style         = {bottom:bottom_helper, left: left_helper, height: length_helper, opacity:opacity}
+      length_helper = Math.abs(left +25)
+      left_helper    = "initial"
+      right_helper = windowDimensions.width- offsetX
+      style         = {right:right_helper, top: top_helper, width: length_helper, opacity:opacity}
     }
   }
   else{
     opacity       = 0
     length_helper = 0
-    top_helper    = top - height +45
-    style         = {top:0,bottom:0, left: left_helper, height: length_helper, opacity:opacity}
+    left_helper    = left - width +45
+    style         = {left:0,right:0, top: top_helper, width: length_helper, opacity:opacity}
   }
 
-  return <div className="helper-x" style={style}></div>
+  return <div className="helper-y" style={style}></div>
 }
 
-export default HelperLineX
+export default HelperLineY
