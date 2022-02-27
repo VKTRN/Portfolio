@@ -1,62 +1,23 @@
 import React, {useState ,useEffect} from 'react'
-
-function pixelToNum(value){
-  return parseInt(value.replace(/px/,""))
-}
-
-function add_px(value,px){
-  return pixelToNum(value) + px + "px";
-}
-
-function toPixel(value){
-  return value + "px";
-}
-
-function getWindowDimensions() {
-  const {innerWidth: width, innerHeight: height} = window;
-  return {width, height};
-}
-
-function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return windowDimensions;
-}
+import {useWindowDimensions} from '../hooks'
 
 function HorizontalMeasure({top, length, position}) {
 
   const [offsetX, setOffsetX] = useState(0)
   const [offsetY, setOffsetY] = useState(0)
   const windowDimensions      = useWindowDimensions()
-  const [small, set_small]    = useState(false)
 
   useEffect(() => {
 
-      // sets the offset of the lines with respect to the property position of the div screen 
-      // whenever position is changed
-      
-      if (position === "relative"){
-        const x = document.querySelector(".container").getBoundingClientRect().x;
-        const y = document.querySelector(".container").getBoundingClientRect().y;
-        setOffsetX(x);
-        setOffsetY(y);
-      }
+    // sets the offset of the lines with respect to the property position of the .container 
+    // whenever position is changed
 
-      if (position === "static"){
-          const x = document.querySelector(".code-display").getBoundingClientRect().x;
-          const y = document.querySelector(".code-display").getBoundingClientRect().y;
-          setOffsetX(x);
-          setOffsetY(y);
-      }
+    const selector   = position === "static" ? ".code-display" : ".container"
+    const dimensions = document.querySelector(selector).getBoundingClientRect()
+    
+    setOffsetX(dimensions.x);
+    setOffsetY(dimensions.y);
+    
   }, [position, windowDimensions])
 
 
