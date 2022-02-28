@@ -1,7 +1,8 @@
 import {useState, useRef, useEffect} from "react"
-import {useWindowDimensions}         from '../hooks'
 import { MdOutlineKeyboardArrowUp, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+
 import React from 'react';
+
 import Header            from "../components/Header"
 import Footer            from "../components/Footer"
 import Editor            from '../components/Editor'
@@ -34,34 +35,22 @@ function closeSelector(css_string){
   return css_string + "\n}"
 }
 
-function makeHTML(){
-  const initial_html = "<body>\n\t<div class='container'>\n\t\t<div class='square'></div>\n\t</div>\n</body>"
+const initial_html = "<body>\n\t<div class='container'>\n\t\t<div class='square'></div>\n\t</div>\n</body>"
 
-  return initial_html
-}
+let initial_css = "" 
 
-function makeCSS(){
-  let initial_css = "" 
-  
-  initial_css = openSelector(initial_css,".square")
-  initial_css = addDeclaration(initial_css, "position", "absolute")
-  initial_css = addDeclaration(initial_css, "left", "100px")
-  initial_css = addDeclaration(initial_css, "top", "100px")
-  initial_css = closeSelector(initial_css)
-  
-  initial_css = addNewLine(initial_css)
-  initial_css = addNewLine(initial_css)
-  
-  initial_css = openSelector(initial_css,".container")
-  initial_css = addDeclaration(initial_css, "position", "relative")
-  initial_css = closeSelector(initial_css)
+initial_css = openSelector(initial_css,".square")
+initial_css = addDeclaration(initial_css, "position", "absolute")
+initial_css = addDeclaration(initial_css, "left", "100px")
+initial_css = addDeclaration(initial_css, "top", "100px")
+initial_css = closeSelector(initial_css)
 
-  return initial_css
+initial_css = addNewLine(initial_css)
+initial_css = addNewLine(initial_css)
 
-}
-
-
-
+initial_css = openSelector(initial_css,".container")
+initial_css = addDeclaration(initial_css, "position", "relative")
+initial_css = closeSelector(initial_css)
 
 function Blog() {
 
@@ -99,16 +88,16 @@ function Blog() {
     }
   }
 
-  const [html, setHtml]          = useState(makeHTML())
-  const [css, setCss]            = useState(makeCSS())
+  const [html, setHtml]          = useState(initial_html)
+  const [css, setCss]            = useState(initial_css)
   const [left, set_left]         = useState(100)
   const [top, set_top]           = useState(100)
-  const [x, set_x]               = useState(0)
-  const [y, set_y]               = useState(0)
   const [position, set_position] = useState("relative")
   const ref_square               = useRef()
   const ref_display              = useRef()
-  const windowDimensions         = useWindowDimensions()
+
+  // const top_of_x_line     = add_px(top, 35);
+  // const style_line_y     = {left:add_px(left,35)};
 
   useEffect(() => {
     function getPropertyValue(property, selector){
@@ -126,19 +115,6 @@ function Blog() {
     set_top(pixelToNum(getPropertyValue("top", "square")))
     set_position(getPropertyValue("position", "container"))
   },[css])
-
-  useEffect(() => {
-
-    // sets the offset of the lines with respect to the property position of the .container 
-    // whenever position is changed
-
-    const selector   = position === "static" ? ".code-display" : ".container"
-    const dimensions = document.querySelector(selector).getBoundingClientRect()
-    
-    set_x(dimensions.x);
-    set_y(dimensions.y);
-    
-  }, [position, windowDimensions])
 
   return (
     <div className="Blog">
@@ -191,8 +167,8 @@ function Blog() {
             </div>
           </div>
           <span className="name2">.container</span>
-          <HorizontalMeasure x={x} y = {y+top+35} length={left}/>
-          <VerticalMeasure x={x+left+35} y = {y} length={top}/>
+          <HorizontalMeasure top={top} length = {left} position={position}/>
+          <VerticalMeasure left={left} length = {top} position={position}/>
           <HelperLineX top={top} position={position}/>
           <HelperLineY left={left} position={position}/>
         </div>
