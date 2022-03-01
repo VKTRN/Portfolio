@@ -159,7 +159,7 @@ function Blog() {
     set_vertical(  {property: vertical.property,value:   pixelToNum(getPropertyValue(vertical.property,   "square"))})
     set_horizontal({property: horizontal.property,value: pixelToNum(getPropertyValue(horizontal.property, "square"))})
     set_position(getPropertyValue("position", "container"))
-  },[css, horizontal, vertical])
+  },[css])
 
   useEffect(() => {
 
