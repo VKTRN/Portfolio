@@ -7,9 +7,9 @@ import Footer            from "../components/Footer"
 import Editor            from '../components/Editor'
 import HorizontalMeasure from '../components/HorizontalMeasure'
 import VerticalMeasure   from '../components/VerticalMeasure'
-import HelperLineX       from '../components/HelperLineX'
-import HelperLineY       from '../components/HelperLineY'
-import LabeledSwitch     from '../components/LabeledSwitch'
+// import HelperLineX       from '../components/HelperLineX'
+// import HelperLineY       from '../components/HelperLineY'
+// import LabeledSwitch     from '../components/LabeledSwitch'
 
 function pixelToNum(value){
   return parseInt(value.replace(/px/,""))
@@ -88,10 +88,9 @@ function Blog() {
     setCss(newString)
   }
 
-  function change_position(){
-    console.log("okay");
-    position === "relative" ? setPropertyValue("static", "position", "container") : setPropertyValue("relative", "position", "container")
-  }
+  // function change_position(){
+  //   position === "relative" ? setPropertyValue("static", "position", "container") : setPropertyValue("relative", "position", "container")
+  // }
 
   function move(direction){
     switch (direction) {
@@ -160,7 +159,7 @@ function Blog() {
     set_vertical(  {property: vertical.property,value:   pixelToNum(getPropertyValue(vertical.property,   "square"))})
     set_horizontal({property: horizontal.property,value: pixelToNum(getPropertyValue(horizontal.property, "square"))})
     set_position(getPropertyValue("position", "container"))
-  },[css])
+  },[css, horizontal, vertical])
 
   useEffect(() => {
 
@@ -207,8 +206,8 @@ function Blog() {
             onChange={setCss}
           />
           <div className="buttons">
-            <LabeledSwitch toggle={change_position} position={position}></LabeledSwitch>
-            {/* <button onClick={() => move("up")}>
+            {/* <LabeledSwitch toggle={change_position} position={position}></LabeledSwitch> */}
+            <button onClick={() => move("up")}>
               <MdOutlineKeyboardArrowUp />
             </button>
             <button onClick={() => move("down")}>
@@ -225,7 +224,7 @@ function Blog() {
             </button>
             <button onClick={toggleVertical}>
               vert
-            </button> */}
+            </button>
           </div>
         </div>
 
