@@ -1,5 +1,5 @@
 import {useState, useRef, useEffect} from "react"
-import {useWindowDimensions}         from '../hooks'
+import {useWindowDimensions, useDimensions} from '../hooks'
 import { MdOutlineKeyboardArrowUp, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import React from 'react';
 import Header            from "../components/Header"
@@ -7,6 +7,7 @@ import Footer            from "../components/Footer"
 import Editor            from '../components/Editor'
 import HorizontalMeasure from '../components/HorizontalMeasure'
 import VerticalMeasure   from '../components/VerticalMeasure'
+import { isTypeQueryNode } from "typescript";
 // import HelperLineX       from '../components/HelperLineX'
 // import HelperLineY       from '../components/HelperLineY'
 // import LabeledSwitch     from '../components/LabeledSwitch'
@@ -59,6 +60,10 @@ function makeCSS(){
 
   return initial_css
 
+}
+
+function getDimensions(selector){
+  return document.querySelector(selector).getBoundingClientRect()
 }
 
 
@@ -133,16 +138,21 @@ function Blog() {
     }
   }
 
+  console.log(document.querySelector(".container"))
   const [html, setHtml]              = useState(makeHTML())
   const [css, setCss]                = useState(makeCSS())
   const [vertical, set_vertical]     = useState({property: "left", value: 100})
   const [horizontal, set_horizontal] = useState({property: "top", value: 100})
+  // const [container, set_container]   = useState({})
   const [x, set_x]                   = useState(0)
   const [y, set_y]                   = useState(0)
   const [position, set_position]     = useState("relative")
   const ref_square                   = useRef()
   const ref_display                  = useRef()
-  const windowDimensions             = useWindowDimensions()
+  const window                       = useWindowDimensions()
+
+  const [container, set_container] = useState({})
+  const [body, set_body]           = useState({})
 
   useEffect(() => {
     function getPropertyValue(property, selector){
@@ -166,18 +176,25 @@ function Blog() {
     // sets the offset of the lines with respect to the property position of the .container 
     // whenever position is changed
 
-    const selector   = position === "static" ? ".code-display" : ".container"
-    const dimensions = document.querySelector(selector).getBoundingClientRect()
+    // const selector   = position === "static" ? ".code-display" : ".container"
+    set_container(getDimensions(".container"))
+    set_body(getDimensions(".code-display"))
     
-    vertical.property === "left"? set_x(dimensions.x) : set_x(windowDimensions.width - dimensions.x - dimensions.width)
-    horizontal.property === "top"? set_y(dimensions.y) : set_y(windowDimensions.height - dimensions.y - dimensions.height)
+    vertical.property === "left"? set_x(container.x) : set_x(container.x + container.width)
+    horizontal.property === "top"? set_y(container.y) : set_y(container.y + container.height)
     
-  }, [position, windowDimensions, vertical, horizontal])
+  }, [position, window, vertical, horizontal])
 
-  const style_container = {}
-  style_container[vertical.property]   = vertical.value
-  style_container[horizontal.property] = horizontal.value
-
+  const x_square    = vertical.property   === "left"? x + vertical.value : x - vertical.value - 70
+  const y_square    = horizontal.property === "top"?  y + horizontal.value : y - horizontal.value - 70
+  
+  const x_measure_x = vertical.property   === "left"? x : x - vertical.value
+  const y_measure_x = horizontal.property === "top"?  y + horizontal.value + 35 : y - horizontal.value - 35
+  
+  const x_measure_y = vertical.property === "left"?  x + vertical.value + 35 : x - vertical.value - 35
+  const y_measure_y = horizontal.property   === "top"? y : y - horizontal.value
+  
+  const style_square   = {left: x_square, top:y_square}
 
   return (
     <div className="Blog">
@@ -229,15 +246,16 @@ function Blog() {
         </div>
 
         <div ref={ref_display} className="code-display" >
-          <span className="name">body</span>
-          <div className="container" style={{ position: position}}>
-            <div ref={ref_square} className="square" style={style_container}>
+          {/* <span className="name">body</span> */}
+          {/* <div className="container" style={{ position: position}}> */}
+          <div className="container">
+            <div ref={ref_square} className="square" style={style_square}>
               <span className="name">.square</span>
             </div>
           </div>
-          <span className="name2">.container</span>
-          <HorizontalMeasure x={x} y = {y+horizontal.value+35} length={vertical.value} vertical={vertical.property} horizontal={horizontal.property}/>
-          <VerticalMeasure x={x+vertical.value+35} y = {y} length={horizontal.value} horizontal={horizontal.property} vertical={vertical.property}/>
+          {/* <span className="name2">.container</span> */}
+          <HorizontalMeasure x={x_measure_x} y = {y_measure_x} length={vertical.value}/>
+          <VerticalMeasure x={x_measure_y} y = {y_measure_y} length={horizontal.value}/>
           {/* <HelperLineX top={top} position={position}/> */}
           {/* <HelperLineY left={vertical.value} position={position}/> */}
         </div>

@@ -1,10 +1,11 @@
 import React from 'react'
 
-function VerticalMeasure({x, y, length, horizontal, vertical}) {
+function VerticalMeasure({x, y, length}) {
+
   let len       = Math.abs(length)
   let line_y    = y
-  let rotation1 = "scaleX(1)"
-  let rotation2 = "scaleX(1)"
+  let rotation1 = "scaleY(1)"
+  let rotation2 = "scaleY(1)"
 
   const length_is_negative = length < 0
   const length_is_long     = Math.abs(length) > 70
@@ -22,10 +23,8 @@ function VerticalMeasure({x, y, length, horizontal, vertical}) {
     line_y += length
   }
 
-  const style_measure = {height:len}
-  style_measure[horizontal] = line_y
-  style_measure[vertical] = x
-
+  // const style_measure = {left: line_y, top:x,height:len}
+  const style_measure = {left: x, top:line_y,height:len}
 
   return(
     <>

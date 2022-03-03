@@ -1,6 +1,6 @@
 import React from "react"
 
-function HorizontalMeasure({x, y, length, vertical, horizontal}) {
+function HorizontalMeasure({x, y, length}) {
 
   let len       = Math.abs(length)
   let line_x    = x
@@ -23,10 +23,7 @@ function HorizontalMeasure({x, y, length, vertical, horizontal}) {
     line_x += length
   }
 
-  const style_measure = {width:len}
-  style_measure[vertical] = line_x
-  style_measure[horizontal] = y
-
+  const style_measure = {left: line_x, top:y,width:len}   
 
   return(
     <>

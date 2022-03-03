@@ -101,8 +101,6 @@
   background-color: rgb(83, 85, 105);
   margin:5rem;
   border-radius: .5rem;
-
-
 }
 
 .code-display{
@@ -115,9 +113,9 @@
   border: solid rgb(189, 189, 189) 1px;
   border-radius: .5rem;
   overflow: hidden;
-  position:relative;
+  // position:relative;
   // clip: rect(0, auto, auto, 0);
-  clip-path: inset(0 0 0 0);
+  // clip-path: inset(0 0 0 0);
 
 
   .name{
