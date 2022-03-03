@@ -21,4 +21,33 @@ function useWindowDimensions() {
   return windowDimensions;
 }
 
-export {useWindowDimensions}
+function useDimensions(selector) {
+
+  console.log(selector);
+  console.log(document);
+  console.log(document.querySelector(".container"))
+  
+  const element    = document.querySelector(selector)
+  
+  function get_dimensions(element) {
+    return element.getBoundingClientRect()
+  }
+  
+  
+  const [dimensions, set_dimensions] = useState(get_dimensions(element));
+
+  useEffect(() => {
+    function handleResize() {
+      set_dimensions(get_dimensions(element));
+    }
+
+    element.addEventListener('resize', handleResize);
+    return () => element.removeEventListener('resize', handleResize);
+  }, []);
+
+  return dimensions;
+}
+
+
+
+export {useWindowDimensions, useDimensions}
