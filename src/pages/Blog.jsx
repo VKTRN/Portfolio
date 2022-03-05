@@ -8,7 +8,7 @@ import Editor            from '../components/Editor'
 import HorizontalMeasure from '../components/HorizontalMeasure'
 import VerticalMeasure   from '../components/VerticalMeasure'
 import { isTypeQueryNode } from "typescript";
-// import HelperLineX       from '../components/HelperLineX'
+import HelperLineX       from '../components/HelperLineX'
 // import HelperLineY       from '../components/HelperLineY'
 // import LabeledSwitch     from '../components/LabeledSwitch'
 
@@ -76,7 +76,6 @@ function Blog() {
     const substring            = css.slice(selectorStringStart, selectorStringEnd) // get substring of only the selector 
     const start               = substring.indexOf(property)+property.length+1 // get index of where the value of the property begins
     const end                 = substring.slice(start).indexOf(";") + start // get index of where the value of the property ends
-    console.log(property,start, end);
     const newString           = css.slice(0, selectorStringStart+start) + " " + value + css.slice(selectorStringStart + end) // replace the value
     
     setCss(newString)
@@ -92,10 +91,6 @@ function Blog() {
     
     setCss(newString)
   }
-
-  // function change_position(){
-  //   position === "relative" ? setPropertyValue("static", "position", "container") : setPropertyValue("relative", "position", "container")
-  // }
 
   function move(direction){
     switch (direction) {
@@ -138,22 +133,29 @@ function Blog() {
     }
   }
 
-  console.log(document.querySelector(".container"))
-  const [html, setHtml]              = useState(makeHTML())
-  const [css, setCss]                = useState(makeCSS())
-  const [vertical, set_vertical]     = useState({property: "left", value: 100})
-  const [horizontal, set_horizontal] = useState({property: "top", value: 100})
-  // const [container, set_container]   = useState({})
-  const [x, set_x]                   = useState(0)
-  const [y, set_y]                   = useState(0)
-  const [position, set_position]     = useState("relative")
-  const ref_square                   = useRef()
-  const ref_display                  = useRef()
-  const window                       = useWindowDimensions()
-
-  const [container, set_container] = useState({})
-  const [body, set_body]           = useState({})
-
+  const [html, setHtml]                = useState(makeHTML())
+  const [css, setCss]                  = useState(makeCSS())
+  const [vertical, set_vertical]       = useState({property: "left", value: 100})
+  const [horizontal, set_horizontal]   = useState({property: "top", value: 100})
+  const [x, set_x]                     = useState(0)
+  const [y, set_y]                     = useState(0)
+  const [position, set_position]       = useState("relative")
+  const ref_square                     = useRef()
+  const ref_display                    = useRef()
+  const [styleHelper, set_styleHelper] = useState({left:"default", right:"default", top:"default", bottom:"default",height:1})
+  const [container, set_container]     = useState({})
+  const [body, set_body]               = useState({})
+  const window                         = useWindowDimensions()
+  
+  const x_square    = vertical.property   === "left"? x + vertical.value : x - vertical.value - 70
+  const y_square    = horizontal.property === "top"?  y + horizontal.value : y - horizontal.value - 70
+  
+  const x_measure_x = vertical.property   === "left"? x : x - vertical.value
+  const y_measure_x = horizontal.property === "top"?  y + horizontal.value + 35 : y - horizontal.value - 35
+  
+  const x_measure_y = vertical.property   === "left"?  x + vertical.value + 35 : x - vertical.value - 35
+  const y_measure_y = horizontal.property === "top"? y : y - horizontal.value
+  
   useEffect(() => {
     function getPropertyValue(property, selector){
       const selectorStringStart = css.indexOf(selector)
@@ -165,7 +167,6 @@ function Blog() {
   
       return value
     }
-
     set_vertical(  {property: vertical.property,value:   pixelToNum(getPropertyValue(vertical.property,   "square"))})
     set_horizontal({property: horizontal.property,value: pixelToNum(getPropertyValue(horizontal.property, "square"))})
     set_position(getPropertyValue("position", "container"))
@@ -182,19 +183,25 @@ function Blog() {
     
     vertical.property === "left"? set_x(container.x) : set_x(container.x + container.width)
     horizontal.property === "top"? set_y(container.y) : set_y(container.y + container.height)
+
+    const is_above      = y_measure_x < container.y + container.height/2 
+    const is_underneath = !is_above
+    const is_outside    = y_measure_x < container.y || y_measure_x > container.y + container.height
+  
+    if (is_underneath) {
+      const opacity = is_outside? 1:0
+      const h = horizontal.property === "top"? Math.max(horizontal.value + 45 - container.height, 0) : -horizontal.value - 25
+      set_styleHelper({left:x, right:"initial", top:container.y+container.height, bottom:"initial",height:h, opacity:opacity})
+    } else {
+      const opacity = is_outside? 1:0
+      const h = Math.max(Math.abs(horizontal.value) -25,0)
+      set_styleHelper({left:x, right:"initial", top:"initial", bottom:window.height - container.y, height:h, opacity:opacity})
+    }
+
     
   }, [position, window, vertical, horizontal])
-
-  const x_square    = vertical.property   === "left"? x + vertical.value : x - vertical.value - 70
-  const y_square    = horizontal.property === "top"?  y + horizontal.value : y - horizontal.value - 70
   
-  const x_measure_x = vertical.property   === "left"? x : x - vertical.value
-  const y_measure_x = horizontal.property === "top"?  y + horizontal.value + 35 : y - horizontal.value - 35
-  
-  const x_measure_y = vertical.property === "left"?  x + vertical.value + 35 : x - vertical.value - 35
-  const y_measure_y = horizontal.property   === "top"? y : y - horizontal.value
-  
-  const style_square   = {left: x_square, top:y_square}
+  const style_square = {left: x_square, top:y_square}
 
   return (
     <div className="Blog">
@@ -256,7 +263,7 @@ function Blog() {
           {/* <span className="name2">.container</span> */}
           <HorizontalMeasure x={x_measure_x} y = {y_measure_x} length={vertical.value}/>
           <VerticalMeasure x={x_measure_y} y = {y_measure_y} length={horizontal.value}/>
-          {/* <HelperLineX top={top} position={position}/> */}
+          <HelperLineX style={styleHelper}/>
           {/* <HelperLineY left={vertical.value} position={position}/> */}
         </div>
       </div>
