@@ -16,7 +16,7 @@ jobs:
         node-version: '14.x'
     - name: Install npm dependencies
       env:
-        CI: ""
+        CI: false
       run: npm install
     - name: Run build task
       run: npm run build
