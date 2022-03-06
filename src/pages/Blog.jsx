@@ -181,7 +181,6 @@ function Blog() {
     set_container(getDimensions(".container"))
     set_body(getDimensions(".code-display"))
 
-    console.log(body);
     
     vertical.property === "left"? set_x(container.x) : set_x(container.x + container.width)
     horizontal.property === "top"? set_y(container.y) : set_y(container.y + container.height)
@@ -214,7 +213,7 @@ function Blog() {
     }
 
     
-  }, [position, window, vertical, horizontal,css, body])
+  }, [position, window, vertical, horizontal])
   
   const style_square = {left: x_square, top:y_square}
 

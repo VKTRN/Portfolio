@@ -7,7 +7,6 @@ import './scss/custom.scss';
 
 function App() {
 
-  console.log(process.env.CI);
 
   return (
     <Router>
