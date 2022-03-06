@@ -1,5 +1,4 @@
-import React, {useState ,useEffect} from 'react'
-import {useWindowDimensions} from '../hooks'
+import React from 'react'
 
 const HelperLineX = ({style}) => {
 

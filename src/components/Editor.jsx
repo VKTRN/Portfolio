@@ -6,36 +6,28 @@ import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/css/css'
 import { Controlled as ControlledEditor } from 'react-codemirror2'
 
-type Props = {
-  language: string,
-  displayName: string,
-  value: string,
-  onChange:any
-}
+export default function Editor({ language, displayName, value, onChange}) {
 
-export default function Editor({ language, displayName, value, onChange}:Props) {
+  function handleChange(editor, event) {
 
-
-  function handleChange(editor:any, event:any) {
-
-    function lineContainsSomeProperty(index: number){
+    function lineContainsSomeProperty(index){
       return lines[index].includes(":")
     }
     
-    function findColon(line: string){
+    function findColon(line){
       return line.indexOf(":")
     }
     
-    function findSemicolon(line: string){
+    function findSemicolon(line){
       return line.indexOf(";")
     }
 
-    function insertChange(line: string){
+    function insertChange(line){
       const newLine = line.slice(0, charStart) + change + line.slice(charEnd)
       return newLine
     }
     
-    function insertLine(index: number){
+    function insertLine(index){
       let newValue    = ""
       let newLines    = lines
       newLines[index] = newLine
@@ -48,17 +40,17 @@ export default function Editor({ language, displayName, value, onChange}:Props) 
         }
       }
 
-      newLines = newLines.map((line: string) => {return deleteWhiteSpace(line)})
+      newLines = newLines.map((line) => {return deleteWhiteSpace(line)})
 
       newValue = newLines.join("")
       return newValue
     }
 
     function getLines(){
-      return editor.display.view.map((a:any) => a.line.text)
+      return editor.display.view.map((a) => a.line.text)
     }
 
-    function deleteWhiteSpace(string: string){
+    function deleteWhiteSpace(string){
       if(/\s/.test(string[string.length-1]) && string.length > 1){
         return string.slice(0, -1)
       }

@@ -1,15 +1,10 @@
 import React from 'react'
 
-type Props = {
-  id: string,
-  open: string,
-  set_open: any,
-  i: number,
-}
 
-function Logo({id,open, set_open, i}:Props){
 
-  function toggleAccordion(event: any) {
+function Logo({id,open, set_open, i}){
+
+  function toggleAccordion(event) {
 
       function close_accordion(){
           set_open(Array(open.length))
@@ -21,7 +16,7 @@ function Logo({id,open, set_open, i}:Props){
           set_open(value)
       }
 
-      function handleOutsideClick(event: any) {
+      function handleOutsideClick(event) {
           // if user clicks outside, the menu gets closed and the outside-click eventlistener is removed.
           const outside      = event.target.id !== id
           const is_accordion = event.target.classList.contains("accordion")

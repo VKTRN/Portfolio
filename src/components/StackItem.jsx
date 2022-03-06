@@ -2,15 +2,9 @@ import React from 'react'
 import Logo from "./Logo"
 import Accordion from "./Accordion"
 
-type Props = {
-  id: string,
-  text: string,
-  open: string,
-  set_open: any,
-  i: number
-}
 
-function StackItem({id, text, open, set_open, i}: Props){
+
+function StackItem({id, text, open, set_open, i}){
 
   return(
     <>

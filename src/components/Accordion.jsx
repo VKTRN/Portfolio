@@ -1,12 +1,6 @@
 import React from 'react'
 
-type Props = {
-  id: string,
-  open: string,
-  text: string,
-}
-
-function Accordion({id, open, text}:Props){
+function Accordion({id, open, text}){
 
     return(
         <div id = {id} className = {`accordion ${open} item`} >
