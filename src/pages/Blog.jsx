@@ -136,10 +136,6 @@ function getPropertyValue(css_object, selector, property){
   return declaration.value
 }
 
-
-
-
-
 function get_vertical_property(css_object, selector){
   const top    = getDeclaration(css_object, selector, "top")
   const bottom = getDeclaration(css_object, selector, "bottom")
@@ -227,8 +223,11 @@ function get_body(){
 
 function get_horizontal_measure(parent, horizontal,vertical){
   const measure = {}
-  measure.x = parent.left
-  measure.y = parent.top + vertical.value + 35
+  
+  measure.x = horizontal.property === "left"? parent.left : parent.right  - horizontal.value
+  measure.y = vertical.property === "top"? parent.top + vertical.value + 35 : parent.bottom - vertical.value - 35
+
+
   measure.length = horizontal.value
 
   return measure
@@ -236,8 +235,11 @@ function get_horizontal_measure(parent, horizontal,vertical){
 
 function get_vertical_measure(parent, horizontal,vertical){
   const measure = {}
-  measure.x = parent.left + horizontal.value + 35
-  measure.y = parent.top
+  
+  measure.x = horizontal.property === "left"? parent.left + horizontal.value + 35 : parent.right - horizontal.value - 35
+  measure.y = vertical.property === "top"? parent.top : parent.bottom  - vertical.value
+
+
   measure.length = vertical.value
 
   return measure
@@ -245,12 +247,12 @@ function get_vertical_measure(parent, horizontal,vertical){
 
 function get_square(parent, horizontal, vertical){
   const square = {}
-  square.x = parent.left + horizontal.value
-  square.y = parent.top + vertical.value
+
+  square.x = horizontal.property === "left"? parent.left + horizontal.value : parent.right  - horizontal.value - 70
+  square.y = vertical.property   === "top"?  parent.top  + vertical.value   : parent.bottom - vertical.value   - 70
 
   return square
 }
-
 
 function Blog() {
 
@@ -307,7 +309,7 @@ function Blog() {
       changeProperty(css_object, ".square", "bottom", "top")
     }
   }
-
+ 
   const [css_object, set_css_object] = useState(make_css_object())
   const window                       = useWindowDimensions()
   const [parent, set_parent]         = useState({left:0,right:0,top:0,bottom:0, width:0, height:0, center:{x:0, y:0}})
@@ -318,7 +320,6 @@ function Blog() {
   const square             = get_square(parent, horizontal, vertical)
   const vertical_measure   = get_vertical_measure(parent, horizontal, vertical) 
   const horizontal_measure = get_horizontal_measure(parent, horizontal, vertical)
-
 
   useEffect(() => {
     position === "relative"? set_parent(get_container()) : set_parent(get_body()) 
