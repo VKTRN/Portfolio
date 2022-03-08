@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect} from "react"
+import {useState, useRef, useEffect, useLayoutEffect} from "react"
 import {useWindowDimensions} from '../hooks'
 import { MdOutlineKeyboardArrowUp, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import React from 'react';
@@ -19,21 +19,21 @@ function toPixel(value){
   return value + "px";
 }
 
-function addDeclaration(css_string, property, value){
-  return css_string+"\n  "+property+": "+value+";"
-}
+// function addDeclaration_(css_string, property, value){
+//   return css_string+"\n  "+property+": "+value+";"
+// }
 
-function openSelector(css_string, selector){
-  return css_string + selector+"{"
-}
+// function openSelector(css_string, selector){
+//   return css_string + selector+"{"
+// }
 
-function addNewLine(css_string){
-  return css_string + "\n"
-}
+// function addNewLine(css_string){
+//   return css_string + "\n"
+// }
 
-function closeSelector(css_string){
-  return css_string + "\n}"
-}
+// function closeSelector(css_string){
+//   return css_string + "\n}"
+// }
 
 function makeHTML(){
   const initial_html = "<body>\n\t<div class='container'>\n\t\t<div class='square'></div>\n\t</div>\n</body>"
@@ -41,184 +41,295 @@ function makeHTML(){
   return initial_html
 }
 
-function makeCSS(){
-  let initial_css = "" 
+// function makeCSS_(){
+//   let initial_css = "" 
   
-  initial_css = openSelector(initial_css,".square")
-  initial_css = addDeclaration(initial_css, "position", "absolute")
-  initial_css = addDeclaration(initial_css, "left", "100px")
-  initial_css = addDeclaration(initial_css, "top", "100px")
-  initial_css = closeSelector(initial_css)
+//   initial_css = openSelector(initial_css,".square")
+//   initial_css = addDeclaration(initial_css, "position", "absolute")
+//   initial_css = addDeclaration(initial_css, "left", "100px")
+//   initial_css = addDeclaration(initial_css, "top", "100px")
+//   initial_css = closeSelector(initial_css)
   
-  initial_css = addNewLine(initial_css)
-  initial_css = addNewLine(initial_css)
+//   initial_css = addNewLine(initial_css)
+//   initial_css = addNewLine(initial_css)
   
-  initial_css = openSelector(initial_css,".container")
-  initial_css = addDeclaration(initial_css, "position", "relative")
-  initial_css = closeSelector(initial_css)
+//   initial_css = openSelector(initial_css,".container")
+//   initial_css = addDeclaration(initial_css, "position", "relative")
+//   initial_css = closeSelector(initial_css)
 
-  return initial_css
+//   return initial_css
 
+// }
+
+
+
+// function getPropertyValue_(css,property, selector){
+//   const selectorStringStart = css.indexOf(selector)
+//   const selectorStringEnd   = css.slice(selectorStringStart).indexOf("}")+selectorStringStart
+//   const cssString           = css.slice(selectorStringStart, selectorStringEnd)
+//   const start               = cssString.indexOf(property)+property.length+1
+//   const end                 = cssString.slice(start).indexOf(";") + start
+//   const value               = cssString.slice(start,end).replace(/\s/g, "")
+
+//   return value
+// }
+
+
+
+
+
+
+  //////////////////
+ //// NEW CODE ////
+//////////////////
+
+function add_rule(name){
+  let rule = {name: name, declarations:[]}
+  return rule
+}
+
+function add_declaration(rule,property,value){
+  rule.declarations.push({property: property, value:value})
+  return rule
+}
+
+function get_rule_string(rule){
+  let name = rule.name
+  let declarations = rule.declarations
+  let string = name + "{\n"
+
+  declarations.forEach((declaration) => {
+    string = string + "\t" + declaration.property+": "+declaration.value + ";\n"
+  })
+
+  string = string + "}"
+
+  return string
+}
+
+function get_css_string(rules){
+  let css_string = ""
+  rules.forEach((rule, i) => {
+    let rule_string = get_rule_string(rule)
+    css_string = css_string + rule_string 
+    css_string = i === rules.length-1? css_string : css_string + "\n\n" 
+  })
+  return css_string
+}
+
+function getMatchingObject(array, property, value){
+  const match = array.find(x => x[property] === value)
+  return match
+}
+
+function getDeclaration(css_object, selector, property){
+  const rule         = getMatchingObject(css_object, "name", selector)
+  const declarations = rule.declarations
+  const declaration  = getMatchingObject(declarations, "property", property)
+
+  return declaration
+}
+
+function getPropertyValue(css_object, selector, property){
+  const declaration = getDeclaration(css_object, selector, property)
+  
+  return declaration.value
+}
+
+
+
+
+
+function get_vertical_property(css_object, selector){
+  const top    = getDeclaration(css_object, selector, "top")
+  const bottom = getDeclaration(css_object, selector, "bottom")
+  if(top)    return "top"
+  if(bottom) return "bottom"
+}
+
+function get_horizontal_property(css_object, selector){
+  const left    = getDeclaration(css_object, selector, "left")
+  const right = getDeclaration(css_object, selector, "right")
+  if(left)    return "left"
+  if(right) return "right"
+}
+
+function make_css_object(){
+  
+  let rule_container = add_rule(".square")
+  rule_container     = add_declaration(rule_container, "position", "absolute")
+  rule_container     = add_declaration(rule_container, "left", "100px")
+  rule_container     = add_declaration(rule_container, "top", "100px")
+
+  let rule_square = add_rule(".container")
+  rule_square     = add_declaration(rule_square, "position", "relative")
+
+  let css_object = [rule_container, rule_square]
+
+  return css_object
+}
+
+function get_horizontal(css_object){
+  console.log(css_object);
+
+  const property = get_horizontal_property(css_object, ".square")
+  const value    = pixelToNum(getPropertyValue(css_object, ".square", property))
+  const horizontal = {property: property, value:value}
+
+  return horizontal
+}
+
+function get_vertical(css_object){
+  const property = get_vertical_property(css_object, ".square")
+  const value    = pixelToNum(getPropertyValue(css_object, ".square", property))
+  const vertical = {property: property, value:value}
+
+  return vertical
 }
 
 function getDimensions(selector){
   return document.querySelector(selector).getBoundingClientRect()
 }
 
+function get_container(){
+  const container_dimensions = getDimensions(".container")
+  const container = 
+  { left:   container_dimensions.x, 
+    right:  container_dimensions.x + container_dimensions.width, 
+    top:    container_dimensions.y, 
+    bottom: container_dimensions.y + container_dimensions.height, 
+    width:  container_dimensions.width, 
+    height: container_dimensions.height,
+    center: 
+    { x: container_dimensions.x + container_dimensions.width/2,
+      y: container_dimensions.y + container_dimensions.height/2
+    }
+  }
+  return container
+}
+
+function get_body(){
+  const body_dimensions = getDimensions(".code-display")
+  const body = 
+  { left:   body_dimensions.x, 
+    right:  body_dimensions.x + body_dimensions.width, 
+    top:    body_dimensions.y, 
+    bottom: body_dimensions.y + body_dimensions.height, 
+    width:  body_dimensions.width, 
+    height: body_dimensions.height,
+    center: 
+    { x: body_dimensions.x + body_dimensions.width/2,
+      y: body_dimensions.y + body_dimensions.height/2
+    }
+  }
+  return body
+}
+
+function get_horizontal_measure(parent, horizontal,vertical){
+  const measure = {}
+  measure.x = parent.left
+  measure.y = parent.top + vertical.value + 35
+  measure.length = horizontal.value
+
+  return measure
+}
+
+function get_vertical_measure(parent, horizontal,vertical){
+  const measure = {}
+  measure.x = parent.left + horizontal.value + 35
+  measure.y = parent.top
+  measure.length = vertical.value
+
+  return measure
+}
+
+function get_square(parent, horizontal, vertical){
+  const square = {}
+  square.x = parent.left + horizontal.value
+  square.y = parent.top + vertical.value
+
+  return square
+}
 
 
 function Blog() {
 
-  function setPropertyValue(value, property, selector){
-    const selectorStringStart = css.indexOf(selector) // find index, where the demanded selector begins in the string
-    const selectorStringEnd   = css.slice(selectorStringStart).indexOf("}")+selectorStringStart // find index, where the demanded selector ends in the string
-    const substring            = css.slice(selectorStringStart, selectorStringEnd) // get substring of only the selector 
-    const start               = substring.indexOf(property)+property.length+1 // get index of where the value of the property begins
-    const end                 = substring.slice(start).indexOf(";") + start // get index of where the value of the property ends
-    const newString           = css.slice(0, selectorStringStart+start) + " " + value + css.slice(selectorStringStart + end) // replace the value
-    
-    setCss(newString)
+  function setPropertyValue(css_object, selector, property, value){
+    const new_css_object = [...css_object]
+    let declaration      = getDeclaration(new_css_object, selector, property)
+    declaration.value    = value
+
+    set_css_object(new_css_object)
   }
 
-  function changeProperty(newProperty, property, selector){
-    const selectorStringStart = css.indexOf(selector) // find index, where the demanded selector begins in the string
-    const selectorStringEnd   = css.slice(selectorStringStart).indexOf("}")+selectorStringStart // find index, where the demanded selector ends in the string
-    const cssString           = css.slice(selectorStringStart, selectorStringEnd) // get substring of only the selector 
-    const start               = cssString.indexOf(property) // get index of where the property begins
-    const end                 = cssString.slice(start).indexOf(":") + start // get index of where the property ends
-    const newString           = css.slice(0, selectorStringStart+start) + newProperty + css.slice(selectorStringStart + end) // replace the value
+  function changeProperty(css_object, selector, property, new_property){
+    const new_css_object = [...css_object]
+    let declaration      = getDeclaration(new_css_object, selector, property)
+    declaration.property = new_property
     
-    setCss(newString)
+    set_css_object(new_css_object)
   }
 
   function move(direction){
     switch (direction) {
       case "left":
-        setPropertyValue(toPixel(vertical.value -50), vertical.property, "square")
+        setPropertyValue(css_object,  ".square",horizontal.property, toPixel(horizontal.value -50) )
         break;
       case "right":
-        setPropertyValue(toPixel(vertical.value+ 50), vertical.property, "square")
+        setPropertyValue(css_object,  ".square",horizontal.property, toPixel(horizontal.value + 50) )
         break;
       case "up":
-        setPropertyValue(toPixel(horizontal.value -50),horizontal.property, "square")
+        setPropertyValue(css_object,  ".square",vertical.property, toPixel(vertical.value - 50))
         break;
       case "down":
-        setPropertyValue(toPixel(horizontal.value+ 50), horizontal.property, "square")
+        setPropertyValue(css_object,  ".square",vertical.property, toPixel(vertical.value + 50) )
         break;
       default:
         break;
     }
   }
 
-  function toggleHorizontal(){
-    if(vertical.property === "left"){
-      changeProperty("right","left",".square")
-      set_vertical({property:"right", value: vertical.value})
+    function toggleHorizontal(){
+
+    if(horizontal.property === "left"){
+      changeProperty(css_object, ".square", "left", "right")
     }
     else{
-      changeProperty("left","right",".square")
-      set_vertical({property:"left", value: vertical.value})
+      changeProperty(css_object, ".square", "right", "left")
     }
   }
 
   function toggleVertical(){
-    if(horizontal.property === "top"){
-      changeProperty("bottom","top",".square")
-      set_horizontal({property:"bottom", value: horizontal.value})
+    if(vertical.property === "top"){
+      changeProperty(css_object, ".square", "top", "bottom")
     }
     else{
-      changeProperty("top","bottom",".square")
-      set_horizontal({property:"top", value: horizontal.value})
+      changeProperty(css_object, ".square", "bottom", "top")
     }
   }
 
-  const [html, setHtml]                  = useState(makeHTML())
-  const [css, setCss]                    = useState(makeCSS())
-  const [vertical, set_vertical]         = useState({property: "left", value: 100})
-  const [horizontal, set_horizontal]     = useState({property: "top", value: 100})
-  const [x, set_x]                       = useState(0)
-  const [y, set_y]                       = useState(0)
-  const [position, set_position]         = useState("relative")
-  const ref_square                       = useRef()
-  const ref_display                      = useRef()
-  const [styleHelperX, set_styleHelperX] = useState({left:"default", right:"default", top:"default", bottom:"default",height:1})
-  const [styleHelperY, set_styleHelperY] = useState({left:"default", right:"default", top:"default", bottom:"default",width:1})
-  const [container, set_container]       = useState({})
-  const [body, set_body]                 = useState({})
-  const window                           = useWindowDimensions()
-  
-  const x_square    = vertical.property   === "left"? x + vertical.value : x - vertical.value - 70
-  const y_square    = horizontal.property === "top"?  y + horizontal.value : y - horizontal.value - 70
-  
-  const x_measure_x = vertical.property   === "left"? x : x - vertical.value
-  const y_measure_x = horizontal.property === "top"?  y + horizontal.value + 35 : y - horizontal.value - 35
-  
-  const x_measure_y = vertical.property   === "left"?  x + vertical.value + 35 : x - vertical.value - 35
-  const y_measure_y = horizontal.property === "top"? y : y - horizontal.value
-  
-  useEffect(() => {
-    function getPropertyValue(property, selector){
-      const selectorStringStart = css.indexOf(selector)
-      const selectorStringEnd = css.slice(selectorStringStart).indexOf("}")+selectorStringStart
-      const cssString = css.slice(selectorStringStart, selectorStringEnd)
-      const start = cssString.indexOf(property)+property.length+1
-      const end   = cssString.slice(start).indexOf(";") + start
-      const value = cssString.slice(start,end).replace(/\s/g, "")
-  
-      return value
-    }
-    set_vertical(  {property: vertical.property,value:   pixelToNum(getPropertyValue(vertical.property,   "square"))})
-    set_horizontal({property: horizontal.property,value: pixelToNum(getPropertyValue(horizontal.property, "square"))})
-    set_position(getPropertyValue("position", "container"))
-  },[css])
+  const [css_object, set_css_object] = useState(make_css_object())
+  const window                       = useWindowDimensions()
+  const [parent, set_parent]         = useState({left:0,right:0,top:0,bottom:0, width:0, height:0, center:{x:0, y:0}})
+
+  const horizontal         = get_horizontal(css_object)
+  const vertical           = get_vertical(css_object)
+  const position           = getPropertyValue(css_object, ".container", "position")
+  const square             = get_square(parent, horizontal, vertical)
+  const vertical_measure   = get_vertical_measure(parent, horizontal, vertical) 
+  const horizontal_measure = get_horizontal_measure(parent, horizontal, vertical)
+
 
   useEffect(() => {
+    position === "relative"? set_parent(get_container()) : set_parent(get_body()) 
+  },[window, css_object])
 
-    // sets the offset of the lines with respect to the property position of the .container 
-    // whenever position is changed
-
-    // const selector   = position === "static" ? ".code-display" : ".container"
-    set_container(getDimensions(".container"))
-    set_body(getDimensions(".code-display"))
-
-    
-    vertical.property === "left"? set_x(container.x) : set_x(container.x + container.width)
-    horizontal.property === "top"? set_y(container.y) : set_y(container.y + container.height)
-
-    const is_above      = y_measure_x < container.y + container.height/2 
-    const is_left       = x_measure_y < container.x + container.width/2 
-    const is_underneath = !is_above
-    const is_right      = !is_left
-    const is_outside_y  = y_measure_x < container.y || y_measure_x > container.y + container.height
-    const is_outside_x  = x_measure_y < container.x || x_measure_y > container.x + container.width
-  
-    if (is_underneath) {
-      const opacity = is_outside_y? 1:0
-      const h = horizontal.property === "top"? Math.max(horizontal.value + 45 - container.height, 0) : -horizontal.value - 25
-      set_styleHelperX({left:x, right:"initial", top:container.y+container.height, bottom:"initial",height:h, opacity:opacity})
-    } else {
-      const opacity = is_outside_y? 1:0
-      const h = horizontal.property === "top"? Math.max(Math.abs(horizontal.value) -25,0) : horizontal.value + 45 - container.height
-      set_styleHelperX({left:x, right:"initial", top:"initial", bottom:window.height - container.y, height:h, opacity:opacity})
-    }
-
-    if (is_right) {
-      const opacity = is_outside_x? 1:0
-      const h = vertical.property === "left"? Math.max(vertical.value + 45 - container.width, 0) : - vertical.value - 25
-      set_styleHelperY({top:y, bottom:"initial", left:container.x + container.width, right:"initial",width:h, opacity:opacity})
-    } else {
-      const opacity = is_outside_x? 1:0
-      const h = vertical.property === "left"? Math.max(Math.abs(vertical.value) -25,0) : vertical.value + 45 - container.width
-      set_styleHelperY({top:y, bottom:"initial", left:"initial", right:window.width - container.x, width:h, opacity:opacity})
-    }
-
-    
-  }, [position, window, vertical, horizontal])
-  
-  const style_square = {left: x_square, top:y_square}
 
   return (
     <div className="Blog">
+      <div className="logger">
+        <div>square: {JSON. stringify(square)}</div>  
+      </div>
       <Header></Header>
 
       <div className="blog">
@@ -234,14 +345,12 @@ function Blog() {
           <Editor
             language="xml"
             displayName="HTML"
-            value={html}
-            onChange={setHtml}
+            value={makeHTML()}
           />
           <Editor
             language="css"
             displayName="CSS"
-            value={css}
-            onChange={setCss}
+            value={get_css_string(css_object)}
           />
           <div className="buttons">
             {/* <LabeledSwitch toggle={change_position} position={position}></LabeledSwitch> */}
@@ -266,19 +375,15 @@ function Blog() {
           </div>
         </div>
 
-        <div ref={ref_display} className="code-display" >
-          {/* <span className="name">body</span> */}
-          {/* <div className="container" style={{ position: position}}> */}
+        <div className="code-display" >
           <div className="container">
-            <div ref={ref_square} className="square" style={style_square}>
-              <span className="name">.square</span>
+            <div className="square" style={{left: square.x, top:square.y}}>
+            <span className="name">.square</span>
             </div>
           </div>
-          {/* <span className="name2">.container</span> */}
-          <HorizontalMeasure x={x_measure_x} y = {y_measure_x} length={vertical.value}/>
-          <VerticalMeasure x={x_measure_y} y = {y_measure_y} length={horizontal.value}/>
-          <HelperLineX style={styleHelperX}/>
-          <HelperLineY style={styleHelperY}/>
+          <HorizontalMeasure x={horizontal_measure.x} y = {horizontal_measure.y} length={horizontal_measure.length}/>
+          <VerticalMeasure x={vertical_measure.x} y = {vertical_measure.y} length={vertical_measure.length}/>
+
         </div>
       </div>
 
