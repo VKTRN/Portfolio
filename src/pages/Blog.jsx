@@ -7,9 +7,228 @@ import Footer            from "../components/Footer"
 import Editor            from '../components/Editor'
 import HorizontalMeasure from '../components/HorizontalMeasure'
 import VerticalMeasure   from '../components/VerticalMeasure'
-import HelperLineX       from '../components/HelperLineX'
-import HelperLineY       from '../components/HelperLineY'
-// import LabeledSwitch     from '../components/LabeledSwitch'
+import VerticalHelper    from '../components/HelperLineX'
+import HorizontalHelper  from '../components/HelperLineY'
+import LabeledSwitch     from '../components/LabeledSwitch'
+
+function Blog() {
+
+  function setPropertyValue(css_object, selector, property, value){
+    const new_css_object = [...css_object]
+    let declaration      = getDeclaration(new_css_object, selector, property)
+    declaration.value    = value
+
+    set_css_object(new_css_object)
+  }
+
+  function changeProperty(css_object, selector, property, new_property){
+    const new_css_object = [...css_object]
+    let declaration      = getDeclaration(new_css_object, selector, property)
+    declaration.property = new_property
+    
+    set_css_object(new_css_object)
+  }
+
+  function change_position(){
+    const new_position = position === "relative"? "static" : "relative"
+    setPropertyValue(css_object,  ".container","position", new_position)
+  }
+
+  function move(direction){
+    switch (direction) {
+      case "left":
+        setPropertyValue(css_object,  ".square",horizontal.property, toPixel(horizontal.value -50) )
+        break;
+      case "right":
+        setPropertyValue(css_object,  ".square",horizontal.property, toPixel(horizontal.value + 50) )
+        break;
+      case "up":
+        setPropertyValue(css_object,  ".square",vertical.property, toPixel(vertical.value - 50))
+        break;
+      case "down":
+        setPropertyValue(css_object,  ".square",vertical.property, toPixel(vertical.value + 50) )
+        break;
+      default:
+        break;
+    }
+  }
+
+  function toggleHorizontal(){
+
+    if(horizontal.property === "left"){
+      changeProperty(css_object, ".square", "left", "right")
+    }
+    else{
+      changeProperty(css_object, ".square", "right", "left")
+    }
+  }
+
+  function toggleVertical(){
+    if(vertical.property === "top"){
+      changeProperty(css_object, ".square", "top", "bottom")
+    }
+    else{
+      changeProperty(css_object, ".square", "bottom", "top")
+    }
+  }
+
+  function get_vertical_helper(parent, horizontal_measure, horizontal, vertical){
+
+    let helper = {}
+    
+    if (position === "static") return
+
+    const is_above       = horizontal_measure.y < parent.center.y 
+    const is_underneath  = !is_above
+    const is_outside_y   = horizontal_measure.y < parent.top  || horizontal_measure.y > parent.bottom
+    
+    if (is_underneath) {
+      const h     = vertical.property === "top"? Math.max(vertical.value + 45 - parent.height, 0) : - vertical.value - 25
+      helper      = {right:"initial", top:parent.bottom, bottom:"initial",height:h}
+    } 
+    else {
+      const h = vertical.property === "top"? Math.max(Math.abs(vertical.value) -25,0) : vertical.value + 45 - parent.height
+      helper = {right:"initial", top:"initial", bottom:window.height - parent.top, height:h}
+    }
+    
+    helper["opacity"]    = is_outside_y? 1:0
+    helper["left"]       = horizontal.property === "left" ? parent.left : parent.right
+    
+    return helper
+
+  }
+
+  function get_horizontal_helper(parent, vertical_measure, horizontal, vertical){
+
+    let helper = {}
+    
+    if (position === "static") return {display:"none"}
+    
+    const is_left       = vertical_measure.x   < parent.center.x 
+    const is_right      = !is_left
+    const is_outside_x  = vertical_measure.x   < parent.left || vertical_measure.x   > parent.right
+
+    if (is_right) {
+      const h = horizontal.property === "left"? Math.max(horizontal.value + 45 - parent.width, 0) : - horizontal.value - 25
+      helper = {bottom:"initial", left:parent.right, right:"initial",width:h}
+    } else {
+      const h = horizontal.property === "left"? Math.max(Math.abs(horizontal.value) -25, 0) :  horizontal.value + 45 - parent.width
+      helper = {bottom:"initial", left:"initial", right:window.width - parent.left, width:h}
+    }
+
+    helper["opacity"]   = is_outside_x? 1:0
+    helper["top"]       = vertical.property === "top" ? parent.top : parent.bottom
+
+    return helper
+
+  }
+ 
+  const [css_object, set_css_object] = useState(make_css_object())
+  const window                       = useWindowDimensions()
+  const [parent, set_parent]         = useState({left:0,right:0,top:0,bottom:0, width:0, height:0, center:{x:0, y:0}})
+
+  const horizontal         = get_horizontal(css_object) // {property: "left" || "right", value: number}
+  const vertical           = get_vertical(css_object) // {property: "top" || "bottom", value: number}
+  const position           = getPropertyValue(css_object, ".container", "position") // "relative" || "static"
+  const square             = get_square(parent, horizontal, vertical) // {x: number, y: number}
+  const vertical_measure   = get_vertical_measure(parent, horizontal, vertical) 
+  const horizontal_measure = get_horizontal_measure(parent, horizontal, vertical)
+  const vertical_helper    = get_vertical_helper(parent, horizontal_measure, horizontal,vertical)
+  const horizontal_helper  = get_horizontal_helper(parent, vertical_measure, horizontal,vertical)
+
+  useEffect(() => {
+    position === "relative"? set_parent(get_container()) : set_parent(get_body()) 
+  },[window, css_object])
+
+
+  return (
+    <div className="Blog">
+      <div className="logger">
+        <div>square: {JSON. stringify(horizontal_helper)}</div>  
+      </div>
+      <Header></Header>
+
+      <div className="blog">
+
+        <div className="text-container">
+          <h2>Position: Absolute</h2>
+          <div className="text">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita fugiat reprehenderit, delectus et explicabo provident hic facere tempore cumque velit mollitia fugit quos molestiae harum quis, alias error magnam asperiores quisquam architecto culpa rerum maiores at! Delectus nemo, laudantium quibusdam iure dicta eius ullam obcaecati reprehenderit veniam, quod quidem dignissimos.
+          </div>
+          <LabeledSwitch toggle={change_position} position={position}></LabeledSwitch>
+
+        </div>
+
+        <div className="code">
+          <Editor
+            language="xml"
+            displayName="HTML"
+            value={makeHTML()}
+          />
+          <Editor
+            language="css"
+            displayName="CSS"
+            value={get_css_string(css_object)}
+          />
+          <div className="buttons">
+              <button onClick={() => move("up")}>
+                <MdOutlineKeyboardArrowUp />
+              </button>
+              <button onClick={() => move("down")}>
+                <MdOutlineKeyboardArrowDown />
+              </button>
+              <button onClick={() => move("left")}>
+                <MdOutlineKeyboardArrowLeft />
+              </button>
+              <button onClick={() => move("right")}>
+                <MdOutlineKeyboardArrowRight />
+              </button>
+              <button onClick={toggleHorizontal}>
+                hori
+              </button>
+              <button onClick={toggleVertical}>
+                vert
+              </button>
+            </div>
+          </div>
+
+        <div className="code-display" >
+          <div className="container">
+            <div className="square" style={{left: square.x, top:square.y}}>
+            <span className="name">.square</span>
+            </div>
+          </div>
+          <HorizontalMeasure x={horizontal_measure.x} y = {horizontal_measure.y} length={horizontal_measure.length}/>
+          <VerticalMeasure   x={vertical_measure.x}   y = {vertical_measure.y}   length={vertical_measure.length}/>
+          <VerticalHelper   style={vertical_helper}/>
+          <HorizontalHelper style={horizontal_helper}/>
+          
+
+        </div>
+      </div>
+
+      <Footer></Footer>
+
+    </div>
+  );
+}
+
+export default Blog;
+
+
+
+
+
+
+
+
+
+
+
+
+  /////////////////
+ /// FUNCTIONS ///
+/////////////////
 
 function pixelToNum(value){
   return parseInt(value.replace(/px/,""))
@@ -158,7 +377,7 @@ function make_css_object(){
   rule_container     = add_declaration(rule_container, "top", "100px")
 
   let rule_square = add_rule(".container")
-  rule_square     = add_declaration(rule_square, "position", "relative")
+  rule_square     = add_declaration(rule_square, "position", "static")
 
   let css_object = [rule_container, rule_square]
 
@@ -253,145 +472,3 @@ function get_square(parent, horizontal, vertical){
 
   return square
 }
-
-function Blog() {
-
-  function setPropertyValue(css_object, selector, property, value){
-    const new_css_object = [...css_object]
-    let declaration      = getDeclaration(new_css_object, selector, property)
-    declaration.value    = value
-
-    set_css_object(new_css_object)
-  }
-
-  function changeProperty(css_object, selector, property, new_property){
-    const new_css_object = [...css_object]
-    let declaration      = getDeclaration(new_css_object, selector, property)
-    declaration.property = new_property
-    
-    set_css_object(new_css_object)
-  }
-
-  function move(direction){
-    switch (direction) {
-      case "left":
-        setPropertyValue(css_object,  ".square",horizontal.property, toPixel(horizontal.value -50) )
-        break;
-      case "right":
-        setPropertyValue(css_object,  ".square",horizontal.property, toPixel(horizontal.value + 50) )
-        break;
-      case "up":
-        setPropertyValue(css_object,  ".square",vertical.property, toPixel(vertical.value - 50))
-        break;
-      case "down":
-        setPropertyValue(css_object,  ".square",vertical.property, toPixel(vertical.value + 50) )
-        break;
-      default:
-        break;
-    }
-  }
-
-    function toggleHorizontal(){
-
-    if(horizontal.property === "left"){
-      changeProperty(css_object, ".square", "left", "right")
-    }
-    else{
-      changeProperty(css_object, ".square", "right", "left")
-    }
-  }
-
-  function toggleVertical(){
-    if(vertical.property === "top"){
-      changeProperty(css_object, ".square", "top", "bottom")
-    }
-    else{
-      changeProperty(css_object, ".square", "bottom", "top")
-    }
-  }
- 
-  const [css_object, set_css_object] = useState(make_css_object())
-  const window                       = useWindowDimensions()
-  const [parent, set_parent]         = useState({left:0,right:0,top:0,bottom:0, width:0, height:0, center:{x:0, y:0}})
-
-  const horizontal         = get_horizontal(css_object)
-  const vertical           = get_vertical(css_object)
-  const position           = getPropertyValue(css_object, ".container", "position")
-  const square             = get_square(parent, horizontal, vertical)
-  const vertical_measure   = get_vertical_measure(parent, horizontal, vertical) 
-  const horizontal_measure = get_horizontal_measure(parent, horizontal, vertical)
-
-  useEffect(() => {
-    position === "relative"? set_parent(get_container()) : set_parent(get_body()) 
-  },[window, css_object])
-
-
-  return (
-    <div className="Blog">
-      <div className="logger">
-        <div>square: {JSON. stringify(square)}</div>  
-      </div>
-      <Header></Header>
-
-      <div className="blog">
-
-        <div className="text-container">
-          <h2>Position: Absolute</h2>
-          <div className="text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita fugiat reprehenderit, delectus et explicabo provident hic facere tempore cumque velit mollitia fugit quos molestiae harum quis, alias error magnam asperiores quisquam architecto culpa rerum maiores at! Delectus nemo, laudantium quibusdam iure dicta eius ullam obcaecati reprehenderit veniam, quod quidem dignissimos.
-          </div>
-        </div>
-
-        <div className="code">
-          <Editor
-            language="xml"
-            displayName="HTML"
-            value={makeHTML()}
-          />
-          <Editor
-            language="css"
-            displayName="CSS"
-            value={get_css_string(css_object)}
-          />
-          <div className="buttons">
-            {/* <LabeledSwitch toggle={change_position} position={position}></LabeledSwitch> */}
-            <button onClick={() => move("up")}>
-              <MdOutlineKeyboardArrowUp />
-            </button>
-            <button onClick={() => move("down")}>
-              <MdOutlineKeyboardArrowDown />
-            </button>
-            <button onClick={() => move("left")}>
-              <MdOutlineKeyboardArrowLeft />
-            </button>
-            <button onClick={() => move("right")}>
-              <MdOutlineKeyboardArrowRight />
-            </button>
-            <button onClick={toggleHorizontal}>
-              hori
-            </button>
-            <button onClick={toggleVertical}>
-              vert
-            </button>
-          </div>
-        </div>
-
-        <div className="code-display" >
-          <div className="container">
-            <div className="square" style={{left: square.x, top:square.y}}>
-            <span className="name">.square</span>
-            </div>
-          </div>
-          <HorizontalMeasure x={horizontal_measure.x} y = {horizontal_measure.y} length={horizontal_measure.length}/>
-          <VerticalMeasure x={vertical_measure.x} y = {vertical_measure.y} length={vertical_measure.length}/>
-
-        </div>
-      </div>
-
-      <Footer></Footer>
-
-    </div>
-  );
-}
-
-export default Blog;
