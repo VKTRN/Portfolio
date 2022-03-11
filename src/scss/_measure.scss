@@ -4,7 +4,7 @@ $color:red;
 .measure-x{
   height:2px;
   background-color: red;
-  position:fixed;
+  position:absolute;
   transition: all 300ms;
   border-radius: 3px;
 
@@ -47,7 +47,7 @@ $color:red;
 .measure-y{
   width:2px;
   background-color: red;
-  position:fixed;
+  position:absolute;
   transition: all 300ms;
   border-radius: 3px;
 

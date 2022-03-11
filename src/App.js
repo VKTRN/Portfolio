@@ -7,7 +7,6 @@ import './scss/custom.scss';
 
 function App() {
 
-
   return (
     <Router>
       <Switch>
