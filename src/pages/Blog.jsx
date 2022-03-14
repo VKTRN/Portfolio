@@ -10,6 +10,7 @@ import VerticalMeasure   from '../components/VerticalMeasure'
 import VerticalHelper    from '../components/HelperLineX'
 import HorizontalHelper  from '../components/HelperLineY'
 import LabeledSwitch     from '../components/LabeledSwitch'
+import Buttons           from '../components/Buttons'
 
 function Blog() {
 
@@ -27,11 +28,6 @@ function Blog() {
     declaration.property = new_property
     
     set_css_object(new_css_object)
-  }
-
-  function change_position(){
-    const new_position = position === "relative"? "static" : "relative"
-    setPropertyValue(css_object,  ".container","position", new_position)
   }
 
   function move(direction){
@@ -53,6 +49,11 @@ function Blog() {
     }
   }
 
+  function togglePosition(){
+    const new_position = position === "relative"? "static" : "relative"
+    setPropertyValue(css_object,  ".container","position", new_position)
+  }
+
   function toggleHorizontal(){
 
     if(horizontal.property === "left"){
@@ -61,6 +62,14 @@ function Blog() {
     else{
       changeProperty(css_object, ".square", "right", "left")
     }
+  }
+
+  function setDirection(direction){
+
+    if(direction === "right" && horizontal.property === "left"){changeProperty(css_object, ".square", "left", "right")}
+    if(direction === "left"  && horizontal.property === "right"){changeProperty(css_object, ".square", "right", "left")}
+    if(direction === "top"  && vertical.property === "bottom"){changeProperty(css_object, ".square", "bottom", "top")}
+    if(direction === "bottom"  && vertical.property === "top"){changeProperty(css_object, ".square", "top", "bottom")}
   }
 
   function toggleVertical(){
@@ -140,12 +149,11 @@ function Blog() {
     position === "relative"? set_parent(get_container()) : set_parent(get_body()) 
   },[window, css_object])
 
-
   return (
     <div className="Blog">
-      <div className="logger">
+      {/* <div className="logger">
         <div>square: {JSON. stringify(horizontal_helper)}</div>  
-      </div>
+      </div> */}
       <Header></Header>
 
       <div className="blog">
@@ -155,7 +163,7 @@ function Blog() {
           <div className="text">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita fugiat reprehenderit, delectus et explicabo provident hic facere tempore cumque velit mollitia fugit quos molestiae harum quis, alias error magnam asperiores quisquam architecto culpa rerum maiores at! Delectus nemo, laudantium quibusdam iure dicta eius ullam obcaecati reprehenderit veniam, quod quidem dignissimos.
           </div>
-          <LabeledSwitch toggle={change_position} position={position}></LabeledSwitch>
+          <Buttons togglePosition={togglePosition} setDirection={setDirection} move={move}></Buttons>
 
         </div>
 
@@ -165,32 +173,12 @@ function Blog() {
             displayName="HTML"
             value={makeHTML()}
           />
-          <Editor
+          <Editor className="code-css"
             language="css"
             displayName="CSS"
             value={get_css_string(css_object)}
           />
-          <div className="buttons">
-              <button onClick={() => move("up")}>
-                <MdOutlineKeyboardArrowUp />
-              </button>
-              <button onClick={() => move("down")}>
-                <MdOutlineKeyboardArrowDown />
-              </button>
-              <button onClick={() => move("left")}>
-                <MdOutlineKeyboardArrowLeft />
-              </button>
-              <button onClick={() => move("right")}>
-                <MdOutlineKeyboardArrowRight />
-              </button>
-              <button onClick={toggleHorizontal}>
-                hori
-              </button>
-              <button onClick={toggleVertical}>
-                vert
-              </button>
-            </div>
-          </div>
+        </div>
 
         <div className="code-display" >
           <div className="container">
@@ -472,3 +460,10 @@ function get_square(parent, horizontal, vertical){
 
   return square
 }
+
+// function get_line(){
+//   const element = document.querySelector('.editor-container:nth-child(2)');
+//   const line    = element.querySelector('.CodeMirror-line:nth-child(3)');
+//   const p       = line.getBoundingClientRect()
+//   set_button_pos({x:p.x,y: p.y})
+// }

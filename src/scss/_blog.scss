@@ -4,21 +4,23 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
+  height:100rem;
 
   .blog{
     display: flex;
     gap:2rem;
+    // height:100rem;
     flex:1;
     padding:2rem;
     justify-content: center;
     font-family: monospace !important;
 
     .text-container{
+      position: relative;
       font-family: 'Roboto', sans-serif;
       width:29rem;
       color:white;
-      
+      height:80vh;
       .text{
         text-align: justify;
         text-align-last: justify;
