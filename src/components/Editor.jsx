@@ -1,6 +1,6 @@
 import React from 'react'
 import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/material.css'
+import 'codemirror/theme/vscode-dark.css'
 import 'codemirror/mode/xml/xml'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/css/css'
@@ -92,7 +92,7 @@ export default function Editor({ language, displayName, value, onChange}) {
           lineWrapping: true,
           mode: language,
           tabSize:2,
-          theme: 'material',
+          theme: 'vscode-dark',
         }}
       />
     </div>
