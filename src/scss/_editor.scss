@@ -3,14 +3,14 @@
   height: 80vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   width: 23rem;
-  gap:1.5rem;
+  gap:15%;
   display: flex;
   background-color: #1e1e1e;
   padding:1rem;
   border-radius: .5rem;
   border: solid rgb(189, 189, 189) 1px;
+  max-height: 40rem;
 }
 
 .CodeMirror-vscrollbar{
@@ -87,6 +87,7 @@
   background-color: rgb(83, 85, 105);
   margin:5rem;
   border-radius: .5rem;
+  padding:0;
 }
 
 .code-display{
@@ -99,6 +100,18 @@
   border-radius: .5rem;
   height:80vh;
   clip-path: inset(0 0 0 0);
+
+  .body-name{
+    text-align: end;
+    color: white;
+    margin-right: .5rem;
+  }
+
+  .container-name{
+    text-align: end;
+    color: white;
+    margin-right: .5rem;
+  }
 
   .name{
     color: rgba(255,255,255,.7);

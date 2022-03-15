@@ -180,7 +180,9 @@ function Blog() {
         </div>
 
         <div className="code-display" >
+          <div className="body-name">.body</div>
           <div className="container">
+            <div className="container-name">.container</div>
             <div className="square" style={{left: square.x, top:square.y}}>
             <span className="name">.square</span>
             </div>
