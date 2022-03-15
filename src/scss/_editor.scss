@@ -3,26 +3,14 @@
   height: 80vh;
   display: flex;
   flex-direction: column;
-  width: 30rem;
+  justify-content: space-around;
+  width: 23rem;
   gap:1.5rem;
   display: flex;
   background-color: #1e1e1e;
   padding:1rem;
   border-radius: .5rem;
   border: solid rgb(189, 189, 189) 1px;
-
-  // .buttons{
-    
-  //   display:flex;
-
-  //   button{
-  //     background-color: rgba(161, 163, 189, 0.6);
-  //     border-radius: .5rem;
-  //     margin: 0 .25rem;
-  //     width:20%
-  //   }
-  // }
-
 }
 
 .CodeMirror-vscrollbar{
@@ -35,17 +23,8 @@
   display: flex;
   flex-direction: column;
   margin:0rem;
-  // border: solid rgb(189, 189, 189) 1px;
   border-radius: .5rem;
-  // height:90vh;
-
-
-
 }
-
-// .editor-container.collapsed {
-//   flex-grow: 0;
-// }
 
 .editor-container.collapsed .CodeMirror-scroll {
   position: absolute;
@@ -62,20 +41,15 @@
 .editor-title {
   display: flex;
   justify-content: space-between;
-  // background-color: hsl(225, 6%, 13%);
   color: rgba(255,255,255,.7);
   padding: 0;
-  // padding: .5rem .5rem .5rem 1rem;
   border-top-right-radius: .5rem;
   border-top-left-radius: .5rem;
-
 }
 
 .CodeMirror {
   height: 100% !important;
 }
-
-
 
 .CodeMirror-scroll{
   padding: 0 !important;
@@ -84,14 +58,10 @@
   height:initial;
 }
 
-
-
 .code-mirror-wrapper {
   flex-grow: 1;
-  // height:auto !important;
   border-bottom-right-radius: .5rem;
   border-bottom-left-radius: .5rem;
-
 }
 
 .square{
@@ -121,7 +91,6 @@
 
 .code-display{
   width:30rem;
-  // height:auto;
   width:35vw;
   max-width: 40rem;
   max-height: 40rem;
@@ -129,10 +98,7 @@
   border: solid rgb(189, 189, 189) 1px;
   border-radius: .5rem;
   height:80vh;
-  // position:relative;
-  // clip: rect(0, auto, auto, 0);
   clip-path: inset(0 0 0 0);
-
 
   .name{
     color: rgba(255,255,255,.7);
@@ -141,15 +107,12 @@
     right:.5rem;
   }
 
-
-
   .name2{
     color: rgba(255, 255, 255, 0.85) !important;
     position: absolute;
     top:5rem;
     right:calc(100% - 17rem - 4.5rem);
   }
-
 }
 
 .cm-s-material.CodeMirror{

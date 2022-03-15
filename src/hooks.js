@@ -22,10 +22,6 @@ function useWindowDimensions() {
 }
 
 function useDimensions(selector) {
-
-  console.log(selector);
-  console.log(document);
-  console.log(document.querySelector(".container"))
   
   const element    = document.querySelector(selector)
   

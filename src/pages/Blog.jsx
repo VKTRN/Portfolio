@@ -85,7 +85,7 @@ function Blog() {
 
     let helper = {}
     
-    if (position === "static") return
+    if (position === "static") return {"right":"initial","top":"initial","bottom":"initial","height":0,"opacity":0,"left":"initial"}
 
     const is_above       = horizontal_measure.y < parent.center.y 
     const is_underneath  = !is_above
@@ -93,11 +93,12 @@ function Blog() {
     
     if (is_underneath) {
       const h     = vertical.property === "top"? Math.max(vertical.value + 45 - parent.height, 0) : - vertical.value - 25
+      console.log(h)
       helper      = {right:"initial", top:parent.bottom, bottom:"initial",height:h}
     } 
     else {
       const h = vertical.property === "top"? Math.max(Math.abs(vertical.value) -25,0) : vertical.value + 45 - parent.height
-      helper = {right:"initial", top:"initial", bottom:window.height - parent.top, height:h}
+      helper = {right:"initial", top:"initial", bottom:window_.height - parent.top, height:h}
     }
     
     helper["opacity"]    = is_outside_y? 1:0
@@ -111,18 +112,19 @@ function Blog() {
 
     let helper = {}
     
-    if (position === "static") return {display:"none"}
+    if (position === "static") return {"right":"initial","top":"initial","bottom":"initial","width":0,"opacity":0,"left":"initial"}
     
     const is_left       = vertical_measure.x   < parent.center.x 
     const is_right      = !is_left
     const is_outside_x  = vertical_measure.x   < parent.left || vertical_measure.x   > parent.right
+    const scrollbar_width = 15
 
     if (is_right) {
       const h = horizontal.property === "left"? Math.max(horizontal.value + 45 - parent.width, 0) : - horizontal.value - 25
       helper = {bottom:"initial", left:parent.right, right:"initial",width:h}
     } else {
       const h = horizontal.property === "left"? Math.max(Math.abs(horizontal.value) -25, 0) :  horizontal.value + 45 - parent.width
-      helper = {bottom:"initial", left:"initial", right:window.width - parent.left, width:h}
+      helper = {bottom:"initial", left:"initial", right:window_.width - parent.left - scrollbar_width, width:h}
     }
 
     helper["opacity"]   = is_outside_x? 1:0
@@ -133,7 +135,7 @@ function Blog() {
   }
  
   const [css_object, set_css_object] = useState(make_css_object())
-  const window                       = useWindowDimensions()
+  const window_                       = useWindowDimensions()
   const [parent, set_parent]         = useState({left:0,right:0,top:0,bottom:0, width:0, height:0, center:{x:0, y:0}})
 
   const horizontal         = get_horizontal(css_object) // {property: "left" || "right", value: number}
@@ -147,13 +149,11 @@ function Blog() {
 
   useEffect(() => {
     position === "relative"? set_parent(get_container()) : set_parent(get_body()) 
-  },[window, css_object])
+  },[window_, css_object])
 
   return (
     <div className="Blog">
-      {/* <div className="logger">
-        <div>square: {JSON. stringify(horizontal_helper)}</div>  
-      </div> */}
+      {/* <div className="logger"><div>window:{JSON.stringify(vertical_helper)}</div></div> */}
       <Header></Header>
 
       <div className="blog">
@@ -163,8 +163,7 @@ function Blog() {
           <div className="text">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita fugiat reprehenderit, delectus et explicabo provident hic facere tempore cumque velit mollitia fugit quos molestiae harum quis, alias error magnam asperiores quisquam architecto culpa rerum maiores at! Delectus nemo, laudantium quibusdam iure dicta eius ullam obcaecati reprehenderit veniam, quod quidem dignissimos.
           </div>
-          <Buttons togglePosition={togglePosition} setDirection={setDirection} move={move}></Buttons>
-
+          <Buttons position={position} togglePosition={togglePosition} setDirection={setDirection} move={move}></Buttons>
         </div>
 
         <div className="code">
@@ -195,7 +194,7 @@ function Blog() {
         </div>
       </div>
 
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
 
     </div>
   );
@@ -365,7 +364,7 @@ function make_css_object(){
   rule_container     = add_declaration(rule_container, "top", "100px")
 
   let rule_square = add_rule(".container")
-  rule_square     = add_declaration(rule_square, "position", "static")
+  rule_square     = add_declaration(rule_square, "position", "relative")
 
   let css_object = [rule_container, rule_square]
 
@@ -396,16 +395,17 @@ function getDimensions(selector){
 
 function get_container(){
   const container_dimensions = getDimensions(".container")
+  const scroll               = window.scrollY
   const container = 
   { left:   container_dimensions.x, 
     right:  container_dimensions.x + container_dimensions.width, 
-    top:    container_dimensions.y, 
-    bottom: container_dimensions.y + container_dimensions.height, 
+    top:    container_dimensions.y + scroll, 
+    bottom: container_dimensions.y + container_dimensions.height + scroll, 
     width:  container_dimensions.width, 
     height: container_dimensions.height,
     center: 
     { x: container_dimensions.x + container_dimensions.width/2,
-      y: container_dimensions.y + container_dimensions.height/2
+      y: container_dimensions.y + container_dimensions.height/2 + scroll
     }
   }
   return container
@@ -413,16 +413,17 @@ function get_container(){
 
 function get_body(){
   const body_dimensions = getDimensions(".code-display")
+  const scroll          = window.scrollY
   const body = 
   { left:   body_dimensions.x, 
     right:  body_dimensions.x + body_dimensions.width, 
-    top:    body_dimensions.y, 
-    bottom: body_dimensions.y + body_dimensions.height, 
+    top:    body_dimensions.y + scroll, 
+    bottom: body_dimensions.y + body_dimensions.height + scroll, 
     width:  body_dimensions.width, 
     height: body_dimensions.height,
     center: 
     { x: body_dimensions.x + body_dimensions.width/2,
-      y: body_dimensions.y + body_dimensions.height/2
+      y: body_dimensions.y + body_dimensions.height/2 + scroll
     }
   }
   return body
