@@ -134,9 +134,10 @@ function Blog() {
 
   }
  
-  const [css_object, set_css_object] = useState(make_css_object())
-  const window_                       = useWindowDimensions()
-  const [parent, set_parent]         = useState({left:0,right:0,top:0,bottom:0, width:0, height:0, center:{x:0, y:0}})
+  const [css_object, set_css_object]     = useState(make_css_object())
+  const window_                          = useWindowDimensions()
+  const [parent, set_parent]             = useState({left:0,right:0,top:0,bottom:0, width:0, height:0, center:{x:0, y:0}})
+  const [highlighting, set_highlighting] = useState({directions:"", values:"", position:""})
 
   const horizontal         = get_horizontal(css_object) // {property: "left" || "right", value: number}
   const vertical           = get_vertical(css_object) // {property: "top" || "bottom", value: number}
@@ -161,20 +162,29 @@ function Blog() {
         <div className="text-container">
           <h2>Position: Absolute</h2>
           <ul className="text">
-            <li>
+            <li 
+              onMouseEnter={() => {set_highlighting({directions:"", values:"", position:"highlighted"})}}
+              onMouseLeave={() => {set_highlighting({directions:"", values:"", position:""})}}
+              >
               The position of .square is relative to its first positioned (relative, absolute, fixed, sticky but not static) ancestor,
               which is either body or .container.
             </li>
             <br />
-            <li>
+            <li 
+              onMouseEnter={() => {set_highlighting({directions:"highlighted", values:"", position:""})}}
+              onMouseLeave={() => {set_highlighting({directions:"", values:"", position:""})}}
+              >
               The properties left, right, top, bottom define to which edges the position of .square is set relative to.
             </li>
             <br />
-            <li>
+            <li 
+              onMouseEnter={() => {set_highlighting({directions:"", values:"highlighted", position:""})}}
+              onMouseLeave={() => {set_highlighting({directions:"", values:"", position:""})}}
+              >
               Changing the values left or right and top or bottom defines the horizontal and vertical destances relative to the first positioned ancestor of .square.
             </li>
           </ul>
-          <Buttons position={position} togglePosition={togglePosition} setDirection={setDirection} move={move}></Buttons>
+          <Buttons position={position} togglePosition={togglePosition} setDirection={setDirection} move={move} highlighting={highlighting}></Buttons>
         </div>
 
         <div className="code">

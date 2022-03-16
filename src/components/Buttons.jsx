@@ -7,7 +7,7 @@ import LabeledSwitch from './LabeledSwitch';
 
 
 
-function Buttons({setDirection, move, position, togglePosition}) {
+function Buttons({setDirection, move, position, togglePosition, highlighting}) {
 
     const [active, setActive] = useState({top:"orange", bottom:"white", left:"orange", right:"white"})
 
@@ -23,14 +23,14 @@ function Buttons({setDirection, move, position, togglePosition}) {
 
   return (
     <div className="buttons">
-        <div className="direction-bg-y"></div>
-        <div className="direction-bg-x"></div>
+        <div className={`direction-bg-y ${highlighting.directions}`} ></div>
+        <div className={`direction-bg-x ${highlighting.directions}`} ></div>
         <button className="top"    onClick={() => {handleClick("top")}}    style={{backgroundColor:active.top}}><BsArrowBarDown/></button>
         <button className="bottom" onClick={() => {handleClick("bottom")}} style={{backgroundColor:active.bottom}}><BsArrowBarUp/></button>
         <button className="left"   onClick={() => {handleClick("left")}}   style={{backgroundColor:active.left}}><BsArrowBarRight/></button>
         <button className="right"  onClick={() => {handleClick("right")}}  style={{backgroundColor:active.right}}><BsArrowBarLeft/></button>
 
-        <div className="horizontal">
+        <div className={`horizontal ${highlighting.values}`}>
             <button className="horizontal-left" onClick={() => move("left")}> 
                 <HiMinus/>
             </button>
@@ -39,7 +39,7 @@ function Buttons({setDirection, move, position, togglePosition}) {
                 <HiPlus/>
             </button>
         </div>
-        <div className="vertical">
+        <div className={`vertical ${highlighting.values}`}>
             <button className="horizontal-top"  onClick={() => move("up")}>
                 <HiMinus/>
             </button>
@@ -48,7 +48,7 @@ function Buttons({setDirection, move, position, togglePosition}) {
                 <HiPlus/>
             </button>
         </div>
-        <LabeledSwitch position={position} toggle={togglePosition} ></LabeledSwitch>
+        <LabeledSwitch position={position} toggle={togglePosition} highlighting={highlighting.position}></LabeledSwitch>
   </div>
   );
 }

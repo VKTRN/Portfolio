@@ -11,7 +11,12 @@
     border-radius: .4rem;
     background-color: #8E96B2;
     
+    .highlighted{
+        background-color: yellow !important;
+    }
+    
     .direction-bg-x{
+        transition: background-color 300ms;
         grid-column-start: 1;
         grid-column-end: 4;
         grid-row-start: 2;
@@ -21,6 +26,8 @@
     }
     
     .direction-bg-y{
+        transition: background-color 300ms;
+
         grid-column-start: 2;
         grid-column-end: 2;
         grid-row-start: 1;
@@ -69,6 +76,8 @@
     }
     
     .horizontal{
+        transition: background-color 300ms;
+
         grid-column-start: 5;
         grid-column-end: 8;
         grid-row-start: 1;
@@ -89,6 +98,8 @@
     }
     
     .vertical{
+        transition: background-color 300ms;
+
         grid-column-start: 5;
         grid-column-end: 8;
         grid-row-start: 2;
