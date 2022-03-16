@@ -160,9 +160,20 @@ function Blog() {
 
         <div className="text-container">
           <h2>Position: Absolute</h2>
-          <div className="text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita fugiat reprehenderit, delectus et explicabo provident hic facere tempore cumque velit mollitia fugit quos molestiae harum quis, alias error magnam asperiores quisquam architecto culpa rerum maiores at! Delectus nemo, laudantium quibusdam iure dicta eius ullam obcaecati reprehenderit veniam, quod quidem dignissimos.
-          </div>
+          <ul className="text">
+            <li>
+              The position of .square is relative to its first positioned (relative, absolute, fixed, sticky but not static) ancestor,
+              which is either body or .container.
+            </li>
+            <br />
+            <li>
+              The properties left, right, top, bottom define to which edges the position of .square is set relative to.
+            </li>
+            <br />
+            <li>
+              Changing the values left or right and top or bottom defines the horizontal and vertical destances relative to the first positioned ancestor of .square.
+            </li>
+          </ul>
           <Buttons position={position} togglePosition={togglePosition} setDirection={setDirection} move={move}></Buttons>
         </div>
 
@@ -180,7 +191,7 @@ function Blog() {
         </div>
 
         <div className="code-display" >
-          <div className="body-name">.body</div>
+          <div className="body-name">body</div>
           <div className="container">
             <div className="container-name">.container</div>
             <div className="square" style={{left: square.x, top:square.y}}>

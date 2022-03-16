@@ -22,10 +22,21 @@
       color:white;
       max-height: 40rem;
       height:80vh;
+
       .text{
-        text-align: justify;
-        text-align-last: justify;
+        padding:0;
+        
+        li{
+          padding:.5rem;
+          border-radius: .5rem;
+          transition: background-color 300ms;
+
+          &:hover{
+            background-color: rgba(255,255,255,.1);
+          }
+        }
       }
+
     }
 
   }

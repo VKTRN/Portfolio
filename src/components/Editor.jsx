@@ -85,8 +85,9 @@ export default function Editor({ language, displayName, value, onChange}) {
         {displayName}
       </div>
       <ControlledEditor
-        onBeforeChange={handleChange}
+        // onBeforeChange={handleChange}
         value={value}
+        readOnly={true}
         className="code-mirror-wrapper"
         options={{
           lineWrapping: true,
