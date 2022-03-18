@@ -1,0 +1,22 @@
+.text-wrapper{
+    position: relative;
+    height:80vh;
+    width:23rem;
+    max-height: 40rem;
+    font-family: 'Roboto', sans-serif;
+    color:white;
+
+    .text{
+        padding:0;
+        
+        li{
+        padding:.5rem;
+        border-radius: .5rem;
+        transition: background-color 300ms;
+
+        &:hover{
+            background-color: rgba(255,255,255,.1);
+        }
+        }
+    }   
+}

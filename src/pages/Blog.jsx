@@ -153,13 +153,12 @@ function Blog() {
   },[window_, css_object])
 
   return (
-    <div className="Blog">
-      {/* <div className="logger"><div>window:{JSON.stringify(vertical_helper)}</div></div> */}
+    <div className="blog">
       <Header></Header>
 
-      <div className="blog">
+      <div className="content">
 
-        <div className="text-container">
+        <div className="text-wrapper">
           <h2>Position: Absolute</h2>
           <ul className="text">
             <li 
@@ -187,7 +186,7 @@ function Blog() {
           <Buttons position={position} togglePosition={togglePosition} setDirection={setDirection} move={move} highlighting={highlighting}></Buttons>
         </div>
 
-        <div className="code">
+        <div className="code-wrapper">
           <Editor
             language="xml"
             displayName="HTML"
@@ -200,7 +199,7 @@ function Blog() {
           />
         </div>
 
-        <div className="code-display" >
+        <div className="render-wrapper" >
           <div className="body-name">body</div>
           <div className="container">
             <div className="container-name">.container</div>

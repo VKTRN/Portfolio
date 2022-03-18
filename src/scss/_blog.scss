@@ -1,50 +1,23 @@
-
-.Blog{
-  background-color: #342F3D;
+.blog{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #342F3D;
   height:100rem;
 
-  .blog{
+  .content{
     display: flex;
-    gap:2rem;
-    // height:100rem;
     flex:1;
-    padding:2rem;
     justify-content: center;
+    gap:2rem;
+    padding:2rem;
     font-family: monospace !important;
 
-    .text-container{
-      position: relative;
-      font-family: 'Roboto', sans-serif;
-      width:23rem;
-      color:white;
-      max-height: 40rem;
-      height:80vh;
-
-      .text{
-        padding:0;
-        
-        li{
-          padding:.5rem;
-          border-radius: .5rem;
-          transition: background-color 300ms;
-
-          &:hover{
-            background-color: rgba(255,255,255,.1);
-          }
-        }
-      }
-
-    }
+    @import './_textWrapper.scss';
+    @import './_codeWrapper.scss';
+    @import './_renderWrapper.scss';
 
   }
 }
 
-.logger{
-  position:fixed;
-  left:2rem;
-  bottom:1rem;
-  color: rgb(255, 0, 0);
-}
+
