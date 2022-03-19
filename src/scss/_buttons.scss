@@ -10,139 +10,152 @@
     padding:.3rem;
     border-radius: .4rem;
     background-color: #8E96B2;
-    
+    border: solid rgb(189, 189, 189) 2px;
+
+
+
     .highlighted{
         background-color: yellow !important;
     }
-    
-    .direction-bg-x{
-        transition: background-color 300ms;
-        grid-column-start: 1;
-        grid-column-end: 4;
-        grid-row-start: 2;
-        grid-row-end: 2;
-        background: #26212e;
-        border-radius: 5px;
-    }
-    
-    .direction-bg-y{
-        transition: background-color 300ms;
 
-        grid-column-start: 2;
-        grid-column-end: 2;
-        grid-row-start: 1;
-        grid-row-end: 4;
-        background: #26212e;
-        border-radius: 5px;
-    }
-    
-    .top{
-        grid-column-start: 2;
-        grid-column-end: 2;
-        grid-row-start: 1;
-        grid-row-end: 1;
-        // height:80%;
-        // width:80%;
-        align-self: center;
-        justify-self: center;
-        // border-radius: 10px;
-    }
-    
-    .bottom{
-        grid-column-start: 2;
-        grid-column-end: 3;
-        grid-row-start: 3;
-        grid-row-end: 3;
-        align-self: center;
-        justify-self: center;
-    }
-    
-    .left{
-        grid-column-start: 1;
-        grid-column-end: 1;
-        grid-row-start: 2;
-        grid-row-end: 2;
-        align-self: center;
-        justify-self: center;
-    }
-    
-    .right{
-        grid-column-start: 3;
-        grid-column-end: 3;
-        grid-row-start: 2;
-        grid-row-end: 2;
-        align-self: center;
-        justify-self: center;
-    }
-    
-    .horizontal{
-        transition: background-color 300ms;
-
-        grid-column-start: 5;
-        grid-column-end: 8;
-        grid-row-start: 1;
-        grid-row-end: 1;
-        background: #26212e;
-        border-radius: 5px;
-        display: flex;
-        height:90%;
-        align-self: start;
-        display:flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 2.5%;
-        
-        button{
-            width:30%;
-        }
-    }
-    
-    .vertical{
-        transition: background-color 300ms;
-
-        grid-column-start: 5;
-        grid-column-end: 8;
-        grid-row-start: 2;
-        grid-row-end: 2;
-        background: #26212e;
-        border-radius: 5px;
-        display: flex;
-        height:90%;
-        align-self: center;
-        display:flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 2.5%;
-
-        button{
-            width:30%;
-        }
-    }
-    
-    .position{
-        grid-column-start: 5;
-        grid-column-end: 8;
-        grid-row-start: 3;
-        grid-row-end: 3;
-        background: #26212e;
-        border-radius: 5px;
-        height:90%;
-        width:100%;
-        align-self: end;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1rem;
-        color:white;
-        font-family: 'Roboto', sans-serif;
-    }
-    
     button{
         background-color: rgb(227, 219, 255);
-        // border-radius: 10px;
-        // aspect-ratio: 1;
-        height:80%;
-        width:80%;
         border-radius: 3px;
     }
+
+    .direction-bg{
+        transition: background-color 300ms;
+        background: #26212e;
+        border-radius: 5px;
+
+        &.x{
+            grid-column: 1 / span 3;
+            grid-row: 2 / span 1;
+        }
+
+        &.y{
+            grid-column: 2 / span 1;
+            grid-row: 1 / span 3;
+        }
+    }
+
+    .direction{
+        align-self: center;
+        justify-self: center;
+
+        svg{
+            transform: scale(1.4) translateY(-4%);
+        }
+
+        &.top{
+            grid-column: 2 / span 1;
+            grid-row: 1 / span 1;
+            height:90%;
+            transform: translateY(6%);
+            width:79%;
+        }
+
+        &.bottom{
+            grid-column: 2 / span 1;
+            grid-row: 3 / span 1;
+            height:90%;
+            transform: translateY(-6%);
+            width:79%;
+        }
+
+        &.left{
+            grid-column: 1 / span 1;
+            grid-row: 2 / span 1;
+            width:90%;
+            transform: translateX(6%);
+            height:79%;
+        }
+
+        &.right{
+            grid-column: 3 / span 1;
+            grid-row: 2 / span 1;
+            width:90%;
+            transform: translateX(-6%);
+            height:79%;
+        }
+
+    }
+
+    .change-value{
+        transition: background-color 300ms;
+        background: #26212e;
+        border-radius: 5px;
+        display: flex;
+        height:90%;
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2.5%;
+
+        svg{
+            transform: scale(1.5);
+        }
+        
+        button{
+            width:26%;
+            height:84%;
+
+            svg{
+                transform: scale(1.6) translateY(-4%);
+            }
+        }
+
+        &.horizontal{
+            grid-column: 5 / span 3;
+            grid-row: 1 / span 1;
+            align-self: start;
+ 
+        }
+
+        &.vertical{
+            grid-column: 5 / span 3;
+            grid-row: 2 / span 1;
+            align-self: center;
+        }
+    }
+
+    .switch {
+        grid-column-start: 5;
+        grid-column-end: 8;
+        grid-row-start: 3;
+        grid-row-end: 3;
+        position: relative;
+        height:90%;
+        align-self: end;
+        color:black;
+
+      
+        .slider {
+          position: absolute;
+          user-select: none;
+          display: flex;
+          justify-content:center;
+          align-items: center;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: coral;
+          transition: .3s;
+          border-radius: 5px;
+          border: solid 1px black;
+      
+          input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+        }
+      
+        input:checked + .slider {
+          background-color: #2196F3;
+        }
+    }
 }    
+            

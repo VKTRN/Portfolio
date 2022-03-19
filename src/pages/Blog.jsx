@@ -434,7 +434,7 @@ function get_container(){
 }
 
 function get_body(){
-  const body_dimensions = getDimensions(".code-display")
+  const body_dimensions = getDimensions(".render-wrapper")
   const scroll          = window.scrollY
   const body = 
   { left:   body_dimensions.x, 

@@ -29,11 +29,12 @@ $input-border-width: 0rem;
 @import './_blog';
 @import './_header';
 @import './_footer';
-@import './_editor';
 @import './_measure';
 @import './_helper';
-@import './_labeledSwitch';
 @import './_buttons';
+@import './_textWrapper.scss';
+@import './_codeWrapper.scss';
+@import './_renderWrapper.scss';
 
 
 

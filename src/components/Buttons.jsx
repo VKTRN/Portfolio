@@ -9,28 +9,28 @@ import LabeledSwitch from './LabeledSwitch';
 
 function Buttons({setDirection, move, position, togglePosition, highlighting}) {
 
-    const [active, setActive] = useState({top:"orange", bottom:"white", left:"orange", right:"white"})
+    const [active, setActive] = useState({top:"coral", bottom:"rgb(227, 219, 255)", left:"coral", right:"rgb(227, 219, 255)"})
 
     function handleClick(direction){
         setDirection(direction)
         
-        if(direction === "left"){setActive({top:active.top, bottom:active.bottom, left:"orange", right:"white"})}
-        if(direction === "right"){setActive({top:active.top, bottom:active.bottom, left:"white", right:"orange"})}
-        if(direction === "top"){setActive({top:"orange", bottom:"white", left:active.left, right:active.right})}
-        if(direction === "bottom"){setActive({top:"white", bottom:"orange", left:active.left, right:active.right})}
+        if(direction === "left"){setActive({top:active.top, bottom:active.bottom, left:"coral", right:"rgb(227, 219, 255)"})}
+        if(direction === "right"){setActive({top:active.top, bottom:active.bottom, left:"rgb(227, 219, 255)", right:"coral"})}
+        if(direction === "top"){setActive({top:"coral", bottom:"rgb(227, 219, 255)", left:active.left, right:active.right})}
+        if(direction === "bottom"){setActive({top:"rgb(227, 219, 255)", bottom:"coral", left:active.left, right:active.right})}
 
     }
 
   return (
     <div className="buttons">
-        <div className={`direction-bg-y ${highlighting.directions}`} ></div>
-        <div className={`direction-bg-x ${highlighting.directions}`} ></div>
-        <button className="top"    onClick={() => {handleClick("top")}}    style={{backgroundColor:active.top}}><BsArrowBarDown/></button>
-        <button className="bottom" onClick={() => {handleClick("bottom")}} style={{backgroundColor:active.bottom}}><BsArrowBarUp/></button>
-        <button className="left"   onClick={() => {handleClick("left")}}   style={{backgroundColor:active.left}}><BsArrowBarRight/></button>
-        <button className="right"  onClick={() => {handleClick("right")}}  style={{backgroundColor:active.right}}><BsArrowBarLeft/></button>
+        <div className={`direction-bg y ${highlighting.directions}`} ></div>
+        <div className={`direction-bg x ${highlighting.directions}`} ></div>
+        <button className="direction top"    onClick={() => {handleClick("top")}}    style={{backgroundColor:active.top}}><BsArrowBarDown/></button>
+        <button className="direction bottom" onClick={() => {handleClick("bottom")}} style={{backgroundColor:active.bottom}}><BsArrowBarUp/></button>
+        <button className="direction left"   onClick={() => {handleClick("left")}}   style={{backgroundColor:active.left}}><BsArrowBarRight/></button>
+        <button className="direction right"  onClick={() => {handleClick("right")}}  style={{backgroundColor:active.right}}><BsArrowBarLeft/></button>
 
-        <div className={`horizontal ${highlighting.values}`}>
+        <div className={`change-value horizontal ${highlighting.values}`}>
             <button className="horizontal-left" onClick={() => move("left")}> 
                 <HiMinus/>
             </button>
@@ -39,7 +39,7 @@ function Buttons({setDirection, move, position, togglePosition, highlighting}) {
                 <HiPlus/>
             </button>
         </div>
-        <div className={`vertical ${highlighting.values}`}>
+        <div className={`change-value vertical ${highlighting.values}`}>
             <button className="horizontal-top"  onClick={() => move("up")}>
                 <HiMinus/>
             </button>

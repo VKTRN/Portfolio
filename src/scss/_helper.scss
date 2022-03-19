@@ -1,17 +1,15 @@
-.helper-x{
+.helper{
   border: none;
-  border-left: 1px dashed #f00;
-  width:1px;
   position:absolute;
-  transition: height 300ms;
+  transition: all 300ms;
+  
+  &.x{
+    border-left: 1px dashed #f00;
+    width:1px;
+  }
+
+  &.y{
+    border-top: 1px dashed #f00;
+    height:1px; 
+  }
 }
-
-.helper-y{
-  border: none;
-  border-top: 1px dashed #f00;
-  height:1px;
-  position:absolute;
-  transition: width 300ms;
-}
-
-
