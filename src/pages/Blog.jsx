@@ -180,7 +180,7 @@ function Blog() {
               onMouseEnter={() => {set_highlighting({directions:"", values:"highlighted", position:""})}}
               onMouseLeave={() => {set_highlighting({directions:"", values:"", position:""})}}
               >
-              Changing the values left or right and top or bottom defines the horizontal and vertical destances relative to the first positioned ancestor of .square.
+              Changing the values left or right and top or bottom defines the horizontal and vertical distances relative to the first positioned ancestor of .square.
             </li>
           </ul>
           <Buttons position={position} togglePosition={togglePosition} setDirection={setDirection} move={move} highlighting={highlighting}></Buttons>
