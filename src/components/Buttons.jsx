@@ -25,6 +25,13 @@ function Buttons({setDirection, move, position, togglePosition, highlighting}) {
     <div className="buttons">
         <div className={`direction-bg y ${highlighting.directions}`} ></div>
         <div className={`direction-bg x ${highlighting.directions}`} ></div>
+        <div className={`direction-bg y`} >
+            <div className="corner top left"></div>
+            <div className="corner top right"></div>
+            <div className="corner bottom left"></div>
+            <div className="corner bottom right"></div>
+        </div>
+        <div className={`direction-bg x`} ></div>
         <button className="direction top"    onClick={() => {handleClick("top")}}    style={{backgroundColor:active.top}}><BsArrowBarDown/></button>
         <button className="direction bottom" onClick={() => {handleClick("bottom")}} style={{backgroundColor:active.bottom}}><BsArrowBarUp/></button>
         <button className="direction left"   onClick={() => {handleClick("left")}}   style={{backgroundColor:active.left}}><BsArrowBarRight/></button>
