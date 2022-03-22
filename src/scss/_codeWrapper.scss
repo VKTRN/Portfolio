@@ -23,8 +23,52 @@
         color: rgba(255,255,255,.7);
       }
 
+      // &:nth-child(1){
+      //   .CodeMirror-line:nth-child(1){
+      //     color:red;
+      //   }
+      // }
+
       .CodeMirror {
         height: 100% !important;
+
+        .cm-number{
+          border-radius: 4px;
+          
+          &.highlight{
+            animation-name: example;
+            animation-duration: 1000ms;
+
+          }
+        }
+
+        .cm-atom{
+          border-radius: 4px;
+          
+          &.highlight{
+            animation-name: example;
+            animation-duration: 1000ms;
+
+          }
+        }
+
+        .cm-property{
+          border-radius: 4px;
+          
+          &.highlight{
+            animation-name: example;
+            animation-duration: 1000ms;
+
+          }
+        }
+
+        @keyframes example {
+          from {
+            background-color: #1e1e1e;
+            filter: invert(100%);
+          }
+          to {filter: invert(0%);}
+        }
 
         &-vscrollbar{
           display: none !important;

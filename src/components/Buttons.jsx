@@ -61,3 +61,5 @@ function Buttons({setDirection, move, position, togglePosition, highlighting}) {
 }
 
 export default Buttons;
+
+

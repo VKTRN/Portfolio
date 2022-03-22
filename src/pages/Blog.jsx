@@ -33,16 +33,16 @@ function Blog() {
   function move(direction){
     switch (direction) {
       case "left":
-        setPropertyValue(css_object,  ".square",horizontal.property, toPixel(horizontal.value -50) )
+        setPropertyValue(css_object, ".square",horizontal.property, toPixel(horizontal.value -50))
         break;
       case "right":
-        setPropertyValue(css_object,  ".square",horizontal.property, toPixel(horizontal.value + 50) )
+        setPropertyValue(css_object,  ".square",horizontal.property, toPixel(horizontal.value + 50))
         break;
       case "up":
         setPropertyValue(css_object,  ".square",vertical.property, toPixel(vertical.value - 50))
         break;
       case "down":
-        setPropertyValue(css_object,  ".square",vertical.property, toPixel(vertical.value + 50) )
+        setPropertyValue(css_object,  ".square",vertical.property, toPixel(vertical.value + 50))
         break;
       default:
         break;
@@ -93,7 +93,6 @@ function Blog() {
     
     if (is_underneath) {
       const h     = vertical.property === "top"? Math.max(vertical.value + 45 - parent.height, 0) : - vertical.value - 25
-      console.log(h)
       helper      = {right:"initial", top:parent.bottom, bottom:"initial",height:h}
     } 
     else {
@@ -151,6 +150,56 @@ function Blog() {
   useEffect(() => {
     position === "relative"? set_parent(get_container()) : set_parent(get_body()) 
   },[window_, css_object])
+
+  useEffect(() => {
+    highlightValue(3)
+  }, [horizontal.value])
+
+  useEffect(() => {
+    highlightValue(4)
+  }, [vertical.value])
+
+  useEffect(() => {
+    highlightValue(8)
+  }, [position])
+
+  useEffect(() => {
+    highlightProperty(3)
+  }, [horizontal.property])
+
+  useEffect(() => {
+    highlightProperty(4)
+  }, [vertical.property])
+
+  useEffect(() => {
+    const container_ = document.querySelector(".container")
+    const square_    = document.querySelector(".square")
+    const body_      = document.querySelector(".render-wrapper")
+    
+    let line = getLine(1,1)
+    line.addEventListener("mouseenter", () => {body_.classList.toggle("highlight")})
+    line.addEventListener("mouseleave", () => {body_.classList.toggle("highlight")})
+    
+    line = getLine(1,2)
+    line.addEventListener("mouseenter", () => {container_.classList.toggle("highlight")})
+    line.addEventListener("mouseleave", () => {container_.classList.toggle("highlight")})
+    
+    line = getLine(1,3)
+    line.addEventListener("mouseenter", () => {square_.classList.toggle("highlight")})
+    line.addEventListener("mouseleave", () => {square_.classList.toggle("highlight")})
+
+    
+    line = getLine(1,4)
+    line.addEventListener("mouseenter", () => {container_.classList.toggle("highlight")})
+    line.addEventListener("mouseleave", () => {container_.classList.toggle("highlight")})
+    
+    line = getLine(1,5)
+    line.addEventListener("mouseenter", () => {body_.classList.toggle("highlight")})
+    line.addEventListener("mouseleave", () => {body_.classList.toggle("highlight")})
+    
+
+  }, [])
+  
 
   return (
     <div className="blog">
@@ -394,7 +443,6 @@ function make_css_object(){
 }
 
 function get_horizontal(css_object){
-  console.log(css_object);
 
   const property = get_horizontal_property(css_object, ".square")
   const value    = pixelToNum(getPropertyValue(css_object, ".square", property))
@@ -484,9 +532,19 @@ function get_square(parent, horizontal, vertical){
   return square
 }
 
-// function get_line(){
-//   const element = document.querySelector('.editor-container:nth-child(2)');
-//   const line    = element.querySelector('.CodeMirror-line:nth-child(3)');
-//   const p       = line.getBoundingClientRect()
-//   set_button_pos({x:p.x,y: p.y})
-// }
+function getLine(ruleIndex, lineIndex){
+  const element = document.querySelector( `.editor-container:nth-child(${ruleIndex})`)
+  const line    = element.querySelector(`.CodeMirror-line:nth-child(${lineIndex})`)
+
+  return line
+}
+
+function highlightValue(lineIndex){
+  const line = getLine(2, lineIndex)
+  line.firstChild.childNodes[3].classList.toggle("highlight")
+}
+
+function highlightProperty(lineIndex){
+  const line = getLine(2, lineIndex)
+  line.firstChild.childNodes[1].classList.toggle("highlight")
+}
