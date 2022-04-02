@@ -1,13 +1,14 @@
 .text-wrapper{
     position: relative;
-    height:80vh;
+    height:10vh !important;
     width:23rem;
     max-height: 40rem;
     font-family: 'Roboto', sans-serif;
     color:white;
-
+    
     .text{
         padding:0;
+        overflow-y: scroll;
         
         li{
         padding:.5rem;
@@ -19,4 +20,6 @@
         }
         }
     }   
+
+    // _buttons.scss
 }

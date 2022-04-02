@@ -3,7 +3,17 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: #342F3D;
-  height:100rem;
+  // height:100rem;
+
+  .title{
+    color: white;
+    margin: 1rem 7.5% 0 7.5%;
+  }
+
+  .introduction{
+    color: white;
+    margin: 2rem 7.5%;
+  }
 
   .content{
     display: flex;

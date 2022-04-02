@@ -204,11 +204,26 @@ function Blog() {
   return (
     <div className="blog">
       <Header></Header>
-
+      <h2 className="title">position: absolute;</h2>
+      <p className="introduction">
+        The position property defines, how an element should be positioned. The available property values are: static, relative, fixed, absolute or sticky.
+        Setting the positioning of an element to absolute (<code>position: absolute;</code>) will make that element orient itself to its nearest positioned
+        ancestor. Positioned in this regard means, that an element contains a declaration of either relative, fixed, absolute or sticky. The positioning property
+        static - which is the default positioning value for html-elements - means, that an element is not positioned in any special way. If the element
+        whos position property was set to absolute does not have any positioned ancestor it will orient itself relative to the document body.
+        The position relative to the first positioned ancestor is controlled via the properties <code>top, right, bottom, left</code>.
+        <br />
+        <br />
+        This tutorial aims to convey the concept of <code>position: absolute;</code> as intuitively as possible. It is highly interactive. Hovering over the 
+        paragraphs will highlight the corresponding control element, that the text is referring to. Hovering over the html-code will highlight to corresponding
+        elements. Using the control elements you can get a feel for how <code>position: absolute;</code> works.
+        The css code shown in this tutorial does not translate to the rendered style of the elements. It only contains the definitions, that are essential
+        to <code>position: absolute;</code>.
+        
+      </p>
       <div className="content">
 
         <div className="text-wrapper">
-          <h2>Position: Absolute</h2>
           <ul className="text">
             <li 
               onMouseEnter={() => {set_highlighting({directions:"", values:"", position:"highlighted"})}}
@@ -265,7 +280,7 @@ function Blog() {
         </div>
       </div>
 
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
 
     </div>
   );
