@@ -92,11 +92,11 @@ function Blog() {
     const is_outside_y   = horizontal_measure.y < parent.top  || horizontal_measure.y > parent.bottom
     
     if (is_underneath) {
-      const h     = vertical.property === "top"? Math.max(vertical.value + 45 - parent.height, 0) : - vertical.value - 25
+      const h     = vertical.property === "top"? Math.max(vertical.value + square.size/2+10 - parent.height, 0) : - vertical.value - square.size/2-10
       helper      = {right:"initial", top:parent.bottom, bottom:"initial",height:h}
     } 
     else {
-      const h = vertical.property === "top"? Math.max(Math.abs(vertical.value) -25,0) : vertical.value + 45 - parent.height
+      const h = vertical.property === "top"? Math.max(Math.abs(vertical.value) -square.size/2-10,0) : vertical.value + square.size/2+10 - parent.height
       helper = {right:"initial", top:"initial", bottom:window_.height - parent.top, height:h}
     }
     
@@ -119,10 +119,10 @@ function Blog() {
     const scrollbar_width = 15
 
     if (is_right) {
-      const h = horizontal.property === "left"? Math.max(horizontal.value + 45 - parent.width, 0) : - horizontal.value - 25
+      const h = horizontal.property === "left"? Math.max(horizontal.value + square.size/2+10 - parent.width, 0) : - horizontal.value - square.size/2-10
       helper = {bottom:"initial", left:parent.right, right:"initial",width:h}
     } else {
-      const h = horizontal.property === "left"? Math.max(Math.abs(horizontal.value) -25, 0) :  horizontal.value + 45 - parent.width
+      const h = horizontal.property === "left"? Math.max(Math.abs(horizontal.value) -square.size/2-10, 0) :  horizontal.value + square.size/2+10 - parent.width
       helper = {bottom:"initial", left:"initial", right:window_.width - parent.left - scrollbar_width, width:h}
     }
 
@@ -136,20 +136,25 @@ function Blog() {
   const [css_object, set_css_object]     = useState(make_css_object())
   const window_                          = useWindowDimensions()
   const [parent, set_parent]             = useState({left:0,right:0,top:0,bottom:0, width:0, height:0, center:{x:0, y:0}})
+  const [square, setSquare]              = useState({x:0, y:0, size: 0})
   const [highlighting, set_highlighting] = useState({directions:"", values:"", position:""})
 
   const horizontal         = get_horizontal(css_object) // {property: "left" || "right", value: number}
   const vertical           = get_vertical(css_object) // {property: "top" || "bottom", value: number}
   const position           = getPropertyValue(css_object, ".container", "position") // "relative" || "static"
-  const square             = get_square(parent, horizontal, vertical) // {x: number, y: number}
-  const vertical_measure   = get_vertical_measure(parent, horizontal, vertical) 
-  const horizontal_measure = get_horizontal_measure(parent, horizontal, vertical)
-  const vertical_helper    = get_vertical_helper(parent, horizontal_measure, horizontal,vertical)
-  const horizontal_helper  = get_horizontal_helper(parent, vertical_measure, horizontal,vertical)
+  const vertical_measure   = get_vertical_measure(parent, horizontal, vertical, square) 
+  const horizontal_measure = get_horizontal_measure(parent, horizontal, vertical, square)
+  const vertical_helper    = get_vertical_helper(parent, horizontal_measure, horizontal,vertical, square)
+  const horizontal_helper  = get_horizontal_helper(parent, vertical_measure, horizontal,vertical, square)
 
   useEffect(() => {
-    position === "relative"? set_parent(get_container()) : set_parent(get_body()) 
+    position === "relative"? set_parent(get_container()) : set_parent(get_body())
+    
   },[window_, css_object])
+  
+  useEffect(() => {
+    setSquare(get_square(parent, horizontal, vertical))
+  }, [parent])
 
   useEffect(() => {
     highlightValue(3)
@@ -196,7 +201,6 @@ function Blog() {
     line = getLine(1,5)
     line.addEventListener("mouseenter", () => {body_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {body_.classList.toggle("highlight")})
-    
 
   }, [])
   
@@ -271,8 +275,8 @@ function Blog() {
             <span className="name">.square</span>
             </div>
           </div>
-          <HorizontalMeasure x={horizontal_measure.x} y = {horizontal_measure.y} length={horizontal_measure.length}/>
-          <VerticalMeasure   x={vertical_measure.x}   y = {vertical_measure.y}   length={vertical_measure.length}/>
+          <HorizontalMeasure x={horizontal_measure.x} y = {horizontal_measure.y} length={horizontal_measure.length} />
+          <VerticalMeasure   x={vertical_measure.x}   y = {vertical_measure.y}   length={vertical_measure.length} />
           <VerticalHelper   style={vertical_helper}/>
           <HorizontalHelper style={horizontal_helper}/>
           
@@ -514,11 +518,11 @@ function get_body(){
   return body
 }
 
-function get_horizontal_measure(parent, horizontal,vertical){
+function get_horizontal_measure(parent, horizontal,vertical, square){
   const measure = {}
   
   measure.x = horizontal.property === "left"? parent.left : parent.right  - horizontal.value
-  measure.y = vertical.property === "top"? parent.top + vertical.value + 35 : parent.bottom - vertical.value - 35
+  measure.y = vertical.property === "top"? parent.top + vertical.value + square.size/2 : parent.bottom - vertical.value - square.size/2
 
 
   measure.length = horizontal.value
@@ -526,10 +530,10 @@ function get_horizontal_measure(parent, horizontal,vertical){
   return measure
 }
 
-function get_vertical_measure(parent, horizontal,vertical){
+function get_vertical_measure(parent, horizontal,vertical, square){
   const measure = {}
   
-  measure.x = horizontal.property === "left"? parent.left + horizontal.value + 35 : parent.right - horizontal.value - 35
+  measure.x = horizontal.property === "left"? parent.left + horizontal.value + square.size/2 : parent.right - horizontal.value - square.size/2
   measure.y = vertical.property === "top"? parent.top : parent.bottom  - vertical.value
 
 
@@ -540,10 +544,11 @@ function get_vertical_measure(parent, horizontal,vertical){
 
 function get_square(parent, horizontal, vertical){
   const square = {}
-
-  square.x = horizontal.property === "left"? parent.left + horizontal.value : parent.right  - horizontal.value - 70
-  square.y = vertical.property   === "top"?  parent.top  + vertical.value   : parent.bottom - vertical.value   - 70
-
+  
+  square.size = getDimensions('.square').width
+  square.x    = horizontal.property === "left"? parent.left + horizontal.value : parent.right  - horizontal.value - square.size
+  square.y    = vertical.property   === "top"?  parent.top  + vertical.value   : parent.bottom - vertical.value   - square.size
+  
   return square
 }
 

@@ -5,6 +5,12 @@
     max-height: 40rem;
     font-family: 'Roboto', sans-serif;
     color:white;
+    display: none;
+
+
+    @include media-breakpoint-up(lg){
+        display: block;
+    }
     
     .text{
         padding:0;

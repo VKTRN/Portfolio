@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: #342F3D;
-  // height:100rem;
 
   .title{
     color: white;
@@ -17,17 +16,23 @@
 
   .content{
     display: flex;
+    flex-direction: column-reverse;
     flex:1;
     justify-content: center;
-    gap:2rem;
-    padding:2rem;
+    padding:0;
     font-family: monospace !important;
-
+    
     // _textWrapper.scss
     // _codeWrapper.scss
     // _renderWrapper.scss
-
+    
+    @include media-breakpoint-up(lg){
+      flex-direction: row;
+      padding:2rem;
+      gap:2rem;
+    }
   }
+
 }
 
 
