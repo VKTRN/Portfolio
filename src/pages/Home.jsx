@@ -30,7 +30,7 @@ function Home() {
             <p>
               I am a front-end developer based in Hannover, Germany.
               <br/>
-              I love to write clean and readable code and to <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">not repeat myself</a>.
+              I like to write clean and readable code and to <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">not repeat myself</a>.
             </p>
           </div>
 

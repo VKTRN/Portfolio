@@ -132,12 +132,18 @@ function Blog() {
     return helper
 
   }
+
+  const toggleCode = () => {
+    console.log('hi')
+    open[0] === 'open'? setOpen(['', 'open']) : setOpen(['open', ''])
+  }
  
   const [css_object, set_css_object]     = useState(make_css_object())
   const window_                          = useWindowDimensions()
   const [parent, set_parent]             = useState({left:0,right:0,top:0,bottom:0, width:0, height:0, center:{x:0, y:0}})
   const [square, setSquare]              = useState({x:0, y:0, size: 0})
   const [highlighting, set_highlighting] = useState({directions:"", values:"", position:""})
+  const [open, setOpen]                  = useState(['open', ''])
 
   const horizontal         = get_horizontal(css_object) // {property: "left" || "right", value: number}
   const vertical           = get_vertical(css_object) // {property: "top" || "bottom", value: number}
@@ -192,7 +198,6 @@ function Blog() {
     line = getLine(1,3)
     line.addEventListener("mouseenter", () => {square_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {square_.classList.toggle("highlight")})
-
     
     line = getLine(1,4)
     line.addEventListener("mouseenter", () => {container_.classList.toggle("highlight")})
@@ -251,21 +256,15 @@ function Blog() {
               Changing the values left or right and top or bottom defines the horizontal and vertical distances relative to the first positioned ancestor of .square.
             </li>
           </ul>
-          <Buttons position={position} togglePosition={togglePosition} setDirection={setDirection} move={move} highlighting={highlighting}></Buttons>
         </div>
 
         <div className="code-wrapper">
-          <Editor
-            language="xml"
-            displayName="HTML"
-            value={makeHTML()}
-          />
-          <Editor className="code-css"
-            language="css"
-            displayName="CSS"
-            value={get_css_string(css_object)}
-          />
+          <Editor open={open[0]} language="xml" displayName="HTML" value={makeHTML()}/>
+          <Editor open={open[1]} language="css" displayName="CSS" value={get_css_string(css_object)}/>
+          <Buttons position={position} togglePosition={togglePosition} setDirection={setDirection} move={move} highlighting={highlighting}></Buttons>
+
         </div>
+        {window_.width < 600 && <button onClick={toggleCode} className="code-toggle">switch</button>}
 
         <div className="render-wrapper" >
           <div className="body-name">body</div>

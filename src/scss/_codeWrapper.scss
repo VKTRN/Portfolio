@@ -7,15 +7,16 @@
     flex: 0 0 23rem;
     max-height: 40rem;
     padding:1rem;
-    border: solid rgb(189, 189, 189) 2px;
-    border-radius: .5rem;
+    border-top: solid rgb(189, 189, 189) 2px;
+
     background-color: #1e1e1e;
-    overflow-y: overlay;
-
-
-    // @include media-breakpoint-up(lg){
-    //   display: flex;
-    // }
+    
+    
+    @include media-breakpoint-up(lg){
+      border: solid rgb(189, 189, 189) 2px;
+      border-radius: .5rem;
+      overflow-y: overlay;
+    }
 
 
 
@@ -29,6 +30,11 @@
 
       .editor-title {
         color: rgba(255,255,255,.7);
+      }
+
+      &.open{
+        opacity: 0;
+        order:1;
       }
 
       // &:nth-child(1){
