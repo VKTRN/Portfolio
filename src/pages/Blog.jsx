@@ -133,9 +133,12 @@ function Blog() {
 
   }
 
-  const toggleCode = () => {
-    console.log('hi')
-    open[0] === 'open'? setOpen(['', 'open']) : setOpen(['open', ''])
+  const showCSS = () => {
+    setOpen(['open', ''])
+  }
+
+  const showHTML = () => {
+    setOpen(['', 'open'])
   }
  
   const [css_object, set_css_object]     = useState(make_css_object())
@@ -262,9 +265,14 @@ function Blog() {
           <Editor open={open[0]} language="xml" displayName="HTML" value={makeHTML()}/>
           <Editor open={open[1]} language="css" displayName="CSS" value={get_css_string(css_object)}/>
           <Buttons position={position} togglePosition={togglePosition} setDirection={setDirection} move={move} highlighting={highlighting}></Buttons>
+          {window_.width < 600 &&
+            <div className="code-toggle">
+              <button onClick={showHTML} className = {open[1]}>HTML</button>
+              <button onClick={showCSS} className = {open[0]}>CSS</button>
+            </div> 
+          }
 
         </div>
-        {window_.width < 600 && <button onClick={toggleCode} className="code-toggle">switch</button>}
 
         <div className="render-wrapper" >
           <div className="body-name">body</div>

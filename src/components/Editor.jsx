@@ -81,9 +81,6 @@ export default function Editor({ language, displayName, value, onChange, open}) 
   
   return (
     <div className={`editor-container ${open}`}>
-      <div className="editor-title">
-        {displayName}
-      </div>
       <ControlledEditor
         // onBeforeChange={handleChange}
         value={value}

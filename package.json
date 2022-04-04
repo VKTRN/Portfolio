@@ -1,6 +1,7 @@
 {
   "name": "portfolio",
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
     "bootstrap": "*",
     "codemirror": "^5.57.0",
     "dotenv": "^8.2.0",
