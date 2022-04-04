@@ -37,6 +37,7 @@
       flex-basis: 0;
       margin: 2rem 0 0 0;
       border-radius: .5rem;
+      position: absolute;
 
       .editor-title {
         color: rgba(255,255,255,.7);
@@ -44,7 +45,11 @@
 
       &.open{
         opacity: 0;
-        order:1;
+        // order:1;
+      }
+
+      @include media-breakpoint-up(lg){
+        position: initial;
       }
 
       // &:nth-child(1){
