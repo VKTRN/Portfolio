@@ -2,6 +2,9 @@
   "name": "portfolio",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@reduxjs/toolkit": "^1.8.1",
+    "axios": "^0.26.1",
     "bootstrap": "*",
     "codemirror": "^5.57.0",
     "dotenv": "^8.2.0",
@@ -9,9 +12,14 @@
     "react-codemirror2": "^7.2.1",
     "react-dom": "^16.13.1",
     "react-icons": "^4.3.1",
-    "react-router-dom": "^5.1.2",
+    "react-redux": "^7.2.8",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "3.4.3",
-    "sass": "^1.49.7"
+    "react-stripe-checkout": "^2.6.3",
+    "redux": "^4.1.2",
+    "redux-persist": "^6.0.0",
+    "sass": "^1.49.7",
+    "styled-components": "^5.3.5"
   },
   "scripts": {
     "start": "react-scripts start",
