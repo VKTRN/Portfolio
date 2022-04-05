@@ -1,20 +1,21 @@
 .buttons{
     display: flex;
     gap: 1rem;
-    flex-direction: column;
+    flex-direction: row;
     position:absolute;
     bottom:1rem;
     right:1rem;
     padding:.3rem;
+    align-items: flex-end;
     // background-color: #b9bbc3;
 
 
     .direction-wrapper{
         display:grid;
-        grid-template-columns: repeat(3,1fr);
-        grid-template-rows: repeat(3,1fr);
-        height:8rem;
-        aspect-ratio: 1;
+        grid-template-columns: repeat(4,1fr);
+        grid-template-rows: repeat(1,1fr);
+        height:2.5rem;
+        aspect-ratio: 4;
 
         .direction-bg{
             position: relative;
@@ -58,14 +59,25 @@
             }
     
             &.x{
-                grid-column: 1 / span 3;
-                grid-row: 2 / span 1;
+                grid-column: 1 / span 4;
+                grid-row: 1 / span 1;
+
+                @include media-breakpoint-up(lg){
+                    grid-column: 1 / span 4;
+                    grid-row: 2 / span 1;
+                }
             }
     
             &.y{
-                grid-column: 2 / span 1;
-                grid-row: 1 / span 3;
-    
+                display: none;
+                // grid-column: 2 / span 1;
+                // grid-row: 1 / span 3;
+
+                @include media-breakpoint-up(lg){
+                    display: initial;
+                    grid-column: 2 / span 1;
+                    grid-row: 1 / span 3;
+                }
             }
 
             @include media-breakpoint-up(lg){
@@ -86,37 +98,76 @@
             }
     
             &.top{
-                grid-column: 2 / span 1;
+                grid-column: 1 / span 1;
                 grid-row: 1 / span 1;
-                height:85%;
-                transform: translateY(3%);
+                height:79%;
                 width:79%;
+                transform: translateY(0);
+                
+                @include media-breakpoint-up(lg){
+                    grid-column: 2 / span 1;
+                    grid-row: 1 / span 1;
+                    height:85%;
+                    transform: translateY(3%);
+
+                }
             }
     
             &.bottom{
                 grid-column: 2 / span 1;
-                grid-row: 3 / span 1;
-                height:85%;
-                transform: translateY(-3%);
+                grid-row: 1 / span 1;
+                height:79%;
                 width:79%;
+                transform: translateY(0);
+                
+                @include media-breakpoint-up(lg){
+                    grid-column: 2 / span 1;
+                    grid-row: 3 / span 1;
+                    height:85%;
+                    transform: translateY(-3%);
+                    
+                }
             }
     
             &.left{
-                grid-column: 1 / span 1;
-                grid-row: 2 / span 1;
-                width:85%;
-                transform: translateX(3%);
+                grid-column: 3 / span 1;
+                grid-row: 1 / span 1;
+                width:79%;
                 height:79%;
+                transform: translateX(0);
+                
+                @include media-breakpoint-up(lg){
+                    grid-column: 1 / span 1;
+                    grid-row: 2 / span 1;
+                    height:85%;
+                    transform: translateX(3%);
+
+                }
             }
     
             &.right{
-                grid-column: 3 / span 1;
-                grid-row: 2 / span 1;
-                width:85%;
-                transform: translateX(-3%);
+                grid-column: 4 / span 1;
+                grid-row: 1 / span 1;
+                width:79%;
                 height:79%;
+                transform: translateX(0);
+                
+                @include media-breakpoint-up(lg){
+                    grid-column: 3 / span 1;
+                    grid-row: 2 / span 1;
+                    height:85%;
+                    transform: translateX(-3%);
+
+                }
             }
     
+        }
+
+        @include media-breakpoint-up(lg){
+            grid-template-columns: repeat(3,1fr);
+            grid-template-rows: repeat(3,1fr);
+            height:8rem;
+            aspect-ratio: 1;
         }
     }
 
