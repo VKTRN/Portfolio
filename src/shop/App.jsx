@@ -7,13 +7,12 @@ import Cart        from "./pages/Cart";
 import Pay         from "./pages/Pay";
 import Success     from "./pages/Success";
 import { BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import React from 'react';
 
 function App() {
 
-  // const user      = useSelector((state) => state.user.currentUser)
-  const user = 'user'
+  const user      = useSelector((state) => state.user.currentUser)
 
   return (
     <div className="App">
