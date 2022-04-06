@@ -1,17 +1,8 @@
-import { Link } from 'react-router-dom';
-import { addProduct } from "../redux/cartRedux";
+import React         from 'react';
+import styled        from "styled-components";
+import {addProduct } from "../redux/cartRedux";
 import {useDispatch} from 'react-redux'
-import React from 'react';
-
-
-import {
-  FavoriteBorderOutlined,
-  SearchOutlined,
-  ShoppingCartOutlined,
-  Add, 
-  Remove
-} from "@material-ui/icons";
-import styled from "styled-components";
+import {Add} from "@material-ui/icons";
 
 const Info = styled.div`
   opacity: 0;
@@ -25,7 +16,22 @@ const Info = styled.div`
   align-items: flex-end;
   transition: all 0.5s ease;
   cursor: pointer;
-`;
+`
+
+const Container = styled.div`
+  flex: 1;
+  margin: 5px;
+  min-width: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5fbfd;
+  position: relative;
+
+  &:hover ${Info}{
+    opacity: 1;
+  }
+`
 
 const InfoContent = styled.div`
   display: flex;
@@ -34,7 +40,6 @@ const InfoContent = styled.div`
   justify-content: space-between;
   overflow:hidden;
   flex:1;
-  // width: 100%;
   padding: 0 1rem;
 `
 
@@ -43,30 +48,12 @@ const Title = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: end;
-  // flex:1;
-  // width:30%;
 `
 
 const TextContainer = styled.div`
    flex-grow: 1;
    overflow: hidden;
 `
-
-const Container = styled.div`
-  flex: 1;
-  margin: 5px;
-  min-width: 280px;
-  height: 350px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  background-color: #f5fbfd;
-  position: relative;
-
-  &:hover ${Info}{
-    opacity: 1;
-  }
-`;
 
 const Circle = styled.div`
   width: 200px;
@@ -78,13 +65,13 @@ const Circle = styled.div`
 
 const Image = styled.img`
   margin-top: 1rem;
-  height: 75%;
+  max-width:80%;
+  max-height:80%;
   z-index: 2;
 `;
 
 const Icon = styled.div`
   flex: 0 0 40px;
-  
   width: 40px;
   height: 40px;
   flex: 0 0 40px;
@@ -99,14 +86,11 @@ const Icon = styled.div`
     background-color: rgba(0,0,0,.4);
     transform: scale(1.1);
   }
-`;
-
-
+`
 
 const Product = ({item}) => {
 
   const handleClick = (item) => {
-    console.log(item)
     dispatch(addProduct({...item, quantity: 1}))
   }
   const dispatch = useDispatch()
@@ -124,12 +108,9 @@ const Product = ({item}) => {
             <div>$ {item.price}</div>
             <Title>{item.title}</Title>
           </TextContainer>
-
         </InfoContent>
-
       </Info>
     </Container>
-
   )
 }
 
