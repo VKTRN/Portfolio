@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import React from 'react';
+import { mobile } from "../responsive";
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -19,6 +21,8 @@ const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
   background-color: white;
+  border-radius: 10px;
+  ${mobile({ width: "80%" })}
 `;
 
 const Title = styled.h1`
@@ -59,12 +63,12 @@ const Register = () => {
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
+          <Input placeholder="name" type='text'/>
+          <Input placeholder="last name" type='text'/>
+          <Input placeholder="username" type='text'/>
+          <Input placeholder="email" type='email'/>
           <Input placeholder="password" type = 'password'/>
-          <Input placeholder="confirm password" />
+          <Input placeholder="confirm password" type = 'password'/>
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
