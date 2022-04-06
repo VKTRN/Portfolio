@@ -14,9 +14,11 @@
       color: #342F3D;
       font-size: 1.5rem;
       font-weight: 600;
-
+      display: none;
+      
       @include media-breakpoint-up(sm){
         font-size: 2rem;
+        display: initial;
       }
     }
   
