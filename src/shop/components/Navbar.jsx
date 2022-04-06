@@ -6,20 +6,16 @@ import {useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import React from 'react';
 
-
-
 const Container = styled.div`
-  height:60px;
-  ${mobile({ height: "50px" })}
-
 `
 
 const Wrapper = styled.div`
+  height:60px;
   padding:10px 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  ${mobile({ padding: "10px 0px" })}
+  ${mobile({ padding: "10px 0px" ,height: "50px"})}
 `
 
 const Left = styled.div`
@@ -38,8 +34,7 @@ const Right = styled.div`
   display:flex;
   align-items:center;
   justify-content:flex-end;
-  ${mobile({ flex: 2, justifyContent: "center" })}
-
+  ${mobile({ padding: "0 20px 0 0"})}
 `
 
 const Language = styled.span`
@@ -58,11 +53,12 @@ padding: 5px;
 
 const Input = styled.input`
   border: none;
-  ${mobile({ width: "50px" })}
+  ${mobile({ width: "60px" })}
 `
 
 const Logo = styled.h1`
   font-weight: bold;
+  font-size: 36px;
   ${mobile({ fontSize: "24px" })}
 `
 
@@ -71,8 +67,12 @@ const MenuItem = styled.div`
   cursor: pointer;
   margin-left: 25px;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
-
 `
+
+const UserInfo = styled.span`
+  ${mobile({ display: 'none'})}
+`
+
 
 
 const Navbar = () => {
@@ -109,11 +109,11 @@ const Navbar = () => {
             </>
             :
             <>
-              <span>Hello, {username}</span>
+              <UserInfo>Hello, {username}</UserInfo>
               <Link to = '/cart'>
                 <MenuItem>
                   <Badge badgeContent={quantity} color="primary">
-                  <ShoppingCartOutlined />
+                    <ShoppingCartOutlined />
                   </Badge>
                 </MenuItem>
               </Link>
