@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://vktrn.com/api/'
+const BASE_URL = 'https://vktrn.com/api'
 let localItem = localStorage.getItem('persist:root')
 const TOKEN = localItem?  JSON.parse(JSON.parse(localItem).user).currentUser?.accessToken : '' 
 
