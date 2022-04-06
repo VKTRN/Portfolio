@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { sliderItems } from "../data";
 import { mobile } from "../responsive";
 import React from 'react';
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -11,7 +12,6 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
   ${mobile({ display: "none" })}
-
 `
 
 const Arrow = styled.div`

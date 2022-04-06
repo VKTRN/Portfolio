@@ -73,6 +73,21 @@ const UserInfo = styled.span`
   ${mobile({ display: 'none'})}
 `
 
+const UserInfoMobile = styled.span`
+  height: 30px;
+  width: 30px;
+  font-weight: bold;
+  border-radius: 50%;
+  margin-right:10px;
+  display: none;
+  background-color: #fcf5f5;
+  ${mobile({ 
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  })}
+`
+
 
 
 const Navbar = () => {
@@ -110,6 +125,7 @@ const Navbar = () => {
             :
             <>
               <UserInfo>Hello, {username}</UserInfo>
+              <UserInfoMobile>{username[0].toUpperCase()}</UserInfoMobile>
               <Link to = '/cart'>
                 <MenuItem>
                   <Badge badgeContent={quantity} color="primary">

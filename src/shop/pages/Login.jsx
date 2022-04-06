@@ -1,18 +1,15 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { login } from "../redux/apiCalls";
+import React                        from 'react';
+import styled                       from "styled-components";
+import { useState }                 from "react";
+import { login }                    from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
-import React from 'react';
+import { mobile }                   from "../responsive";
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
-      center;
   background-size: cover;
+  background-color: #f5d5d5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,6 +19,8 @@ const Wrapper = styled.div`
   width: 25%;
   padding: 20px;
   background-color: white;
+  border-radius: 10px;
+  ${mobile({ width: "80%" })}
 `;
 
 const Title = styled.h1`
@@ -68,7 +67,6 @@ const Login = () => {
 
   const handleClick = (e) => {
     e.preventDefault()
-    console.log('handleClick')
     login(dispatch, {username, password})
   }
   
