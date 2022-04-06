@@ -16,26 +16,26 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <Router basename='/shop'>
         <Switch>
 
-          <Route exact path="/shop/">
+          <Route exact path="/">
             <Home />
           </Route>
 
-          <Route path="shop/products/:category">
+          <Route path="/products/:category">
             <ProductList />
           </Route>
 
-          <Route path="shop/product/:id">
+          <Route path="/product/:id">
             <Product />
           </Route>
 
-          <Route path="shop/cart">
+          <Route path="/cart">
             <Cart />
           </Route>
 
-          <Route path="shop/success">
+          <Route path="/success">
             <Success />
           </Route>
 
@@ -43,7 +43,7 @@ function App() {
             {user ? <Redirect to="/" />: <Login />}
           </Route>
 
-          <Route path="shop/register">
+          <Route path="/register">
             {user ? <Redirect to="/" /> : <Register />}
           </Route>
 
