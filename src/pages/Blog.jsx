@@ -96,8 +96,8 @@ function Blog() {
       helper      = {right:"initial", top:parent.bottom, bottom:"initial",height:h}
     } 
     else {
-      const h = vertical.property === "top"? Math.max(Math.abs(vertical.value) -square.size/2-10,0) : vertical.value + square.size/2+10 - parent.height + + (window_.height - document.documentElement.clientHeight)
-      helper = {right:"initial", top:"initial", bottom:window_.height - parent.top, height:h}
+      const h = vertical.property === "top"? Math.max(Math.abs(vertical.value) -square.size/2-10,0) : vertical.value + square.size/2+10 - parent.height  
+      helper = {right:"initial", top:"initial", bottom:document.documentElement.clientHeight - parent.top, height:h}
     }
     
     helper["opacity"]    = is_outside_y? 1:0
