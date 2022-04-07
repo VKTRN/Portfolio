@@ -290,7 +290,7 @@ function Blog() {
 
         </div>
         <div className="logger">
-          {window.innerHeight},{window_.height}
+          {window.innerHeight},{window_.height},{window.screen.height}
           </div>
       </div>
 
