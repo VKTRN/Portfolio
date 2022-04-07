@@ -84,7 +84,7 @@ export default function Editor({ language, displayName, value, onChange, open}) 
       <ControlledEditor
         // onBeforeChange={handleChange}
         value={value}
-        readOnly={true}
+        readOnly="nocursor"
         className="code-mirror-wrapper"
         options={{
           lineWrapping: true,
