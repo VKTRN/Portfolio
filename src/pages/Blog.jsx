@@ -127,7 +127,7 @@ function Blog() {
     }
 
     helper["opacity"]   = is_outside_x? 1:0
-    helper["top"]       = vertical.property === "top" ? parent.top : parent.bottom + (window_.height - window.innerHeight)
+    helper["top"]       = vertical.property === "top" ? parent.top : parent.bottom
 
     console.log(helper)
     return helper
@@ -290,7 +290,7 @@ function Blog() {
 
         </div>
         <div className="logger">
-          {window.innerHeight},{window_.height},{window.screen.height}
+          {window.innerHeight},{window_.height},{window.screen.height},{document.documentElement.clientHeight}
           </div>
       </div>
 
