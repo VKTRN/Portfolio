@@ -90,6 +90,11 @@
           }
         }
 
+        .CodeMirror-line{
+          pointer-events: none;
+          user-select: none;
+        }
+
         @keyframes example {
           from {
             background-color: #1e1e1e;

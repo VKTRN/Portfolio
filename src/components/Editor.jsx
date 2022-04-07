@@ -78,13 +78,19 @@ export default function Editor({ language, displayName, value, onChange, open}) 
       onChange(newValue)
     }
   }
+
+  const handleTouch = (e) => {
+    e.target.contentEditable = "false"
+  }
   
   return (
-    <div onTouchStart={(e) => e.target.blur()} className={`editor-container ${open}`}>
+    <div onTouchStart={handleTouch} className={`editor-container ${open}`}>
       <ControlledEditor
+        ref={ref}
         // onBeforeChange={handleChange}
-        onTouchStart={(e) => console.log(e)}
+        // onTouchStart={(e) => console.log(e)}
         value={value}
+        contentEditable={false}
         className="code-mirror-wrapper"
         options={{
           readOnly:true,
