@@ -80,7 +80,7 @@ export default function Editor({ language, displayName, value, onChange, open}) 
   }
   
   return (
-    <div className={`editor-container ${open}`}>
+    <div onTouchStart={(e) => e.stopPropagation()} className={`editor-container ${open}`}>
       <ControlledEditor
         // onBeforeChange={handleChange}
         value={value}
