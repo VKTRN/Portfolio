@@ -127,7 +127,7 @@ function Blog() {
     }
 
     helper["opacity"]   = is_outside_x? 1:0
-    helper["top"]       = vertical.property === "top" ? parent.top : parent.bottom
+    helper["top"]       = vertical.property === "top" ? parent.top : parent.bottom + (window_.height - document.documentElement.clientHeight)
 
     console.log(helper)
     return helper
