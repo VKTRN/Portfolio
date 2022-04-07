@@ -80,14 +80,16 @@ export default function Editor({ language, displayName, value, onChange, open}) 
   }
   
   return (
-    <div onTouchStart={(e) => e.stopPropagation()} className={`editor-container ${open}`}>
+    <div onTouchStart={(e) => e.target.blur()} className={`editor-container ${open}`}>
       <ControlledEditor
         // onBeforeChange={handleChange}
+        onTouchStart={(e) => console.log(e)}
         value={value}
-        readOnly="nocursor"
         className="code-mirror-wrapper"
         options={{
+          readOnly:true,
           lineWrapping: true,
+          disableInput:true,
           mode: language,
           tabSize:2,
           theme: 'vscode-dark',
