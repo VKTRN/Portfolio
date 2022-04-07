@@ -129,6 +129,7 @@ function Blog() {
     helper["opacity"]   = is_outside_x? 1:0
     helper["top"]       = vertical.property === "top" ? parent.top : parent.bottom
 
+    console.log(helper)
     return helper
 
   }
@@ -260,7 +261,7 @@ function Blog() {
             </li>
           </ul>
         </div>
-
+        
         <div className="code-wrapper">
           <Editor open={open[0]} language="xml" displayName="HTML" value={makeHTML()}/>
           <Editor open={open[1]} language="css" displayName="CSS" value={get_css_string(css_object)}/>
@@ -286,9 +287,9 @@ function Blog() {
           <VerticalMeasure   x={vertical_measure.x}   y = {vertical_measure.y}   length={vertical_measure.length} />
           <VerticalHelper   style={vertical_helper}/>
           <HorizontalHelper style={horizontal_helper}/>
-          
 
         </div>
+        <div className="logger">{window.innerHeight}</div>
       </div>
 
       <Footer></Footer>
