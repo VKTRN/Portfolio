@@ -189,6 +189,12 @@ function Blog() {
   }, [vertical.property])
 
   useEffect(() => {
+
+    const handleTouch = (element) => {
+      element.classList.toggle("highlight")
+      setTimeout(() => {element.classList.toggle("highlight")}, 1000);
+    }
+
     const container_ = document.querySelector(".container")
     const square_    = document.querySelector(".square")
     const body_      = document.querySelector(".render-wrapper")
@@ -196,22 +202,34 @@ function Blog() {
     let line = getLine(1,1)
     line.addEventListener("mouseenter", () => {body_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {body_.classList.toggle("highlight")})
+    line.addEventListener("touchstart", () => handleTouch(body_))
+
+    // line.addEventListener("touchend"  , () => {body_.classList.toggle("highlight")})
+    console.log('hi')
     
     line = getLine(1,2)
     line.addEventListener("mouseenter", () => {container_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {container_.classList.toggle("highlight")})
+    line.addEventListener("touchstart", () => handleTouch(container_))
+
     
     line = getLine(1,3)
     line.addEventListener("mouseenter", () => {square_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {square_.classList.toggle("highlight")})
+    line.addEventListener("touchstart", () => handleTouch(square_))
+
     
     line = getLine(1,4)
     line.addEventListener("mouseenter", () => {container_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {container_.classList.toggle("highlight")})
+    line.addEventListener("touchstart", () => handleTouch(container_))
+
     
     line = getLine(1,5)
     line.addEventListener("mouseenter", () => {body_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {body_.classList.toggle("highlight")})
+    line.addEventListener("touchstart", () => handleTouch(body_))
+
 
   }, [])
   
