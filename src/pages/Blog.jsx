@@ -116,14 +116,15 @@ function Blog() {
     const is_left       = vertical_measure.x   < parent.center.x 
     const is_right      = !is_left
     const is_outside_x  = vertical_measure.x   < parent.left || vertical_measure.x   > parent.right
-    const scrollbar_width = 15
+    const scrollbar_width = getScrollbarWidth()
 
     if (is_right) {
       const h = horizontal.property === "left"? Math.max(horizontal.value + square.size/2+10 - parent.width, 0) : - horizontal.value - square.size/2-10
       helper = {bottom:"initial", left:parent.right, right:"initial",width:h}
     } else {
       const h = horizontal.property === "left"? Math.max(Math.abs(horizontal.value) -square.size/2-10, 0) :  horizontal.value + square.size/2+10 - parent.width
-      helper = {bottom:"initial", left:"initial", right:window_.width - parent.left - scrollbar_width, width:h}
+      // helper = {bottom:"initial", left:"initial", right:window_.width - parent.left - scrollbar_width, width:h}
+      helper = {bottom:"initial", left:"initial", right:window_.width - parent.left , width:h}
     }
 
     helper["opacity"]   = is_outside_x? 1:0
@@ -147,6 +148,8 @@ function Blog() {
   const [square, setSquare]              = useState({x:0, y:0, size: 0})
   const [highlighting, set_highlighting] = useState({directions:"", values:"", position:""})
   const [open, setOpen]                  = useState(['open', ''])
+
+
 
   const horizontal         = get_horizontal(css_object) // {property: "left" || "right", value: number}
   const vertical           = get_vertical(css_object) // {property: "top" || "bottom", value: number}
@@ -576,4 +579,27 @@ function highlightValue(lineIndex){
 function highlightProperty(lineIndex){
   const line = getLine(2, lineIndex)
   line.firstChild.childNodes[1].classList.toggle("highlight")
+}
+
+function getScrollbarWidth() {
+
+  // Creating invisible container
+  const outer = document.createElement('div');
+  outer.style.visibility = 'hidden';
+  outer.style.overflow = 'scroll'; // forcing scrollbar to appear
+  outer.style.msOverflowStyle = 'scrollbar'; // needed for WinJS apps
+  document.body.appendChild(outer);
+
+  // Creating inner element and placing it in the container
+  const inner = document.createElement('div');
+  outer.appendChild(inner);
+
+  // Calculating difference between container's full width and the child width
+  const scrollbarWidth = (outer.offsetWidth - inner.offsetWidth);
+
+  // Removing temporary elements from the DOM
+  outer.parentNode.removeChild(outer);
+
+  return scrollbarWidth;
+
 }
