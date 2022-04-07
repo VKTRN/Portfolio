@@ -85,7 +85,7 @@ function Blog() {
 
     let helper = {}
     
-    if (position === "static") return {"right":"initial","top":"initial","bottom":"initial","height":0,"opacity":0,"left":"initial"}
+    if (position === "static") return {"right":"initial","top":"initial","bottom":"initial","height":0,"opacity":0,"left":"initial","transition":"none"}
 
     const is_above       = horizontal_measure.y < parent.center.y 
     const is_underneath  = !is_above
@@ -111,7 +111,7 @@ function Blog() {
 
     let helper = {}
     
-    if (position === "static") return {"right":"initial","top":"initial","bottom":"initial","width":0,"opacity":0,"left":"initial"}
+    if (position === "static") return {"right":"initial","top":"initial","bottom":"initial","width":0,"opacity":0,"left":"initial","transition":"none"}
     
     const is_left       = vertical_measure.x   < parent.center.x 
     const is_right      = !is_left
@@ -291,9 +291,9 @@ function Blog() {
           <HorizontalHelper style={horizontal_helper}/>
 
         </div>
-        <div className="logger">
-          {window.innerHeight},{window_.height},{window.screen.height},{document.documentElement.clientHeight}
-          </div>
+        {/* <div className="logger">
+          {window.innerHeight}
+        </div> */}
       </div>
 
       <Footer></Footer>
