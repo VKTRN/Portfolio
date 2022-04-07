@@ -96,7 +96,7 @@ function Blog() {
       helper      = {right:"initial", top:parent.bottom, bottom:"initial",height:h}
     } 
     else {
-      const h = vertical.property === "top"? Math.max(Math.abs(vertical.value) -square.size/2-10,0) : vertical.value + square.size/2+10 - parent.height
+      const h = vertical.property === "top"? Math.max(Math.abs(vertical.value) -square.size/2-10,0) : vertical.value + square.size/2+10 - parent.height + + (window_.height - document.documentElement.clientHeight)
       helper = {right:"initial", top:"initial", bottom:window_.height - parent.top, height:h}
     }
     
@@ -127,9 +127,8 @@ function Blog() {
     }
 
     helper["opacity"]   = is_outside_x? 1:0
-    helper["top"]       = vertical.property === "top" ? parent.top : parent.bottom + (window_.height - document.documentElement.clientHeight)
+    helper["top"]       = vertical.property === "top" ? parent.top : parent.bottom 
 
-    console.log(helper)
     return helper
 
   }
