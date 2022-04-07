@@ -86,7 +86,6 @@ export default function Editor({ language, displayName, value, onChange, open}) 
   return (
     <div onTouchStart={handleTouch} className={`editor-container ${open}`}>
       <ControlledEditor
-        ref={ref}
         // onBeforeChange={handleChange}
         // onTouchStart={(e) => console.log(e)}
         value={value}
