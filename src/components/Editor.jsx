@@ -80,10 +80,6 @@ export default function Editor({ language, displayName, value, onChange, open}) 
     }
   }
 
-  const handleTouch = (e) => {
-    // e.target.contentEditable = "false"
-  }
-
   const ref = useRef()
 
   useEffect(() => {
@@ -94,10 +90,11 @@ export default function Editor({ language, displayName, value, onChange, open}) 
 
   
   return (
-    <div onTouchStart={handleTouch} className={`editor-container ${open}`}>
+    <div className={`editor-container ${open}`}>
       <ControlledEditor
         ref={ref}
         value={value}
+        onSelection = {(e,b) => {console.log(e,b)}}
         className="code-mirror-wrapper"
         options={{
           readOnly:'nocursor',
