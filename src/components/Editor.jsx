@@ -5,6 +5,7 @@ import 'codemirror/mode/xml/xml'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/css/css'
 import { Controlled as ControlledEditor } from 'react-codemirror2'
+import {useEffect} from 'react'
 
 export default function Editor({ language, displayName, value, onChange, open}) {
 
@@ -80,8 +81,15 @@ export default function Editor({ language, displayName, value, onChange, open}) 
   }
 
   const handleTouch = (e) => {
-    e.target.contentEditable = "false"
+    // e.target.contentEditable = "false"
   }
+
+  useEffect(() => {
+    const code = document.querySelector(".CodeMirror-code")
+    console.log(language, code)
+    code.contentEditable = "false"
+  }, [])
+
   
   return (
     <div onTouchStart={handleTouch} className={`editor-container ${open}`}>

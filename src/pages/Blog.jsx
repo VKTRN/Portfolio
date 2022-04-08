@@ -204,9 +204,6 @@ function Blog() {
     line.addEventListener("mouseleave", () => {body_.classList.toggle("highlight")})
     line.addEventListener("touchstart", () => handleTouch(body_))
 
-    // line.addEventListener("touchend"  , () => {body_.classList.toggle("highlight")})
-    console.log('hi')
-    
     line = getLine(1,2)
     line.addEventListener("mouseenter", () => {container_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {container_.classList.toggle("highlight")})
