@@ -190,61 +190,46 @@ function Blog() {
 
   useEffect(() => {
 
-    const handleTouch = (e,element) => {
+    const handleMouse = (e, element) => {
       e.preventDefault()
-      // let id = window.setTimeout(function() {}, 0);
-      // while (id--) {window.clearTimeout(id)}
-
-      element.classList.add("highlight")
-      // setTimeout(() => {element.classList.remove("highlight")}, 1000);
+      element.classList.toggle("highlight")
     }
 
-    const handleTouchEnd = (e,element) => {
+    const handleTouch = (e, element) => {
       e.preventDefault()
-
-      // let id = window.setTimeout(function() {}, 0);
-      // while (id--) {window.clearTimeout(id)}
-
+      element.classList.add("highlight")
       setTimeout(() => {element.classList.remove("highlight")}, 1000);
     }
+
 
     const container_ = document.querySelector(".container")
     const square_    = document.querySelector(".square")
     const body_      = document.querySelector(".render-wrapper")
     
     let line = getLine(1,1)
-    line.addEventListener("mouseenter", () => {body_.classList.toggle("highlight")})
-    line.addEventListener("mouseleave", () => {body_.classList.toggle("highlight")})
+    line.addEventListener("mouseenter", (e) => handleMouse(e, body_))
+    line.addEventListener("mouseleave", (e) => handleMouse(e, body_))
     line.addEventListener("touchstart", (e) => handleTouch(e, body_))
-    line.addEventListener("touchend", (e) => handleTouchEnd(e, body_))
-
 
     line = getLine(1,2)
-    line.addEventListener("mouseenter", () => {container_.classList.toggle("highlight")})
-    line.addEventListener("mouseleave", () => {container_.classList.toggle("highlight")})
-    line.addEventListener("touchstart", (e) => handleTouch(e,container_))
-    line.addEventListener("touchend", (e) => handleTouchEnd(e,container_))
+    line.addEventListener("mouseenter", (e) => handleMouse(e, container_))
+    line.addEventListener("mouseleave", (e) => handleMouse(e, container_))
+    line.addEventListener("touchstart", (e) => handleTouch(e, container_))
 
-    
     line = getLine(1,3)
-    line.addEventListener("mouseenter", () => {square_.classList.toggle("highlight")})
-    line.addEventListener("mouseleave", () => {square_.classList.toggle("highlight")})
-    line.addEventListener("touchstart", (e) => handleTouch(e,square_))
-    line.addEventListener("touchend", (e) => handleTouchEnd(e,square_))
-
+    line.addEventListener("mouseenter", (e) => handleMouse(e, square_ ))
+    line.addEventListener("mouseleave", (e) => handleMouse(e, square_))
+    line.addEventListener("touchstart", (e) => handleTouch(e, square_))
     
     line = getLine(1,4)
-    line.addEventListener("mouseenter", () => {container_.classList.toggle("highlight")})
-    line.addEventListener("mouseleave", () => {container_.classList.toggle("highlight")})
-    line.addEventListener("touchstart", (e) => handleTouch(e,container_))
-    line.addEventListener("touchend", (e) => handleTouchEnd(e,container_))
-
+    line.addEventListener("mouseenter", (e) => handleMouse(e, container_))
+    line.addEventListener("mouseleave", (e) => handleMouse(e, container_))
+    line.addEventListener("touchstart", (e) => handleTouch(e, container_))
     
     line = getLine(1,5)
-    line.addEventListener("mouseenter", () => {body_.classList.toggle("highlight")})
-    line.addEventListener("mouseleave", () => {body_.classList.toggle("highlight")})
-    line.addEventListener("touchstart", () => handleTouch(body_))
-    line.addEventListener("touchend", () => handleTouchEnd(body_))
+    line.addEventListener("mouseenter", (e) => handleMouse(e, body_))
+    line.addEventListener("mouseleave", (e) => handleMouse(e, body_))
+    line.addEventListener("touchstart", (e) => handleTouch(e, body_))
 
 
   }, [])
