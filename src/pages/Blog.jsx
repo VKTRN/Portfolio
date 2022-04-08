@@ -196,6 +196,14 @@ function Blog() {
       // while (id--) {window.clearTimeout(id)}
 
       element.classList.add("highlight")
+      // setTimeout(() => {element.classList.remove("highlight")}, 1000);
+    }
+
+    const handleTouchEnd = (element) => {
+
+      // let id = window.setTimeout(function() {}, 0);
+      // while (id--) {window.clearTimeout(id)}
+
       setTimeout(() => {element.classList.remove("highlight")}, 1000);
     }
 
@@ -207,30 +215,35 @@ function Blog() {
     line.addEventListener("mouseenter", () => {body_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {body_.classList.toggle("highlight")})
     line.addEventListener("touchstart", () => handleTouch(body_))
+    line.addEventListener("touchend", () => handleTouchEnd(body_))
 
 
     line = getLine(1,2)
     line.addEventListener("mouseenter", () => {container_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {container_.classList.toggle("highlight")})
     line.addEventListener("touchstart", () => handleTouch(container_))
+    line.addEventListener("touchend", () => handleTouchEnd(container_))
 
     
     line = getLine(1,3)
     line.addEventListener("mouseenter", () => {square_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {square_.classList.toggle("highlight")})
     line.addEventListener("touchstart", () => handleTouch(square_))
+    line.addEventListener("touchend", () => handleTouchEnd(square_))
 
     
     line = getLine(1,4)
     line.addEventListener("mouseenter", () => {container_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {container_.classList.toggle("highlight")})
     line.addEventListener("touchstart", () => handleTouch(container_))
+    line.addEventListener("touchend", () => handleTouchEnd(container_))
 
     
     line = getLine(1,5)
     line.addEventListener("mouseenter", () => {body_.classList.toggle("highlight")})
     line.addEventListener("mouseleave", () => {body_.classList.toggle("highlight")})
     line.addEventListener("touchstart", () => handleTouch(body_))
+    line.addEventListener("touchend", () => handleTouchEnd(body_))
 
 
   }, [])
