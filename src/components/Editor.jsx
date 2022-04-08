@@ -5,7 +5,7 @@ import 'codemirror/mode/xml/xml'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/css/css'
 import { Controlled as ControlledEditor } from 'react-codemirror2'
-import {useEffect} from 'react'
+import {useEffect, useRef} from 'react'
 
 export default function Editor({ language, displayName, value, onChange, open}) {
 
@@ -84,25 +84,24 @@ export default function Editor({ language, displayName, value, onChange, open}) 
     // e.target.contentEditable = "false"
   }
 
+  const ref = useRef()
+
   useEffect(() => {
     const code = document.querySelector(".CodeMirror-code")
-    console.log(language, code)
-    code.contentEditable = "false"
+    console.log(ref.current)
+    // code.contentEditable = "false"
   }, [])
 
   
   return (
     <div onTouchStart={handleTouch} className={`editor-container ${open}`}>
       <ControlledEditor
-        // onBeforeChange={handleChange}
-        // onTouchStart={(e) => console.log(e)}
+        ref={ref}
         value={value}
-        contentEditable={false}
         className="code-mirror-wrapper"
         options={{
-          readOnly:true,
+          readOnly:'nocursor',
           lineWrapping: true,
-          disableInput:true,
           mode: language,
           tabSize:2,
           theme: 'vscode-dark',
