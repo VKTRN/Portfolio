@@ -1,5 +1,5 @@
 .header{
-  display: flex;
+  display: none;
   justify-content: center;
   background-color: #8E96B2;
   padding: .5rem 0;
@@ -29,5 +29,9 @@
       align-items: center;
       font-size: 1.25rem;
     }
+  }
+
+  @include media-breakpoint-up(lg){
+    display: flex;
   }
 }

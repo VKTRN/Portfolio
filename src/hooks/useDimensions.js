@@ -1,26 +1,5 @@
 import {useState, useEffect} from 'react'
 
-function useWindowDimensions() {
-  
-  function getWindowDimensions() {
-    const {innerWidth: width, innerHeight: height} = window;
-    return {width, height};
-  }
-  
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return windowDimensions;
-}
-
 function useDimensions(selector) {
   
   const element    = document.querySelector(selector)
@@ -44,6 +23,4 @@ function useDimensions(selector) {
   return dimensions;
 }
 
-
-
-export {useWindowDimensions, useDimensions}
+export default useDimensions

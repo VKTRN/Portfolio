@@ -1,16 +1,15 @@
-import {useState, useRef, useEffect, useLayoutEffect} from "react"
-import {useWindowDimensions} from '../hooks'
-import { MdOutlineKeyboardArrowUp, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
-import React from 'react';
-import Header            from "../components/Header"
-import Footer            from "../components/Footer"
-import Editor            from '../components/Editor'
-import HorizontalMeasure from '../components/HorizontalMeasure'
-import VerticalMeasure   from '../components/VerticalMeasure'
-import VerticalHelper    from '../components/HelperLineX'
-import HorizontalHelper  from '../components/HelperLineY'
-import LabeledSwitch     from '../components/LabeledSwitch'
-import Buttons           from '../components/Buttons'
+import React                 from 'react'
+import {useState, useEffect} from "react"
+import useWindowDimensions   from '../hooks/useWindowDimensions'
+import useScrollPosition     from '../hooks/useScrollPosition'
+import Header                from "../components/Header"
+import Footer                from "../components/Footer"
+import Editor                from '../components/Editor'
+import HorizontalMeasure     from '../components/HorizontalMeasure'
+import VerticalMeasure       from '../components/VerticalMeasure'
+import VerticalHelper        from '../components/HelperLineX'
+import HorizontalHelper      from '../components/HelperLineY'
+import Buttons               from '../components/Buttons'
 
 function Blog() {
 
@@ -141,6 +140,14 @@ function Blog() {
   const showHTML = () => {
     setOpen(['', 'open'])
   }
+
+  const handleScroll = () => {
+    console.log('hi')
+    // const yContent = document.querySelector(".content").getBoundingClientRect().top
+    // if(yContent < 100){
+    //   document.querySelector(".content").scrollIntoView()
+    // }
+  }
  
   const [css_object, set_css_object]     = useState(make_css_object())
   const window_                          = useWindowDimensions()
@@ -148,8 +155,7 @@ function Blog() {
   const [square, setSquare]              = useState({x:0, y:0, size: 0})
   const [highlighting, set_highlighting] = useState({directions:"", values:"", position:""})
   const [open, setOpen]                  = useState(['open', ''])
-
-
+  const scrollposition                   = useScrollPosition()
 
   const horizontal         = get_horizontal(css_object) // {property: "left" || "right", value: number}
   const vertical           = get_vertical(css_object) // {property: "top" || "bottom", value: number}
@@ -230,15 +236,29 @@ function Blog() {
     line.addEventListener("mouseenter", (e) => handleMouse(e, body_))
     line.addEventListener("mouseleave", (e) => handleMouse(e, body_))
     line.addEventListener("touchstart", (e) => handleTouch(e, body_))
-
-
+    
   }, [])
+  
+  // useEffect(() => {
+  //   const yContent = document.querySelector(".content").getBoundingClientRect().top
+  //   const distance = Math.abs(yContent - scrollposition)
+  //   console.log(yContent, distance)
+
+  //   if(yContent < 100){
+  //     document.querySelector(".content").scrollIntoView()
+  //   }
+  // }, [scrollposition])
+
+  
   
 
   return (
-    <div className="blog">
+    <div className="blog" onTouchMove={handleScroll}>
+      
       <Header></Header>
+      
       <h2 className="title">position: absolute;</h2>
+      
       <p className="introduction">
         The position property defines, how an element should be positioned. The available property values are: static, relative, fixed, absolute or sticky.
         Setting the positioning of an element to absolute (<code>position: absolute;</code>) will make that element orient itself to its nearest positioned
@@ -255,6 +275,7 @@ function Blog() {
         to <code>position: absolute;</code>.
         
       </p>
+
       <div className="content">
 
         <div className="text-wrapper">
@@ -310,11 +331,11 @@ function Blog() {
           <HorizontalHelper style={horizontal_helper}/>
 
         </div>
-        {/* <div className="logger">
-          {window.innerHeight}
-        </div> */}
-      </div>
 
+      </div>
+      {/* <div className="logger">
+        {Math.abs(scrollposition)}
+      </div> */}
       <Footer></Footer>
 
     </div>
