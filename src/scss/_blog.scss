@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: #342F3D;
+  height:100%;
   // scroll-snap-type: y proximity;
 
   .title{
@@ -29,7 +30,7 @@
   .content{
     display: flex;
     flex-direction: column-reverse;
-    height:100vh;
+    height:100%;
     background-color: coral;
     flex:1;
     justify-content: center;
