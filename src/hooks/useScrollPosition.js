@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const isBrowser = typeof window !== `undefined`;
 
 function getScrollPosition() {
-  return isBrowser ? window.pageYOffset : 0;
+  return window.pageYOffset
 }
 
 function useScrollPosition() {
@@ -11,7 +11,7 @@ function useScrollPosition() {
   useEffect(() => {
     let requestRunning = null;
     function handleScroll() {
-      if (isBrowser && requestRunning === null) {
+      if (requestRunning === null) {
         requestRunning = window.requestAnimationFrame(() => {
           setScrollPosition(getScrollPosition());
           requestRunning = null;
@@ -19,10 +19,10 @@ function useScrollPosition() {
       }
     }
 
-    if (isBrowser) {
-      window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
-    }
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+
   }, []);
 
 
