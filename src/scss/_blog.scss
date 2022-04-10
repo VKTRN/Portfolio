@@ -1,10 +1,10 @@
 .blog{
-  // display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: #342F3D;
   height:100%;
-  // scroll-snap-type: y proximity;
+  touch-action: none;
+
 
   .title{
     color: white;
