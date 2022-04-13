@@ -10,6 +10,7 @@ function Header() {
           <a href="/">Home</a>
           <a href="/blog">Blog</a>
           <a href="/shop">Shop</a>
+          <a href="/player">Player</a>
         </div>
       </div>
     </div>

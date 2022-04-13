@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from "./pages/Home"
 import Blog from "./pages/Blog"
 import Shop from "./pages/Shop"
+import PlayerApp from "./pages/PlayerApp"
 
 import './scss/custom.scss';
 
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route path="/shop">
           <Shop/>
+        </Route>
+        <Route path="/player">
+          <PlayerApp/>
         </Route>
       </Switch>
     </Router>

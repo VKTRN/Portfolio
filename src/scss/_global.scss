@@ -10,9 +10,9 @@ html, body {
   overflow-y: overlay;
 }
 
-button:focus, a:focus, input:focus{
-  border: none !important;
-}
+// button:focus, a:focus, input:focus{
+//   border: none !important;
+// }
 
 a{
   text-decoration: none;
@@ -24,8 +24,9 @@ a{
 }
 
 button{
-  border-style: none;
-  background-color: transparent;
+  // border-style: none;
+  background-color: coral;
+  margin:.5rem;
 }
 
 input{

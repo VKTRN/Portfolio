@@ -140,14 +140,6 @@ function Blog() {
   const showHTML = () => {
     setOpen(['', 'open'])
   }
-
-  const handleScroll = () => {
-    console.log('hi')
-    // const yContent = document.querySelector(".content").getBoundingClientRect().top
-    // if(yContent < 100){
-    //   document.querySelector(".content").scrollIntoView()
-    // }
-  }
  
   const [css_object, set_css_object]     = useState(make_css_object())
   const window_                          = useWindowDimensions()
@@ -155,7 +147,6 @@ function Blog() {
   const [square, setSquare]              = useState({x:0, y:0, size: 0})
   const [highlighting, set_highlighting] = useState({directions:"", values:"", position:""})
   const [open, setOpen]                  = useState(['open', ''])
-  const scrollposition                   = useScrollPosition()
 
   const horizontal         = get_horizontal(css_object) // {property: "left" || "right", value: number}
   const vertical           = get_vertical(css_object) // {property: "top" || "bottom", value: number}
@@ -238,22 +229,9 @@ function Blog() {
     line.addEventListener("touchstart", (e) => handleTouch(e, body_))
     
   }, [])
-  
-  // useEffect(() => {
-  //   const yContent = document.querySelector(".content").getBoundingClientRect().top
-  //   const distance = Math.abs(yContent - scrollposition)
-  //   console.log(yContent, distance)
-
-  //   if(yContent < 100){
-  //     document.querySelector(".content").scrollIntoView()
-  //   }
-  // }, [scrollposition])
-
-  
-  
 
   return (
-    <div className="blog" onTouchMove={handleScroll}>
+    <div className="blog">
       
       <Header></Header>
       
@@ -333,9 +311,9 @@ function Blog() {
         </div>
 
       </div>
-      {/* <div className="logger">
-        {Math.abs(scrollposition)}
-      </div> */}
+      <div className="logger">
+        {square.x}
+      </div>
       <Footer></Footer>
 
     </div>
