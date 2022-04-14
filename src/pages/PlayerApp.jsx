@@ -36,7 +36,6 @@ export const PlayerApp = () => {
   }
 
   const renderVideo = async () => {
-    console.log("http://localhost:8000/?" + arrayToQuery(categories))
     const res = await axios.get("https://vktrn.com/render/?" + arrayToQuery(categories), {responseType: 'blob'})
     const url = window.URL.createObjectURL(new Blob([res.data]));
     const link = document.createElement('a');

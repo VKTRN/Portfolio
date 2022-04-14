@@ -1,27 +1,42 @@
 import {Arc} from './Arc'
-import {useCurrentFrame, interpolate} from 'remotion'
+import {useCurrentFrame, interpolate, spring, Easing} from 'remotion'
 import React from "react"
 
-const colors = ["rgb(255,80,80)","rgb(255,255,80)","rgb(255,80,255)","rgb(80,255,80)","rgb(80,255,255)","rgb(0,80,80)","rgb(80,0,80)"]
+const colors = ["rgb(255,80,80)","rgb(255,255,80)","rgb(255,80,255)","rgb(80,255,80)","rgb(80,255,255)","rgb(0,80,80)","rgb(80,0,80)", "rgb(80,80,0)"]
 
 
 export const Pie = ({data}) => {
 
   const frame = useCurrentFrame()
-  const r = interpolate(frame, [0,120], [0, 1],{ extrapolateRight: "clamp" })
+  // const r = interpolate(frame, [0,120], [0, 1],{ extrapolateRight: "clamp" })
+
+
+  const r = interpolate(frame, [0, 60], [0, 1], {
+    easing: Easing.bezier(.5, 0, .5, 1),
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp"
+  })
+  // const r = spring({
+  //   frame,
+  //   from: 0,
+  //   to: 1,
+  //   fps: 30,
+  //   config: {
+  //     stiffness: 100,
+  //     damping:100
+  //   },
+  // });
 
   const arcs = getArcsFromData(data)
 
 	return (
     <>
-      {/* <div style={{fontSize:"8rem", color: "green"}}>{arcs[0].end}</div> */}
+      {/* <div style={{fontSize:"8rem", color: "coral"}}>{r}</div> */}
       {arcs.map((arc, i) => {
-
-        const d = (arc.end-arc.start)*r
 
         return (
           <>
-            <Arc x={960} y = {540} radius = {300} start = {arc.start} end = {arc.start+d} color = {colors[i]}/>
+            <Arc x={960} y = {540} radius = {300} start = {arc.start*r} end = {arc.end*r} color = {colors[i]} t0={i*7+45}/>
           </>
         )
       })}

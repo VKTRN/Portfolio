@@ -1,19 +1,23 @@
 import {useVideoConfig, useCurrentFrame, interpolate} from 'remotion';
 import React from "react"
+import {PieTitle} from './PieTitle'
 
 
-export const Arc = ({x, y, radius, start, end, color}) => {
+export const Arc = ({x, y, radius, start, end, color, t0}) => {
 	
 	const config = useVideoConfig()
 
 	return (
-		<svg
-			viewBox={`0 0 ${config.width} ${config.height}`}
-			fill={color}
-      style = {{position: "absolute"}}
-		>
-      <path d={getArc(x,y,radius,start,end)} />
-		</svg>
+    <>
+      <PieTitle start = {polarToCartesian(x, y, radius*1.5, (start+end)/2)} t0={t0}/>
+      <svg
+        viewBox={`0 0 ${config.width} ${config.height}`}
+        fill={color}
+        style = {{position: "absolute"}}
+      >
+        <path d={getArc(x,y,radius,start,end)} />
+      </svg>
+    </>
 	);
 };
 
@@ -42,3 +46,4 @@ function getArc(x, y, radius, startAngle, endAngle){
 
     return d;       
 }
+
