@@ -4,7 +4,7 @@ import { Comp } from "../remotion/MyComp";
 import {useState} from 'react'
 import './style.css'
 import axios from 'axios'
-import { TextField } from '@mui/material';
+import { input } from '@mui/material';
 
 export const PlayerApp = () => {
 
@@ -54,7 +54,8 @@ export const PlayerApp = () => {
 
   const changeValue = (value, i) => {
     const cats = [...categories]
-    cats[i].value = value
+    const newVal = value < 1? 1 : value
+    cats[i].value = newVal
     setCategories(cats)
   }
 
@@ -69,16 +70,16 @@ export const PlayerApp = () => {
 			<button type='button'  onClick={renderVideo}>render</button>
 			<div className='categories'>
 				{
-            categories.map((category, i) => {
-              return(
-                <div className='category'>
-                  <TextField margin="normal" label="Name" type="text" value={category.name} onChange = {(e) => changeName(e.target.value, i)}></TextField>
-                  <TextField margin="normal" label="Value" type="number" value={category.value} onChange = {(e) => changeValue(e.target.value, i)}></TextField>
+          categories.map((category, i) => {
+            return(
+              <div className='category'>
+                  <input     type="text" value={category.name} onChange = {(e) => changeName(e.target.value, i)}></input>
+                  <input    type="number" value={category.value} onChange = {(e) => changeValue(e.target.value, i)}></input>
                 </div>
               )
             })
           }
-			</div>
+      </div>
 
 		</div>
 		<div className='player'>
