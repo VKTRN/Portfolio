@@ -4,7 +4,7 @@ import { Comp } from "../remotion/MyComp";
 import {useState} from 'react'
 import './style.css'
 import axios from 'axios'
-import { input } from '@mui/material';
+import LoadingSpinner from '../components/Spinner';
 
 export const PlayerApp = () => {
 
@@ -37,13 +37,18 @@ export const PlayerApp = () => {
   }
 
   const renderVideo = async () => {
-    const res = await axios.get("https://vktrn.com/render/?" + arrayToQuery(categories.map((a) => a.value)), {responseType: 'blob'})
+    // const res = await axios.get("https://vktrn.com/render/?" + arrayToQuery(categories.map((a) => a.value)), {responseType: 'blob'})
+    setisRendering(true)
+    const res = await axios.post("https://vktrn.com/render/", {data: categories}, {responseType: 'blob'})
+    
+    // console.log("https://vktrn.com/render/?" + arrayToQuery(categories.map((a) => a.value)))
     const url = window.URL.createObjectURL(new Blob([res.data]));
     const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', 'file.mp4'); //or any other extension
     document.body.appendChild(link);
     link.click();
+    setisRendering(false)
   }
 
   const changeName = (value, i) => {
@@ -55,11 +60,12 @@ export const PlayerApp = () => {
   const changeValue = (value, i) => {
     const cats = [...categories]
     const newVal = value < 1? 1 : value
-    cats[i].value = newVal
+    cats[i].value = parseFloat(newVal) 
     setCategories(cats)
   }
 
   const [categories, setCategories] = useState([{name: "name1", value: 5},{name: "name2", value: 5}, {name: "name3", value: 5}]);
+  const [isRendering, setisRendering] = useState(false)
 
   return (
 	<div className='app'>
@@ -67,7 +73,7 @@ export const PlayerApp = () => {
 			<button type='button' disabled={categories.length === 8} onClick={addCategory}>add category</button>
 
 			<button type='button' disabled={categories.length === 2} onClick={removeCategory}>remove category</button>
-			<button type='button'  onClick={renderVideo}>render</button>
+			<button type='button'  onClick={renderVideo}>{isRendering?<LoadingSpinner/>:"render"}</button>
 			<div className='categories'>
 				{
           categories.map((category, i) => {

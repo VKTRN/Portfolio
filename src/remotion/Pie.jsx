@@ -1,7 +1,6 @@
 import {Arc} from './Arc'
 import {useCurrentFrame, interpolate, spring, Easing} from 'remotion'
 import React from "react"
-import { DragIndicatorSharp } from '@material-ui/icons'
 
 const colors = ["rgb(255,80,80)","rgb(255,255,80)","rgb(255,80,255)","rgb(80,255,80)","rgb(80,255,255)","rgb(0,80,80)","rgb(80,0,80)", "rgb(80,80,0)"]
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { Composition } from "remotion";
 import { Comp } from "./MyComp";
-import React from "react"
  
 export const MyVideo = () => {
   return (
