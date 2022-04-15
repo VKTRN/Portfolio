@@ -1,6 +1,7 @@
 import {Arc} from './Arc'
 import {useCurrentFrame, interpolate, spring, Easing} from 'remotion'
 import React from "react"
+import { DragIndicatorSharp } from '@material-ui/icons'
 
 const colors = ["rgb(255,80,80)","rgb(255,255,80)","rgb(255,80,255)","rgb(80,255,80)","rgb(80,255,255)","rgb(0,80,80)","rgb(80,0,80)", "rgb(80,80,0)"]
 
@@ -27,7 +28,7 @@ export const Pie = ({data}) => {
   //   },
   // });
 
-  const arcs = getArcsFromData(data)
+  const arcs = getArcsFromData(data.map(a => a.value))
 
 	return (
     <>
@@ -36,7 +37,7 @@ export const Pie = ({data}) => {
 
         return (
           <>
-            <Arc x={960} y = {540} radius = {300} start = {arc.start*r} end = {arc.end*r} color = {colors[i]} t0={i*7+45}/>
+            <Arc x={960} y = {540} radius = {300} start = {arc.start*r} end = {arc.end*r} color = {colors[i]} t0={i*7+45} name={data[i].name}/>
           </>
         )
       })}

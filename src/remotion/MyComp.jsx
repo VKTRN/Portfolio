@@ -7,7 +7,7 @@ export const Comp = ({data}) => {
 	const videoConfig     = useVideoConfig()
 
 	return (
-		<div style={{flex: 1, backgroundColor: 'gray'}}>
+		<div style={{flex: 1, backgroundColor: '#bfe0de'}}>
 			<div >
 				<Sequence from={0} durationInFrames={videoConfig.durationInFrames}>
 					<Pie data={data}/>

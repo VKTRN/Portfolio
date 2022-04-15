@@ -3,13 +3,13 @@ import React from "react"
 import {PieTitle} from './PieTitle'
 
 
-export const Arc = ({x, y, radius, start, end, color, t0}) => {
+export const Arc = ({x, y, radius, start, end, color, t0, name}) => {
 	
 	const config = useVideoConfig()
 
 	return (
     <>
-      <PieTitle start = {polarToCartesian(x, y, radius*1.5, (start+end)/2)} t0={t0}/>
+      <PieTitle start = {polarToCartesian(x, y, radius*1.5, (start+end)/2)} t0={t0} name={name}/>
       <svg
         viewBox={`0 0 ${config.width} ${config.height}`}
         fill={color}

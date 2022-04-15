@@ -4,11 +4,12 @@ import { Comp } from "../remotion/MyComp";
 import {useState} from 'react'
 import './style.css'
 import axios from 'axios'
+import { TextField } from '@mui/material';
 
 export const PlayerApp = () => {
 
   const addCategory = () => {
-    setCategories([...categories,5])
+    setCategories([...categories,{name: "name", value: 5}])
   }
 
   const removeCategory = () => {
@@ -17,13 +18,13 @@ export const PlayerApp = () => {
   
   const addValue = (i) => {
     const copy = [...categories]
-    copy[i] += 1
+    copy[i].value += 1
     setCategories(copy)
   }
 
   const removeValue = (i) => {
     const copy = [...categories]
-    copy[i] -= 1
+    copy[i].value -= 1
     setCategories(copy)
   }
 
@@ -45,23 +46,35 @@ export const PlayerApp = () => {
     link.click();
   }
 
-  const [categories, setCategories] = useState([5,5,5]);
+  const changeName = (value, i) => {
+    const cats = [...categories]
+    cats[i].name = value
+    setCategories(cats)
+  }
+
+  const changeValue = (value, i) => {
+    const cats = [...categories]
+    cats[i].value = value
+    setCategories(cats)
+  }
+
+  const [categories, setCategories] = useState([{name: "name1", value: 5},{name: "name2", value: 5}, {name: "name3", value: 5}]);
 
   return (
 	<div className='app'>
 		<div className="controls">
 			<button type='button' disabled={categories.length === 8} onClick={addCategory}>add category</button>
+
 			<button type='button' disabled={categories.length === 2} onClick={removeCategory}>remove category</button>
 			<button type='button'  onClick={renderVideo}>render</button>
 			<div className='categories'>
 				{
             categories.map((category, i) => {
               return(
-	<div className='category'>
-		<button type='button' disabled={categories[i] === 1} onClick={() => removeValue(i)}>-</button>
-		<span>{category}</span>
-		<button type='button' disabled={categories[i] === 20} onClick={() => addValue(i)}>+</button>
-	</div>
+                <div className='category'>
+                  <TextField margin="normal" label="Name" type="text" value={category.name} onChange = {(e) => changeName(e.target.value, i)}></TextField>
+                  <TextField margin="normal" label="Value" type="number" value={category.value} onChange = {(e) => changeValue(e.target.value, i)}></TextField>
+                </div>
               )
             })
           }
