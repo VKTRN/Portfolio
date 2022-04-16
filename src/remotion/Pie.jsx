@@ -8,24 +8,12 @@ const colors = ["rgb(255,80,80)","rgb(255,255,80)","rgb(255,80,255)","rgb(80,255
 export const Pie = ({data}) => {
 
   const frame = useCurrentFrame()
-  // const r = interpolate(frame, [0,120], [0, 1],{ extrapolateRight: "clamp" })
-
 
   const r = interpolate(frame, [0, 60], [0, 1], {
     easing: Easing.bezier(.5, 0, .5, 1),
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp"
   })
-  // const r = spring({
-  //   frame,
-  //   from: 0,
-  //   to: 1,
-  //   fps: 30,
-  //   config: {
-  //     stiffness: 100,
-  //     damping:100
-  //   },
-  // });
 
   const arcs = getArcsFromData(data.map(a => a.value))
 
@@ -33,11 +21,8 @@ export const Pie = ({data}) => {
     <>
       {/* <div style={{fontSize:"8rem", color: "coral"}}>{r}</div> */}
       {arcs.map((arc, i) => {
-
         return (
-          <>
-            <Arc x={960} y = {540} radius = {300} start = {arc.start*r} end = {arc.end*r} color = {colors[i]} t0={i*7+45} name={data[i].name}/>
-          </>
+          <Arc x={960} y = {540} radius = {300} start = {arc.start*r} end = {arc.end*r} color = {colors[i]} t0={i*7+45} name={data[i].name}/>
         )
       })}
     </>

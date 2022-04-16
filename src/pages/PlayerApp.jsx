@@ -1,6 +1,7 @@
 import React from 'react';
 import { Player } from "@remotion/player";
-import { Comp } from "../remotion/MyComp";
+import { PieChartComp } from "../remotion/PieChartComp";
+import { HistogramComp } from "../remotion/HistogramComp";
 import {useState} from 'react'
 import './style.css'
 import axios from 'axios'
@@ -9,31 +10,11 @@ import LoadingSpinner from '../components/Spinner';
 export const PlayerApp = () => {
 
   const addCategory = () => {
-    setCategories([...categories,{name: "name", value: 5}])
+    setCategories([...categories,{name: "text", value: 5}])
   }
 
   const removeCategory = () => {
     setCategories(categories.slice(0,-1))
-  }
-  
-  const addValue = (i) => {
-    const copy = [...categories]
-    copy[i].value += 1
-    setCategories(copy)
-  }
-
-  const removeValue = (i) => {
-    const copy = [...categories]
-    copy[i].value -= 1
-    setCategories(copy)
-  }
-
-  const arrayToQuery = (array) => {
-    let query = ""
-    array.forEach((item) => {
-      query += "&data=" + item
-    })
-    return query
   }
 
   const renderVideo = async () => {
@@ -64,23 +45,32 @@ export const PlayerApp = () => {
     setCategories(cats)
   }
 
-  const [categories, setCategories] = useState([{name: "name1", value: 5},{name: "name2", value: 5}, {name: "name3", value: 5}]);
+  const handleModeChange = (e) => setMode(e.target.value)
+
+  const [categories, setCategories] = useState([{name: "text", value: 5},{name: "text", value: 5}, {name: "text", value: 5}]);
   const [isRendering, setisRendering] = useState(false)
+  const [mode, setMode] = useState("pie-chart")
 
   return (
 	<div className='app'>
 		<div className="controls">
-			<button type='button' disabled={categories.length === 8} onClick={addCategory}>add category</button>
+			<button type='button' disabled={categories.length === 6} onClick={addCategory}>add category</button>
 
 			<button type='button' disabled={categories.length === 2} onClick={removeCategory}>remove category</button>
-			<button type='button'  onClick={renderVideo}>{isRendering?<LoadingSpinner/>:"render"}</button>
+			<button className='render-button' type='button' disabled = {isRendering}  onClick={renderVideo}>{isRendering?
+        <>
+         <LoadingSpinner/> rendering...
+        </>
+         :"render"
+        }
+      </button>
 			<div className='categories'>
 				{
           categories.map((category, i) => {
             return(
               <div className='category'>
-                  <input     type="text" value={category.name} onChange = {(e) => changeName(e.target.value, i)}></input>
-                  <input    type="number" value={category.value} onChange = {(e) => changeValue(e.target.value, i)}></input>
+                  <input type="text" value={category.name} onChange = {(e) => changeName(e.target.value, i)}></input>
+                  <input type="number" value={category.value} onChange = {(e) => changeValue(e.target.value, i)}></input>
                 </div>
               )
             })
@@ -91,7 +81,7 @@ export const PlayerApp = () => {
 		<div className='player'>
 			<Player
 				controls
-				component={Comp}
+				component={mode === 'pie-chart'? PieChartComp: HistogramComp}
 				inputProps={{data:categories}}
 				durationInFrames={150}
 				compositionWidth={1920}
@@ -105,8 +95,27 @@ export const PlayerApp = () => {
 				}}
         />
 		</div>
+    <select className='mode-select' name="modes" id="mode-select" onChange={e => handleModeChange(e)}>
+      <option value="pie-chart">Pie Chart</option>
+      <option value="histogram">Histogram</option>
+    </select>
 	</div>
   );
 };
 
 export default PlayerApp;
+
+
+
+
+
+
+
+
+const arrayToQuery = (array) => {
+  let query = ""
+  array.forEach((item) => {
+    query += "&data=" + item
+  })
+  return query
+}

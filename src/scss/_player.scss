@@ -18,4 +18,21 @@
     width:5.75rem;
     margin: .25rem;
   }
+
+  .render-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.mode-select{
+  height: 3rem;
+  width:9rem;
+  margin:2rem;
+  padding:.5rem;
+
+  option{
+    padding: 1rem 0;
+  }
 }

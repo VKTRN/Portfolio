@@ -2,7 +2,7 @@ import {Sequence, useVideoConfig} from 'remotion';
 import {Pie} from './Pie'
 import React from "react"
 
-export const Comp = ({data}) => {
+export const PieChartComp = ({data}) => {
 
 	const videoConfig     = useVideoConfig()
 

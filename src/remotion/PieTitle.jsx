@@ -18,7 +18,7 @@ export const PieTitle = ({start, t0, name}) => {
 			fill = "black"
       style = {{position: "absolute", fontSize:r+"rem", textAlign:"center"}}
 		>
-      <text  x={start.x} y={start.y} dominant-baseline="middle" text-anchor="middle" >{name}</text>
+      <text  x={start.x} y={start.y} dominantBaseline="middle" textAnchor="middle" >{name}</text>
       
 		</svg>
 	);
