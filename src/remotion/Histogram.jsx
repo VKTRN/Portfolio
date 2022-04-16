@@ -35,7 +35,7 @@ const getHeightsFromData = (data, maxHeight) => {
   const maxValue = Math.max(...data)
   
   const heights = data.map((value) => value/maxValue*maxHeight)
-  console.log(maxValue)
+
 
   return heights
 }

@@ -20,7 +20,7 @@ export const PlayerApp = () => {
   const renderVideo = async () => {
     // const res = await axios.get("https://vktrn.com/render/?" + arrayToQuery(categories.map((a) => a.value)), {responseType: 'blob'})
     setisRendering(true)
-    const res = await axios.post("https://vktrn.com/render/", {data: categories}, {responseType: 'blob'})
+    const res = await axios.post("https://vktrn.com/render/", {data: categories, mode:mode}, {responseType: 'blob'})
     
     // console.log("https://vktrn.com/render/?" + arrayToQuery(categories.map((a) => a.value)))
     const url = window.URL.createObjectURL(new Blob([res.data]));
