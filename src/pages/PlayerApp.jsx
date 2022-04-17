@@ -51,6 +51,8 @@ export const PlayerApp = () => {
   const [isRendering, setisRendering] = useState(false)
   const [mode, setMode] = useState("pie-chart")
 
+  console.log(mode)
+
   return (
 	<div className='app'>
 		<div className="controls">
@@ -81,8 +83,8 @@ export const PlayerApp = () => {
 		<div className='player'>
 			<Player
 				controls
-				component={mode === 'pie-chart'? PieChartComp: HistogramComp}
-				inputProps={{data:categories}}
+				component={PieChartComp}
+				inputProps={{data:categories, mode: mode}}
 				durationInFrames={150}
 				compositionWidth={1920}
 				compositionHeight={1080}
@@ -96,6 +98,7 @@ export const PlayerApp = () => {
         />
 		</div>
     <select className='mode-select' name="modes" id="mode-select" onChange={e => handleModeChange(e)}>
+      <option value="circle">Circle</option>
       <option value="pie-chart">Pie Chart</option>
       <option value="histogram">Histogram</option>
     </select>

@@ -20,7 +20,8 @@ export const Histogram = ({data}) => {
 
 	return (
     <>
-      {/* <div style={{fontSize:"8rem", color: "coral"}}>{r}</div> */}
+      {/* <div style={{fontSize:"1rem", color: "coral"}}>{JSON.stringify([data, mode])}</div> */}
+
       {heights.map((height, i) => {
         return (
 					<Bar x={config.width/2-(heights.length-1)*250/2 + i*250} y={config.height-200} height={height} color={colors[i]} t0={i*7} name={data[i].name}></Bar>
