@@ -2,7 +2,6 @@ import {useVideoConfig, useCurrentFrame, interpolate} from 'remotion';
 import React from "react"
 import {PieTitle} from './PieTitle'
 
-
 export const Arc = ({x, y, radius, start, end, color, t0, name}) => {
 	
 	const config = useVideoConfig()

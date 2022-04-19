@@ -4,8 +4,17 @@ import React from "react"
 export const XAxis = ({position, dx, length}) => {
 
 	const config = useVideoConfig()
+  const frame = useCurrentFrame()
+
+  const t0 = 2
 
   const ticks = Array(Math.floor(length/dx)).fill(0).map((item,i) => i*dx)
+
+  const r = interpolate(frame, [0, 40], [0, 1], {
+    easing: Easing.bezier(.5, 0, .5, 1),
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp"
+  })
 
 	return (
     <>
@@ -13,14 +22,21 @@ export const XAxis = ({position, dx, length}) => {
         viewBox={`0 0 ${config.width} ${config.height}`}
         style = {{position: "absolute"}}
       >
-        <line x1={position.x} y1={config.height - position.y} x2={position.x + length} y2={config.height - position.y} stroke="black" stroke-width={6}/>
+        <line x1={position.x} y1={config.height - position.y} x2={position.x + length*r} y2={config.height - position.y} stroke="black" stroke-width={6}/>
         
         {
           ticks.map((tick,i) => {
+
+            const r = interpolate(frame, [t0*i, 10+t0*i], [0, 1], {
+              easing: Easing.bezier(.5, 0, .5, 1),
+              extrapolateLeft: "clamp",
+              extrapolateRight: "clamp"
+            })
+
             return (
               <>
-                <line x1={position.x+tick} y1={config.height - position.y} x2={position.x + tick} y2={config.height - position.y+20} stroke="black" stroke-width={4}/>
-                {i%5 === 0 && <text x={position.x+tick} y={config.height - position.y + 50} font-size="40" dominantBaseline="middle" textAnchor="middle">{tick}</text>}
+                <line x1={position.x+tick} y1={config.height - position.y} x2={position.x + tick} y2={config.height - position.y+20*r} stroke="black" stroke-width={4}/>
+                {i%5 === 0 && <text x={position.x+tick} y={config.height - position.y + 50} font-size={40*r} dominantBaseline="middle" textAnchor="middle">{tick}</text>}
               </>
             )
           })

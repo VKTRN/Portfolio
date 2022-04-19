@@ -19,7 +19,7 @@ export const Graph = ({data}) => {
 	return (
     <>
       <XAxis position = {{x: 200, y:200}} length = {1600} dx={100}/>
-      {/* <YAxis position = {{x: 200, y:200}} length = {600} dx={100}/> */}
+      <YAxis position = {{x: 200, y:200}} length = {600} dx={100}/>
       {/* <div style={{fontSize:"1rem", color: "coral"}}>{JSON.stringify([data, mode])}</div> */}
 
       <svg viewBox={`0 0 ${config.width} ${config.height}`} style = {{position: "absolute"}}>
@@ -28,7 +28,7 @@ export const Graph = ({data}) => {
         
         {data.map((item, i) => {
           return (
-            <circle cx={i*cx+dx} cy={1080 - item.y*cy - dy} r="5"/>
+            <circle cx={i*cx+dx} cy={1080 - item.y*cy - dy} r="8"/>
           )})}
       </svg>
     </>

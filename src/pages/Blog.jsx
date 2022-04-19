@@ -251,7 +251,6 @@ function Blog() {
         elements. Using the control elements you can get a feel for how <code>position: absolute;</code> works.
         The css code shown in this tutorial does not translate to the rendered style of the elements. It only contains the definitions, that are essential
         to <code>position: absolute;</code>.
-        
       </p>
 
       <div className="content">
@@ -311,9 +310,9 @@ function Blog() {
         </div>
 
       </div>
-      <div className="logger">
+      {/* <div className="logger">
         {square.x}
-      </div>
+      </div> */}
       <Footer></Footer>
 
     </div>
