@@ -3,9 +3,11 @@ import { Player } from "@remotion/player";
 import { PieChartComp } from "../remotion/PieChartComp";
 import { HistogramComp } from "../remotion/HistogramComp";
 import {useState} from 'react'
-import './style.css'
 import axios from 'axios'
 import LoadingSpinner from '../components/Spinner';
+import ReactDataSheet from 'react-datasheet';
+import 'react-datasheet/lib/react-datasheet.css';
+import {BasicSheet} from '../remotion/BasicSheet';
 
 export const PlayerApp = () => {
 
@@ -20,7 +22,7 @@ export const PlayerApp = () => {
   const renderVideo = async () => {
     // const res = await axios.get("https://vktrn.com/render/?" + arrayToQuery(categories.map((a) => a.value)), {responseType: 'blob'})
     setisRendering(true)
-    const res = await axios.post("https://vktrn.com/render/", {data: categories, mode:mode}, {responseType: 'blob'})
+    const res = await axios.post("https://vktrn.com/render/", {data:mode === 'axis'?graphData:categories, mode: mode}, {responseType: 'blob'})
     
     // console.log("https://vktrn.com/render/?" + arrayToQuery(categories.map((a) => a.value)))
     const url = window.URL.createObjectURL(new Blob([res.data]));
@@ -49,16 +51,20 @@ export const PlayerApp = () => {
 
   const [categories, setCategories] = useState([{name: "text", value: 5},{name: "text", value: 5}, {name: "text", value: 5}]);
   const [isRendering, setisRendering] = useState(false)
-  const [mode, setMode] = useState("pie-chart")
-
-  console.log(mode)
+  const [mode, setMode] = useState("axis")
+  const [graphData, setGraphData] = useState(makeGraphData())
 
   return (
 	<div className='app'>
 		<div className="controls">
-			<button type='button' disabled={categories.length === 6} onClick={addCategory}>add category</button>
+      {
+         mode !== 'axis' &&
+         <>
+          <button type='button' disabled={categories.length === 6} onClick={addCategory}>add category</button>
+          <button type='button' disabled={categories.length === 2} onClick={removeCategory}>remove category</button>
+         </>
 
-			<button type='button' disabled={categories.length === 2} onClick={removeCategory}>remove category</button>
+      }
 			<button className='render-button' type='button' disabled = {isRendering}  onClick={renderVideo}>{isRendering?
         <>
          <LoadingSpinner/> rendering...
@@ -66,6 +72,13 @@ export const PlayerApp = () => {
          :"render"
         }
       </button>
+
+      {
+        mode === 'axis' ?
+      <div className='cell-sheet'>
+        <BasicSheet graphData = {graphData} setGraphData = {setGraphData}/>
+      </div>
+      :
 			<div className='categories'>
 				{
           categories.map((category, i) => {
@@ -79,12 +92,15 @@ export const PlayerApp = () => {
           }
       </div>
 
+      }
+
+
 		</div>
 		<div className='player'>
 			<Player
 				controls
 				component={PieChartComp}
-				inputProps={{data:categories, mode: mode}}
+				inputProps={{data:mode === 'axis'?graphData:categories, mode: mode}}
 				durationInFrames={150}
 				compositionWidth={1920}
 				compositionHeight={1080}
@@ -98,6 +114,7 @@ export const PlayerApp = () => {
         />
 		</div>
     <select className='mode-select' name="modes" id="mode-select" onChange={e => handleModeChange(e)}>
+      <option value="axis">Axis</option>
       <option value="circle">Circle</option>
       <option value="pie-chart">Pie Chart</option>
       <option value="histogram">Histogram</option>
@@ -121,4 +138,12 @@ const arrayToQuery = (array) => {
     query += "&data=" + item
   })
   return query
+}
+
+const makeGraphData = () => {
+  const data = []
+  for (let i = 0; i < 16; i++) {
+    data.push({x:i, y:(i)*(i)})
+  }
+  return data
 }

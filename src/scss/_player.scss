@@ -2,6 +2,26 @@
   display: flex;
 }
 
+.cell-sheet{
+  width:16rem;
+
+  table.data-grid{
+    width:100%;
+  }
+
+  .data-grid-container .data-grid .cell .value-viewer {
+    display: block;
+    box-sizing: content-box;
+    width: inherit;
+  }
+ 
+  .data-grid-container .data-grid .cell .data-editor{
+    display: block;
+    box-sizing: content-box;
+    height: inherit;
+  }
+}
+
 .controls{
   display: flex;
   margin: .5rem;
