@@ -54,6 +54,15 @@ export const PlayerApp = () => {
   const [mode, setMode] = useState("axis")
   const [graphData, setGraphData] = useState(makeGraphData())
 
+  const [xMax, setxMax] = useState(100)
+  const [nthTick, setNthTick] = useState(3)
+  const [nTicks, setNTicks] = useState(20)
+
+  const [yMax, setyMax] = useState(100)
+  const [nthYTick, setNthYTick] = useState(3)
+  const [nYTicks, setNYTicks] = useState(20)
+
+
   return (
 	<div className='app'>
 		<div className="controls">
@@ -100,8 +109,16 @@ export const PlayerApp = () => {
 			<Player
 				controls
 				component={PieChartComp}
-				inputProps={{data:mode === 'axis'?graphData:categories, mode: mode}}
-				durationInFrames={150}
+				inputProps={{data:mode === 'axis'?graphData:categories, mode: mode, 
+          xMax: xMax, 
+          yMax: yMax, 
+          nthYTick:nthYTick, 
+          nthTick:nthTick, 
+          nYTicks:nYTicks,
+          nTicks:nTicks
+        }}
+				
+          durationInFrames={150}
 				compositionWidth={1920}
 				compositionHeight={1080}
 				showVolumeControls={false}
@@ -113,12 +130,38 @@ export const PlayerApp = () => {
 				}}
         />
 		</div>
-    <select className='mode-select' name="modes" id="mode-select" onChange={e => handleModeChange(e)}>
-      <option value="axis">Axis</option>
-      <option value="circle">Circle</option>
-      <option value="pie-chart">Pie Chart</option>
-      <option value="histogram">Histogram</option>
-    </select>
+    <div className="settings">
+      <select className='mode-select' name="modes" id="mode-select" onChange={e => handleModeChange(e)}>
+        <option value="axis">Axis</option>
+        <option value="circle">Circle</option>
+        <option value="pie-chart">Pie Chart</option>
+        <option value="histogram">Histogram</option>
+      </select>
+      <div className="range">
+        <span>x-max</span>
+        <input type="number" value={xMax} onChange = {(e) => {setxMax(parseInt(e.target.value))}}/>
+      </div>
+      <div className="nth-tick">
+        <span>nth-tick</span>
+        <input type="number" value={nthTick} onChange = {(e) => {setNthTick(parseInt(e.target.value))}}/>
+      </div>
+      <div className="n-ticks">
+        <span>n-ticks</span>
+        <input type="number" value={nTicks} onChange = {(e) => {setNTicks(parseInt(e.target.value))}}/>
+      </div>
+      <div className="range">
+        <span>Y-max</span>
+        <input type="number" value={yMax} onChange = {(e) => {setyMax(parseInt(e.target.value))}}/>
+      </div>
+      <div className="nth-tick">
+        <span>nthY-tick</span>
+        <input type="number" value={nthYTick} onChange = {(e) => {setNthYTick(parseInt(e.target.value))}}/>
+      </div>
+      <div className="n-ticks">
+        <span>nY-ticks</span>
+        <input type="number" value={nYTicks} onChange = {(e) => {setNYTicks(parseInt(e.target.value))}}/>
+      </div>
+    </div>
 	</div>
   );
 };

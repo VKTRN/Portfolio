@@ -1,13 +1,14 @@
 import {useVideoConfig, useCurrentFrame, interpolate, Easing} from 'remotion';
 import React from "react"
 
-export const YAxis = ({position, dx, length}) => {
+export const YAxis = ({position, length, yMax, nthTick, nTicks}) => {
 
 	const config = useVideoConfig()
   const frame = useCurrentFrame()
   const t0 = 3
 
-  const ticks = Array(Math.floor(length/dx)).fill(0).map((item,i) => i*dx)
+  const ticks = Array(nTicks).fill(0).map((item,i) => i*500/nTicks)
+  console.log(ticks)
   
   const r = interpolate(frame, [0, 40], [0, 1], {
     easing: Easing.bezier(.5, 0, .5, 1),
@@ -41,7 +42,7 @@ export const YAxis = ({position, dx, length}) => {
             return (
               <>
               <line  y1={config.height-position.y - tick} x1={position.x} y2={config.height-position.y - tick} x2={position.x-20*r} stroke="black" stroke-width={4}/>
-              {i%1 === 0 && <text x={position.x-60} y={config.height-position.y - tick} font-size={40*r} dominantBaseline="middle" textAnchor="middle">{tick}</text>}
+              {i%nthTick === 0 && <text x={position.x-60} y={config.height-position.y - tick} font-size={40*r} dominantBaseline="middle" textAnchor="middle">{i*yMax/nTicks}</text>}
               </>
             ) 
           })
