@@ -18,10 +18,10 @@ export const Graph = ({data,xMax, nthTick, nTicks,yMax, nthYTick, nYTicks}) => {
   //   extrapolateRight: "clamp"
   // })
 
-  const cx = 1600/xMax
-  const cy = 600/yMax
-  const dx = 200
-  const dy = 200
+  const pixelsPerXUnit = 1600/xMax
+  const pixelsPerYUnit = 600/yMax
+  const x0 = 200
+  const y0 = 200
 
 	return (
     <>
@@ -33,7 +33,7 @@ export const Graph = ({data,xMax, nthTick, nTicks,yMax, nthYTick, nYTicks}) => {
         
       {/* <path stroke="black" stroke-width="3" fill="none" d={dataToPath(data, dx, dy, cx, cy,r)} /> */}
         
-        {data.slice(0, -1).map((item, i) => {
+        {data.map((item, i) => {
 
           const r = interpolate(frame, [i*3+25, i*3+2+25], [0, 1], {
             easing: Easing.bezier(.5, 0, .5, 1),
@@ -45,8 +45,8 @@ export const Graph = ({data,xMax, nthTick, nTicks,yMax, nthYTick, nYTicks}) => {
 
           return (
             <>
-              <circle cx={i*cx+dx} cy={1080 - item.y*cy - dy} r={8*r}/>
-              <line x1={i*cx+dx} y1={1080 - item.y*cy - dy} x2={(i+r)*cx+dx} y2={1080 - item.y*cy - dy+cy*(data[i].y - data[i+1].y)*r} stroke="black" />
+              <circle cx={item.x*pixelsPerXUnit+x0} cy={1080 - item.y*pixelsPerYUnit - y0} r={8*r}/>
+              { i < data.length-1 && <line x1={item.x*pixelsPerXUnit+x0} y1={1080 - item.y*pixelsPerYUnit - y0} x2={(item.x+r*(data[i+1].x-data[i].x))*pixelsPerXUnit+x0} y2={1080 - item.y*pixelsPerYUnit - y0+pixelsPerYUnit*(data[i].y - data[i+1].y)*r} stroke="black" />}
             </>
           )})}
       </svg>

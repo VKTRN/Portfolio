@@ -54,13 +54,15 @@ export const PlayerApp = () => {
   const [mode, setMode] = useState("axis")
   const [graphData, setGraphData] = useState(makeGraphData())
 
-  const [xMax, setxMax] = useState(100)
-  const [nthTick, setNthTick] = useState(3)
-  const [nTicks, setNTicks] = useState(20)
+  console.log(graphData)
 
-  const [yMax, setyMax] = useState(100)
-  const [nthYTick, setNthYTick] = useState(3)
-  const [nYTicks, setNYTicks] = useState(20)
+  const [xMax, setxMax] = useState(16)
+  const [nthTick, setNthTick] = useState(2)
+  const [nTicks, setNTicks] = useState(16)
+
+  const [yMax, setyMax] = useState(200)
+  const [nthYTick, setNthYTick] = useState(2)
+  const [nYTicks, setNYTicks] = useState(10)
 
 
   return (

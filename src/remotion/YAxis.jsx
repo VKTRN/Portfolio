@@ -7,8 +7,7 @@ export const YAxis = ({position, length, yMax, nthTick, nTicks}) => {
   const frame = useCurrentFrame()
   const t0 = 3
 
-  const ticks = Array(nTicks).fill(0).map((item,i) => i*500/nTicks)
-  console.log(ticks)
+  const ticks = Array(nTicks+1).fill(0).map((item,i) => i*500/nTicks)
   
   const r = interpolate(frame, [0, 40], [0, 1], {
     easing: Easing.bezier(.5, 0, .5, 1),

@@ -39,8 +39,12 @@ export const BasicSheet = ({graphData, setGraphData}) => {
   const onCellsChanged = changes => {
     const grid_new = grid;
     changes.forEach(({ cell, row, col, value }) => {
-      grid_new[row][col] = { ...grid[row][col], value };
+      const newValue = parseFloat(value)
+      console.log(newValue)
+      grid_new[row][col] = { ...grid[row][col], value: newValue  };
     });
+
+    console.log(grid_new)
     setGrid( grid_new );
 
     const new_data = []

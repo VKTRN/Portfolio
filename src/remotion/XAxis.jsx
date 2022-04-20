@@ -8,7 +8,7 @@ export const XAxis = ({position, length, xMax, nthTick, nTicks}) => {
 
   const t0 = 2
 
-  const ticks = Array(nTicks).fill(0).map((item,i) => i*1600/nTicks)
+  const ticks = Array(nTicks+1).fill(0).map((item,i) => i*1600/nTicks)
 
 
   const r = interpolate(frame, [0, 40], [0, 1], {
@@ -33,6 +33,7 @@ export const XAxis = ({position, length, xMax, nthTick, nTicks}) => {
               extrapolateLeft: "clamp",
               extrapolateRight: "clamp"
             })
+
 
             return (
               <>
