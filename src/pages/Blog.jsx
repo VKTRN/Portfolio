@@ -146,7 +146,7 @@ function Blog() {
   const [parent, set_parent]             = useState({left:0,right:0,top:0,bottom:0, width:0, height:0, center:{x:0, y:0}})
   const [square, setSquare]              = useState({x:0, y:0, size: 0})
   const [highlighting, set_highlighting] = useState({directions:"", values:"", position:""})
-  const [open, setOpen]                  = useState(['open', ''])
+  const [open, setOpen]                  = useState(window_.width > 600? ["",""]: ["open",""])
 
   const horizontal         = get_horizontal(css_object) // {property: "left" || "right", value: number}
   const vertical           = get_vertical(css_object) // {property: "top" || "bottom", value: number}
@@ -284,7 +284,7 @@ function Blog() {
         <div className="code-wrapper">
           <Editor open={open[0]} language="xml" displayName="HTML" value={makeHTML()}/>
           <Editor open={open[1]} language="css" displayName="CSS" value={get_css_string(css_object)}/>
-          <Buttons position={position} togglePosition={togglePosition} setDirection={setDirection} move={move} highlighting={highlighting}></Buttons>
+          {/* <Buttons position={position} togglePosition={togglePosition} setDirection={setDirection} move={move} highlighting={highlighting}></Buttons> */}
           {window_.width < 600 &&
             <div className="code-toggle">
               <button onClick={showHTML} className = {open[1]}>HTML</button>
