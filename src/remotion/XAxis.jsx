@@ -23,7 +23,7 @@ export const XAxis = ({position, length, xMax, nthTick, nTicks}) => {
         viewBox={`0 0 ${config.width} ${config.height}`}
         style = {{position: "absolute"}}
       >
-        <line x1={position.x} y1={config.height - position.y} x2={position.x + length*r} y2={config.height - position.y} stroke="black" stroke-width={6}/>
+        <line x1={position.x} y1={config.height - position.y} x2={position.x + (length+25)*r} y2={config.height - position.y} stroke="black" stroke-width={6}/>
         
         {
           ticks.map((tick,i) => {
@@ -47,3 +47,6 @@ export const XAxis = ({position, length, xMax, nthTick, nTicks}) => {
     </>
 	);
 };
+
+
+

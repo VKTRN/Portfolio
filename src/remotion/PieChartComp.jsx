@@ -1,24 +1,20 @@
+import React  										from "react"
 import {Sequence, useVideoConfig} from 'remotion';
-import {Pie} from './Pie'
-import React from "react"
-import { Histogram } from './Histogram';
-import {XAxis} from './XAxis'
-import {YAxis} from './YAxis'
-import {Graph} from './Graph'
+import {Pie}                      from './Pie'
+import {Histogram}    					  from './Histogram';
+import {Graph}    					      from './Graph';
 
-
-export const PieChartComp = ({data, mode, xMax, nthTick,nTicks, yMax, nthYTick,nYTicks}) => {
+export const PieChartComp = ({state, mode}) => {
 
 	const videoConfig     = useVideoConfig()
-
+	console.log(mode)
 	return (
-		<div style={{flex: 1, backgroundColor: '#bfe0de'}}>
+		<div style={{flex: 1, backgroundColor: 'white'}}>
 			<div >
 				<Sequence from={0} durationInFrames={videoConfig.durationInFrames}>
-					{mode === 'axis' && <Graph data = {data} xMax={xMax} nthTick={nthTick} nTicks = {nTicks}
-																									 yMax={yMax} nthYTick={nthYTick} nYTicks = {nYTicks}/>}
-					{mode === 'pie-chart' && <Pie data = {data}/>}
-					{mode === 'histogram' && <Histogram data = {data}/>}
+					{mode === 'axis'      && <Graph     data={state.data} config={state.graphConfig} />}
+					{mode === "pie-chart" && <Pie       data={state.data}/>}
+					{mode === 'histogram' && <Histogram data={state.data}/>}
 				</Sequence>
 			</div>
 		</div>

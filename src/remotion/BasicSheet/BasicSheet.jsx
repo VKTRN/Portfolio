@@ -2,6 +2,8 @@ import {useState} from 'react'
 import _ from 'lodash';
 import React from 'react';
 import ReactDataSheet from 'react-datasheet'
+import 'react-datasheet/lib/react-datasheet.css';
+import {Wrapper} from './BasicSheet.styles.js'
 
 function addRow(i,x,y){
   const row = [
@@ -30,9 +32,9 @@ function makeGrid(data){
 }
 
 
-export const BasicSheet = ({graphData, setGraphData}) => {
+export const BasicSheet = ({data, setData}) => {
 
-  const [grid, setGrid] = useState(makeGrid(graphData))
+  const [grid, setGrid] = useState(makeGrid(data))
 
   const valueRenderer = cell => cell.value
 
@@ -52,18 +54,20 @@ export const BasicSheet = ({graphData, setGraphData}) => {
     for (let i = 1; i < grid_new.length; i++) {
       new_data.push({x:grid_new[i][1].value, y:grid_new[i][2].value})
     }
-    setGraphData(new_data)
+    setData(new_data)
   }
 
   const onContextMenu = (e, cell, i, j) =>
     cell.readOnly ? e.preventDefault() : null;
 
   return (
-    <ReactDataSheet
-      data={grid}
-      valueRenderer={valueRenderer}
-      onContextMenu={onContextMenu}
-      onCellsChanged={onCellsChanged}
-    />
+    <Wrapper>
+      <ReactDataSheet
+        data={grid}
+        valueRenderer={valueRenderer}
+        onContextMenu={onContextMenu}
+        onCellsChanged={onCellsChanged}
+      />
+    </Wrapper>
   )
 }
