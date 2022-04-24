@@ -6,7 +6,6 @@ import {Wrapper, LeftBar} from './Categorical.styles'
 import {Controls}         from './Controls/Controls'
 import RenderButton       from '../shared/RenderButton/RenderButton'
 
-
 export const Categorical = ({mode}) => {
 
   const renderVideo = async () => {
@@ -30,7 +29,7 @@ export const Categorical = ({mode}) => {
   return (
     <Wrapper>
       <LeftBar>
-        <RenderButton isRendering = {isRendering} renderVideo={renderVideo}/>
+        <RenderButton isRendering={isRendering} renderVideo={renderVideo}/>
         <Controls categories={categories} setCategories={setCategories}/>
       </LeftBar>
       <Viewer state={{data: categories}} mode={mode}/>

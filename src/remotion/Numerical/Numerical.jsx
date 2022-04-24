@@ -1,11 +1,11 @@
 import React                 from 'react';
+import {useState}            from 'react'
 import axios                 from 'axios'
 import {Viewer}              from '../Viewer'
-import {useState}            from 'react'
 import {BasicSheet}          from '../BasicSheet/BasicSheet';
-import {Wrapper, LeftBar}    from './Numerical.styles'
 import RenderButton          from '../shared/RenderButton/RenderButton'
 import {makeData, getRanges} from '../../functions.js'
+import {Wrapper, LeftBar}    from './Numerical.styles'
 import {Controls}            from './Controls/Controls'
 
 export const Numerical = ({mode}) => {
@@ -33,7 +33,7 @@ export const Numerical = ({mode}) => {
     <Wrapper>
       <LeftBar>
         <RenderButton isRendering = {isRendering} renderVideo={renderVideo}/>
-        <Controls config ={graphConfig} setConfig = {setGraphConfig}/>
+        <Controls config={graphConfig} setConfig={setGraphConfig}/>
       </LeftBar>
       <Viewer state={{data: data, graphConfig: graphConfig}} mode={mode}/>
       <BasicSheet data={data} setData={setData}/>

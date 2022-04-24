@@ -1,52 +1,46 @@
-import {useVideoConfig, useCurrentFrame, interpolate, Easing} from 'remotion';
-import React from "react"
+import React             from "react"
+import {ease}            from '../functions.js'
+import {useVideoConfig}  from 'remotion';
+import {useCurrentFrame} from 'remotion';
 
-export const XAxis = ({position, length, xMax, nthTick, nTicks}) => {
+export const XAxis = ({config}) => {
 
-	const config = useVideoConfig()
-  const frame = useCurrentFrame()
+	const videoConfig = useVideoConfig()
+  const frame       = useCurrentFrame()
 
-  const t0 = 2
-
-  const ticks = Array(nTicks+1).fill(0).map((item,i) => i*1600/nTicks)
-
-
-  const r = interpolate(frame, [0, 40], [0, 1], {
-    easing: Easing.bezier(.5, 0, .5, 1),
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp"
-  })
+  const ticks = Array(config.x.nTicks+1).fill(0).map((item,i) => i*config.width/config.x.nTicks)
+  const t0    = 2
+  const t     = ease(frame, 0, 40)
+  const x0    = config.x.x0
+  const y0    = videoConfig.height - config.y.y0
 
 	return (
     <>
-      <svg
-        viewBox={`0 0 ${config.width} ${config.height}`}
-        style = {{position: "absolute"}}
-      >
-        <line x1={position.x} y1={config.height - position.y} x2={position.x + (length+25)*r} y2={config.height - position.y} stroke="black" stroke-width={6}/>
+      <svg viewBox={`0 0 ${videoConfig.width} ${videoConfig.height}`} style = {{position: "absolute"}}>
+        
+        <line x1={x0} y1={y0} x2={x0 + (config.width+25)*t} y2={y0} stroke="black" stroke-width={6}/>
         
         {
           ticks.map((tick,i) => {
 
-            const r = interpolate(frame, [t0*i, 10+t0*i], [0, 1], {
-              easing: Easing.bezier(.5, 0, .5, 1),
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp"
-            })
-
+            const t         = ease(frame, t0*i, 10+t0*i)
+            const x         = x0 + tick
+            const y         = y0 + 20*t
+            const isNthTick = i%config.x.nthTick === 0
+            const value     = i*config.x.max/config.x.nTicks
 
             return (
               <>
-                <line x1={position.x+tick} y1={config.height - position.y} x2={position.x + tick} y2={config.height - position.y+20*r} stroke="black" stroke-width={4}/>
-                {i%nthTick === 0 && <text x={position.x+tick} y={config.height - position.y + 50} font-size={40*r} dominantBaseline="middle" textAnchor="middle">{i*xMax/nTicks}</text>}
+                <line x1={x} y1={y0} x2={x} y2={y} stroke="black" stroke-width={4}/>
+                {isNthTick && <text x={x} y={y0 + 50} font-size={40*t} dominantBaseline="middle" textAnchor="middle">{value}</text>}
               </>
             )
           })
         }
       </svg>
     </>
-	);
-};
+	)
+}
 
 
 

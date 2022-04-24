@@ -34,7 +34,7 @@ export const Controls = ({categories, setCategories}) => {
           categories.map((category, i) => {
             return(
               <Category>
-                <input type="text" value={category.name} onChange = {(e) => changeName(e.target.value, i)}></input>
+                <input type="text"   value={category.name}  onChange = {(e) => changeName(e.target.value, i)}></input>
                 <input type="number" value={category.value} onChange = {(e) => changeValue(e.target.value, i)}></input>
               </Category>
             )

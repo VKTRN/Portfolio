@@ -4,7 +4,7 @@ import Home from "./pages/Home"
 import Blog from "./pages/Blog"
 import Shop from "./pages/Shop"
 // import PlayerApp from "./pages/PlayerApp"
-import VideoEditor from "./pages/VideoEditor"
+import VideoEditor from "./pages/VideoEditor/VideoEditor"
 
 import './scss/custom.scss';
 

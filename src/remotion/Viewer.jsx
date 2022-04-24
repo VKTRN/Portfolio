@@ -1,12 +1,12 @@
 import React from 'react';
-import {PieChartComp} from './PieChartComp'
+import {SequenceWrapper} from './SequenceWrapper'
 import { Player } from "@remotion/player";
 
 export const Viewer = ({state, mode}) => {
   return(
     <Player
       controls
-      component={PieChartComp}
+      component={SequenceWrapper}
       inputProps={{state, mode}}
       durationInFrames={150}
       compositionWidth={1920}

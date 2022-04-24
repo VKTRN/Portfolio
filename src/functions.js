@@ -1,17 +1,5 @@
-// const renderVideo = async (body,setisRendering) => {
-    
-//   setisRendering(true)
-  
-//   const res  = await axios.post("https://vktrn.com/render/", body, {responseType: 'blob'})
-//   const url  = window.URL.createObjectURL(new Blob([res.data]))
-//   const link = document.createElement('a')
-//   link.href  = url
-//   link.setAttribute('download', 'file.mp4')
-//   document.body.appendChild(link)
-//   link.click()
-
-//   setisRendering(false)
-// }
+import {interpolate}     from 'remotion'
+import {Easing}          from 'remotion'
 
 export const makeData = (n) => {
   const data = []
@@ -34,12 +22,14 @@ export const getRanges = (data) => {
   const nthTickX = 2
   const nthTickY = 2
 
-  const ranges = {
-    x:{min:xMin, max:xMax,nTicks:nTicksX, nthTick:nthTickX},
-    y:{min:yMin, max:yMax,nTicks:nTicksY, nthTick:nthTickY},
+  const config = {
+    x:{x0:200, min:xMin, max:xMax,nTicks:nTicksX, nthTick:nthTickX},
+    y:{y0:200, min:yMin, max:yMax,nTicks:nTicksY, nthTick:nthTickY},
+    width:1600,
+    height:600
   }
 
-  return ranges
+  return config
 
 }
 
@@ -76,4 +66,14 @@ export const roundValue = (n) => {
   }
   result = result *p/10
   return result
+}
+
+export const ease = (frame, start, end) => {
+  const r = interpolate(frame, [start, end], [0, 1], {
+    easing: Easing.bezier(.5, 0, .5, 1),
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp"
+  })
+
+  return r
 }
