@@ -1,7 +1,7 @@
 import React                 from 'react';
 import {useState}            from 'react'
 import axios                 from 'axios'
-import {Viewer}              from '../Viewer'
+import {Viewer}              from '../Viewer/Viewer'
 import {BasicSheet}          from '../BasicSheet/BasicSheet';
 import RenderButton          from '../shared/RenderButton/RenderButton'
 import {makeData, getRanges} from '../../functions.js'

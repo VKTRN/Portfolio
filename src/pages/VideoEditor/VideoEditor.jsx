@@ -4,6 +4,7 @@ import {ModeSelection} from '../../components/ModeSelection'
 import {Categorical}   from '../../remotion/Categorical/Categorical'
 import {Numerical}     from '../../remotion/Numerical/Numerical'
 import {TopBar}        from './VideoEditor.styles'
+import {ToolBar}       from './VideoEditor.styles'
 
 export const VideoEditor = () => {
 

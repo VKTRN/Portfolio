@@ -20,7 +20,7 @@ export const Graph = ({data,config}) => {
 
           const isNotLastPoint = i < data.length - 1
           
-          const t      = ease(frame, i*3+25, i*3+2+25)
+          const t      = ease(frame, i*3+25, i*3+27)
           const x      = pixelsPerXUnit * item.x 
           const y      = pixelsPerYUnit * item.y 
           const cx     = x0 + x 

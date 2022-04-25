@@ -7,6 +7,7 @@ export const XAxis = ({config}) => {
 
 	const videoConfig = useVideoConfig()
   const frame       = useCurrentFrame()
+  console.log(frame)
 
   const ticks = Array(config.x.nTicks+1).fill(0).map((item,i) => i*config.width/config.x.nTicks)
   const t0    = 2
@@ -25,13 +26,13 @@ export const XAxis = ({config}) => {
 
             const t         = ease(frame, t0*i, 10+t0*i)
             const x         = x0 + tick
-            const y         = y0 + 20*t
+            const y1        = y0 + 20*t
             const isNthTick = i%config.x.nthTick === 0
             const value     = i*config.x.max/config.x.nTicks
 
             return (
               <>
-                <line x1={x} y1={y0} x2={x} y2={y} stroke="black" stroke-width={4}/>
+                <line x1={x} y1={y0} x2={x} y2={y1} stroke="black" stroke-width={4}/>
                 {isNthTick && <text x={x} y={y0 + 50} font-size={40*t} dominantBaseline="middle" textAnchor="middle">{value}</text>}
               </>
             )

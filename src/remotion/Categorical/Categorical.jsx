@@ -1,6 +1,6 @@
 import React              from 'react';
 import axios              from 'axios'
-import {Viewer}           from '../Viewer'
+import {Viewer}           from '../Viewer/Viewer'
 import {useState}         from 'react'
 import {Wrapper, LeftBar} from './Categorical.styles'
 import {Controls}         from './Controls/Controls'
