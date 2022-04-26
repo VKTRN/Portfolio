@@ -1,7 +1,7 @@
-import React from 'react';
+import React             from 'react'
+import {Player}          from "@remotion/player"
 import {SequenceWrapper} from '../SequenceWrapper'
-import {Player} from "@remotion/player"
-import {Wrapper} from './Viewer.styles'
+import {Wrapper}         from './Viewer.styles'
 
 export const Viewer = () => {
   return(

@@ -1,7 +1,7 @@
 import React             from "react"
 import {useCurrentFrame} from 'remotion'
 import {useVideoConfig}  from 'remotion'
-import {ease}            from '../functions.js'
+import {ease}            from '../../functions.ts'
 import {useSelector}     from 'react-redux'
 
 export const Graph = () => {

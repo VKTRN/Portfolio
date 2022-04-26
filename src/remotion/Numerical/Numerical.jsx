@@ -1,13 +1,11 @@
 import React                 from 'react';
 import {useState}            from 'react'
 import axios                 from 'axios'
-import {makeData, getRanges} from '../../functions.js'
 import {Viewer}              from '../Viewer/Viewer'
-import {BasicSheet}          from '../BasicSheet/BasicSheet';
+import {BasicSheet}          from './BasicSheet/BasicSheet';
 import {RenderButton}        from '../shared/RenderButton/RenderButton'
 import {Wrapper, LeftBar}    from './Numerical.styles'
 import {Controls}            from './Controls/Controls'
-import {useSelector}         from 'react-redux'
 
 export const Numerical = () => {
 
@@ -26,7 +24,6 @@ export const Numerical = () => {
   //   setisRendering(false)
   // }
 
-  // const [graphConfig, setGraphConfig] = useState(getRanges(data))
   const [isRendering, setisRendering] = useState(false)
 
   return (

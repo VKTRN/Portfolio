@@ -2,9 +2,9 @@ import React  					from "react"
 import {Sequence} 			from 'remotion'
 import {useVideoConfig} from 'remotion'
 import {useSelector}    from 'react-redux'
-import {Pie}            from './Pie'
-import {Histogram}    	from './Histogram'
-import {Plot}    				from './Plot';
+import {Pie}            from './Categorical/Pie'
+import {Histogram}    	from './Categorical/Histogram'
+import {Plot}    				from './Numerical/Plot';
 
 export const SequenceWrapper = () => {
 
@@ -12,14 +12,12 @@ export const SequenceWrapper = () => {
   const mode        = useSelector(state => state.mode)
 
 	return (
-		<div style={{flex: 1, backgroundColor: 'white'}}>
-			<div >
-				<Sequence from={0} durationInFrames={videoConfig.durationInFrames}>
-					{mode === 'axis'      && <Plot/>}
-					{mode === 'histogram' && <Histogram/>}
-					{mode === "pie-chart" && <Pie/>}
-				</Sequence>
-			</div>
-		</div>
+		<Sequence from={0} durationInFrames={videoConfig.durationInFrames}>
+			<svg viewBox={`0 0 ${videoConfig.width} ${videoConfig.height}`} style={{position: "absolute", backgroundColor: 'white'}}>
+				{mode === 'axis'      && <Plot/>}
+				{mode === 'histogram' && <Histogram/>}
+				{mode === "pie-chart" && <Pie/>}
+			</svg>
+		</Sequence>
 	)
 }

@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {makeData, getRanges} from '../functions.js'
+import {makeData, getRanges} from '../functions.ts'
 
 const data = makeData(16)
 

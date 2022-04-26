@@ -6,7 +6,7 @@ import 'react-datasheet/lib/react-datasheet.css';
 import {Wrapper} from './BasicSheet.styles.js'
 import {useSelector}         from 'react-redux'
 import {useDispatch}         from 'react-redux'
-import {setNumerical} from '../../redux/slice'
+import {setNumerical} from '../../../redux/slice'
 
 function addRow(i,x,y){
   const row = [
