@@ -3,13 +3,12 @@ import {SequenceWrapper} from '../SequenceWrapper'
 import {Player} from "@remotion/player"
 import {Wrapper} from './Viewer.styles'
 
-export const Viewer = ({state, mode}) => {
+export const Viewer = () => {
   return(
     <Wrapper>
       <Player
         controls
         component={SequenceWrapper}
-        inputProps={{state, mode}}
         durationInFrames={150}
         compositionWidth={1920}
         compositionHeight={1080}

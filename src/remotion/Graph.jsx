@@ -2,11 +2,15 @@ import React             from "react"
 import {useCurrentFrame} from 'remotion'
 import {useVideoConfig}  from 'remotion'
 import {ease}            from '../functions.js'
+import {useSelector}     from 'react-redux'
 
-export const Graph = ({data,config}) => {
+export const Graph = () => {
 
   const videoConfig = useVideoConfig()
   const frame       = useCurrentFrame()
+
+  const data = useSelector(state => state.numerical)
+  const config = useSelector(state => state.config)
 
   const pixelsPerXUnit =  config.width/config.x.max
   const pixelsPerYUnit = -config.height/config.y.max

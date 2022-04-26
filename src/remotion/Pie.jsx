@@ -1,13 +1,16 @@
 import {Arc} from './Arc'
 import {useCurrentFrame, interpolate, spring, Easing} from 'remotion'
 import React from "react"
+import {useSelector}   from "react-redux"
 
 const colors = ["rgb(255,80,80)","rgb(255,255,80)","rgb(255,80,255)","rgb(80,255,80)","rgb(80,255,255)","rgb(0,80,80)","rgb(80,0,80)", "rgb(80,80,0)"]
 
 
-export const Pie = ({data}) => {
+export const Pie = () => {
 
   const frame = useCurrentFrame()
+
+  const data = useSelector(state => state.categories)
 
   const r = interpolate(frame, [0, 60], [0, 1], {
     easing: Easing.bezier(.5, 0, .5, 1),

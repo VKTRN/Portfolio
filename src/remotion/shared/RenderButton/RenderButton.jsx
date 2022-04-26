@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RenderButton = ({isRendering, renderVideo}) => {
+export const RenderButton = ({isRendering, renderVideo}) => {
   return(
     <button className='render-button' type='button' disabled = {isRendering}  onClick={renderVideo}>
       {isRendering?<>
@@ -12,5 +12,3 @@ const RenderButton = ({isRendering, renderVideo}) => {
     </button>
   )
 }
-
-export default RenderButton

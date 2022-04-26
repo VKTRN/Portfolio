@@ -2,11 +2,16 @@ import React             from "react"
 import {ease}            from '../functions.js'
 import {useVideoConfig}  from 'remotion';
 import {useCurrentFrame} from 'remotion';
+import {useSelector}     from 'react-redux'
 
-export const YAxis = ({config}) => {
+
+export const YAxis = () => {
 
 	const videoConfig = useVideoConfig()
   const frame       = useCurrentFrame()
+
+  const config = useSelector(state => state.config)
+
 
   const ticks = Array(config.y.nTicks+1).fill(0).map((item,i) => -i*config.height/config.y.nTicks)
   const t0    = 3

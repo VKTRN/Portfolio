@@ -1,15 +1,18 @@
 import React from 'react'
 import {Wrapper, Config} from './Controls.styles'
+import {useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
+import {setConfig} from '../../../redux/slice'
 
-export const Controls = ({config, setConfig}) => {
+export const Controls = () => {
 
   const ConfigLine = ({name, value, direction, property}) => {
 
     const changeConfig = (e, direction, c) => {
       const value             = parseInt(e.target.value)
-      const newConfig         = {...config}
+      const newConfig =  JSON.parse(JSON.stringify(config)) // deep clone
       newConfig[direction][c] = value
-      setConfig(newConfig)
+      dispatch(setConfig(newConfig))
     }
   
     return(
@@ -19,6 +22,9 @@ export const Controls = ({config, setConfig}) => {
     </Config>
     )
   }
+
+  const config = useSelector(state => state.config)
+  const dispatch = useDispatch()
 
   return(
     <Wrapper>
@@ -31,4 +37,3 @@ export const Controls = ({config, setConfig}) => {
 		</Wrapper> 
   )
 }
-
