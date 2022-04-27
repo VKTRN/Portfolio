@@ -1,8 +1,13 @@
-import React from 'react'
-import {Wrapper, Categories, Category} from './Controls.styles'
-import {addCategory ,removeCategory ,changeName ,changeValue} from '../../../redux/slice.js'
-import {useDispatch} from "react-redux"
-import {useSelector} from 'react-redux'
+import React            from 'react'
+import {useDispatch}    from 'react-redux'
+import {useSelector}    from 'react-redux'
+import {addCategory}    from '../../../redux/slice.js'
+import {removeCategory} from '../../../redux/slice.js'
+import {changeName}     from '../../../redux/slice.js'
+import {changeValue}    from '../../../redux/slice.js'
+import {Wrapper}        from './Controls.styles'
+import {Categories}     from './Controls.styles'
+import {Category}       from './Controls.styles'
 
 export const Controls = () => {
 

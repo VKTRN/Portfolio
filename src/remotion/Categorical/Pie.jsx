@@ -15,8 +15,17 @@ export const Pie = () => {
 
 	return (
     <>
-      {arcs.map((arc, i) => 
-          <Arc x={960} y = {540} radius = {300} start = {arc.start*t} end = {arc.end*t} color = {colors[i]} t0={i*7+45} name={data[i].name}/>
+      {arcs.map((arc, i) => {
+
+        const x     = 960
+        const y     = 540
+        const r     = 300
+        const start = arc.start*t
+        const end   = arc.end*t
+        const color = colors[i]
+
+        return <Arc x={x} y={y} radius={r} start={start} end={end} color={color}/>
+      }
       )}
     </>
 	)
