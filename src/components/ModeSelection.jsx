@@ -1,6 +1,6 @@
-import React from 'react'
-import {setMode} from '../redux/slice'
-import {useDispatch} from "react-redux"
+import React         from 'react'
+import {useDispatch} from 'react-redux'
+import {setMode}     from '../redux/slice'
 
 export const ModeSelection = () => {
 

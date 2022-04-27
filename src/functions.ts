@@ -1,7 +1,10 @@
-import {interpolate}     from 'remotion'
-import {Easing}          from 'remotion'
+import axios         from 'axios'
+import {interpolate} from 'remotion'
+import {Easing}      from 'remotion'
 
 type position = {x: number, y: number}
+
+export const colors = ["rgb(255,80,80)","rgb(255,255,80)","rgb(255,80,255)","rgb(80,255,80)","rgb(80,255,255)","rgb(0,80,80)","rgb(80,0,80)", "rgb(80,80,0)"]
 
 export const makeData = (n: number): position[] => {
   const data: position[] = []
@@ -130,8 +133,6 @@ export const getArcsFromData = (data: any[]) => {
   return arcs
 }
 
-export const colors = ["rgb(255,80,80)","rgb(255,255,80)","rgb(255,80,255)","rgb(80,255,80)","rgb(80,255,255)","rgb(0,80,80)","rgb(80,0,80)", "rgb(80,80,0)"]
-
 export function polarToCartesian(cx: number, cy: number, radius: number, degrees: number) {
   
   const radians= (degrees-90) * Math.PI / 180.0
@@ -164,4 +165,19 @@ export const getHeightsFromData = (data, maxHeight) => {
   const heights  = data.map((value) => value/maxValue*maxHeight)
 
   return heights
+}
+
+export const renderVideo = async (body, setIsRendering) => {
+    
+  setIsRendering(true)
+  
+  const res  = await axios.post("https://vktrn.com/render/", body, {responseType: 'blob'})
+  const url  = window.URL.createObjectURL(new Blob([res.data]));
+  const link = document.createElement('a');
+  link.href  = url;
+  link.setAttribute('download', 'file.mp4'); //or any other extension
+  document.body.appendChild(link);
+  link.click();
+
+  setIsRendering(false)
 }
