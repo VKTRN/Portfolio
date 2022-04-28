@@ -12,9 +12,9 @@ export const ModeSelection = () => {
 
   return (
     <select className='mode-select' name="modes" id="mode-select" onChange={(e) => handleSetMode(e.target.value)}>
-      <option value="pie-chart">Pie Chart</option>
-      <option value="axis">Graph</option>
-      <option value="histogram">Histogram</option>
+      <option value="pie-chart" >Pie Chart</option>
+      <option value="axis"      >Graph</option>
+      <option value="histogram" >Histogram</option>
     </select>
   )
 }
