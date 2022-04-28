@@ -7,15 +7,17 @@ export const RenderButton = ({type}) => {
 
   const [isRendering, setIsRendering] = useState(false)
 
-  const mode       = useSelector(state => state.mode)
-  const categories = useSelector(state => state.categories)
-  const numerical  = useSelector(state => state.numerical)
-  const config     = useSelector(state => state.config)
+  // const mode       = useSelector(state => state.mode)
+  // const categories = useSelector(state => state.categories)
+  // const numerical  = useSelector(state => state.numerical)
+  // const config     = useSelector(state => state.config)
 
-  const body = type === 'categorical' ? {data: categories, mode: mode} : {data: numerical, mode: mode, config: config}
+  const state = useSelector(state => state)
+
+  // const body = type === 'categorical' ? {data: categories, mode: mode} : {data: numerical, mode: mode, config: config}
 
   return(
-    <button className='render-button' type='button' disabled={isRendering}  onClick={() => renderVideo(body, setIsRendering)}>
+    <button className='render-button' type='button' disabled={isRendering}  onClick={() => renderVideo(state, setIsRendering)}>
       {isRendering?
         <>
           <div className="spinner-container">

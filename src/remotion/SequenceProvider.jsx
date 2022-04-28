@@ -1,7 +1,7 @@
 import React   				    from 'react'
 import {Provider} 			  from 'react-redux'
 import store      			  from '../redux/store'
-import {SequenceWrapper2} from './SequenceWrapper'
+import {SequenceWrapper2} from './SequenceWrapper2'
 
 export const SequenceProvider = (data) => {
 

@@ -1,6 +1,6 @@
-import React              from "react"
-import {Composition}      from 'remotion'
-import {SequenceProvider} from "./SequenceProvider"
+import React               from "react"
+import {Composition}       from 'remotion'
+import {SequenceProvider}  from "./SequenceProvider"
 
 export const MyVideo = () => {
   return (
