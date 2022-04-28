@@ -1,22 +1,13 @@
-import React   				   from 'react'
-import {useEffect} 			 from 'react'
-import {Provider} 			 from 'react-redux'
-import {useDispatch}		 from 'react-redux'
-import store      			 from '../redux/store'
-import {setState}        from '../redux/slice'
-import {SequenceWrapper} from './SequenceWrapper'
+import React   				    from 'react'
+import {Provider} 			  from 'react-redux'
+import store      			  from '../redux/store'
+import {SequenceWrapper2} from './SequenceWrapper'
 
-export const SequenceProvider = () => {
-
-	const dispatch = useDispatch()
-
-	useEffect(() => {
-		dispatch(setState(data))
-	}, [])
+export const SequenceProvider = (data) => {
 
 	return (
     <Provider store={store}>
-      <SequenceWrapper/>
+      <SequenceWrapper2 data = {data}/>
 		</Provider>
 	)
 }
