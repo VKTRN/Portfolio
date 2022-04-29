@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit'
 import {makeData}    from '../functions.ts'
 import {getRanges}   from '../functions.ts'
 
-const data = makeData(16)
+const data = makeData(-10,10)
 
 const state = {
   mode:'pie-chart',

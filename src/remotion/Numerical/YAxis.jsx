@@ -10,12 +10,13 @@ export const YAxis = () => {
   const frame       = useCurrentFrame()
   const config      = useSelector(state => state.config)
 
-  const ticks = Array(config.y.nTicks+1).fill(0).map((item,i) => -i*config.height/config.y.nTicks)
+  const ticks = Array(config.y.nTicks+1).fill(0).map((item,i) => -i*config.y.length*10.80/config.y.nTicks)
   const t0    = 3
   const t     = ease(frame, 0, 40)
-  const x0    = config.x.x0
-  const y0    = videoConfig.height - config.y.y0
-  const y2    = y0 - (config.height+25)*t
+  const ppx   = config.x.length*19.20/(config.x.max - config.x.min)
+  const x0    = config.x.x0*19.2  - ppx * config.x.min
+  const y0    = videoConfig.height - config.y.y0*10.8
+  const y2    = y0 - (config.y.length*10.80+25)*t
 
 	return (
     <>
@@ -28,7 +29,7 @@ export const YAxis = () => {
           const y         = y0 + tick
           const x2        = x0 - 20*t
           const isNthTick = i%config.y.nthTick === 0
-          const value     = i*config.y.max/config.y.nTicks
+          const value     = i*(config.y.max - config.y.min)/config.y.nTicks
 
           return (
             <>
@@ -44,3 +45,4 @@ export const YAxis = () => {
 
 
 
+ 

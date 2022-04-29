@@ -3,7 +3,7 @@ import {useVideoConfig}     from 'remotion'
 import {useSelector}        from 'react-redux'
 import {colors}             from '../../functions.ts'
 import {getHeightsFromData} from '../../functions.ts'
-import {Bar}                from './Bar'
+import {Bar}                from './Bar.tsx'
 
 export const Histogram = () => {
 

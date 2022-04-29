@@ -93,6 +93,7 @@ export default function Editor({ language, displayName, value, onChange, open}) 
     <div className={`editor-container ${open}`}>
       <ControlledEditor
         ref={ref}
+        displayName = {displayName}
         value={value}
         onSelection = {(e,b) => {console.log(e,b)}}
         className="code-mirror-wrapper"

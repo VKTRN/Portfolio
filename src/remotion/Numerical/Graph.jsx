@@ -9,24 +9,24 @@ export const Graph = () => {
   const videoConfig = useVideoConfig()
   const frame       = useCurrentFrame()
 
-  const data = useSelector(state => state.numerical)
+  const data   = useSelector(state => state.numerical)
   const config = useSelector(state => state.config)
 
-  const pixelsPerXUnit =  config.width/config.x.max
-  const pixelsPerYUnit = -config.height/config.y.max
-  const x0             = 200
-  const y0             = videoConfig.height-200
+  const pixelsPerXUnit =  config.x.length*19.2/(config.x.max - config.x.min)
+  const pixelsPerYUnit = -config.y.length*10.8/(config.y.max - config.y.min)
+  const x0             = config.x.x0*19.2
+  const y0             = videoConfig.height-config.y.y0*10.8
 
 	return (
-    <svg viewBox={`0 0 ${videoConfig.width} ${videoConfig.height}`} style = {{position: "absolute"}}>
+    <>
       {
         data.map((item, i) => {
 
           const isNotLastPoint = i < data.length - 1
           
           const t      = ease(frame, i*3+25, i*3+27)
-          const x      = pixelsPerXUnit * item.x 
-          const y      = pixelsPerYUnit * item.y 
+          const x      = pixelsPerXUnit * (item.x - config.x.min) 
+          const y      = pixelsPerYUnit * (item.y - config.y.min)
           const cx     = x0 + x 
           const cy     = y0 + y
           const radius = 8*t
@@ -43,7 +43,7 @@ export const Graph = () => {
           )
         })
       }
-    </svg>
+    </>
 	)
 }
 

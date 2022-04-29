@@ -10,7 +10,7 @@ export const Numerical = () => {
   return (
     <Wrapper>
       <LeftBar>
-        <RenderButton type='numerical'/>
+        <RenderButton/>
         <Controls/>
       </LeftBar>
       <Viewer/>
