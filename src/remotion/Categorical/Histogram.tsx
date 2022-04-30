@@ -1,14 +1,14 @@
 import React                from 'react'
 import {useVideoConfig}     from 'remotion'
-import {useSelector}        from 'react-redux'
-import {colors}             from '../../functions.ts'
-import {getHeightsFromData} from '../../functions.ts'
-import {Bar}                from './Bar.tsx'
+import {useAppSelector}     from '../../redux/hooks'
+import {colors}             from '../../functions'
+import {getHeightsFromData} from '../../functions'
+import {Bar}                from './Bar'
 
 export const Histogram = () => {
 
   const config  = useVideoConfig()
-  const data    = useSelector(state => state.categories)
+  const data    = useAppSelector(state => state.categories)
   const heights = getHeightsFromData(data.map(a => a.value), 700)
 
 	return (

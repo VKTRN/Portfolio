@@ -2,18 +2,18 @@ import axios         from 'axios'
 import {interpolate} from 'remotion'
 import {Easing}      from 'remotion'
 
-type Position = {x: number, y: number}
+export type Position = {x: number, y: number}
 
-type PlotConfig = {
+export type PlotConfig = {
   x: {x0: number, min: number, max: number, nTicks: number, nthTick: number, length: number}, 
   y: {y0: number, min: number, max: number, nTicks: number, nthTick: number, length: number}, 
 }
 
 type Angle = {start: number, end: number}
 
-type Category = {name: string, value: number}
+export type Category = {name: string, value: number}
 
-type Body = {categories: Category[], numerical: Position[], mode: string, config: PlotConfig}
+export type State = {categories: Category[], numerical: Position[], mode: string, config: PlotConfig}
 
 export const colors: string[] = ["rgb(255,80,80)","rgb(255,255,80)","rgb(255,80,255)","rgb(80,255,80)","rgb(80,255,255)","rgb(0,80,80)","rgb(80,0,80)", "rgb(80,80,0)"]
 
@@ -31,7 +31,8 @@ export const getRanges = (data: Position[]): PlotConfig => {
   
   const xMin     = Math.min(...X)
   const yMin     = Math.min(...Y)
-  const xMax     = roundValue(Math.max(...X)/20)*20
+  const xMax     = Math.max(...X)
+  // const xMax     = roundValue(Math.max(...X)/20)*20
   const yMax     = Math.max(...Y)
   const nTicksX  = 20
   const nTicksY  = 10
@@ -40,7 +41,7 @@ export const getRanges = (data: Position[]): PlotConfig => {
 
   const config = {
     x:{x0:5, min:xMin, max:xMax, nTicks:nTicksX, nthTick:nthTickX, length: 90},
-    y:{y0:10, min:yMin, max:yMax, nTicks:nTicksY, nthTick:nthTickY, length: 80},
+    y:{y0:20, min:yMin, max:yMax, nTicks:nTicksY, nthTick:nthTickY, length: 70},
   }
 
   return config
@@ -174,7 +175,7 @@ export const getHeightsFromData = (data: number[], maxHeight: number): number[] 
   return heights
 }
 
-export const renderVideo = async (body: Body, setIsRendering: Function): Promise<void> => {
+export const renderVideo = async (body: State, setIsRendering: Function): Promise<void> => {
     
   setIsRendering(true)
   

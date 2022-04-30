@@ -16,11 +16,13 @@ export const XAxis = () => {
   const ppy   = config.y.length*10.80/(config.y.max - config.y.min)
 
   const x0    = config.x.x0*19.2
-  const y0    = videoConfig.height - config.y.y0*10.8+ ppy * config.y.min
+  const y0    = config.y.min <= 0? videoConfig.height - config.y.y0*10.8+ ppy * config.y.min : videoConfig.height - config.y.y0*10.8 
+
+
 
 	return (
     <>
-      <line x1={x0} y1={y0} x2={x0 + (config.x.length*19.20+25)*t} y2={y0} stroke="black" stroke-width={6}/>
+      <line x1={x0} y1={y0} x2={x0 + (config.x.length*19.20)*t} y2={y0} stroke="black" stroke-width={6} stroke-linecap="round"/>
         
       {
         ticks.map((tick,i) => {
@@ -33,8 +35,8 @@ export const XAxis = () => {
 
           return (
             <>
-              <line x1={x} y1={y0} x2={x} y2={y1} stroke="black" stroke-width={4}/>
-              {isNthTick && <text x={x} y={y0 + 50} font-size={40*t} dominantBaseline="middle" textAnchor="middle">{value}</text>}
+              <line x1={x} y1={y0} x2={x} y2={y1} stroke="black" stroke-width={4} stroke-linecap="round"/>
+              {/* {isNthTick && <text x={x} y={y0 + 50} font-size={40*t} dominantBaseline="middle" textAnchor="middle">{value}</text>} */}
             </>
           )
         })

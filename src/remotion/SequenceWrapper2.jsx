@@ -4,7 +4,7 @@ import {useVideoConfig} from 'remotion'
 import {useSelector}    from 'react-redux'
 import {useDispatch}		from 'react-redux'
 import {setState}       from '../redux/slice'
-import {Pie}            from './Categorical/Pie'
+import {Pie}            from './Categorical/Pie.tsx'
 import {Histogram}    	from './Categorical/Histogram'
 import {Plot}    				from './Numerical/Plot'
 

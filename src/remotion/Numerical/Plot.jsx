@@ -9,7 +9,7 @@ export const Plot = () => {
     <>
       <XAxis/>
       <YAxis/>
-      <Graph/>
+      {/* <Graph/> */}
     </>
 	)
 }
