@@ -34,18 +34,23 @@ export const YAxis = () => {
   const a = Math.max(xmin*ppx, -width*19.2)
   const deltaX = Math.abs(Math.min(a, 0))
   // const deltaX = Math.abs(Math.min(ppx*xmin, width*19.20))
-  console.log(deltaX)
   const x0     = dx*19.2 + deltaX
   const y0     = videoConfig.height - dy*10.8
 
+  const line = config.y.direction === 'bottomToTop'
+  ?{  start: videoConfig.height-config.y.y0*10.8, 
+      end:   videoConfig.height-(config.y.y0+config.y.length*t)*10.8} 
+  :{  start: videoConfig.height-(config.y.y0+config.y.length)*10.8, 
+      end:   videoConfig.height-(config.y.y0+config.y.length)*10.8 + (config.y.length*10.8)*t}
 
-  const y2    = y0 - (height*10.80)*t
+
+  // const y2    = y0 - (height*10.80)*t
 
 	return (
     <>
-      <line x1={x0} y1={y0} x2={x0} y2={y2} stroke="black" stroke-width={6} stroke-linecap="round"/>
+      <line x1={x0} y1={line.start} x2={x0} y2={line.end} stroke="black" stroke-width={6} stroke-linecap="round"/>
         
-      {
+      {/* {
         ticks.map((tick,i) => {
 
           const t         = ease(frame, t0*i, 10+t0*i)
@@ -61,7 +66,7 @@ export const YAxis = () => {
             </>
           )
         })
-      }
+      } */}
     </>
 	)
 }
