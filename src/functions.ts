@@ -5,8 +5,8 @@ import {Easing}      from 'remotion'
 export type Position = {x: number, y: number}
 
 export type PlotConfig = {
-  x: {x0: number, min: number, max: number, nTicks: number, nthTick: number, length: number, direction: string}, 
-  y: {y0: number, min: number, max: number, nTicks: number, nthTick: number, length: number, direction: string}, 
+  x: {x0: number, min: number, max: number, nTicks: number, nthTick: number, length: number, direction: string, zeroPosition: string}, 
+  y: {y0: number, min: number, max: number, nTicks: number, nthTick: number, length: number, direction: string, zeroPosition: string}, 
 }
 
 type Angle = {start: number, end: number}
@@ -20,7 +20,7 @@ export const colors: string[] = ["rgb(255,80,80)","rgb(255,255,80)","rgb(255,80,
 export const makeData = (start: number, end: number): Position[] => {
   const data: Position[] = []
   for (let i = start; i <= end; i++) {
-    data.push({x:i, y:-i*i})
+    data.push({x:i, y:-i*i+50})
   }
   return data
 }
@@ -42,13 +42,23 @@ export const getRanges = (data: Position[]): PlotConfig => {
 
   const oInX = xMin < 0 && xMax > 0 // from left to right
   const oSmallerX = xMin >= 0 && xMax >  0 // from left to right
-
   const oBiggerX  = xMin <  0 && xMax <= 0 // from right to left
-  
-  
+
   const oInY = yMin < 0 && yMax > 0 // from bottom to top
   const oBiggerY  = yMin <  0 && yMax <= 0 // from top to bottom
   const oSmallerY = yMin >= 0 && yMax >  0 // from bottom to top
+
+  let zeroPositionX
+  let zeroPositionY
+
+  if(oInX)      {zeroPositionX = "inside"}
+  if(oSmallerX) {zeroPositionX = "smaller"}
+  if(oBiggerX)  {zeroPositionX = "bigger"}
+  
+  if(oInY)      {zeroPositionY = "inside"}
+  if(oSmallerY) {zeroPositionY = "smaller"}
+  if(oBiggerY)  {zeroPositionY = "bigger"}
+  
 
   const directionX = oBiggerX? 'rightToLeft' : 'leftToRight'
   const directionY = oBiggerY? 'topToBottom' : 'bottomToTop'
@@ -56,22 +66,22 @@ export const getRanges = (data: Position[]): PlotConfig => {
 
   const a = oInX && oInY
   
-  const b = oInX && oBiggerY 
-  const c = oInX && oSmallerY
+  const b = oInX      && oBiggerY 
+  const c = oInX      && oSmallerY
   const d = oSmallerX && oInY
-  const e = oBiggerX && oInY
+  const e = oBiggerX  && oInY
 
-  const f = oBiggerX && oBiggerY
+  const f = oBiggerX  && oBiggerY
   const g = oSmallerX && oBiggerY
-  const h = oBiggerX && oSmallerY
+  const h = oBiggerX  && oSmallerY
   const i = oSmallerX && oSmallerY
 
   const direction = [a,b,c,d,e,f,g,h,i]
 
 
   const config = {
-    x:{x0:5, min:xMin, max:xMax, nTicks:nTicksX, nthTick:nthTickX, length: 90, direction: directionX},
-    y:{y0:20, min:yMin, max:yMax, nTicks:nTicksY, nthTick:nthTickY, length: 70, direction: directionY},
+    x:{x0:5, min:xMin, max:xMax, nTicks:nTicksX, nthTick:nthTickX, length: 90, direction: directionX, zeroPosition: zeroPositionX},
+    y:{y0:20, min:yMin, max:yMax, nTicks:nTicksY, nthTick:nthTickY, length: 70, direction: directionY, zeroPosition: zeroPositionY},
   }
 
   return config

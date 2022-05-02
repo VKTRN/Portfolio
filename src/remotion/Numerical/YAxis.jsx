@@ -6,67 +6,89 @@ import {useSelector}     from 'react-redux'
 
 export const YAxis = () => {
 
+  const getXinPx = () => {
+    const a      = Math.max(config.x.min*pxPerXunit, -axisWidthInPx)
+    const deltaX = Math.abs(Math.min(a, 0))
+    const xInPx  = config.x.x0 * videoWidthInPx/100 + deltaX
+  
+    return xInPx
+  }
+
 	const videoConfig = useVideoConfig()
   const frame       = useCurrentFrame()
   const config      = useSelector(state => state.config)
 
-  const dx = config.x.x0
-  const xmin = config.x.min
-  const xmax = config.x.max
-  const xTicks = config.x.nTicks
-  const nthTickx = config.x.nthTick
-  const width = config.x.length
+  const direction       = config.y.direction
+  const nTicks          = config.y.nTicks
 
-  const dy = config.y.y0
-  const ymin = config.y.min
-  const ymax = config.y.max
-  const yTicks = config.y.nTicks
-  const nthTicky = config.y.nthTick
-  const height = config.y.length
-  const zeroWithinXRange = xmin < 0 && xmax > 0
-
-  const ticks  = Array(yTicks+1).fill(0).map((item,i) => -i*height*10.80/yTicks)
-  const t0     = 3
-  const t      = ease(frame, 0, 40)
-  const ppx    = width*19.20/(xmax - xmin)
-  // const x0     = zeroWithinXRange? dx*19.2 - ppx*xmin : dx*19.2
-  // const deltaX = Math.min(Math.abs(ppx*xmin), width*19.20)
-  const a = Math.max(xmin*ppx, -width*19.2)
-  const deltaX = Math.abs(Math.min(a, 0))
-  // const deltaX = Math.abs(Math.min(ppx*xmin, width*19.20))
-  const x0     = dx*19.2 + deltaX
-  const y0     = videoConfig.height - dy*10.8
-
-  const line = config.y.direction === 'bottomToTop'
-  ?{  start: videoConfig.height-config.y.y0*10.8, 
-      end:   videoConfig.height-(config.y.y0+config.y.length*t)*10.8} 
-  :{  start: videoConfig.height-(config.y.y0+config.y.length)*10.8, 
-      end:   videoConfig.height-(config.y.y0+config.y.length)*10.8 + (config.y.length*10.8)*t}
+  const videoWidthInPx  = videoConfig.width
+  const videoHeightInPx = videoConfig.height
+  const axisWidthInPx   = config.x.length * videoWidthInPx/100
+  const axisHeightInPx  = config.y.length * videoHeightInPx/100
 
 
-  // const y2    = y0 - (height*10.80)*t
+  const ticksInPx     = Array(nTicks+1).fill(0).map((item,i) => i*axisHeightInPx/nTicks)
+  const t0            = 2
+  const s             = ease(frame, 0, 40)
+  const deltaYinUnits = config.y.max - config.y.min
+  const deltaXinUnits = config.x.max - config.x.min
+  const pxPerXunit    = axisWidthInPx / deltaXinUnits
+  
+  const yBottomInPx   = videoHeightInPx - config.y.y0*videoHeightInPx/100
+  const yTopInPx      = yBottomInPx - axisHeightInPx
+  const xInPx         = getXinPx()
+
+  let tickShift
+  let deltaTick
+
+  switch (config.x.zeroPosition) {
+    case 'inside':
+      tickShift = -20
+      deltaTick = +10
+      break;
+    case 'smaller':
+      tickShift = -20
+      deltaTick = 0
+      break;
+    case 'bigger':
+      tickShift = 20
+      deltaTick = 0
+      break;
+  
+    default:
+      break;
+  }
+
+  const line = {}
+  line.start = direction === 'bottomToTop'? yBottomInPx                    : yTopInPx
+  line.end   = direction === 'bottomToTop'? yBottomInPx - axisHeightInPx*s : yTopInPx + axisHeightInPx*s
 
 	return (
     <>
-      <line x1={x0} y1={line.start} x2={x0} y2={line.end} stroke="black" stroke-width={6} stroke-linecap="round"/>
+      <line x1={xInPx} y1={line.start} x2={xInPx} y2={line.end} stroke="black" stroke-width={6} stroke-linecap={s > 0 && "round"}/>
         
-      {/* {
-        ticks.map((tick,i) => {
+      {
+        ticksInPx.map((tickInPx,i) => {
 
-          const t         = ease(frame, t0*i, 10+t0*i)
-          const y         = y0 + tick
-          const x2        = x0 - 20*t
+          const s         = ease(frame, t0*i, 10+t0*i)
+          const y         = direction === 'bottomToTop'? yBottomInPx - tickInPx : yTopInPx + tickInPx
+          
+          
+          const xStart    = xInPx + deltaTick
+          const xTick     = xStart + tickShift*s
+          
+          const xNumber   = xInPx - 35
           const isNthTick = i%config.y.nthTick === 0
-          const value     = i*(config.y.max - config.y.min)/config.y.nTicks + config.y.min
+          const value     = direction === 'bottomToTop'? i*deltaYinUnits/nTicks + config.x.min : -i*deltaYinUnits/nTicks + config.y.max
 
           return (
             <>
-              <line x1={x0} y1={y} x2={x2} y2={y} stroke="black" stroke-width={4} stroke-linecap="round"/>
-              {isNthTick && <text x={x0-35} y={y} font-size={40*t} dominantBaseline="middle" textAnchor="end">{value}</text>}
+              <line x1={xStart} y1={y} x2={xTick} y2={y} stroke="black" stroke-width={4} stroke-linecap={s > 0 && "round"}/>
+              {/* {isNthTick && <text x={xNumber} y={y} font-size={40*s} dominantBaseline="middle" textAnchor="end">{value}</text>} */}
             </>
           )
         })
-      } */}
+      }
     </>
 	)
 }

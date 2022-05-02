@@ -6,39 +6,83 @@ import {useSelector}     from 'react-redux'
 
 export const XAxis = () => {
 
+  const getYinPx = () => {
+    const a      = Math.max(config.y.min*pxPerYunit, -axisHeightInPx)
+    const deltaY = Math.abs(Math.min(a, 0))
+    const yInPx  = videoHeightInPx-config.y.y0 * videoHeightInPx/100 - deltaY
+  
+    return yInPx
+  }
+
 	const videoConfig = useVideoConfig()
   const frame       = useCurrentFrame()
   const config      = useSelector(state => state.config)
 
-  const ticks = Array(config.x.nTicks+1).fill(0).map((item,i) => i*config.x.length*19.20/config.x.nTicks)
-  const t0    = 2
-  const t     = ease(frame, 0, 40)
-  const ppy   = config.y.length*10.80/(config.y.max - config.y.min)
-  
-  const y0    = config.y.min <= 0? videoConfig.height - config.y.y0*10.8+ ppy * config.y.min : videoConfig.height - config.y.y0*10.8 
+  const direction       = config.x.direction
+  const nTicks          = config.x.nTicks
 
-  const x0    = config.x.x0*19.2
-  const line = config.x.direction === 'leftToRight'
-    ?{start: config.x.x0*19.2, end: (config.x.x0+config.x.length*t)*19.20} 
-    :{start: (config.x.x0+config.x.length)*19.20, end: (config.x.x0+config.x.length)*19.20 - (config.x.length*19.20)*t}
+  const videoWidthInPx  = videoConfig.width
+  const videoHeightInPx = videoConfig.height
+  const axisWidthInPx   = config.x.length * videoWidthInPx/100
+  const axisHeightInPx  = config.y.length * videoHeightInPx/100
+
+  const ticksInPx     = Array(nTicks+1).fill(0).map((item,i) => i*axisWidthInPx/nTicks)
+  const t0            = 2
+  const s             = ease(frame, 0, 40)
+  const deltaYinUnits = config.y.max - config.y.min
+  const deltaXinUnits = config.x.max - config.x.min
+  const pxPerYunit    = axisHeightInPx / deltaYinUnits
+  
+  const xLeftInPx   = config.x.x0*19.2
+  const xRightInPx  = xLeftInPx + axisWidthInPx
+  const yInPx       = getYinPx()
+
+  let tickShift
+  let deltaTick
+
+  switch (config.y.zeroPosition) {
+    case 'inside':
+      tickShift = -20
+      deltaTick = +10
+      break;
+    case 'smaller':
+      tickShift = 20
+      deltaTick = 0
+      break;
+    case 'bigger':
+      tickShift = -20
+      deltaTick = 0
+      break;
+  
+    default:
+      break;
+  }
+
+
+  const line = {}
+  line.start = direction === 'leftToRight'? xLeftInPx                   : xRightInPx
+  line.end   = direction === 'leftToRight'? xLeftInPx + axisWidthInPx*s : xRightInPx - axisWidthInPx*s
 
 	return (
     <>
-      <line x1={line.start} y1={y0} x2={line.end} y2={y0} stroke="black" stroke-width={6} stroke-linecap="round"/>
+      <line x1={line.start} y1={yInPx} x2={line.end} y2={yInPx} stroke="black" stroke-width={6} stroke-linecap={s > 0 && "round"}/>
         
       {
-        ticks.map((tick,i) => {
+        ticksInPx.map((tickInPx,i) => {
 
-          const t         = ease(frame, t0*i, 10+t0*i)
-          const x         = x0 + tick
-          const y1        = y0 + 20*t
+          const s         = ease(frame, t0*i, 10+t0*i)
+          const x         = direction === 'leftToRight'? xLeftInPx + tickInPx : xRightInPx - tickInPx
+
+          const yStart    = yInPx + deltaTick
+          const yTick     = yStart + tickShift*s
+          const yNumber   = yInPx + 50
           const isNthTick = i%config.x.nthTick === 0
-          const value     = i*(config.x.max - config.x.min)/config.x.nTicks + config.x.min
+          const value     =  direction === 'leftToRight'? i*deltaXinUnits/nTicks + config.x.min : -i*deltaXinUnits/nTicks + config.x.max
 
           return (
             <>
-              <line x1={x} y1={y0} x2={x} y2={y1} stroke="black" stroke-width={4} stroke-linecap="round"/>
-              {isNthTick && <text x={x} y={y0 + 50} font-size={40*t} dominantBaseline="middle" textAnchor="middle">{value}</text>}
+              <line x1={x} y1={yStart} x2={x} y2={yTick} stroke="black" stroke-width={4} stroke-linecap={s > 0 && "round"}/>
+              {/* {isNthTick && <text x={x} y={yNumber} font-size={40*s} dominantBaseline="middle" textAnchor="middle">{value}</text>} */}
             </>
           )
         })

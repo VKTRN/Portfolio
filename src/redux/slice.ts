@@ -7,8 +7,8 @@ import {Position}      from '../functions'
 import {PlotConfig}    from '../functions'
 
 // const data = makeData(-10,10)
-// const data = makeData(0,20)
-const data = makeData(-20,0)
+const data = makeData(0,20)
+// const data = makeData(-10,10)
 // const data = makeData(-15, 0)
 // const data = makeData(-15,-5)
 

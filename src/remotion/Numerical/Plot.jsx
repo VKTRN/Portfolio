@@ -8,8 +8,8 @@ export const Plot = () => {
 	return (
     <>
       <XAxis/>
-      {/* <YAxis/> */}
-      {/* <Graph/> */}
+      <YAxis/>
+      <Graph/>
     </>
 	)
 }
