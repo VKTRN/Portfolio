@@ -1,23 +1,47 @@
+@keyframes appear {
+  0%   {
+    top:20px;
+    opacity:0;
+  }
+  50%   {
+    top:20px;
+    opacity:0;
+  }
+  100% {
+    top:0;
+    opacity:1;
+  }
+}
+
+
+
 .header{
   display: none;
   justify-content: center;
-  background-color: #8E96B2;
+  background-color: #342f3d;
   padding: .5rem 0;
+  width: 100vw;
+  transition: all 0.3s;
+  position: fixed;
+  z-index: 111111111;
+  font-family: 'Montserrat', sans-serif;
+  
   
   .header-content{
+    animation: appear .5s ease;
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width:80%;
-
     .logo{
-      color: #342F3D;
+      color: rgb(239, 233, 255);
       font-size: 1.5rem;
-      font-weight: 600;
       display: none;
+      font-family: 'Satisfy', cursive;
       
       @include media-breakpoint-up(sm){
-        font-size: 2rem;
+        font-size: 3rem;
         display: initial;
       }
     }
@@ -28,6 +52,9 @@
       gap:4rem;
       align-items: center;
       font-size: 1.25rem;
+      color: #ffffff;
+
+
     }
   }
 
@@ -35,3 +62,23 @@
     display: flex;
   }
 }
+
+.not-top{
+  box-shadow: 0 10px 30px -10px #27262a;
+}
+
+.top{
+  box-shadow: none;
+}
+
+.shown{
+  top: -90px;
+  box-shadow: none;
+}
+
+.visible{
+  top: 0px;
+}
+
+
+

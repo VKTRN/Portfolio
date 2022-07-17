@@ -1,5 +1,6 @@
 import {useState} from "react"
 import React from 'react';
+import Logo from '../components/Logo'
 
 // import '../scss/custom.scss';
 import StackItem from "../components/StackItem"
@@ -20,57 +21,55 @@ function Home() {
       <Header></Header>
 
       <div className="home">
-        <div className="content-container">
+        
 
           <div className="introduction">
-            <h1>Hi!</h1>
-            <p>
-              My name is Viktor.
-            </p>
-            <p>
-              I am a front-end developer based in Hannover, Germany.
-              <br/>
-              I like to write clean and readable code and to <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">not repeat myself</a>.
-            </p>
+            <div className="wrapper">
+              <h1>
+                Hi, I'm Viktor.
+              </h1>
+              <p>
+                I am a software engineer based in Hannover, Germany. I specialize in fullstack web development with a focus on frontend development. 
+                I like to write clean, readable, reusable code and deliver a smooth user experience.
+              </p>
+            </div>
           </div>
 
-          <div className="tech-stack">
-            <h2>My Tech Stack</h2>
+          <div className="about">
+            <div className="description">
+              <div className="wrapper">
+                Hello! My name is Viktor and I enjoy creating things that live on the internet. My interest in web development started back in 2012 when I decided to try editing custom Tumblr themes — turns out hacking together a custom reblog button taught me a lot about HTML & CSS!
+                Fast-forward to today, and I’ve had the privilege of working at an advertising agency, a start-up, a huge corporation, and a student-led design studio. My main focus these days is building accessible, inclusive products and digital experiences at Upstatement for a variety of clients.
+                I also recently launched a course that covers everything you need to build a web app with the Spotify API using Node & React.
+              </div>
+            </div>
+            <div className="techstack">
+              <div className="wrapper">
+                <div className="grid">
+                  <Logo name = 'Sass'/>
+                  <Logo name = 'React'/>
+                  <Logo name = 'Bootstrap'/>
+                  <Logo name = 'CSS3'/>
+                  <Logo name = 'JavaScript'/>
+                  <Logo name = 'HTML5'/>
+                  <Logo name = 'MongoDB'/>
+                  <Logo name = 'Node'/>
+                  <Logo name = 'Docker'/>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <h3 className="mt-5">front end</h3>
-          <div className="front-end stack">
-            <StackItem id="HTML5"      text={text_html} open={open} set_open={set_open} i={0}></StackItem>
-            <StackItem id="CSS3"       text={text_css}  open={open} set_open={set_open} i={1}></StackItem>
-            <StackItem id="JavaScript" text={text_js}   open={open} set_open={set_open} i={2}></StackItem>
-            <StackItem id="Sass"       text={text_html} open={open} set_open={set_open} i={3}></StackItem>
-            <StackItem id="React"      text={text_css}  open={open} set_open={set_open} i={4}></StackItem>
-            <StackItem id="Bootstrap"  text={text_js}   open={open} set_open={set_open} i={5}></StackItem>
-          </div>
 
-          <h3 className="mt-5">back end</h3>
-          <div className="front-end stack">
-            <StackItem id="MongoDB" text={text_html} open={open} set_open={set_open} i={6}></StackItem>
-            <StackItem id="Node"    text={text_css}  open={open} set_open={set_open} i={7}></StackItem>
-            <StackItem id="Python"  text={text_js}   open={open} set_open={set_open} i={8}></StackItem>
-          </div>
-
-          <h3 className="mt-5">dev ops</h3>
-          <div className="front-end stack">
-            <StackItem id="Bash" text={text_html} open={open} set_open={set_open} i={9}></StackItem>
-            <StackItem id="Git" text={text_html} open={open} set_open={set_open} i={10}></StackItem>
-            <StackItem id="Docker"    text={text_css}  open={open} set_open={set_open} i={11}></StackItem>
-          </div>
-
-          <div className="tech-stack">
+          <div className="socials-wrapper">
             <h2>Connect with me</h2>
-          </div>  
-          <div className="front-end stack socials">
-            <SocialButton id="youtube" link="https://www.youtube.com"></SocialButton>
-            <SocialButton id="twitter" link="https://www.twitter.com"></SocialButton>
-            <SocialButton id="github"  link="https://github.com/VKTRN"></SocialButton>
+            <div className="socials">
+                <SocialButton id="youtube" link="https://www.youtube.com"></SocialButton>
+                <SocialButton id="twitter" link="https://www.twitter.com"></SocialButton>
+                <SocialButton id="github"  link="https://github.com/VKTRN"></SocialButton>
+            </div>
           </div>
-        </div>
+        
       </div>
       
       <Footer></Footer>

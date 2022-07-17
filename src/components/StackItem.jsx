@@ -4,13 +4,10 @@ import Accordion from "./Accordion"
 
 
 
-function StackItem({id, text, open, set_open, i}){
+function StackItem(){
 
   return(
-    <>
-      <Logo      id = {id}           open={open}   set_open={set_open} i={i}></Logo>
-      <Accordion id = {id + "-accordion"} open = {open[i]} text = {text}></Accordion>
-    </>
+    <Logo></Logo>
   )
 
 }
