@@ -59,57 +59,65 @@ $logo-margin:1rem;
     }
 
     .about{
-      height: 100vh;
+      height: 90vh;
       display: flex;
-      .description{
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-        align-items:center;
-        .wrapper{
-          width:70%;
-        }          
-      }
-      .techstack{
-        flex: 1;
-        display: flex;
-        align-items: center;
-        .wrapper{
-          background-color: #746297;
-          height: 60%;
-          width:60%;
-          margin-left:10vw;
-          border-radius: 20px;
-          padding:2rem;
+      flex-direction: column;
+      align-items: center;
 
-          // a grid of logos. 3x3 grid.
-          .grid{
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            height: 100%;
+      .about-wrapper{
+        display: flex;
+        flex: 1;
+        .description{
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+          align-items:center;
+          .wrapper{
+            width:70%;
+          }          
+        }
+        .techstack{
+          flex: 1;
+          display: flex;
+          align-items: center;
+          .wrapper{
+            background-color: #38363c;
+            height: 70%;
             aspect-ratio: 1;
-            grid-gap: 1rem;
-            .logo{
-              // height: 100%;
-              // width: 100%;
-              flex-direction: column;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-
-              img{
-                height: $svg-size;
-                width: $svg-size;
-                margin-bottom: $logo-gap;
-              }
-              p{
-                margin-bottom:0;
+            margin-left:10vw;
+            border-radius: 5px;
+            padding:2rem;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+  
+            // a grid of logos. 3x3 grid.
+            .grid{
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              grid-template-rows: repeat(3, 1fr);
+              height: 100%;
+              aspect-ratio: 1;
+              grid-gap: 1rem;
+              .logo{
+                // height: 100%;
+                // width: 100%;
+                flex-direction: column;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+  
+                img{
+                  height: $svg-size;
+                  width: $svg-size;
+                  margin-bottom: $logo-gap;
+                }
+                p{
+                  margin-bottom:0;
+                }
               }
             }
           }
+  
         }
-
       }
     }
 
