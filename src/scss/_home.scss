@@ -1,25 +1,12 @@
 @use 'sass:math';
+@use 'keyframes/appear';
+
 $svg-size: 7vh;
 $stack-padding: 4rem;
 $logo-width:10rem;
 $logo-padding:1rem;
 $logo-gap:.5rem;
 $logo-margin:1rem;
-
-@keyframes appear {
-  0%   {
-    top:20px;
-    opacity:0;
-  }
-  50%   {
-    top:20px;
-    opacity:0;
-  }
-  100% {
-    top:0;
-    opacity:1;
-  }
-}
 
 .home{
   background-color: #342F3D;
@@ -41,53 +28,87 @@ $logo-margin:1rem;
         bottom: 10vh;
 
         h1{
-          font-size: 5rem;
+          font-size: 5vh;
           animation: appear 1.5s ease;
           position: relative;
+          
+          @include media-breakpoint-up(lg){
+            font-size: 10vh;
+          }
         }
         
         p{
-          font-size: 1.25rem;
-          width: 60vw;
+          font-size: 2vh;
+          width: 80vw;
           animation: appear 2s ease;
           position: relative;
+          @include media-breakpoint-up(lg){
+            width: 60vw;
+            font-size: 10vh;
+          }
         }
       }
-      
-      
     }
 
     .about{
-      height: 90vh;
+      // height: 90vh;
+      width: 100vw;
       display: flex;
       flex-direction: column;
       align-items: center;
       
+      @include media-breakpoint-up(lg){
+        height: 90vh;
+      }
 
       .about-wrapper{
         display: flex;
         flex: 1;
+        flex-direction: column;
+        gap:4vh;
+
+        @include media-breakpoint-up(lg){
+          flex-direction: row;
+        }
+
         .description{
           flex: 1;
           display: flex;
-          justify-content: flex-end;
+          justify-content: center;
           align-items:center;
           .wrapper{
             width:70%;
+            font-size: 2vh;
           }          
+          
+          @include media-breakpoint-up(lg){
+            justify-content: flex-end;
+          }
         }
+
         .techstack{
           flex: 1;
           display: flex;
           align-items: center;
+          justify-content: center;
+          
+          @include media-breakpoint-up(lg){
+            display: flex;
+            justify-content: flex-start;
+          }
+
           .wrapper{
             background-color: #38363c;
-            height: 70%;
+            width:70%;
             aspect-ratio: 1;
-            margin-left:10vw;
+            margin-left:0;
             border-radius: 5px;
             padding:2rem;
             box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+            
+            @include media-breakpoint-up(lg){
+              margin-left:10vw;
+            }
   
             // a grid of logos. 3x3 grid.
             .grid{
@@ -106,9 +127,15 @@ $logo-margin:1rem;
                 align-items: center;
   
                 img{
-                  height: $svg-size;
-                  width: $svg-size;
-                  margin-bottom: $logo-gap;
+                  
+                  height: 5vh;
+                  width: 5vh;
+                  margin-bottom: .5rem;
+
+                  @include media-breakpoint-up(lg){
+                    height: 7vh;
+                    width: 7vh;
+                  }
                 }
                 p{
                   margin-bottom:0;
