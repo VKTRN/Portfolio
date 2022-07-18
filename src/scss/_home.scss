@@ -100,7 +100,7 @@ $logo-margin:1rem;
           .wrapper{
             background-color: #38363c;
             width:70%;
-            aspect-ratio: 1;
+            // aspect-ratio: 1;
             margin-left:0;
             border-radius: 5px;
             padding:2rem;
@@ -116,29 +116,28 @@ $logo-margin:1rem;
               grid-template-columns: repeat(3, 1fr);
               grid-template-rows: repeat(3, 1fr);
               height: 100%;
-              aspect-ratio: 1;
+              // aspect-ratio: 1;
               grid-gap: 1rem;
               .logo{
                 // height: 100%;
                 // width: 100%;
-                flex-direction: column;
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
-  
-                img{
-                  
-                  height: 5vh;
-                  width: 5vh;
-                  margin-bottom: .5rem;
 
-                  @include media-breakpoint-up(lg){
-                    height: 7vh;
-                    width: 7vh;
-                  }
+
+                img{
+                  // image fills the height of the grid cell.
+                  height: 13vw;
+                  width: 13vw;
+                  margin-bottom: 1vh;
+
                 }
+                
                 p{
                   margin-bottom:0;
+                  font-size: 2vw;
                 }
               }
             }
