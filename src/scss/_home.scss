@@ -24,7 +24,6 @@ $logo-margin:1rem;
 .home{
   background-color: #342F3D;
   justify-content: center;
-  // font-family: 'Quicksand', sans-serif;
   font-family: 'Montserrat', sans-serif;
   color: rgb(239, 233, 255);
 
@@ -63,6 +62,7 @@ $logo-margin:1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      
 
       .about-wrapper{
         display: flex;
@@ -180,28 +180,4 @@ $logo-margin:1rem;
 
 }
 
-// handle order of the techstack items
-$elements: 24;
-
-@for $i from 0 to $elements {
-  .stack{
-    @include media-breakpoint-up(md){
-      .item:nth-child(#{2*$i + 1}) {
-        order: $i+2*floor(calc($i/2));
-      }
-      .item:nth-child(#{2*$i + 2}) {
-        order: $i+2*floor(calc($i/2))+2;
-      }
-    }
-    
-    @include media-breakpoint-up(lg){
-      .item:nth-child(#{2*$i + 1}) {
-        order: $i+3*floor(calc($i/3));
-      }
-      .item:nth-child(#{2*$i + 2}) {
-        order: $i+3*floor(calc($i/3))+3;
-      }
-    }
-  }
-}
 

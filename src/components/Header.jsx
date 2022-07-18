@@ -9,7 +9,9 @@ function Header() {
 
   useEffect(() => {
     let prevScrollpos = window.pageYOffset;
-    window.onscroll = () => {
+    const handleScroll = () => {
+      console.log(window)
+      console.log('scroll')
       let currentScrollPos = window.pageYOffset;
       if (prevScrollpos > currentScrollPos) {
         setVisibility('visible')
@@ -25,6 +27,11 @@ function Header() {
       }
       prevScrollpos = currentScrollPos;
     }
+
+    
+
+    window.onscroll = handleScroll;
+    window.ontouchmove = handleScroll;
   }, [])
 
   return (
