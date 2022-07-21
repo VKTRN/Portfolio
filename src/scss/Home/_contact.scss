@@ -7,10 +7,9 @@
 
   .socials{
 
-    background-color: transparent !important;
     display: flex;
     margin-top:2rem;
-    padding:0;
+    padding:2rem;
     gap:2rem;
     
     @include media-breakpoint-up(1200px){

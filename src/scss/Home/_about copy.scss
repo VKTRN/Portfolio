@@ -3,12 +3,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
+  @include media-breakpoint-up(1200px){
+    height: 90vh;
+  }
 
   .about-wrapper{
     display: flex;
     flex: 1;
     flex-direction: column;
     gap:4vh;
+
+    @include media-breakpoint-up(1200px){
+      flex-direction: row;
+    }
 
     .description{
       flex: 1;
@@ -19,19 +27,34 @@
         width:70%;
         font-size: 2vh;
       }          
+      
+      @include media-breakpoint-up(1200px){
+        justify-content: flex-end;
+      }
     }
 
-    .logo-grid{
+    .techstack{
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
+      
+      @include media-breakpoint-up(1200px){
+        display: flex;
+        justify-content: flex-start;
+      }
 
       .wrapper{
-    
+        background-color: $purple-gray;
         width:70%;
         margin-left:0;
+        border-radius: 5px;
         padding:2rem;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+        
+        @include media-breakpoint-up(1200px){
+          margin-left:2vw;
+        }
 
         .grid{
           display: grid;
@@ -49,47 +72,18 @@
               height: 13vw;
               width: 13vw;
               margin-bottom: 1vh;
+
+              @include media-breakpoint-up(1200px){
+                height: 7vh;
+                width: 7vh;
+              }
             }
             
             p{
               margin-bottom:0;
               font-size: 2vw;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-@include media-breakpoint-up(1200px){
-  .about{
-      height: 90vh;
-  
-    .about-wrapper{
-        flex-direction: row;
-  
-      .description{
-          justify-content: flex-end;
-      }
-  
-      .logo-grid{
-          display: flex;
-          justify-content: flex-start;
-  
-        .wrapper{
-            margin-left:2vw;
-  
-          .grid{
-            .logo{
-  
-              img{
-                  height: 7vh;
-                  width: 7vh;
-              }
-              
-              p{
-                  font-size: 2vh;
+              @include media-breakpoint-up(1200px){
+                font-size: 2vh;
               }
             }
           }

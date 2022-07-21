@@ -1,8 +1,19 @@
-import {useState} from "react"
 import React from 'react';
-import Logo from '../components/Home/Logo'
 import SocialButton from "../components/Home/SocialButton"
 import Header from "../components/Home/Header"
+import {LogoGrid} from "../components/Home/LogoGrid"
+
+const techList = [
+  'Sass',
+  'React',
+  'Bootstrap',
+  'CSS3',
+  'JavaScript',
+  'HTML5',
+  'MongoDB',
+  'Node',
+  'Docker'
+]
 
 function Home() {
 
@@ -32,27 +43,13 @@ function Home() {
                   I also recently launched a course that covers everything you need to build a web app with the Spotify API using Node & React.
                 </div>
               </div>
-              <div className="techstack">
-                <div className="wrapper">
-                  <div className="grid">
-                    <Logo name = 'Sass'/>
-                    <Logo name = 'React'/>
-                    <Logo name = 'Bootstrap'/>
-                    <Logo name = 'CSS3'/>
-                    <Logo name = 'JavaScript'/>
-                    <Logo name = 'HTML5'/>
-                    <Logo name = 'MongoDB'/>
-                    <Logo name = 'Node'/>
-                    <Logo name = 'Docker'/>
-                  </div>
-                </div>
-              </div>
+              <LogoGrid logos = {techList}/>
             </div>
           </div>
 
           <div className="socials-wrapper">
             <h2>Connect with me</h2>
-            <div className="socials">
+            <div className="socials dark-surface">
                 <SocialButton id="youtube" link="https://www.youtube.com"></SocialButton>
                 <SocialButton id="twitter" link="https://www.twitter.com"></SocialButton>
                 <SocialButton id="github"  link="https://github.com/VKTRN"></SocialButton>
