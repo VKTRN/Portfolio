@@ -1,28 +1,15 @@
 import {useState} from "react"
 import React from 'react';
-import Logo from '../components/Logo'
-
-// import '../scss/custom.scss';
-import StackItem from "../components/StackItem"
-import SocialButton from "../components/SocialButton"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-
-const text_html      = "html html html html html html html html html html html html html html html html html html html html html html html html html html "
-const text_css       = "css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css css" 
-const text_js        = "JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript JavaScript " 
+import Logo from '../components/Home/Logo'
+import SocialButton from "../components/Home/SocialButton"
+import Header from "../components/Home/Header"
 
 function Home() {
-
-  const [open, set_open] = useState(Array(12))
 
   return (
     <div className="Home">
       <Header></Header> 
-
       <div className="home">
-        
-
           <div className="introduction">
             <div className="wrapper">
               <h1>
@@ -63,7 +50,6 @@ function Home() {
             </div>
           </div>
 
-
           <div className="socials-wrapper">
             <h2>Connect with me</h2>
             <div className="socials">
@@ -72,9 +58,7 @@ function Home() {
                 <SocialButton id="github"  link="https://github.com/VKTRN"></SocialButton>
             </div>
           </div>
-        
       </div>
-      
     </div>
   );
 }

@@ -1,0 +1,72 @@
+@use '../keyframes';
+
+.header{
+  display: flex;
+  justify-content: center;
+  background-color: $purple;
+  padding: .5rem 0;
+  width: 100vw;
+  transition: all 0.3s;
+  position: fixed;
+  z-index: 111111111;
+  
+  .header-content{
+    animation: appear .5s ease;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width:80%;
+
+    @include media-breakpoint-up(1200px){
+      justify-content: space-between;
+    }
+
+    .logo{
+      color: $purple-white;
+      font-size: 6vh;
+      // display: none;
+      font-family: 'Satisfy', cursive;
+      
+      @include media-breakpoint-up(1200px){
+        font-size: 7vh;
+        display: initial;
+      }
+    }
+  
+    .links{
+      display: none;
+      justify-content: center;
+      gap:4rem;
+      align-items: center;
+      font-size: 1.25rem;
+      @include media-breakpoint-up(1200px){
+        display: flex;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(1200px){
+    display: flex;
+  }
+}
+
+.not-top{
+  box-shadow: 0 10px 30px -10px #27262a;
+}
+
+.top{
+  box-shadow: none;
+}
+
+.shown{
+  top: -90px;
+  box-shadow: none;
+}
+
+.visible{
+  top: 0px;
+}
+
+
+

@@ -1,0 +1,40 @@
+.socials-wrapper{
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .socials{
+
+    background-color: transparent !important;
+    display: flex;
+    margin-top:2rem;
+    padding:0;
+    gap:2rem;
+    
+    @include media-breakpoint-up(1200px){
+      gap:5rem;
+    }
+
+    .social{
+      display: flex;
+      justify-content:center;
+      align-items: center;
+
+      &:hover{
+        transform: scale(1.2);
+      }
+
+      transition: all 400ms;
+
+      img{
+        width: 2.5rem !important;
+      }
+    }
+
+    #github{
+      filter: brightness(0) saturate(100%) invert(100%);
+    }
+  }
+}

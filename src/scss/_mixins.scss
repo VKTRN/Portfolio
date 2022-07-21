@@ -1,0 +1,15 @@
+@mixin hover-lift() {
+  transition: transform 350ms;
+  box-shadow: 0 .25em .5em 0 rgba(0, 0, 0, 0.2);
+
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+  }
+}
+
+@mixin media-breakpoint-up($breakpoint){
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}

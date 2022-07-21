@@ -1,0 +1,33 @@
+.introduction{
+  width:100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .wrapper{
+    position: relative;
+    bottom: 10vh;
+
+    h1{
+      font-size: 5vh;
+      animation: appear 1.5s ease;
+      position: relative;
+      
+      @include media-breakpoint-up(1200px){
+        font-size: 10vh;
+      }
+    }
+    
+    p{
+      font-size: 2vh;
+      width: 80vw;
+      animation: appear 2s ease;
+      position: relative;
+      @include media-breakpoint-up(1200px){
+        width: 60vw;
+        font-size: 3vh;
+      }
+    }
+  }
+}
