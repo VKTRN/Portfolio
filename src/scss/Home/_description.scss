@@ -1,0 +1,14 @@
+.description{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  .wrapper{
+    width:70%;
+    font-size: 2vh;
+  }          
+  
+  @include media-breakpoint-up(1200px){
+    justify-content: flex-end;
+  }
+}
