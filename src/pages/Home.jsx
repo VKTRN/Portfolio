@@ -2,6 +2,7 @@ import React from 'react';
 import SocialButton from "../components/Home/SocialButton"
 import Header from "../components/Home/Header"
 import {LogoGrid} from "../components/Home/LogoGrid"
+import { About } from '../text/Text';
 
 const techList = [
   'Sass',
@@ -38,9 +39,7 @@ function Home() {
             <div className="about-wrapper">
               <div className="description">
                 <div className="wrapper">
-                  Hello! My name is Viktor and I enjoy creating things that live on the internet. My interest in web development started back in 2012 when I decided to try editing custom Tumblr themes — turns out hacking together a custom reblog button taught me a lot about HTML & CSS!
-                  Fast-forward to today, and I've had the privilege of working at an advertising agency, a start-up, a huge corporation, and a student-led design studio. My main focus these days is building accessible, inclusive products and digital experiences at Upstatement for a variety of clients.
-                  I also recently launched a course that covers everything you need to build a web app with the Spotify API using Node & React.
+                  <About/>
                 </div>
               </div>
               <LogoGrid logos = {techList}/>
@@ -55,6 +54,12 @@ function Home() {
                 <SocialButton id="github"  link="https://github.com/VKTRN"></SocialButton>
             </div>
           </div>
+        <div className="footer">
+          <span>
+             
+            <a href="https://github.com/VKTRN/Portfolio">Designed & Built by Viktor Niedens - 2022</a>
+          </span>
+        </div>
       </div>
     </div>
   );
