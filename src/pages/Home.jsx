@@ -29,7 +29,7 @@ function Home() {
               </h1>
               <p>
                 I am a software engineer based in Hannover, Germany. I specialize in fullstack web development with a focus on frontend development. 
-                I like to write clean, readable, reusable code and deliver a smooth user experience.
+                I like to write clean, readable, reusable code and deliver a smooth and intuitive user experience.
               </p>
             </div>
           </div>
