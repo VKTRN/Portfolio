@@ -55,7 +55,7 @@ function Home() {
         </div>
 
         <div className ='section'>
-          <h1>Demo</h1>
+          <h1>Showcase Project</h1>
           <Demo/>
         </div>
 
