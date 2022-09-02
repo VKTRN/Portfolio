@@ -70,7 +70,7 @@ function Home() {
 
         <div className="footer">
           <span>
-            <a href="https://github.com/VKTRN/Portfolio">Designed & Built by Viktor Niedens - 2022</a>
+            <a href="https://github.com/VKTRN/Portfolio">Designed & Built pretty much from scratch by Viktor Niedens - 2022</a>
           </span>
         </div>
 

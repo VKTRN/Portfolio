@@ -1,10 +1,76 @@
 .slider{
   height: 50vh;
-  width: 800px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 1200px;
   position: relative;
+  display:flex;
+  // justify-content:flex-end;
+  
+  .content{
+    padding: 30px;
+    flex: 1;
+  }
+  
+  .slides{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%, 0 0);
+    width: 60%;
+    height: 100%;
+    
+    .container{
+      overflow: hidden;
+      font-size: 50px;
+      width: 60%;
+      height:100%;
+
+      display: flex;
+      z-index:1;
+      justify-content: center;
+      transition: transform 1s, opacity .2s ease .5s ;
+      position: absolute;
+      border-radius: 0px 5px  5px 0px;
+      
+      img{
+        width:100%;
+        
+      }
+    }
+
+    .inactive-left{
+      transform: translateX(-100%);
+      pointer-events: none;
+      // opacity: 0;
+    }
+
+    .ontop{
+      z-index: 30;
+    }
+    
+    .inactive-right{
+      transform: translateX(100%);
+      pointer-events: none;
+      // opacity: 0;
+      
+    }
+  
+    .active{
+      transform: translateX(0);
+      z-index: 30;
+    }
+  
+    
+    .a{
+      background-color: rgb(90, 55, 165);
+    }
+    .b{
+      background-color: rgb(108, 165, 55);
+    }
+    .c{
+      background-color: rgb(165, 55, 55);
+    }
+  }
 
   button{
     height: 30px;
@@ -19,53 +85,12 @@
   }
 
   #button-left{
-    left: -40px;
+    left: -50px;
+    z-index:44;
   }
 
   #button-right{
-    right: -40px;
+    right: -50px;
+    z-index:44;
   }
-
-  .inactive-left{
-    transform: translateX(-800px);
-    pointer-events: none;
-    opacity: 0;
-  }
-
-  
-  .inactive-right{
-    transform: translateX(800px);
-    pointer-events: none;
-    opacity: 0;
-  }
-
-  .active{
-    transform: translateX(0)
-  }
-
-  .container{
-    font-size: 50px;
-    width: 800px;
-    display: flex;
-    justify-content: center;
-    transition: all .5s;
-    position: absolute;
-  }
-  
-  .a{
-    background-color: rgb(90, 55, 165);
-  }
-  .b{
-    background-color: rgb(108, 165, 55);
-  }
-  .c{
-    background-color: rgb(165, 55, 55);
-  }
-  
-
-  .move-left{
-    transform: translateX(400px)
-  }
-
-
 }

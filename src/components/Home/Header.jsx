@@ -41,8 +41,9 @@ function Header() {
         <div className="links">
           <a href="/">About</a>
           <a href="/">Experience</a>
-          <a href="/">Projects</a>
+          <a href="/">Showcase</a>
           <a href="/">Contact</a>
+          <a id = 'resume' href="/">Resume</a>
         </div>
       </div>
     </div>
