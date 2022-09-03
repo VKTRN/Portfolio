@@ -6,8 +6,21 @@
   // justify-content:flex-end;
   
   .content{
+
+    font-size: 16px;
     padding: 30px;
     flex: 1;
+
+    .bullets{
+
+      transition: all 0.5s ease-in-out;
+
+      li{
+        margin-bottom: 20px;
+      }
+    }
+
+
   }
   
   .slides{
@@ -15,12 +28,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%, 0 0);
+    clip-path: inset(0 0 0 0 round 0 5px 5px 0);
     width: 60%;
     height: 100%;
     
     .container{
-      overflow: hidden;
       font-size: 50px;
       width: 60%;
       height:100%;
@@ -72,16 +84,21 @@
     }
   }
 
-  button{
+  .button{
     height: 30px;
     width: 30px;
-    border-radius: 50%;
+    // border-radius: 50%;
     font-weight: bold;
     font-size: 22px;
+    color: $purple-light;
     cursor: pointer;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%)
+    transform: translateY(-50%);
+
+    &:hover{
+      filter: brightness(1.4);
+    }
   }
 
   #button-left{
