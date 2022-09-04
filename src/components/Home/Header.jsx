@@ -43,7 +43,7 @@ function Header() {
           <a href="/">Experience</a>
           <a href="/">Showcase</a>
           <a href="/">Contact</a>
-          <a id = 'resume' href="/">Resume</a>
+          <a id = 'resume' href="/resume">Resume</a>
         </div>
       </div>
     </div>
