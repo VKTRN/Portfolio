@@ -3,6 +3,21 @@ import {useState} from 'react'
 import {BiRightArrow} from 'react-icons/bi'
 import {BiLeftArrow} from 'react-icons/bi'
 
+import {IoLogoNodejs}  from 'react-icons/io'
+import {SiTypescript}  from 'react-icons/si'
+import {DiCss3}        from 'react-icons/di'
+import {RiReactjsLine} from 'react-icons/ri'
+import {FaGitAlt}      from 'react-icons/fa'
+import {SiWebpack}     from 'react-icons/si'
+import {FaDocker}      from 'react-icons/fa'
+import {FaHtml5}       from 'react-icons/fa'
+import {FaSass}        from 'react-icons/fa'
+import {SiCypress}     from 'react-icons/si'
+import {SiJavascript}  from 'react-icons/si'
+import {SiElectron}    from 'react-icons/si'
+import {DiMongodb}     from 'react-icons/di'
+import {Eleventy}      from './Eleventy'
+import {Draftjs}       from './Draftjs'
 
 const experience1 = {
   title: 'Frontend Development',
@@ -13,6 +28,14 @@ const experience1 = {
     'Implemented the unified design for multiple user authentication pages.',
     'Wrote End to End tests for the authentication pages.',
     'Integrated the test-automation into the ci/cd pipeline in bamboo (Atlassian).'
+  ],
+  techStack: [
+    {name:'Javascript', logo: <SiJavascript/>}, 
+    {name:'HTML',       logo: <FaHtml5/>}, 
+    {name:'Eleventy',   logo: <Eleventy/>}, 
+    {name:'Sass',       logo:  <FaSass/>}, 
+    {name:'Cypress.io', logo: <SiCypress/> },
+    {name:'Docker',     logo: <FaDocker/> }
   ]
 }
 
@@ -24,8 +47,18 @@ const experience2 = {
   bullets: [
     'Developing the frontend for creating, editing and managing company specific documents.',
     'Developing a backend for storing and accessing the documents.',
-    'Implemented continuous integration using Github Actions.'
+    'Implemented continuous integration using Github Actions.',
+  ],
+  techStack: [
+    {name:'React.js',    logo: <RiReactjsLine/>}, 
+    {name:'Electron.js', logo: <SiElectron/>}, 
+    {name:'draft.js',    logo: <Draftjs/>}, 
+    {name:'Typescript',  logo:  <SiTypescript/>}, 
+    {name:'Sass',        logo: <FaSass/> },
+    {name:'MongoDB',     logo: <DiMongodb/> },
+    {name:'Express',     logo: <IoLogoNodejs/> }
   ]
+
 }
 
 const experience3 = {
@@ -36,6 +69,10 @@ const experience3 = {
   bullets: [
     'Created and edited web-pages in the CARIAD Intranet.',
     'Fixed issues with the display of the content using HTML and CSS.',
+  ],
+  techStack: [
+    {name:'HTML',    logo: <FaHtml5/>}, 
+    {name:'CSS', logo: <DiCss3/>}, 
   ]
 }
 
@@ -100,6 +137,19 @@ function Slider(){
             return <li key = {index}>{bullet}</li>
           })}
         </ul>
+
+        <div className = 'tech-stack'>
+          {
+            experiences[index].techStack.map((tech) => {
+              return (
+                <div className = 'tech'>
+                  {tech.logo}
+                  <span>{tech.name}</span>
+                </div>
+              )
+            })
+          }
+        </div>
 
         
       </div>
