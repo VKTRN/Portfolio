@@ -1,5 +1,5 @@
 .slider{
-  height: 600px;
+  height: 700px;
   width: 1200px;
   position: relative;
   display:flex;
@@ -11,33 +11,46 @@
     padding: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex: 1;
+
+    .project{
+      flex: 1;
+      // background-color: rgb(61, 75, 23);
+    }
 
     .bullets{
 
       transition: all 0.5s ease-in-out;
+      // background-color: rgb(65, 113, 160);
+      height: 180px;
+      flex: 6;
 
       li{
         margin-bottom: 20px;
       }
     }
 
-    .tech-stack{
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 20px;
-      margin-top: 50px;
+    .tech-stack-wrapper{
+      flex: 3;
 
-      .tech{
+      .tech-stack{
         display: flex;
-        gap: 10px;
-        svg{
-          transform: scale(1.5) translateY(1px);
-          
+        flex-wrap: wrap;
+        gap: 5%;
+        
+        .tech-wrapper{
+          width: 30%;
+          // background-color: rgb(189, 91, 91);
+          height: 40px;
         }
-        
-        
+        .tech{
+          display: flex;
+          gap: 10px;
+          svg{
+            transform: scale(1.5) translateY(1px);
+          }
+        }
       }
     }
 

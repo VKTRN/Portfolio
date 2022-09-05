@@ -130,25 +130,28 @@ function Slider(){
           </div>
         </div>
 
-        <h4>{experiences[index].project}</h4>
+        <h4 className = 'project'>{experiences[index].project}</h4>
 
         <ul className = 'bullets'>
           {experiences[index].bullets.map((bullet, index) => {
             return <li key = {index}>{bullet}</li>
           })}
         </ul>
-
-        <div className = 'tech-stack'>
-          {
-            experiences[index].techStack.map((tech) => {
-              return (
-                <div className = 'tech'>
-                  {tech.logo}
-                  <span>{tech.name}</span>
-                </div>
-              )
-            })
-          }
+        <div className = 'tech-stack-wrapper'>
+          <div className = 'tech-stack'>
+            {
+              experiences[index].techStack.map((tech) => {
+                return (
+                  <div className = 'tech-wrapper'>
+                    <div className = 'tech'>
+                      {tech.logo}
+                      <span>{tech.name}</span>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
         </div>
 
         
