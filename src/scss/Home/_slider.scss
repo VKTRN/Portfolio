@@ -1,9 +1,14 @@
 .slider{
-  height: 700px;
+  height: 600px;
   width: 1200px;
   position: relative;
   display:flex;
   // justify-content:flex-end;
+
+  .title{
+    font-size: 30px;
+    margin-block:8px;
+  }
   
   .content{
 
@@ -14,7 +19,16 @@
     justify-content: flex-start;
     flex: 1;
 
+
+
+    .company{
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
     .project{
+      margin-block: 5px;
       flex: 1;
       // background-color: rgb(61, 75, 23);
     }
@@ -24,7 +38,7 @@
       transition: all 0.5s ease-in-out;
       // background-color: rgb(65, 113, 160);
       height: 180px;
-      flex: 6;
+      flex: 4;
 
       li{
         margin-bottom: 20px;
@@ -118,17 +132,23 @@
     }
   }
 
-  .button{
-    height: 30px;
-    width: 30px;
+  button{
+    height: 50px;
+    width: 50px;
     // border-radius: 50%;
     font-weight: bold;
     font-size: 22px;
     color: $purple-light;
     cursor: pointer;
     position: absolute;
+    background-color: transparent;
+    border: none;
     top: 50%;
     transform: translateY(-50%);
+
+    svg{
+      transform: scale(1.5);
+    }
 
     &:hover{
       filter: brightness(1.4);

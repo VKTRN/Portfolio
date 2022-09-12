@@ -9,9 +9,9 @@ import { About } from '../text/Text';
 const techList = [
   'Sass',
   'React',
-  'Bootstrap',
+  'Webpack',
   'CSS3',
-  'JavaScript',
+  'Typescript',
   'HTML5',
   'MongoDB',
   'Node',
