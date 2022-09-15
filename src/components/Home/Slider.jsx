@@ -2,7 +2,7 @@ import React      from 'react'
 import {useState} from 'react'
 import {BiRightArrow} from 'react-icons/bi'
 import {BiLeftArrow} from 'react-icons/bi'
-
+import {useWindowDimensions} from '../../hooks/useWindowDimensions'
 import {IoLogoNodejs}  from 'react-icons/io'
 import {SiTypescript}  from 'react-icons/si'
 import {DiCss3}        from 'react-icons/di'
@@ -82,6 +82,8 @@ function Slider(){
   const [slide, setSlide] = useState(999)
   const [direction, setDirection] = useState('left')
   const [disabled, setDisabled] = useState(false)
+  const {innerWidth: width, innerHeight: height} = window;
+  console.log(width)
 
   const nextSlide = (e) => {
       setDisabled(true)
@@ -165,11 +167,14 @@ function Slider(){
 
       </div>
 
-      <div className="slides">
-        <div className={slides[0] + ' container a'}><img src = './audi.png'></img></div>
-        <div className={slides[1] + ' container b'}><img src = './bmw.jpg'></img></div>
-        <div className={slides[2] + ' container c'}><img src = './mercedes.jpg'></img></div>
-      </div>
+      {width > 1200 &&
+        <div className="slides">
+          <div className={slides[0] + ' container a'}><img src = './audi.png'></img></div>
+          <div className={slides[1] + ' container b'}><img src = './bmw.jpg'></img></div>
+          <div className={slides[2] + ' container c'}><img src = './mercedes.jpg'></img></div>
+        </div>
+      }
+
       
       <button className = 'button' id='button-right'  disabled = {disabled} onClick = {(e) => {nextSlide(e)}}>
         <BiRightArrow/>

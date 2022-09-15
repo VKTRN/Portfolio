@@ -23,4 +23,4 @@ function useDimensions(selector) {
   return dimensions;
 }
 
-export default useDimensions
+export {useDimensions}
