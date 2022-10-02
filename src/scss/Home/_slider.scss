@@ -1,6 +1,6 @@
 .slider{
   width: 80vw;
-  height: 80vh;
+  // height: 80vh;
   position: relative;
   display:flex;
   // justify-content:flex-end;\
@@ -53,12 +53,14 @@
     }
 
     .tech-stack-wrapper{
-      flex: 3;
+      // flex: 3;
+      display: none;
+
 
       .tech-stack{
         display: flex;
-        flex-wrap: wrap;
-        gap: 5%;
+        flex-direction: column;
+
         
         .tech-wrapper{
           width: 30%;
@@ -72,6 +74,17 @@
             transform: scale(1.5) translateY(1px);
           }
         }
+
+        @include media-breakpoint-up(1200px){
+          flex-wrap: wrap;
+          gap: 5%;
+          flex-direction: row;
+        }
+      }
+
+      @include media-breakpoint-up(1200px){
+        display: initial;
+        flex: 3;
       }
     }
 

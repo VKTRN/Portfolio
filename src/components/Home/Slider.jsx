@@ -82,15 +82,15 @@ function Slider(){
   const [slide, setSlide] = useState(999)
   const [direction, setDirection] = useState('left')
   const [disabled, setDisabled] = useState(false)
+  const [xDown, setXDown] = useState(null)
+  const [yDown, setYDown] = useState(null)
   const {innerWidth: width, innerHeight: height} = window;
-  console.log(width)
 
-  const nextSlide = (e) => {
+  const nextSlide = () => {
       setDisabled(true)
       setTimeout(() => {setDisabled(false)}, 1000)
       setDirection('left')
       setSlide(prev => prev + 1)
-      e.target.disabled = true
   }
   
   const prevSlide = () => {
@@ -123,11 +123,51 @@ function Slider(){
     return slides
   }
 
+  function getTouches(evt) {
+    return evt.touches           // browser API
+  }  
+
+  function handleTouchStart(evt) {
+    const firstTouch = getTouches(evt)[0];  
+    setXDown(firstTouch.clientX);
+    setYDown(firstTouch.clientY);
+  };                                                
+                                                                         
+  function handleTouchMove(evt) {
+      if ( ! xDown || ! yDown ) {
+          return;
+      }
+
+      var xUp = evt.touches[0].clientX;                                    
+      var yUp = evt.touches[0].clientY;
+
+      var xDiff = xDown - xUp;
+      var yDiff = yDown - yUp;
+                                                                          
+      if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+          if ( xDiff > 0 ) {
+              nextSlide()
+          } else {
+              prevSlide()
+          }                       
+      } else {
+          if ( yDiff > 0 ) {
+            console.log('down swipe')
+          } else { 
+            console.log('up swipe')
+          }                                                                 
+      }
+      /* reset values */
+      setXDown(null)
+      setYDown(null)
+
+  };
+
   const index  = slide % 3
   const slides = getSlideClassNames()
 
   return(
-    <div className="slider dark-surface">
+    <div onTouchStart ={handleTouchStart} onTouchMove = {handleTouchMove} className="slider dark-surface">
       
       <div className = 'content'>
         
@@ -147,6 +187,8 @@ function Slider(){
             return <li key = {index}>{bullet}</li>
           })}
         </ul>
+
+
 
         <div className = 'tech-stack-wrapper'>
           <div className = 'tech-stack'>
