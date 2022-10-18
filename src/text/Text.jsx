@@ -8,6 +8,6 @@ export const About = () =>
     a fullstack developer. I enjoy coding and always seek to improve the user experience of the software that I write
     as well as the developer experience by increasing readability of the code and the file structure.
     At the not so distant future I see myself working in encouraging as well as challenging projects to
-    further extend my skillset. Be it as a freelancer or at a company. 
+    further extend my skillset.
   </>
   

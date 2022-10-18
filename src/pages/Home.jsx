@@ -127,11 +127,13 @@ function Home() {
           </div>
         </div>
 
-        <div className ='experience'>
+        <div className = 'experience-wrapper'>
           <h1>Experience</h1>
-          <Project project = {project1}/>
-          <Project project = {project2}/>
-          <Project project = {project3}/>
+          <div className ='experience'>
+            <Project project = {project1}/>
+            <Project project = {project2}/>
+            <Project project = {project3}/>
+          </div>
         </div>
 
         <div className ='section'>
@@ -150,7 +152,7 @@ function Home() {
 
         <div className="footer">
           <span>
-            <a href="https://github.com/VKTRN/Portfolio">Designed & Built pretty much from scratch by Viktor Niedens - 2022</a>
+            <a href="https://github.com/VKTRN/Portfolio">Designed & Built by Viktor Niedens - 2022</a>
           </span>
         </div>
 

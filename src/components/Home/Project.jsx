@@ -27,10 +27,19 @@ function Project({project}){
           })}
         </ul>
 
-      </div>
-
-      <div className='image-wrapper'>
-        <img  src = {project.image}></img>
+        <div className = 'tech-stack'>
+          {project.techStack.map((tech, index) => {
+            return (
+              <div className = 'tech'>
+                <div className = 'logo' key = {index}>
+                  <span>
+                    {tech.logo}
+                  </span>
+                </div>
+                <span>{tech.name}</span>
+              </div>)
+          })}
+        </div>
       </div>
     </div>
   )

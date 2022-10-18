@@ -17,6 +17,11 @@ a{
   }
 }
 
+h1{
+  font-size: 40px;
+  margin-block: 40px;
+}
+
 input{
   &:focus-visible{
     outline: none;
