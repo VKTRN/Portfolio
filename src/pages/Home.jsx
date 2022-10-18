@@ -115,7 +115,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="about">
+        <div className="about" id = 'about'>
           <h1>About</h1>
           <div className="about-wrapper">
             <div className="description">
@@ -127,7 +127,7 @@ function Home() {
           </div>
         </div>
 
-        <div className = 'experience-wrapper'>
+        <div className = 'experience-wrapper' id = 'experience'>
           <h1>Experience</h1>
           <div className ='experience'>
             <Project project = {project1}/>
@@ -136,12 +136,12 @@ function Home() {
           </div>
         </div>
 
-        <div className ='section'>
+        <div className ='section' id = 'showcase'>
           <h1>Showcase Project</h1>
           <ComingSoon/>
         </div>
 
-        <div className="socials-wrapper">
+        <div className="socials-wrapper" id = 'contact'>
           <h2>Connect with me</h2>
           <div className="socials dark-surface">
               <SocialButton id="youtube" link="https://www.youtube.com"></SocialButton>

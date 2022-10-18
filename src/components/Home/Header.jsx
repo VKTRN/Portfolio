@@ -37,10 +37,10 @@ function Header() {
       <div className="header-content">
         <div className="logo">vktrn</div>
         <div className="links">
-          <a href="/">About</a>
-          <a href="/">Experience</a>
-          <a href="/">Showcase</a>
-          <a href="/">Contact</a>
+          <a href="/#about">About</a>
+          <a href="/#experience">Experience</a>
+          <a href="/#showcase">Showcase</a>
+          <a href="/#contact">Contact</a>
           <a id = 'resume' href="/resume">Resume</a>
         </div>
       </div>
