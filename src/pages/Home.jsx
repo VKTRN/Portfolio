@@ -73,8 +73,8 @@ const project3 = {
   date: 'since August 2022',
   project: 'Support of a content management system for CARIAD',
   bullets: [
-    'Created and edited web-pages in the CARIAD Intranet.',
-    'Fixed issues with the display of the content using HTML and CSS.',
+    'Creating and editing web-pages in the CARIAD Intranet.',
+    'Fixing issues with the display of the content using HTML and CSS.',
   ],
   techStack: [
     {name:'HTML',    logo: <FaHtml5/>}, 
