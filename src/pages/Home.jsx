@@ -137,7 +137,7 @@ function Home() {
         </div>
 
         <div className ='section' id = 'showcase'>
-          <h1>Showcase Project</h1>
+          <h1>Personal Project</h1>
           <ComingSoon/>
         </div>
 
