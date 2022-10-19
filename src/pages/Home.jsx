@@ -27,7 +27,7 @@ import {Eleventy}      from '../components/Home/Eleventy'
 const project1 = {
   title: 'Frontend Development',
   company: 'Treubrodt Consulting',
-  date: 'since September 2021',
+  date: 'September 2021 - January 2022',
   project: 'Design unification of multiple user authentication systems for Volkswagen',
   bullets: [
     'Implemented the unified design for multiple user authentication pages.',
@@ -46,9 +46,9 @@ const project1 = {
 }
 
 const project2 = {
-  title: 'Frontend Development',
+  title: 'Fullstack Development',
   company: 'Treubrodt Consulting',
-  date: 'since September 2021',
+  date: 'January 2022 - August 2022',
   project: 'Development of a document management system',
   bullets: [
     'Developing the frontend for creating, editing and managing company specific documents.',
@@ -68,9 +68,9 @@ const project2 = {
 }
 
 const project3 = {
-  title: 'Frontend Development',
+  title: 'Content Management',
   company: 'Treubrodt Consulting',
-  date: 'since September 2021',
+  date: 'since August 2022',
   project: 'Support of a content management system for CARIAD',
   bullets: [
     'Created and edited web-pages in the CARIAD Intranet.',

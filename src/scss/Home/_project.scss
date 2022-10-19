@@ -8,26 +8,43 @@
     padding: 30px;
     flex: 1;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 90vw;
     
     @include media-breakpoint-up(1200px){
       width:700px;
-    }
-
-    .title{
-      font-size: 30px;
-      margin-block:8px;
+      height: 500px;
     }
 
     
-    .company{
+    .heading{
       display: flex;
-      justify-content: space-between;
       align-items: baseline;
+      gap: 10px;
+      margin-bottom: 3px;
+      
+      .title{
+        font-size: 30px;
+        margin-block:8px;
+        font-weight: 600;
+      }
+      
+      .company{
+        color: rgb(186, 186, 186);
+      }
+    }
+
+    .date{
+      font-size: 14px;
+      margin-bottom: 35px;
     }
 
     .project-name{
       margin-block: 5px;
+      font-size: 18px;
+      color: rgb(184, 168, 226);
       flex: 1;
       // background-color: rgb(61, 75, 23);
     }
@@ -45,6 +62,7 @@
     }
 
     .tech-stack{
+      
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       filter: invert(79%) sepia(44%) saturate(410%) hue-rotate(190deg) brightness(300%) ;
