@@ -20,8 +20,14 @@ a{
 }
 
 h1{
-  font-size: 40px;
+  font-size: 32px;
   margin-block: 40px;
+}
+
+@include media-breakpoint-up(1200px){
+  h1{
+    font-size: 40px;
+  }
 }
 
 input{
